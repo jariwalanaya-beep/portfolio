@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "cp case-study.html dist/case-study.html && cp pokk-img*.png dist/",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
