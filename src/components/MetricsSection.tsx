@@ -17,24 +17,28 @@ const MetricsSection = () => {
       ([entry]) => {
         if (entry.isIntersecting && !animated) {
           setAnimated(true);
-          metrics.forEach((m, i) => {
-            const duration = 2000;
-            const step = 16;
-            const increment = m.target / (duration / step);
-            let current = 0;
-            const timer = setInterval(() => {
-              current = Math.min(current + increment, m.target);
-              setCounts((prev) => {
-                const next = [...prev];
-                next[i] = Math.floor(current);
-                return next;
-              });
-              if (current >= m.target) clearInterval(timer);
-            }, step);
-          });
+          // Small delay so React finishes painting before counters start
+          setTimeout(() => {
+            metrics.forEach((m, i) => {
+              if (m.target === 0) return; // already at 0, no animation needed
+              const duration = 2000;
+              const step = 16;
+              const increment = m.target / (duration / step);
+              let current = 0;
+              const timer = setInterval(() => {
+                current = Math.min(current + increment, m.target);
+                setCounts((prev) => {
+                  const next = [...prev];
+                  next[i] = Math.floor(current);
+                  return next;
+                });
+                if (current >= m.target) clearInterval(timer);
+              }, step);
+            });
+          }, 100);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1, rootMargin: "-50px" }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();

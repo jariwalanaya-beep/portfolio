@@ -253,6 +253,7 @@
   width: max-content;
   animation: ticker 20s linear infinite;
   align-items: center;
+  will-change: transform;
 }
 
 /* Terminal cursor */
