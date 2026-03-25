@@ -290,7 +290,7 @@ const Mascot = () => {
       >
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{width: '48px', height: '48px'}}>
           {/* Main Body */}
-          <path d="M25 50 c0-30 50-30 50 0 c0 15 -10 25 -25 25 c-15 0 -25 -10 -25 -25Z" fill="var(--bg-2)" stroke="var(--primary)" strokeWidth="3" />
+          <path d="M25 50 c0-30 50-30 50 0 c0 15 -10 25 -25 25 c-15 0 -25 -10 -25 -25Z" fill="hsl(var(--card))" stroke="var(--primary)" strokeWidth="3" />
           
           {/* Robot details (ears/bolts) */}
           <rect x="18" y="42" width="6" height="12" rx="2" fill="var(--primary)" />
