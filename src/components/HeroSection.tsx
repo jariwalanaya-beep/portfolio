@@ -2,9 +2,9 @@ import MobiusStrip from './MobiusStrip';
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden" id="hero">
-      {/* Background effects */}
-      <div className="absolute inset-0 pointer-events-none">
+    <section className="relative min-h-screen flex items-center pt-24 pb-16" id="hero">
+      {/* Background effects — overflow hidden only here so glow blobs don't scroll */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="grid-overlay" />
         <div className="glow-blob w-[500px] h-[500px] bg-primary/[0.06] -top-[150px] -left-[150px] absolute" />
         <div className="glow-blob w-[320px] h-[320px] bg-primary/[0.05] top-[40%] -right-[80px] absolute" />
