@@ -1400,22 +1400,48 @@ ul {
 /* ============================
    RESPONSIVE
    ============================ */
-@media (max-width: 1100px) {
+
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    /* Möbius canvas scale down on tab */
+    #mobius-canvas {
+        width: 500px !important;
+        height: 500px !important;
+        opacity: 0.6 !important;
+    }
+
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    /* case-studies 2-col override already inline — handled below */
 }
 
+/* ── Small Tablet (≤900px) ── */
 @media (max-width: 900px) {
+
+    /* Hide Möbius canvas entirely — it overlaps content */
+    #mobius-canvas {
+        display: none !important;
+    }
 
     .services-grid,
     .testimonials-grid {
         grid-template-columns: 1fr;
     }
 
+    /* Case-Studies 2-col override */
+    .case-studies-grid {
+        grid-template-columns: 1fr !important;
+    }
+
     .workflow-steps {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 40px;
     }
 
     .step-line {
@@ -1428,7 +1454,7 @@ ul {
 
     .trust-inner {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 40px;
     }
 
     .metrics-grid {
@@ -1442,7 +1468,8 @@ ul {
         left: 0;
         right: 0;
         flex-direction: column;
-        padding: 24px;
+        gap: 4px;
+        padding: 20px 16px;
         background: rgba(5, 6, 8, 0.98);
         backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--border);
@@ -1452,27 +1479,270 @@ ul {
         display: flex;
     }
 
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 10px 14px;
+        font-size: 1rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .nav-links a.btn {
+        text-align: center;
+        margin-top: 8px;
+    }
+
     .hamburger {
         display: flex;
     }
 
     .cta-form {
         flex-direction: column;
+        align-items: stretch;
     }
 
     .cta-input {
         border-radius: 50px;
     }
-}
 
-@media (max-width: 560px) {
-    .hero-headline {
-        font-size: 1.7rem;
+    .cta-inner {
+        padding: 48px 24px;
+    }
+
+    .hero {
+        padding: 90px 0 48px;
     }
 
     .hero-stats {
         flex-wrap: wrap;
+        gap: 12px;
+        width: 100%;
+        padding: 14px 16px;
+    }
+
+    .hero-stat {
+        padding: 0 16px;
+    }
+
+    .hero-stat-div {
+        display: none;
+    }
+}
+
+/* ── Mobile (≤640px) ── */
+@media (max-width: 640px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .hero {
+        padding: 80px 0 40px;
+        min-height: auto;
+    }
+
+    .hero-headline {
+        font-size: clamp(1.55rem, 6.5vw, 2rem);
+    }
+
+    .hero-sub {
+        font-size: 0.95rem;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 16px;
+    }
+
+    .hero-stat {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 0;
+    }
+
+    .hero-stat-l {
+        font-size: 0.8rem;
+    }
+
+    .hero-stat-n {
+        font-size: 1.3rem;
+    }
+
+    .section-title {
+        font-size: clamp(1.5rem, 6vw, 2.2rem);
+    }
+
+    .services {
+        padding: 64px 0;
+    }
+
+    .terminal-section {
+        padding: 0 0 64px;
+    }
+
+    .terminal-body {
+        padding: 16px 14px;
+        font-size: 0.78rem;
+        overflow-x: auto;
+    }
+
+    .workflow {
+        padding: 64px 0;
+    }
+
+    .testimonials {
+        padding: 64px 0;
+    }
+
+    .trust-section {
+        padding: 64px 0;
+    }
+
+    .cta-section {
+        padding: 64px 0;
+    }
+
+    .cta-inner {
+        padding: 40px 18px;
+        border-radius: var(--radius-lg);
+    }
+
+    .cta-title {
+        font-size: clamp(1.5rem, 7vw, 2.2rem);
+    }
+
+    .cta-sub {
+        font-size: 0.92rem;
+    }
+
+    .cta-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .metrics {
+        padding: 36px 0;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .metric-card {
+        padding: 24px 12px;
+    }
+
+    .metric-number {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .section-sub {
+        font-size: 0.92rem;
+    }
+
+    .service-card {
+        padding: 24px 18px;
+    }
+
+    .workflow-step {
+        padding: 0;
+    }
+
+    .testimonial-card {
+        padding: 24px 18px;
+    }
+
+    .dashboard-mock {
+        font-size: 0.82rem;
+    }
+
+    .footer-inner {
         gap: 16px;
+    }
+
+    .footer-links {
+        gap: 16px;
+        justify-content: center;
+    }
+
+    /* CTA contact pills stack to single column */
+    .cta-contact-pills {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cta-contact-pill {
+        justify-content: center;
+    }
+
+    /* Case studies section — override inline grid */
+    .case-studies-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .case-studies-grid .service-card {
+        padding: 28px 20px !important;
+    }
+}
+
+/* ── Small Mobile (≤480px) ── */
+@media (max-width: 480px) {
+    .hero-headline {
+        font-size: 1.45rem;
+        letter-spacing: -0.3px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-card::before {
+        display: none;
+    }
+
+    .metric-card {
+        border-bottom: 1px solid var(--border);
+        border-radius: 0;
+        padding: 20px 16px;
+    }
+
+    .metric-card:last-child {
+        border-bottom: none;
+    }
+
+    .nav {
+        padding: 12px 0;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .dm-stat-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 
