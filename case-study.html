@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Call System Case Study | Karlspace</title>
   <link rel="stylesheet" href="index.css" />
-  <link rel="stylesheet" href="index.css" />
   <link rel="icon" type="image/png" href="1772001775286.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,7 +26,6 @@
 
     body {
       font-family: Inter, system-ui, sans-serif;
-      background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
     }
@@ -82,7 +80,7 @@
     }
 
     .hero-left {
-      padding: 80px 72px 80px 80px;
+      padding: 40px;
       display: flex; flex-direction:column; justify-content:center;
       border-right: 1px solid var(--border);
       height: 100%;
@@ -122,7 +120,7 @@
     }
 
     .hero-right {
-      padding: 64px 56px;
+      padding: 40px;
       display: flex; align-items:center; justify-content:center;
       height: 100%;
       background: linear-gradient(135deg, rgba(34,197,94,0.04), transparent 60%);
@@ -146,11 +144,11 @@
     /* ═══════════════════════ BEFORE & AFTER ═══════════════════════ */
     .ba-section {
       border-bottom: 1px solid var(--border);
-      padding: 0 0 72px;
+      padding: 0 0 40px;
     }
 
     .ba-header {
-      padding: 64px 80px 44px;
+      padding: 40px 40px 24px;
     }
     .sec-tag {
       display:inline-flex; align-items:center; gap:10px;
@@ -173,16 +171,16 @@
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:24px;
-      padding: 0 80px;
+      padding: 0 40px;
     }
 
     .ba-col {
       display:flex; flex-direction:column;
       border:1px solid var(--border); border-radius:16px;
       overflow:hidden;
-      transition: border-color 220ms, transform 220ms;
+      transition: border-color 220ms;
     }
-    .ba-col:hover { border-color:rgba(34,197,94,0.3); transform:translateY(-2px); }
+    .ba-col:hover { border-color:rgba(34,197,94,0.3); }
 
     .ba-col-label {
       padding:14px 22px;
@@ -197,7 +195,7 @@
 
     /* ═══════════════════════ WHAT CHANGED ═══════════════════════ */
     .outcome-section {
-      padding: 80px;
+      padding: 50px 40px;
     }
 
     .outcome-intro {
@@ -217,11 +215,10 @@
       padding:40px 36px;
       background:rgba(255,255,255,0.03);
       position:relative; overflow:hidden;
-      transition: border-color 220ms, transform 220ms, background 220ms;
+      transition: border-color 220ms, background 220ms;
     }
     .outcome-card:hover {
       border-color:rgba(34,197,94,0.3);
-      transform:translateY(-3px);
       background:rgba(34,197,94,0.03);
     }
     .outcome-card::before {
@@ -247,36 +244,35 @@
       display:grid;
       grid-template-columns:repeat(4,1fr);
       gap:20px;
-      padding:0 80px 16px;
+      padding:40px;
       background:transparent;
       align-items:stretch;
     }
 
-    .stat-cell {
-      padding: 16px 16px;
+        .stat-cell {
+      padding: 40px 36px;
       border:1px solid var(--border);
-      border-radius:14px;
-      background:rgba(255,255,255,0.015);
-      transition: background 220ms, transform 220ms;
+      border-radius:20px;
+      background:rgba(255,255,255,0.03);
+      transition: border-color 220ms, background 220ms;
       position:relative;
       overflow:hidden;
-      min-height: 170px;
+      min-height: 180px;
       height: 100%;
       display:flex;
       flex-direction:column;
       justify-content:center;
-      gap:4px;
-      animation: boxReveal .45s ease both;
-      will-change: transform;
+      gap:8px;
     }
-    .stat-cell:nth-child(2) { animation-delay:.06s; }
-    .stat-cell:nth-child(3) { animation-delay:.12s; }
-    .stat-cell:nth-child(4) { animation-delay:.18s; }
-    .stat-cell:last-child { border-right:none; }
     .stat-cell:hover {
+      border-color:rgba(34,197,94,0.3);
       background:rgba(34,197,94,0.03);
-      transform: translateY(-2px);
     }
+    .stat-cell::before {
+      content:""; position:absolute; top:0; left:0; right:0; height:2px;
+      background:var(--grad);
+    }
+
 
     .stat-num {
       font-family:"Space Grotesk",sans-serif;
@@ -304,10 +300,7 @@
       max-width:32ch;
     }
 
-    @keyframes boxReveal {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -325,7 +318,7 @@
     .cta-section {
       display:grid; grid-template-columns:1fr auto;
       align-items:center; gap:60px;
-      padding: 80px;
+      padding: 50px 40px;
       position:relative; overflow:hidden;
       background:transparent;
     }
@@ -366,7 +359,7 @@
       gap:34px;
       white-space:nowrap;
       padding-left:24px;
-      animation: marqueeMove 14s linear infinite;
+      
       color:#cfe0f0;
       font-size:0.88rem;
       font-weight:600;
@@ -391,7 +384,7 @@
       border-radius:50%;
       background:var(--primary);
       box-shadow:0 0 12px rgba(34,197,94,0.8);
-      animation: pulseDot 1.6s ease-in-out infinite;
+      
     }
 
     .cta-btn {
@@ -403,24 +396,21 @@
       background:var(--grad);
       font-family:"Space Grotesk",sans-serif;
       box-shadow: 0 8px 28px rgba(34,197,94,0.3);
-      transition: transform 200ms, box-shadow 200ms;
+      transition: box-shadow 200ms;
       white-space:nowrap;
       letter-spacing:0.2px;
     }
-    .cta-btn:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(34,197,94,0.42); }
+    .cta-btn:hover { box-shadow:0 16px 40px rgba(34,197,94,0.42); }
 
-    @keyframes ctaBob {
-      0%, 100% { transform: translateY(0); }
+    
       50% { transform: translateY(6px); }
     }
 
-    @keyframes marqueeMove {
-      0% { transform: translateX(0); }
+    
       100% { transform: translateX(-50%); }
     }
 
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
+    
       50% { opacity: .6; transform: scale(.8); }
     }
 
@@ -430,12 +420,30 @@
       .hero-left { padding:60px 48px 60px 48px; }
       .hero-right { padding:48px 40px; }
       .stats-strip { gap:16px; padding:0 48px 14px; }
-      .stat-cell { padding:14px 14px; }
-      .ba-header { padding:48px 48px 36px; }
-      .ba-grid { padding:0 48px; gap:18px; }
-      .outcome-section { padding:64px 48px; }
-      .cta-section { padding:64px 48px; }
+      .stat-cell {
+      padding: 40px 36px;
+      border:1px solid var(--border);
+      border-radius:20px;
+      background:rgba(255,255,255,0.03);
+      transition: border-color 220ms, background 220ms;
+      position:relative;
+      overflow:hidden;
+      min-height: 180px;
+      height: 100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:8px;
     }
+    .stat-cell:hover {
+      border-color:rgba(34,197,94,0.3);
+      background:rgba(34,197,94,0.03);
+    }
+    .stat-cell::before {
+      content:""; position:absolute; top:0; left:0; right:0; height:2px;
+      background:var(--grad);
+    }
+
 
     @media(max-width:900px) {
       .hero { grid-template-columns:1fr; min-height:auto; }
@@ -444,14 +452,29 @@
       .outcome-cards { grid-template-columns:1fr; }
       .stats-strip { grid-template-columns:1fr 1fr; gap:12px; padding:0 32px 12px; }
       .stat-cell {
-        padding:14px 14px;
-        min-height:154px;
-      }
-      .cta-section { grid-template-columns:1fr; gap:28px; }
-      .navbar { padding:0 24px; }
-      .nav-links { display:none; }
-      .update-marquee { max-width:100%; }
+      padding: 40px 36px;
+      border:1px solid var(--border);
+      border-radius:20px;
+      background:rgba(255,255,255,0.03);
+      transition: border-color 220ms, background 220ms;
+      position:relative;
+      overflow:hidden;
+      min-height: 180px;
+      height: 100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:8px;
     }
+    .stat-cell:hover {
+      border-color:rgba(34,197,94,0.3);
+      background:rgba(34,197,94,0.03);
+    }
+    .stat-cell::before {
+      content:""; position:absolute; top:0; left:0; right:0; height:2px;
+      background:var(--grad);
+    }
+
 
     @media(max-width:640px) {
       .hero-left { padding:48px 24px; }
@@ -462,253 +485,36 @@
       .outcome-section { padding:48px 24px; }
       .stats-strip { grid-template-columns:1fr; gap:10px; padding:0 24px 10px; }
       .stat-cell {
-        border-right:none;
-        padding:14px 14px;
-        min-height:146px;
-      }
-      .cta-section { padding:48px 24px; }
-      .cta-btn { width:100%; justify-content:center; }
-    }
-  
-    /* ════ PREMIUM REDESIGN OVERRIDES ════ */
-    body {
-        background-color: var(--bg);
-        background-image: 
-            radial-gradient(circle at 15% 50%, rgba(34, 197, 94, 0.04), transparent 35%),
-            radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.04), transparent 35%);
-        background-attachment: fixed;
-    }
-    
-    .navbar {
-        background: rgba(5,6,8,0.75);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    
-    .hero-title {
-        background: linear-gradient(180deg, #ffffff 0%, #a1b0be 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: clamp(3.8rem, 6.5vw, 7rem);
-        letter-spacing: -4px;
-        line-height: 0.95;
-    }
-    
-    .hero-sub {
-        font-size: clamp(1.1rem, 1.6vw, 1.35rem);
-        color: #94a3b8;
-        line-height: 1.8;
-    }
-    
-    .hero-img-wrap {
-        border: 1px solid rgba(34, 197, 94, 0.35);
-        background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.02));
-        box-shadow: 0 0 80px rgba(34, 197, 94, 0.15), 0 30px 60px rgba(0,0,0,0.6);
-        backdrop-filter: blur(10px);
-        transform: perspective(1000px) rotateY(-5deg);
-        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-    
-    .hero-img-wrap:hover {
-        transform: perspective(1000px) rotateY(0deg) translateY(-10px);
-        box-shadow: 0 0 100px rgba(34, 197, 94, 0.25), 0 40px 80px rgba(0,0,0,0.7);
-    }
-
-    .outcome-card {
-        border: 1px solid rgba(255,255,255,0.06);
-        background: rgba(255,255,255,0.015);
-        backdrop-filter: blur(12px);
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-    .outcome-card:hover {
-        border-color: rgba(34, 197, 94, 0.5);
-        background: rgba(34, 197, 94, 0.03);
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 30px 60px rgba(34, 197, 94, 0.15);
-    }
-    
-    .outcome-card::before {
-        height: 2px;
-        background: linear-gradient(90deg, #22c55e 0%, #10b981 100%);
-        opacity: 0.5;
-    }
-    .outcome-card:hover::before {
-        opacity: 1;
-        box-shadow: 0 0 20px rgba(34,197,94,0.6);
-    }
-    
-    .ba-col {
-        border-radius: 24px;
-        border: 1px solid rgba(255,255,255,0.06);
-        background: rgba(255,255,255,0.015);
-        box-shadow: 0 24px 48px rgba(0,0,0,0.3);
-    }
-    .ba-col:hover {
-        border-color: rgba(34, 197, 94, 0.4);
-        transform: translateY(-8px);
-        box-shadow: 0 32px 64px rgba(34, 197, 94, 0.15);
-    }
-    
-    .ba-col-label {
-        background: rgba(0,0,0,0.2);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        padding: 18px 26px;
-        font-size: 0.8rem;
-    }
-
-    .stat-cell {
-        background: rgba(255,255,255,0.015);
-        border: 1px solid rgba(255,255,255,0.06);
-        backdrop-filter: blur(8px);
-        box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+      padding: 40px 36px;
+      border:1px solid var(--border);
+      border-radius:20px;
+      background:rgba(255,255,255,0.03);
+      transition: border-color 220ms, background 220ms;
+      position:relative;
+      overflow:hidden;
+      min-height: 180px;
+      height: 100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:8px;
     }
     .stat-cell:hover {
-        background: rgba(34, 197, 94, 0.04);
-        border-color: rgba(34, 197, 94, 0.3);
-        transform: translateY(-6px);
-        box-shadow: 0 24px 48px rgba(34, 197, 94, 0.15);
+      border-color:rgba(34,197,94,0.3);
+      background:rgba(34,197,94,0.03);
     }
-    
-    .sec-h2 {
-        background: linear-gradient(135deg, #ffffff 0%, #a1b0be 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    .stat-cell::before {
+      content:""; position:absolute; top:0; left:0; right:0; height:2px;
+      background:var(--grad);
     }
-    
-    .hero-tag {
-        background: rgba(34, 197, 94, 0.1);
-        padding: 8px 18px;
-        border-radius: 50px;
-        border: 1px solid rgba(34, 197, 94, 0.2);
-        box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        font-size: 0.8rem;
-    }
-
-
-    /* ════ PREMIUM REDESIGN OVERRIDES ════ */
-    body {
-        background-color: var(--bg);
-        background-image: 
-            radial-gradient(circle at 15% 50%, rgba(34, 197, 94, 0.04), transparent 35%),
-            radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.04), transparent 35%);
-        background-attachment: fixed;
-    }
-    
-    .navbar {
-        background: rgba(5,6,8,0.75);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    
-    .hero-title {
-        background: linear-gradient(180deg, #ffffff 0%, #a1b0be 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: clamp(3.8rem, 6.5vw, 7rem) !important;
-        letter-spacing: -4px !important;
-        line-height: 0.95 !important;
-    }
-    
-    .hero-sub {
-        font-size: clamp(1.1rem, 1.6vw, 1.35rem) !important;
-        color: #94a3b8 !important;
-        line-height: 1.8 !important;
-    }
-    
-    .hero-img-wrap {
-        border: 1px solid rgba(34, 197, 94, 0.35) !important;
-        background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.02)) !important;
-        box-shadow: 0 0 80px rgba(34, 197, 94, 0.15), 0 30px 60px rgba(0,0,0,0.6) !important;
-        backdrop-filter: blur(10px);
-        transform: perspective(1000px) rotateY(-5deg);
-        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-    
-    .hero-img-wrap:hover {
-        transform: perspective(1000px) rotateY(0deg) translateY(-10px);
-        box-shadow: 0 0 100px rgba(34, 197, 94, 0.25), 0 40px 80px rgba(0,0,0,0.7) !important;
-    }
-
-    .outcome-card {
-        border: 1px solid rgba(255,255,255,0.06);
-        background: rgba(255,255,255,0.015);
-        backdrop-filter: blur(12px);
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-    .outcome-card:hover {
-        border-color: rgba(34, 197, 94, 0.5) !important;
-        background: rgba(34, 197, 94, 0.03) !important;
-        transform: translateY(-8px) scale(1.02) !important;
-        box-shadow: 0 30px 60px rgba(34, 197, 94, 0.15);
-    }
-    
-    .outcome-card::before {
-        height: 2px !important;
-        background: linear-gradient(90deg, #22c55e 0%, #10b981 100%) !important;
-        opacity: 0.5 !important;
-    }
-    .outcome-card:hover::before {
-        opacity: 1 !important;
-        box-shadow: 0 0 20px rgba(34,197,94,0.6) !important;
-    }
-    
-    .ba-col {
-        border-radius: 24px;
-        border: 1px solid rgba(255,255,255,0.06) !important;
-        background: rgba(255,255,255,0.015);
-        box-shadow: 0 24px 48px rgba(0,0,0,0.3);
-    }
-    .ba-col:hover {
-        border-color: rgba(34, 197, 94, 0.4) !important;
-        transform: translateY(-8px) !important;
-        box-shadow: 0 32px 64px rgba(34, 197, 94, 0.15) !important;
-    }
-    
-    .ba-col-label {
-        background: rgba(0,0,0,0.2) !important;
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid rgba(255,255,255,0.05) !important;
-        padding: 18px 26px !important;
-        font-size: 0.8rem;
-    }
-
-    .stat-cell {
-        background: rgba(255,255,255,0.015) !important;
-        border: 1px solid rgba(255,255,255,0.06) !important;
-        backdrop-filter: blur(8px);
-        box-shadow: 0 16px 32px rgba(0,0,0,0.2);
-    }
-    .stat-cell:hover {
-        background: rgba(34, 197, 94, 0.04) !important;
-        border-color: rgba(34, 197, 94, 0.3) !important;
-        transform: translateY(-6px) !important;
-        box-shadow: 0 24px 48px rgba(34, 197, 94, 0.15) !important;
-    }
-    
-    .sec-h2 {
-        background: linear-gradient(135deg, #ffffff 0%, #a1b0be 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
-    .hero-tag {
-        background: rgba(34, 197, 94, 0.1) !important;
-        padding: 8px 18px !important;
-        border-radius: 50px !important;
-        border: 1px solid rgba(34, 197, 94, 0.2) !important;
-        box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        font-size: 0.8rem;
-    }
-    .hero-tag::before { display: none !important; }
 
 </style>
 </head>
 <body>
+
+  <!-- PARTICLE VOID -->
+  <canvas id="bg-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.8;"></canvas>
+
 
 <!-- ═══════════ NAVBAR ═══════════ -->
 <nav class="navbar">
@@ -724,10 +530,7 @@
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero" style="position: relative; z-index: 1;">
 
-<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; pointer-events: none;">
-  <div style="position: absolute; width: 60vh; height: 60vh; border-radius: 50%; background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(0,0,0,0) 70%); top: -10%; right: -5%; filter: blur(60px);"></div>
-  <div style="position: absolute; width: 50vh; height: 50vh; border-radius: 50%; background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, rgba(0,0,0,0) 70%); bottom: -10%; left: 0%; filter: blur(60px);"></div>
-</div>
+
 
   <div class="hero-left">
     <div class="hero-tag">Case Study</div>
@@ -746,6 +549,30 @@
     </div>
   </div>
 </section>
+
+<!-- ═══════════ STATS STRIP ═══════════ -->
+<div class="stats-strip" id="stats">
+  <div class="stat-cell">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">Never Sleeps</div>
+    <div class="stat-desc">Handles calls at 2am on Sunday the same as 9am Monday</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">&lt;60s</div>
+    <div class="stat-label">Booked. Done.</div>
+    <div class="stat-desc">Call answered, slot checked, appointment confirmed - in under a minute</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">$10k+</div>
+    <div class="stat-label">Back in the Bank</div>
+    <div class="stat-desc">Revenue recovered every month from calls that used to just ring out</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">0 Missed</div>
+    <div class="stat-label">Zero Missed Calls</div>
+    <div class="stat-desc">Every inbound call gets a response - no voicemail, no lost patients</div>
+  </div>
+</div>
 
 <!-- ═══════════ BEFORE & AFTER ═══════════ -->
 <section class="ba-section" id="ba">
@@ -790,52 +617,14 @@
   </div>
 </section>
 
-<!-- ═══════════ STATS STRIP ═══════════ -->
-<div class="stats-strip" id="stats">
-  <div class="stat-cell">
-    <div class="stat-num">24/7</div>
-    <div class="stat-label">Never Sleeps</div>
-    <div class="stat-desc">Handles calls at 2am on Sunday the same as 9am Monday</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-num">&lt;60s</div>
-    <div class="stat-label">Booked. Done.</div>
-    <div class="stat-desc">Call answered, slot checked, appointment confirmed - in under a minute</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-num">$10k+</div>
-    <div class="stat-label">Back in the Bank</div>
-    <div class="stat-desc">Revenue recovered every month from calls that used to just ring out</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-num">0 Missed</div>
-    <div class="stat-label">Zero Missed Calls</div>
-    <div class="stat-desc">Every inbound call gets a response - no voicemail, no lost patients</div>
-  </div>
-</div>
-
 <!-- ═══════════ CTA ═══════════ -->
 <section class="cta-section">
   <div>
     <div class="cta-text">Need this adapted for your business?</div>
-    <p class="cta-sub">I can map your call path and deploy a production-ready version for your operation.</p>
-    <div class="update-marquee" aria-label="Live updates">
-      <div class="update-marquee-track">
-        <span class="update-pill">Live update</span>
-        <span>AI calls answered in real time</span>
-        <span>Doctor calendars synced instantly</span>
-        <span>SMS confirmations sent automatically</span>
-        <span>Missed-call revenue recovered</span>
-        <span class="update-pill">Live update</span>
-        <span>AI calls answered in real time</span>
-        <span>Doctor calendars synced instantly</span>
-        <span>SMS confirmations sent automatically</span>
-        <span>Missed-call revenue recovered</span>
-      </div>
-    </div>
   </div>
   <a href="index.html#contact" class="cta-btn">Book a Free Audit →</a>
 </section>
 
+  <script src="index.js"></script>
 </body>
 </html>
