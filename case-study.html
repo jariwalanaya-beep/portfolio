@@ -133,7 +133,7 @@
       box-shadow: 0 0 64px rgba(34,197,94,0.12), 0 24px 48px rgba(0,0,0,0.4);
       width: 100%;
       max-width: 540px;
-      animation: heroFloat 5.2s ease-in-out infinite;
+      animation: heroFloat 3s ease-in-out infinite;
     }
     .hero-img-wrap img,
     .hero-img-wrap video {
@@ -166,7 +166,6 @@
       line-height:1.1; letter-spacing:-1px; color:var(--text);
     }
 
-    /* images with padding and gap */
     .ba-grid {
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -249,7 +248,7 @@
       align-items:stretch;
     }
 
-        .stat-cell {
+    .stat-cell {
       padding: 40px 36px;
       border:1px solid var(--border);
       border-radius:20px;
@@ -272,7 +271,6 @@
       content:""; position:absolute; top:0; left:0; right:0; height:2px;
       background:var(--grad);
     }
-
 
     .stat-num {
       font-family:"Space Grotesk",sans-serif;
@@ -300,8 +298,6 @@
       max-width:32ch;
     }
 
-    
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation: none !important;
@@ -311,7 +307,7 @@
 
     @keyframes heroFloat {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-12px); }
     }
 
     /* ═══════════════════════ CTA ═══════════════════════ */
@@ -322,12 +318,6 @@
       position:relative; overflow:hidden;
       background:transparent;
     }
-    .cta-section::before {
-      content:none;
-    }
-    .cta-section::after {
-      content:none;
-    }
 
     .cta-text {
       font-family:"Space Grotesk",sans-serif;
@@ -337,54 +327,6 @@
     .cta-sub {
       font-size:1.02rem; color:var(--muted); line-height:1.65;
       margin-top:12px; max-width:52ch;
-    }
-
-    .update-marquee {
-      margin-top:22px;
-      width:100%;
-      max-width:760px;
-      border:1px solid rgba(255,255,255,0.13);
-      border-radius:999px;
-      background:rgba(255,255,255,0.04);
-      overflow:hidden;
-      height:44px;
-      display:flex;
-      align-items:center;
-      position:relative;
-    }
-
-    .update-marquee-track {
-      display:flex;
-      align-items:center;
-      gap:34px;
-      white-space:nowrap;
-      padding-left:24px;
-      
-      color:#cfe0f0;
-      font-size:0.88rem;
-      font-weight:600;
-      letter-spacing:0.2px;
-    }
-
-    .update-pill {
-      color:var(--primary);
-      font-size:0.74rem;
-      letter-spacing:1.6px;
-      text-transform:uppercase;
-      font-weight:700;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .update-pill::before {
-      content:"";
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:var(--primary);
-      box-shadow:0 0 12px rgba(34,197,94,0.8);
-      
     }
 
     .cta-btn {
@@ -402,48 +344,17 @@
     }
     .cta-btn:hover { box-shadow:0 16px 40px rgba(34,197,94,0.42); }
 
-    
-      50% { transform: translateY(6px); }
-    }
-
-    
-      100% { transform: translateX(-50%); }
-    }
-
-    
-      50% { opacity: .6; transform: scale(.8); }
-    }
-
     /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
     @media(max-width:1100px) {
       .navbar { padding:0 32px; }
       .hero-left { padding:60px 48px 60px 48px; }
       .hero-right { padding:48px 40px; }
       .stats-strip { gap:16px; padding:0 48px 14px; }
-      .stat-cell {
-      padding: 40px 36px;
-      border:1px solid var(--border);
-      border-radius:20px;
-      background:rgba(255,255,255,0.03);
-      transition: border-color 220ms, background 220ms;
-      position:relative;
-      overflow:hidden;
-      min-height: 180px;
-      height: 100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:8px;
+      .ba-header { padding:48px 48px 36px; }
+      .ba-grid { padding:0 48px; gap:18px; }
+      .outcome-section { padding:64px 48px; }
+      .cta-section { padding:64px 48px; }
     }
-    .stat-cell:hover {
-      border-color:rgba(34,197,94,0.3);
-      background:rgba(34,197,94,0.03);
-    }
-    .stat-cell::before {
-      content:""; position:absolute; top:0; left:0; right:0; height:2px;
-      background:var(--grad);
-    }
-
 
     @media(max-width:900px) {
       .hero { grid-template-columns:1fr; min-height:auto; }
@@ -451,30 +362,10 @@
       .hero-right { padding:40px 32px; }
       .outcome-cards { grid-template-columns:1fr; }
       .stats-strip { grid-template-columns:1fr 1fr; gap:12px; padding:0 32px 12px; }
-      .stat-cell {
-      padding: 40px 36px;
-      border:1px solid var(--border);
-      border-radius:20px;
-      background:rgba(255,255,255,0.03);
-      transition: border-color 220ms, background 220ms;
-      position:relative;
-      overflow:hidden;
-      min-height: 180px;
-      height: 100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:8px;
+      .cta-section { grid-template-columns:1fr; gap:28px; }
+      .navbar { padding:0 24px; }
+      .nav-links { display:none; }
     }
-    .stat-cell:hover {
-      border-color:rgba(34,197,94,0.3);
-      background:rgba(34,197,94,0.03);
-    }
-    .stat-cell::before {
-      content:""; position:absolute; top:0; left:0; right:0; height:2px;
-      background:var(--grad);
-    }
-
 
     @media(max-width:640px) {
       .hero-left { padding:48px 24px; }
@@ -484,30 +375,9 @@
       .ba-grid { grid-template-columns:1fr; padding:0 24px; gap:16px; }
       .outcome-section { padding:48px 24px; }
       .stats-strip { grid-template-columns:1fr; gap:10px; padding:0 24px 10px; }
-      .stat-cell {
-      padding: 40px 36px;
-      border:1px solid var(--border);
-      border-radius:20px;
-      background:rgba(255,255,255,0.03);
-      transition: border-color 220ms, background 220ms;
-      position:relative;
-      overflow:hidden;
-      min-height: 180px;
-      height: 100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:8px;
+      .cta-section { padding:48px 24px; }
+      .cta-btn { width:100%; justify-content:center; }
     }
-    .stat-cell:hover {
-      border-color:rgba(34,197,94,0.3);
-      background:rgba(34,197,94,0.03);
-    }
-    .stat-cell::before {
-      content:""; position:absolute; top:0; left:0; right:0; height:2px;
-      background:var(--grad);
-    }
-
 </style>
 </head>
 <body>
@@ -529,9 +399,6 @@
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero" style="position: relative; z-index: 1;">
-
-
-
   <div class="hero-left">
     <div class="hero-tag">Case Study</div>
     <h1 class="hero-title">AI Call Agent</h1>
