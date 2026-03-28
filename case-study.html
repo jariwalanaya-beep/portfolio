@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Call System Case Study | Karlspace</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="index.css" />
   <link rel="icon" type="image/png" href="1772001775286.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -467,7 +469,244 @@
       .cta-section { padding:48px 24px; }
       .cta-btn { width:100%; justify-content:center; }
     }
-  </style>
+  
+    /* ════ PREMIUM REDESIGN OVERRIDES ════ */
+    body {
+        background-color: var(--bg);
+        background-image: 
+            radial-gradient(circle at 15% 50%, rgba(34, 197, 94, 0.04), transparent 35%),
+            radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.04), transparent 35%);
+        background-attachment: fixed;
+    }
+    
+    .navbar {
+        background: rgba(5,6,8,0.75);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .hero-title {
+        background: linear-gradient(180deg, #ffffff 0%, #a1b0be 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: clamp(3.8rem, 6.5vw, 7rem);
+        letter-spacing: -4px;
+        line-height: 0.95;
+    }
+    
+    .hero-sub {
+        font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+        color: #94a3b8;
+        line-height: 1.8;
+    }
+    
+    .hero-img-wrap {
+        border: 1px solid rgba(34, 197, 94, 0.35);
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.02));
+        box-shadow: 0 0 80px rgba(34, 197, 94, 0.15), 0 30px 60px rgba(0,0,0,0.6);
+        backdrop-filter: blur(10px);
+        transform: perspective(1000px) rotateY(-5deg);
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .hero-img-wrap:hover {
+        transform: perspective(1000px) rotateY(0deg) translateY(-10px);
+        box-shadow: 0 0 100px rgba(34, 197, 94, 0.25), 0 40px 80px rgba(0,0,0,0.7);
+    }
+
+    .outcome-card {
+        border: 1px solid rgba(255,255,255,0.06);
+        background: rgba(255,255,255,0.015);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .outcome-card:hover {
+        border-color: rgba(34, 197, 94, 0.5);
+        background: rgba(34, 197, 94, 0.03);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(34, 197, 94, 0.15);
+    }
+    
+    .outcome-card::before {
+        height: 2px;
+        background: linear-gradient(90deg, #22c55e 0%, #10b981 100%);
+        opacity: 0.5;
+    }
+    .outcome-card:hover::before {
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(34,197,94,0.6);
+    }
+    
+    .ba-col {
+        border-radius: 24px;
+        border: 1px solid rgba(255,255,255,0.06);
+        background: rgba(255,255,255,0.015);
+        box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+    }
+    .ba-col:hover {
+        border-color: rgba(34, 197, 94, 0.4);
+        transform: translateY(-8px);
+        box-shadow: 0 32px 64px rgba(34, 197, 94, 0.15);
+    }
+    
+    .ba-col-label {
+        background: rgba(0,0,0,0.2);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        padding: 18px 26px;
+        font-size: 0.8rem;
+    }
+
+    .stat-cell {
+        background: rgba(255,255,255,0.015);
+        border: 1px solid rgba(255,255,255,0.06);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+    }
+    .stat-cell:hover {
+        background: rgba(34, 197, 94, 0.04);
+        border-color: rgba(34, 197, 94, 0.3);
+        transform: translateY(-6px);
+        box-shadow: 0 24px 48px rgba(34, 197, 94, 0.15);
+    }
+    
+    .sec-h2 {
+        background: linear-gradient(135deg, #ffffff 0%, #a1b0be 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .hero-tag {
+        background: rgba(34, 197, 94, 0.1);
+        padding: 8px 18px;
+        border-radius: 50px;
+        border: 1px solid rgba(34, 197, 94, 0.2);
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.8rem;
+    }
+
+
+    /* ════ PREMIUM REDESIGN OVERRIDES ════ */
+    body {
+        background-color: var(--bg);
+        background-image: 
+            radial-gradient(circle at 15% 50%, rgba(34, 197, 94, 0.04), transparent 35%),
+            radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.04), transparent 35%);
+        background-attachment: fixed;
+    }
+    
+    .navbar {
+        background: rgba(5,6,8,0.75);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .hero-title {
+        background: linear-gradient(180deg, #ffffff 0%, #a1b0be 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: clamp(3.8rem, 6.5vw, 7rem) !important;
+        letter-spacing: -4px !important;
+        line-height: 0.95 !important;
+    }
+    
+    .hero-sub {
+        font-size: clamp(1.1rem, 1.6vw, 1.35rem) !important;
+        color: #94a3b8 !important;
+        line-height: 1.8 !important;
+    }
+    
+    .hero-img-wrap {
+        border: 1px solid rgba(34, 197, 94, 0.35) !important;
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.02)) !important;
+        box-shadow: 0 0 80px rgba(34, 197, 94, 0.15), 0 30px 60px rgba(0,0,0,0.6) !important;
+        backdrop-filter: blur(10px);
+        transform: perspective(1000px) rotateY(-5deg);
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .hero-img-wrap:hover {
+        transform: perspective(1000px) rotateY(0deg) translateY(-10px);
+        box-shadow: 0 0 100px rgba(34, 197, 94, 0.25), 0 40px 80px rgba(0,0,0,0.7) !important;
+    }
+
+    .outcome-card {
+        border: 1px solid rgba(255,255,255,0.06);
+        background: rgba(255,255,255,0.015);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .outcome-card:hover {
+        border-color: rgba(34, 197, 94, 0.5) !important;
+        background: rgba(34, 197, 94, 0.03) !important;
+        transform: translateY(-8px) scale(1.02) !important;
+        box-shadow: 0 30px 60px rgba(34, 197, 94, 0.15);
+    }
+    
+    .outcome-card::before {
+        height: 2px !important;
+        background: linear-gradient(90deg, #22c55e 0%, #10b981 100%) !important;
+        opacity: 0.5 !important;
+    }
+    .outcome-card:hover::before {
+        opacity: 1 !important;
+        box-shadow: 0 0 20px rgba(34,197,94,0.6) !important;
+    }
+    
+    .ba-col {
+        border-radius: 24px;
+        border: 1px solid rgba(255,255,255,0.06) !important;
+        background: rgba(255,255,255,0.015);
+        box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+    }
+    .ba-col:hover {
+        border-color: rgba(34, 197, 94, 0.4) !important;
+        transform: translateY(-8px) !important;
+        box-shadow: 0 32px 64px rgba(34, 197, 94, 0.15) !important;
+    }
+    
+    .ba-col-label {
+        background: rgba(0,0,0,0.2) !important;
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+        padding: 18px 26px !important;
+        font-size: 0.8rem;
+    }
+
+    .stat-cell {
+        background: rgba(255,255,255,0.015) !important;
+        border: 1px solid rgba(255,255,255,0.06) !important;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+    }
+    .stat-cell:hover {
+        background: rgba(34, 197, 94, 0.04) !important;
+        border-color: rgba(34, 197, 94, 0.3) !important;
+        transform: translateY(-6px) !important;
+        box-shadow: 0 24px 48px rgba(34, 197, 94, 0.15) !important;
+    }
+    
+    .sec-h2 {
+        background: linear-gradient(135deg, #ffffff 0%, #a1b0be 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .hero-tag {
+        background: rgba(34, 197, 94, 0.1) !important;
+        padding: 8px 18px !important;
+        border-radius: 50px !important;
+        border: 1px solid rgba(34, 197, 94, 0.2) !important;
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.8rem;
+    }
+    .hero-tag::before { display: none !important; }
+
+</style>
 </head>
 <body>
 
@@ -483,7 +722,13 @@
 </nav>
 
 <!-- ═══════════ HERO ═══════════ -->
-<section class="hero">
+<section class="hero" style="position: relative; z-index: 1;">
+
+<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; pointer-events: none;">
+  <div style="position: absolute; width: 60vh; height: 60vh; border-radius: 50%; background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(0,0,0,0) 70%); top: -10%; right: -5%; filter: blur(60px);"></div>
+  <div style="position: absolute; width: 50vh; height: 50vh; border-radius: 50%; background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, rgba(0,0,0,0) 70%); bottom: -10%; left: 0%; filter: blur(60px);"></div>
+</div>
+
   <div class="hero-left">
     <div class="hero-tag">Case Study</div>
     <h1 class="hero-title">AI Call Agent</h1>
