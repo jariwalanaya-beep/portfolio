@@ -25,7 +25,7 @@ if (hamburger) {
 function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);
     if (target === 0) return;
-    const duration = 2000;
+    const duration = 1000;
     const step = 16;
     const increment = target / (duration / step);
     let current = 0;
@@ -60,7 +60,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, observerConfig);
 document.querySelectorAll('.service-card, .testimonial-card, .workflow-step, .metric-card, .dashboard-mock').forEach((el, i) => {
     el.classList.add('reveal-item');
-    el.style.transitionDelay = (i * 0.08) + 's';
+    el.style.transitionDelay = (i * 0.04) + 's';
     revealObserver.observe(el);
 });
 
