@@ -426,6 +426,36 @@
       transform: translateY(-1px);
     }
 
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #d9e8f7;
+      font-weight: 700;
+      font-size: 0.96rem;
+      border-radius: 999px;
+      padding: 16px 28px;
+      border: 1px solid rgba(34, 197, 94, 0.38);
+      background: rgba(34, 197, 94, 0.08);
+      transition: border-color 180ms, background 180ms;
+      white-space: nowrap;
+    }
+
+    .cta-btn-secondary:hover {
+      border-color: rgba(34, 197, 94, 0.62);
+      background: rgba(34, 197, 94, 0.16);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -466,6 +496,7 @@
       .how-steps { grid-template-columns: 1fr; }
       .cta-section { grid-template-columns: 1fr; gap: 20px; padding: 42px var(--section-pad-x-tablet); }
       .cta-copy { max-width: 100%; }
+      .cta-actions { justify-content: flex-start; }
       .navbar { padding: 0 24px; }
       .nav-links { display: none; }
     }
@@ -483,7 +514,9 @@
       .compare-section { padding: var(--section-pad-y-mobile) var(--section-pad-x-mobile) 62px; }
       .cta-section { padding: 38px var(--section-pad-x-mobile); }
       .cta-text { font-size: clamp(1.72rem, 9vw, 2.08rem); letter-spacing: -0.8px; max-width: 16ch; }
-      .cta-btn { width: 100%; justify-content: center; }
+      .cta-actions { width: 100%; flex-direction: column; align-items: stretch; gap: 10px; }
+      .cta-btn,
+      .cta-btn-secondary { width: 100%; justify-content: center; }
       .stats-strip { grid-template-columns: 1fr; gap:10px; padding: 18px var(--section-pad-x-mobile) 0; }
       .stat-cell { padding: 30px 24px; min-height: auto; }
       .sec-h2 { font-size: clamp(1.8rem, 8vw, 2.2rem); }
@@ -647,7 +680,10 @@
     <div class="cta-copy">
       <div class="cta-text">Need this adapted for your business?</div>
     </div>
-    <a href="index.html#contact" class="cta-btn">Book a Free Audit &rarr;</a>
+    <div class="cta-actions">
+      <a href="https://profit-palace-92.lovable.app/" target="_blank" rel="noopener noreferrer" class="cta-btn-secondary">View Project</a>
+      <a href="index.html#contact" class="cta-btn">Book a Free Audit &rarr;</a>
+    </div>
   </section>
 
   <script src="index.js"></script>
