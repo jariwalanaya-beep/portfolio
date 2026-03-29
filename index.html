@@ -54,10 +54,11 @@
     <!-- Mobius Strip Animation Canvas — outside hero-bg so overflow:hidden doesn't clip it -->
     <canvas id="mobius-canvas" style="position: absolute; right: 0; top: 0; width: 800px; height: 800px; z-index: 5; pointer-events: none; opacity: 1; mix-blend-mode: screen;"></canvas>
     <div class="container hero-content">
-      <h1 class="hero-headline animate-in delay-1">
-          Your Business Runs on <span class="highlight">Decisions.</span><br />
-          <span class="hero-midline">Make Them with AI That Understands</span><br />
-          <span class="hero-midline">Your <span class="gradient-text">Operations.</span></span>
+      <h1 class="hero-headline animate-in delay-1" style="font-size: clamp(2rem, 3.2vw, 2.6rem); line-height: 1.4;">
+          Your Business Runs on<br />
+          <span class="highlight">Decisions.</span><br />
+          Make Them with AI That Understands<br />
+          Your <span class="gradient-text">Operations.</span>
       </h1>
       <p class="hero-sub animate-in delay-2">
           I'm Shivam, founder of Karlspace. I build custom AI systems around how your business actually operates, not how a generic template assumes it does.
@@ -67,44 +68,20 @@
       <div class="hero-cta animate-in delay-3">
         <a href="#contact" class="btn btn-primary" id="hero-cta-primary">Book a Free Audit →</a>
       </div>
-      <div class="hero-stats animate-in delay-4">
-        <div class="hero-stat">
-          <span class="hero-stat-n">34+</span>
-          <span class="hero-stat-l">AI Systems Built</span>
+      <div class="hero-stats animate-in delay-4" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px 24px; border-radius: 12px;">
+        <div class="hero-stat" style="padding: 0 16px;">
+          <span class="hero-stat-n" style="font-size: 1.1rem; color: var(--primary-light); background: none; -webkit-text-fill-color: var(--primary-light);">34+</span>
+          <span class="hero-stat-l" style="font-size: 0.65rem; color: var(--text-muted); font-weight: 500;">AI Systems Built</span>
         </div>
-        <div class="hero-stat-div"></div>
-        <div class="hero-stat">
-          <span class="hero-stat-n">100%</span>
-          <span class="hero-stat-l">Client Satisfaction</span>
+        <div class="hero-stat-div" style="height: 28px; background: rgba(255,255,255,0.08);"></div>
+        <div class="hero-stat" style="padding: 0 16px;">
+          <span class="hero-stat-n" style="font-size: 1.1rem; color: var(--primary-light); background: none; -webkit-text-fill-color: var(--primary-light);">100%</span>
+          <span class="hero-stat-l" style="font-size: 0.65rem; color: var(--text-muted); font-weight: 500;">Client Satisfaction</span>
         </div>
-        <div class="hero-stat-div"></div>
-        <div class="hero-stat">
-          <span class="hero-stat-n">0</span>
-          <span class="hero-stat-l">Deadlines Missed</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRUST METRICS -->
-  <section class="metrics" id="metrics">
-    <div class="container">
-      <div class="metrics-grid">
-        <div class="metric-card" id="metric-projects">
-          <span class="metric-number" data-target="34">0</span><span class="metric-suffix">+</span>
-          <p class="metric-label">AI Systems Deployed</p>
-        </div>
-        <div class="metric-card" id="metric-clients">
-          <span class="metric-number" data-target="100">0</span><span class="metric-suffix">%</span>
-          <p class="metric-label">Client Retention Rate</p>
-        </div>
-        <div class="metric-card" id="metric-saved">
-          <span class="metric-number" data-target="12000">0</span><span class="metric-suffix">+</span>
-          <p class="metric-label">Man-Hours Automated</p>
-        </div>
-        <div class="metric-card" id="metric-deadlines">
-          <span class="metric-number" data-target="0">0</span><span class="metric-suffix">!</span>
-          <p class="metric-label">Deadlines Missed</p>
+        <div class="hero-stat-div" style="height: 28px; background: rgba(255,255,255,0.08);"></div>
+        <div class="hero-stat" style="padding: 0 16px;">
+          <span class="hero-stat-n" style="font-size: 1.1rem; color: var(--primary-light); background: none; -webkit-text-fill-color: var(--primary-light);">0</span>
+          <span class="hero-stat-l" style="font-size: 0.65rem; color: var(--text-muted); font-weight: 500;">Deadlines Missed</span>
         </div>
       </div>
     </div>
@@ -345,65 +322,51 @@
 
 
   <!-- CTA -->
-  <section class="cta-section" id="contact">
+  <section class="cta-section" id="contact" style="padding: 120px 0; text-align: center; position: relative; z-index: 10;">
     <div class="container">
-      <div class="cta-inner">
-        <div class="cta-glow"></div>
-        <div class="section-tag">GET STARTED</div>
-        <h2 class="cta-title">Ready to Replace Chaos<br />With <span class="gradient-text">Infrastructure?</span></h2>
-        <p class="cta-sub">Book a free 30-minute audit to discover how AI infrastructure can transform your operations.</p>
-        <div class="cta-form" id="cta-form">
-          <input type="email" id="cta-email" placeholder="your@email.com" class="cta-input" />
-          <button class="btn btn-primary" id="cta-submit">Book Free Audit →</button>
-        </div>
-        <p class="cta-note mb-4">No sales pitch. No commitment. Just clarity.</p>
-        <div class="cta-contact-pills">
-          <a href="mailto:shivam.karlspace@gmail.com" class="cta-contact-pill">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            shivam.karlspace@gmail.com
-          </a>
-          <a href="mailto:shivam@karlspace.in" class="cta-contact-pill">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            shivam@karlspace.in
-          </a>
-        </div>
+      <h2 style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-display); font-weight: 700; margin-bottom: 12px; color: #fff;">Need AI agents like this?</h2>
+      <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px;">Reach me on X to build your automation system</p>
+      
+      <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
+        <a href="https://x.com/karlspace_" target="_blank" class="btn-cs-gradient" style="padding: 12px 28px; font-size: 0.95rem; text-decoration: none;">
+          DM on X
+        </a>
+        <a href="mailto:shivam.karlspace@gmail.com" style="background: transparent; border: 1px solid rgba(34, 197, 94, 0.3); color: var(--primary-light); font-weight: 500; padding: 11px 28px; border-radius: 50px; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; cursor: pointer;" onmouseover="this.style.background='rgba(34,197,94,0.08)';" onmouseout="this.style.background='transparent';">
+          shivam.karlspace@gmail.com
+        </a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a href="https://amber-timekeeper.lovable.app" target="_blank" class="logo">Karl<span>space</span></a>
-        <p>AI Infrastructure for operators who refuse to scale with chaos.</p>
-      </div>
-      <div class="footer-links" style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
-        <a href="#case-studies">Case Studies</a>
-        <a href="#workflow">Process</a>
-        <span class="footer-divider" style="width:1px; height:14px; background: rgba(255,255,255,0.15); display:inline-block;"></span>
-        <a href="https://www.linkedin.com/in/karlspace" target="_blank" title="LinkedIn" class="footer-social">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
+  <footer class="footer" style="padding: 80px 0 40px; text-align: center; border-top: none;">
+    <div class="container">
+      <a href="#" class="logo" style="justify-content: center; display: flex; text-decoration: none; margin-bottom: 16px; font-size: 1.6rem;">Karl<span style="color: var(--primary);">space</span></a>
+      <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 400px; margin: 0 auto 32px; line-height: 1.6;">
+        AI Infrastructure for operators who refuse to scale<br>with chaos.
+      </p>
+      
+      <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; align-items: center; margin-bottom: 32px; font-size: 0.9rem; color: var(--text-muted);">
+        <a href="#case-studies" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff';" onmouseout="this.style.color='var(--text-muted)';">Case Studies</a>
+        <a href="#workflow" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff';" onmouseout="this.style.color='var(--text-muted)';">Process</a>
+        <span style="color: rgba(255,255,255,0.2);">|</span>
+        <a href="https://www.linkedin.com/in/karlspace" target="_blank" style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;" onmouseover="this.style.color='#fff';" onmouseout="this.style.color='var(--text-muted)';">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn
         </a>
-        <a href="https://x.com/karlspace_" target="_blank" title="X (Twitter)" class="footer-social">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          X
+        <a href="https://x.com/karlspace_" target="_blank" style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;" onmouseover="this.style.color='#fff';" onmouseout="this.style.color='var(--text-muted)';">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X
         </a>
-        <a href="https://www.facebook.com/karlspace12" target="_blank" title="Facebook" class="footer-social">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          Facebook
+        <a href="https://www.facebook.com/karlspace12" target="_blank" style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;" onmouseover="this.style.color='#fff';" onmouseout="this.style.color='var(--text-muted)';">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook
         </a>
-        <a href="https://www.reddit.com/user/Equivalent_Disk_5530/" target="_blank" title="Reddit" class="footer-social">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path fill="white" d="M17.5 12a1.5 1.5 0 0 0-1.5-1.5c-.4 0-.76.15-1.02.4A7.4 7.4 0 0 0 12 10a7.4 7.4 0 0 0-3 .89 1.5 1.5 0 1 0-1.55 2.47c-.02.12-.03.24-.03.36 0 1.84 2.06 3.33 4.6 3.33s4.6-1.49 4.6-3.33c0-.12-.01-.24-.03-.36.4-.27.66-.72.66-1.22zm-5.5 3.27c-1.35 0-2.44-.56-2.44-1.25S10.65 12.77 12 12.77s2.44.56 2.44 1.25S13.35 15.27 12 15.27zm-1.5-3.02a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5zm3 0a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5z"/></svg>
-          Reddit
+        <a href="https://www.reddit.com/user/Equivalent_Disk_5530/" target="_blank" style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;" onmouseover="this.style.color='#fff';" onmouseout="this.style.color='var(--text-muted)';">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path fill="var(--bg)" d="M17.5 12a1.5 1.5 0 0 0-1.5-1.5c-.4 0-.76.15-1.02.4A7.4 7.4 0 0 0 12 10a7.4 7.4 0 0 0-3 .89 1.5 1.5 0 1 0-1.55 2.47c-.02.12-.03.24-.03.36 0 1.84 2.06 3.33 4.6 3.33s4.6-1.49 4.6-3.33c0-.12-.01-.24-.03-.36.4-.27.66-.72.66-1.22zm-5.5 3.27c-1.35 0-2.44-.56-2.44-1.25S10.65 12.77 12 12.77s2.44.56 2.44 1.25S13.35 15.27 12 15.27zm-1.5-3.02a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5zm3 0a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5z"/></svg> Reddit
         </a>
-        <a href="https://www.instagram.com/karlspace_" target="_blank" title="Instagram" class="footer-social">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-          Instagram
+        <a href="https://www.instagram.com/karlspace_" target="_blank" style="color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;" onmouseover="this.style.color='#fff';" onmouseout="this.style.color='var(--text-muted)';">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> Instagram
         </a>
       </div>
-      <p class="footer-copy">© 2025 Karlspace</p>
+      <p style="color: rgba(255,255,255,0.3); font-size: 0.85rem;">© 2025 Karlspace</p>
     </div>
   </footer>
 
