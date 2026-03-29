@@ -19,6 +19,12 @@
       --primary: #22c55e;
       --secondary: #f6b93b;
       --grad: linear-gradient(110deg, #22c55e 0%, #16a34a 50%, #f6b93b 100%);
+      --section-pad-y: 64px;
+      --section-pad-x: 40px;
+      --section-pad-y-tablet: 54px;
+      --section-pad-x-tablet: 32px;
+      --section-pad-y-mobile: 46px;
+      --section-pad-x-mobile: 24px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,7 +74,7 @@
 
     /* ═══════════════════════ HERO ═══════════════════════ */
     .hero {
-      min-height: 88vh;
+      min-height: 84vh;
       display: grid;
       grid-template-columns: 1.05fr 1fr;
       align-items: center;
@@ -78,7 +84,7 @@
     }
 
     .hero-left {
-      padding: 40px;
+      padding: 48px 40px;
       display: flex; flex-direction: column; justify-content: center;
       border-right: 1px solid var(--border);
       height: 100%;
@@ -103,9 +109,9 @@
     }
 
     .hero-sub {
-      font-size: clamp(1.02rem, 1.6vw, 1.25rem);
+      font-size: clamp(1rem, 1.35vw, 1.18rem);
       color: #b8ccde; line-height: 1.7;
-      margin-bottom: 28px; max-width: 46ch;
+      margin-bottom: 24px; max-width: 48ch;
     }
 
     .hero-bullets { list-style: none; display: grid; gap: 14px; }
@@ -118,7 +124,7 @@
     }
 
     .hero-right {
-      padding: 40px;
+      padding: 48px 40px;
       display: flex; align-items: center; justify-content: center;
       height: 100%;
       background: linear-gradient(135deg, rgba(34, 197, 94, 0.04), transparent 60%);
@@ -154,49 +160,86 @@
 
     .sec-h2 {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 700;
+      font-size: clamp(2rem, 3.1vw, 3.15rem); font-weight: 700;
       line-height: 1.1; letter-spacing: -1px; color: var(--text);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
-    .benefit-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 18px;
+    /* ═══════════════════════ STATS STRIP ═══════════════════════ */
+    .stats-strip {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+      padding:24px var(--section-pad-x) 0;
+      background:transparent;
+      align-items:stretch;
     }
 
-    .benefit-card {
-      border: 1px solid var(--border); border-radius: 16px;
-      padding: 18px 18px 20px;
-      background: rgba(255, 255, 255, 0.03);
+    .stat-cell {
+      padding: 34px 30px;
+      border:1px solid var(--border);
+      border-radius:20px;
+      background:rgba(255,255,255,0.03);
       transition: border-color 220ms, background 220ms;
+      position:relative;
+      overflow:hidden;
+      min-height: 168px;
+      height: 100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:8px;
     }
-    .benefit-card:hover {
-      border-color: rgba(34, 197, 94, 0.3);
-      background: rgba(34, 197, 94, 0.04);
+    .stat-cell:hover {
+      border-color:rgba(34,197,94,0.3);
+      background:rgba(34,197,94,0.03);
+    }
+    .stat-cell::before {
+      content:""; position:absolute; top:0; left:0; right:0; height:2px;
+      background:var(--grad);
     }
 
-    .benefit-card h3 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1rem; font-weight: 700;
-      margin-bottom: 8px;
+    .stat-num {
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(1.75rem,2.35vw,2.45rem);
+      font-weight:800; line-height:1;
+      letter-spacing:-0.8px; margin-bottom:2px;
+      background:var(--grad);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+      display:block;
+    }
+    .stat-label {
+      font-size:0.9rem;
+      font-weight:700;
+      color:#d9e5f2;
+      line-height:1.35;
+      margin-bottom:1px;
+      max-width:22ch;
     }
 
-    .benefit-card p {
-      font-size: 0.9rem; color: #c7d5e6; line-height: 1.55;
+    .stat-desc {
+      font-size:0.75rem;
+      color:var(--muted);
+      line-height:1.32;
+      max-width:32ch;
     }
 
     /* ═══════════════════════ BEFORE & AFTER ═══════════════════════ */
-    .ba-section { border-bottom: 1px solid var(--border); padding: 0 0 40px; }
+    .ba-section { border-bottom: 1px solid var(--border); padding: 0 0 56px; }
 
-    .ba-header { padding: 40px 40px 24px; }
+    .ba-header { padding: 42px var(--section-pad-x) 26px; }
+
+    .ba-header.tight-bottom { padding-bottom: 8px; }
+
+    .ba-header.spacious-top { padding-top: 56px; }
 
     .ba-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 24px;
-      padding: 0 40px;
+      padding: 0 var(--section-pad-x);
+      margin-top: 20px;
     }
 
     .ba-col {
@@ -219,30 +262,62 @@
     .ba-col img { width: 100%; display: block; }
 
     /* ═══════════════════════ HOW IT WORKS ═══════════════════════ */
-    .how-section { padding: 50px 40px; border-bottom: 1px solid var(--border); }
+    .how-section {
+      padding: var(--section-pad-y) var(--section-pad-x);
+      border-bottom: 1px solid var(--border);
+    }
 
-    .how-steps { display: grid; gap: 14px; max-width: 900px; }
+    .how-steps {
+      display: grid;
+      gap: 16px;
+      max-width: 1200px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 
     .how-step {
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px 20px;
-      background: rgba(255, 255, 255, 0.03);
-      display: grid;
-      grid-template-columns: auto 1fr;
+      border: 1px solid rgba(34, 197, 94, 0.18);
+      border-radius: 20px;
+      padding: 24px 24px;
+      background: linear-gradient(180deg, rgba(7, 13, 20, 0.96), rgba(6, 11, 17, 0.9));
+      display: flex;
+      flex-direction: column;
       gap: 14px;
-      align-items: start;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+    .how-step::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 2px;
+      background: var(--grad);
     }
 
     .how-num {
       font-family: "Space Grotesk", sans-serif;
-      font-size: 1rem; font-weight: 700; color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-top: 2px;
     }
 
-    .how-step p { color: #c7d5e6; line-height: 1.6; }
+    .how-step p {
+      color: #c7d5e6;
+      line-height: 1.68;
+      font-size: 1rem;
+      max-width: none;
+      margin: 0;
+    }
 
     /* ═══════════════════════ COMPARE TABLE ═══════════════════════ */
-    .compare-section { padding: 50px 40px 70px; }
+    .compare-section { padding: var(--section-pad-y) var(--section-pad-x) 72px; }
 
     .compare-table {
       width: 100%;
@@ -251,11 +326,26 @@
       font-size: 0.95rem;
     }
 
+    .compare-table-wrap {
+      margin-top: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow-x: auto;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.005));
+    }
+
     .compare-table th,
     .compare-table td {
       padding: 16px 14px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       text-align: left;
+      white-space: nowrap;
+    }
+
+    .compare-table th:first-child,
+    .compare-table td:first-child {
+      width: 31%;
+      white-space: normal;
     }
 
     .compare-table th {
@@ -275,27 +365,45 @@
       margin-top: 22px;
       color: #c7d5e6;
       line-height: 1.7;
+      font-size: 1rem;
       max-width: 85ch;
     }
 
     /* ═══════════════════════ CTA ═══════════════════════ */
     .cta-section {
-      display: grid; grid-template-columns: 1fr auto;
-      align-items: center; gap: 60px;
-      padding: 50px 40px;
-      position: relative; overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 28px;
+      padding: 54px var(--section-pad-x);
+      position: relative;
+      overflow: hidden;
       background: transparent;
       border-top: 1px solid var(--border);
     }
 
+    .cta-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      justify-self: start;
+      width: 100%;
+      max-width: 700px;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
     .cta-text {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.5rem, 2.6vw, 2.3rem); font-weight: 700;
-      line-height: 1.3; color: var(--text);
-    }
-    .cta-sub {
-      font-size: 1.02rem; color: var(--muted); line-height: 1.65;
-      margin-top: 12px; max-width: 52ch;
+      font-size: clamp(2.15rem, 3.7vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.1px;
+      color: #edf4fb;
+      max-width: 20ch;
     }
 
     .cta-btn {
@@ -310,8 +418,13 @@
       transition: box-shadow 200ms;
       white-space: nowrap;
       letter-spacing: 0.2px;
+      position: relative;
+      z-index: 1;
     }
-    .cta-btn:hover { box-shadow: 0 16px 40px rgba(34, 197, 94, 0.42); }
+    .cta-btn:hover {
+      box-shadow: 0 16px 40px rgba(34, 197, 94, 0.42);
+      transform: translateY(-1px);
+    }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -325,40 +438,56 @@
     /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
     @media (max-width: 1100px) {
       .navbar { padding: 0 32px; }
-      .hero-left { padding: 60px 48px; }
-      .hero-right { padding: 48px 40px; }
+      .hero-left { padding: 56px 40px; }
+      .hero-right { padding: 44px 36px; }
       .benefits { padding: 60px 48px 28px; }
-      .ba-header { padding: 48px 48px 36px; }
-      .ba-grid { padding: 0 48px; gap: 18px; }
-      .how-section { padding: 64px 48px; }
-      .compare-section { padding: 64px 48px 80px; }
-      .cta-section { padding: 64px 48px; }
-      .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+      .ba-header { padding: 40px var(--section-pad-x-tablet) 30px; }
+      .ba-header.tight-bottom { padding-bottom: 8px; }
+      .ba-header.spacious-top { padding-top: 48px; }
+      .ba-grid { padding: 0 var(--section-pad-x-tablet); gap: 18px; }
+      .how-section { padding: var(--section-pad-y-tablet) var(--section-pad-x-tablet); }
+      .compare-section { padding: var(--section-pad-y-tablet) var(--section-pad-x-tablet) 72px; }
+      .compare-table-wrap { margin-top: 14px; border-radius: 14px; }
+      .compare-table { min-width: 760px; font-size: 0.9rem; margin-top: 0; }
+      .compare-table th,
+      .compare-table td { padding: 15px 12px; }
+      .compare-table th { letter-spacing: 1.4px; font-size: 0.84rem; }
+      .cta-section { padding: 50px var(--section-pad-x-tablet); }
+      .cta-copy { max-width: 600px; }
+      .cta-text { font-size: clamp(1.95rem, 3.8vw, 2.6rem); }
+      .stats-strip { grid-template-columns: 1fr 1fr; gap:12px; padding: 20px var(--section-pad-x-tablet) 0; }
     }
 
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 60px 32px; }
-      .hero-right { padding: 40px 32px; }
+      .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 52px 32px; }
+      .hero-right { padding: 36px 32px; }
       .ba-grid { grid-template-columns: 1fr; }
-      .cta-section { grid-template-columns: 1fr; gap: 28px; }
+      .how-steps { grid-template-columns: 1fr; }
+      .cta-section { grid-template-columns: 1fr; gap: 20px; padding: 42px var(--section-pad-x-tablet); }
+      .cta-copy { max-width: 100%; }
       .navbar { padding: 0 24px; }
       .nav-links { display: none; }
     }
 
     @media (max-width: 640px) {
-      .hero-left { padding: 48px 24px; }
-      .hero-right { padding: 32px 24px; }
+      .hero-left { padding: 46px 24px; }
+      .hero-right { padding: 30px 24px; }
       .benefits { padding: 48px 24px 24px; }
       .ba-section { padding: 0 0 48px; }
-      .ba-header { padding: 36px 24px 28px; }
-      .ba-grid { padding: 0 24px; gap: 16px; }
-      .how-section { padding: 48px 24px; }
-      .compare-section { padding: 48px 24px 70px; }
-      .cta-section { padding: 48px 24px; }
+      .ba-header { padding: 34px var(--section-pad-x-mobile) 24px; }
+      .ba-header.tight-bottom { padding-bottom: 8px; }
+      .ba-header.spacious-top { padding-top: 42px; }
+      .ba-grid { padding: 0 var(--section-pad-x-mobile); gap: 16px; }
+      .how-section { padding: var(--section-pad-y-mobile) var(--section-pad-x-mobile); }
+      .compare-section { padding: var(--section-pad-y-mobile) var(--section-pad-x-mobile) 62px; }
+      .cta-section { padding: 38px var(--section-pad-x-mobile); }
+      .cta-text { font-size: clamp(1.72rem, 9vw, 2.08rem); letter-spacing: -0.8px; max-width: 16ch; }
       .cta-btn { width: 100%; justify-content: center; }
-      .benefit-grid { grid-template-columns: 1fr; }
-      .how-step { grid-template-columns: 1fr; }
+      .stats-strip { grid-template-columns: 1fr; gap:10px; padding: 18px var(--section-pad-x-mobile) 0; }
+      .stat-cell { padding: 30px 24px; min-height: auto; }
+      .sec-h2 { font-size: clamp(1.8rem, 8vw, 2.2rem); }
+      .compare-table { min-width: 680px; }
     }
   </style>
 </head>
@@ -394,35 +523,39 @@
     </div>
   </section>
 
-  <section class="benefits" id="benefits">
-    <div class="sec-tag">Case Study</div>
-    <h2 class="sec-h2">Why your Sheet isn't enough</h2>
-    <p class="hero-sub">You built the Sheet. You maintain it. But when someone asks "how are we doing?" you end up filtering, scrolling, and explaining. This turns your Sheet into a living dashboard that tells the story for you.</p>
-    <div class="benefit-grid">
-      <div class="benefit-card">
-        <h3>24hrs</h3>
-        <p>From sharing your Sheet to a live, usable dashboard.</p>
+  <section class="ba-section" id="before-after">
+    <div class="ba-header tight-bottom">
+      <div class="sec-tag">Result</div>
+    </div>
+    
+    <div class="stats-strip" id="stats">
+      <div class="stat-cell">
+        <div class="stat-num">24hrs</div>
+        <div class="stat-label">Fast Setup</div>
+        <div class="stat-desc">From sharing your Sheet to a live, usable dashboard.</div>
       </div>
-      <div class="benefit-card">
-        <h3>Built around your data</h3>
-        <p>Layout, tabs, and charts mirror your actual dataset &mdash; not a fixed template.</p>
+      <div class="stat-cell">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Built around your data</div>
+        <div class="stat-desc">Layout, tabs, and charts mirror your actual dataset — not a fixed template.</div>
       </div>
-      <div class="benefit-card">
-        <h3>Zero data team</h3>
-        <p>No analyst, no developer, no IT department needed.</p>
+      <div class="stat-cell">
+        <div class="stat-num">Zero</div>
+        <div class="stat-label">Zero data team</div>
+        <div class="stat-desc">No analyst, no developer, no IT department needed.</div>
       </div>
-      <div class="benefit-card">
-        <h3>Always live</h3>
-        <p>Dashboard updates the moment your Sheet updates.</p>
+      <div class="stat-cell">
+        <div class="stat-num">Live</div>
+        <div class="stat-label">Always live</div>
+        <div class="stat-desc">Dashboard updates the moment your Sheet updates.</div>
       </div>
     </div>
-  </section>
 
-  <section class="ba-section" id="before-after">
-    <div class="ba-header">
+    <div class="ba-header spacious-top">
       <div class="sec-tag">Before &amp; After</div>
       <h2 class="sec-h2">From rows of data to instant clarity</h2>
     </div>
+
     <div class="ba-grid">
       <div class="ba-col">
         <div class="ba-col-label">Before</div>
@@ -445,7 +578,7 @@
       </div>
       <div class="how-step">
         <div class="how-num">Step 2</div>
-        <p>We map your data. The system reads your columns &mdash; sales, expenses, staff, inventory &mdash; and auto-assigns the right charts and KPIs.</p>
+        <p>We map your data. The system reads your columns sales, expenses, staff, inventory and auto-assigns the right charts and KPIs.</p>
       </div>
       <div class="how-step">
         <div class="how-num">Step 3</div>
@@ -457,61 +590,62 @@
   <section class="compare-section" id="compare">
     <div class="sec-tag">Why Not Power BI?</div>
     <h2 class="sec-h2">Built for owners, not data teams</h2>
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>Power BI</th>
-          <th>Google Analytics</th>
-          <th>This</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Setup time</td>
-          <td>Days-Weeks</td>
-          <td>Hours</td>
-          <td>Minutes</td>
-        </tr>
-        <tr>
-          <td>Requires IT/developer</td>
-          <td>Yes</td>
-          <td>Partial</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>Works with your Sheet</td>
-          <td>Export needed</td>
-          <td>No</td>
-          <td>Direct</td>
-        </tr>
-        <tr>
-          <td>Cost</td>
-          <td>$10-$20/user/mo</td>
-          <td>Free but complex</td>
-          <td>Affordable</td>
-        </tr>
-        <tr>
-          <td>Made for small business</td>
-          <td>No</td>
-          <td>No</td>
-          <td>Yes</td>
-        </tr>
-        <tr>
-          <td>Your team can read it</td>
-          <td>Maybe</td>
-          <td>No</td>
-          <td>Always</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Power BI</th>
+            <th>Google Analytics</th>
+            <th>This</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Setup time</td>
+            <td>Days-Weeks</td>
+            <td>Hours</td>
+            <td>Minutes</td>
+          </tr>
+          <tr>
+            <td>Requires IT/developer</td>
+            <td>Yes</td>
+            <td>Partial</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Works with your Sheet</td>
+            <td>Export needed</td>
+            <td>No</td>
+            <td>Direct</td>
+          </tr>
+          <tr>
+            <td>Cost</td>
+            <td>$10-$20/user/mo</td>
+            <td>Free but complex</td>
+            <td>Affordable</td>
+          </tr>
+          <tr>
+            <td>Made for small business</td>
+            <td>No</td>
+            <td>No</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Your team can read it</td>
+            <td>Maybe</td>
+            <td>No</td>
+            <td>Always</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <p class="compare-note">Power BI is built for enterprise data teams. Google Analytics is built for website traffic. Neither was built for a five-store retail owner who just wants to know which branch is underperforming this month. This was.</p>
   </section>
 
   <section class="cta-section">
-    <div>
+    <div class="cta-copy">
       <div class="cta-text">Need this adapted for your business?</div>
-      <div class="cta-sub">We will design a live dashboard tailored to your data, your team, and your goals.</div>
     </div>
     <a href="index.html#contact" class="cta-btn">Book a Free Audit &rarr;</a>
   </section>
