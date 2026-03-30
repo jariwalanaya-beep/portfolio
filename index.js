@@ -23,17 +23,36 @@ if (hamburger) {
 
 // ---- Counter animation ----
 function animateCounter(el) {
-    const target = parseInt(el.dataset.target, 10);
-    if (target === 0) return;
-    const duration = 1000;
-    const step = 16;
-    const increment = target / (duration / step);
-    let current = 0;
-    const timer = setInterval(() => {
-        current = Math.min(current + increment, target);
-        el.textContent = Math.floor(current).toLocaleString();
-        if (current >= target) clearInterval(timer);
-    }, step);
+    const target = parseInt(el.dataset.target ?? '0', 10);
+    const start = parseInt(el.dataset.start ?? '0', 10);
+    const prefix = el.dataset.prefix ?? '';
+    const suffix = el.dataset.suffix ?? '';
+    const duration = parseInt(el.dataset.duration ?? '1100', 10);
+
+    if (!Number.isFinite(target)) return;
+    if (target === start) {
+        el.textContent = `${prefix}${target.toLocaleString()}${suffix}`;
+        return;
+    }
+
+    const startTime = performance.now();
+    const from = Math.min(start, target);
+    const to = Math.max(start, target);
+
+    const updateValue = (timestamp) => {
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        // Ease-out curve so the final number settles smoothly.
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(from + (to - from) * eased);
+        const resolved = target >= start ? value : target - (value - from);
+
+        el.textContent = `${prefix}${resolved.toLocaleString()}${suffix}`;
+        if (progress < 1) {
+            requestAnimationFrame(updateValue);
+        }
+    };
+
+    requestAnimationFrame(updateValue);
 }
 
 // ---- Intersection Observer ----
@@ -43,12 +62,14 @@ const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.dataset.animated) {
             entry.target.dataset.animated = 'true';
-            entry.target.querySelectorAll('.metric-number').forEach(animateCounter);
+            entry.target.querySelectorAll('.metric-number, .hero-stat-n[data-target]').forEach(animateCounter);
         }
     });
 }, observerConfig);
 const metricsSection = document.querySelector('.metrics');
 if (metricsSection) counterObserver.observe(metricsSection);
+const heroStatsSection = document.querySelector('.hero-stats-wrapper');
+if (heroStatsSection) counterObserver.observe(heroStatsSection);
 
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -651,15 +672,15 @@ if (mobiusCanvas) {
     
     // Scale for high-DPI displays
     const dpr = window.devicePixelRatio || 1;
-    const width = 800;
-    const height = 800;
+    const width = 700;
+    const height = 700;
     
     mobiusCanvas.width = width * dpr;
     mobiusCanvas.height = height * dpr;
     mCtx.scale(dpr, dpr);
     
     // Ribbon geometry
-    const mR = 260;       // Radius/scale of figure 8
+    const mR = 225;       // Radius/scale of figure 8
     const maxV = 55;      // Width of the strip
     const stepsU = 130;   // Reduced length resolution for less particles
     const stepsV = 6;     // Width resolution (number of lines)
