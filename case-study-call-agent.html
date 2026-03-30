@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Call System Case Study | Karlspace</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="icon" type="image/png" href="1772001775286.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  
+<style>
+
+    :root {
+      --bg:       #04070c;
+      --bg2:      #060c12;
+      --border:   rgba(255,255,255,0.09);
+      --text:     #e9f0f8;
+      --muted:    #7a8fa8;
+      --primary:  #22c55e;
+      --secondary:#f6b93b;
+      --grad:     linear-gradient(110deg,#22c55e 0%,#16a34a 50%,#f6b93b 100%);
+    }
+
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════ NAVBAR ═══════════════════════ */
+    .navbar {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      display: flex; align-items:center; justify-content:space-between;
+      padding: 0 64px; height: 64px;
+      background: rgba(4,7,12,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family:"Space Grotesk",sans-serif;
+      font-size:1.05rem; font-weight:700;
+      color:#fff; text-decoration:none; letter-spacing:0.2px;
+    }
+    .nav-logo span { color:var(--primary); }
+
+    .nav-links {
+      display:flex; gap:8px; list-style:none;
+    }
+    .nav-links a {
+      text-decoration:none; font-size:0.84rem; font-weight:500;
+      color:var(--muted); padding:6px 14px; border-radius:999px;
+      border:1px solid transparent;
+      transition: color 180ms, border-color 180ms;
+    }
+    .nav-links a:hover { color:var(--text); border-color:var(--border); }
+
+    .nav-back {
+      text-decoration:none; font-size:0.84rem; font-weight:600;
+      color:var(--text); padding:8px 18px; border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.03);
+      transition: border-color 180ms;
+      white-space:nowrap;
+    }
+    .nav-back:hover { border-color:rgba(34,197,94,0.5); }
+
+    /* ═══════════════════════ HERO ═══════════════════════ */
+    .hero-cs {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 0;
+      padding-top: 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-cs-left {
+      padding: 40px;
+      display: flex; flex-direction:column; justify-content:center;
+      border-right: 1px solid var(--border);
+      height: 100%;
+    }
+
+    .hero-cs-tag {
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:0.9rem; font-weight:700; letter-spacing:3px;
+      text-transform:uppercase; color:var(--primary);
+      margin-bottom:28px;
+    }
+    .hero-cs-tag::before {
+      content:""; display:inline-block; width:22px; height:2px;
+      background:var(--grad); border-radius:2px;
+    }
+
+    .hero-cs-title {
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(3.3rem,5.7vw,5.9rem);
+      font-weight:800; line-height:0.97;
+      letter-spacing:-3px; margin-bottom:32px;
+    }
+
+    .hero-cs-sub {
+      font-size:clamp(1.05rem,1.5vw,1.28rem);
+      color:#b8ccde; line-height:1.7;
+      margin-bottom:44px; max-width:44ch;
+    }
+
+    .hero-cs-bullets { list-style:none; display:grid; gap:16px; }
+    .hero-cs-bullets li {
+      display:flex; gap:12px; font-size:clamp(0.98rem,1.15vw,1.14rem);
+      color:#d0dcea; line-height:1.45;
+    }
+    .hero-cs-bullets li::before {
+      content:"—"; color:var(--primary); font-weight:700; flex-shrink:0;
+    }
+
+    .hero-cs-right {
+      padding: 40px;
+      display: flex; align-items:center; justify-content:center;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(34,197,94,0.04), transparent 60%);
+    }
+
+    .hero-cs-img-wrap {
+      border:1px solid rgba(34,197,94,0.22); border-radius:18px;
+      background:linear-gradient(150deg,rgba(34,197,94,0.07),rgba(255,255,255,0.02));
+      padding:14px;
+      box-shadow: 0 0 64px rgba(34,197,94,0.12), 0 24px 48px rgba(0,0,0,0.4);
+      width: 100%;
+      max-width: 540px;
+      animation: heroFloat 3s ease-in-out infinite;
+    }
+    .hero-cs-img-wrap img,
+    .hero-cs-img-wrap video {
+      border-radius:10px; width:100%; display:block;
+      border:1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ═══════════════════════ BEFORE & AFTER ═══════════════════════ */
+    .ba-section {
+      border-bottom: 1px solid var(--border);
+      padding: 0 0 40px;
+    }
+
+    .ba-header {
+      padding: 40px 40px 24px;
+    }
+    .sec-tag {
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:0.9rem; font-weight:700; letter-spacing:3px;
+      text-transform:uppercase; color:var(--primary);
+      margin-bottom:14px;
+    }
+    .sec-tag::before {
+      content:""; display:inline-block; width:18px; height:2px;
+      background:var(--grad); border-radius:2px;
+    }
+    .sec-h2 {
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(1.8rem,3vw,3rem); font-weight:700;
+      line-height:1.1; letter-spacing:-1px; color:var(--text);
+    }
+
+    .ba-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      padding: 0 40px;
+    }
+
+    .ba-col {
+      display:flex; flex-direction:column;
+      border:1px solid var(--border); border-radius:16px;
+      overflow:hidden;
+      transition: border-color 220ms;
+    }
+    .ba-col:hover { border-color:rgba(34,197,94,0.3); }
+
+    .ba-col-label {
+      padding:14px 22px;
+      border-bottom:1px solid var(--border);
+      font-family:"Space Grotesk",sans-serif;
+      font-size:0.75rem; font-weight:700; letter-spacing:2px;
+      text-transform:uppercase; color:var(--muted);
+      background: rgba(255,255,255,0.03);
+    }
+    .ba-col-label.after { color:var(--primary); }
+    .ba-col img { width:100%; display:block; }
+
+    /* ═══════════════════════ WHAT CHANGED ═══════════════════════ */
+    .outcome-section {
+      padding: 50px 40px;
+    }
+
+    .outcome-intro {
+      font-size:clamp(1rem,1.4vw,1.12rem);
+      color:var(--muted); line-height:1.75;
+      max-width:74ch; margin-bottom:44px;
+    }
+
+    .outcome-cards {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .outcome-card {
+      border:1px solid var(--border); border-radius:20px;
+      padding:40px 36px;
+      background:rgba(255,255,255,0.03);
+      position:relative; overflow:hidden;
+      transition: border-color 220ms, background 220ms;
+    }
+    .outcome-card:hover {
+      border-color:rgba(34,197,94,0.3);
+      background:rgba(34,197,94,0.03);
+    }
+    .outcome-card::before {
+      content:""; position:absolute; top:0; left:0; right:0; height:2px;
+      background:var(--grad);
+    }
+    .oc-label {
+      font-size:0.82rem; font-weight:700; letter-spacing:2.5px;
+      text-transform:uppercase; color:var(--primary); margin-bottom:16px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .oc-label::before {
+      content:""; display:inline-block;
+      width:14px; height:2px;
+      background:var(--grad); border-radius:2px;
+    }
+    .oc-body {
+      font-size:1.05rem; color:#ccd8ea; line-height:1.75;
+    }
+
+    /* ═══════════════════════ STATS STRIP ═══════════════════════ */
+    .stats-strip {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+      padding:40px;
+      background:transparent;
+      align-items:stretch;
+    }
+
+    .stat-cell {
+      padding: 40px 36px;
+      border:1px solid var(--border);
+      border-radius:20px;
+      background:rgba(255,255,255,0.03);
+      transition: border-color 220ms, background 220ms;
+      position:relative;
+      overflow:hidden;
+      min-height: 180px;
+      height: 100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:8px;
+    }
+    .stat-cell:hover {
+      border-color:rgba(34,197,94,0.3);
+      background:rgba(34,197,94,0.03);
+    }
+    .stat-cell::before {
+      content:""; position:absolute; top:0; left:0; right:0; height:2px;
+      background:var(--grad);
+    }
+
+    .stat-num {
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(1.75rem,2.35vw,2.45rem);
+      font-weight:800; line-height:1;
+      letter-spacing:-0.8px; margin-bottom:2px;
+      background:var(--grad);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+      display:block;
+    }
+    .stat-label {
+      font-size:0.9rem;
+      font-weight:700;
+      color:#d9e5f2;
+      line-height:1.35;
+      margin-bottom:1px;
+      max-width:22ch;
+    }
+
+    .stat-desc {
+      font-size:0.74rem;
+      color:var(--muted);
+      line-height:1.32;
+      max-width:32ch;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* ═══════════════════════ CTA ═══════════════════════ */
+    .cta-cs-section {
+      display:grid; grid-template-columns:1fr auto;
+      align-items:center; gap:60px;
+      padding: 50px 40px;
+      position:relative; overflow:hidden;
+      background:transparent;
+    }
+
+    .cta-cs-text {
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(1.5rem,2.6vw,2.3rem); font-weight:700;
+      line-height:1.3; color:var(--text);
+    }
+    .cta-cs-sub {
+      font-size:1.02rem; color:var(--muted); line-height:1.65;
+      margin-top:12px; max-width:52ch;
+    }
+
+    .cta-cs-btn {
+      flex-shrink:0;
+      display:inline-flex; align-items:center; gap:10px;
+      text-decoration:none; color:#041008; font-weight:800;
+      font-size:1rem; border-radius:999px;
+      padding:18px 36px;
+      background:var(--grad);
+      font-family:"Space Grotesk",sans-serif;
+      box-shadow: 0 8px 28px rgba(34,197,94,0.3);
+      transition: box-shadow 200ms;
+      white-space:nowrap;
+      letter-spacing:0.2px;
+    }
+    .cta-cs-btn:hover { box-shadow:0 16px 40px rgba(34,197,94,0.42); }
+
+    
+    .cta-cs-copy { display: flex; flex-direction: column; }
+    .cta-cs-actions { display: flex; gap: 16px; align-items: center; }
+    .cta-cs-btn-secondary {
+      text-decoration:none; color:var(--text); font-weight:600;
+      font-size:0.95rem; border-radius:999px;
+      padding:16px 32px; border:1px solid rgba(255,255,255,0.2);
+      transition: background 200ms, border-color 200ms;
+    }
+    .cta-cs-btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.4); }
+
+    /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+    @media(max-width:1100px) {
+      .navbar { padding:0 32px; }
+      .hero-cs-left { padding:60px 48px 60px 48px; }
+      .hero-cs-right { padding:48px 40px; }
+      .stats-strip { gap:16px; padding:0 48px 14px; }
+      .ba-header { padding:48px 48px 36px; }
+      .ba-grid { padding:0 48px; gap:18px; }
+      .outcome-section { padding:64px 48px; }
+      .cta-cs-section { padding:64px 48px; }
+    }
+
+    @media(max-width:900px) {
+      .hero-cs { grid-template-columns:1fr; min-height:auto; }
+      .hero-cs-left { border-right:none; border-bottom:1px solid var(--border); padding:60px 32px; }
+      .hero-cs-right { padding:40px 32px; }
+      .outcome-cards { grid-template-columns:1fr; }
+      .stats-strip { grid-template-columns:1fr 1fr; gap:12px; padding:0 32px 12px; }
+      .cta-cs-section { grid-template-columns:1fr; gap:28px; }
+      .navbar { padding:0 24px; }
+      .nav-links { display:none; }
+    }
+
+    @media(max-width:640px) {
+      .hero-cs-left { padding:48px 24px; }
+      .hero-cs-right { padding:32px 24px; }
+      .ba-section { padding:0 0 48px; }
+      .ba-header { padding:36px 24px 28px; }
+      .ba-grid { grid-template-columns:1fr; padding:0 24px; gap:16px; }
+      .outcome-section { padding:48px 24px; }
+      .stats-strip { grid-template-columns:1fr; gap:10px; padding:0 24px 10px; }
+      .cta-cs-section { padding:48px 24px; }
+      .cta-cs-btn { width:100%; justify-content:center; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- PARTICLE VOID -->
+  <canvas id="bg-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.8;"></canvas>
+
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav class="navbar">
+  <a href="/" class="nav-logo">Karl<span>space</span></a>
+  <ul class="nav-links">
+    <li><a href="#ba">Before &amp; After</a></li>
+    <li><a href="#outcome">What Changed</a></li>
+    <li><a href="#stats">Stats</a></li>
+  </ul>
+  <a href="/#case-studies" class="nav-back">← Back to Case Studies</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero-cs" style="position: relative; z-index: 1;">
+  <div class="hero-cs-left">
+    <div class="hero-cs-tag">Case Study</div>
+    <h1 class="hero-cs-title">AI Call Agent</h1>
+    <p class="hero-cs-sub">The AI voice agent that books, reschedules, and cancels clinic appointments - automatically, 24/7.</p>
+    <ul class="hero-cs-bullets">
+      <li>AI agent answers calls and books appointments in real time</li>
+      <li>Sends instant SMS confirmation with appointment code</li>
+      <li>Reschedules or cancels based on patient request</li>
+      <li>Syncs directly to doctor schedules - zero double bookings</li>
+    </ul>
+  </div>
+  <div class="hero-cs-right">
+    <div class="hero-cs-img-wrap">
+      <video src="case-study-demo.mp4" autoplay loop muted playsinline></video>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ STATS STRIP ═══════════ -->
+<div class="stats-strip" id="stats">
+  <div class="stat-cell">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">Never Sleeps</div>
+    <div class="stat-desc">Handles calls at 2am on Sunday the same as 9am Monday</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">&lt;60s</div>
+    <div class="stat-label">Booked. Done.</div>
+    <div class="stat-desc">Call answered, slot checked, appointment confirmed - in under a minute</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">$10k+</div>
+    <div class="stat-label">Back in the Bank</div>
+    <div class="stat-desc">Revenue recovered every month from calls that used to just ring out</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">0 Missed</div>
+    <div class="stat-label">Zero Missed Calls</div>
+    <div class="stat-desc">Every inbound call gets a response - no voicemail, no lost patients</div>
+  </div>
+</div>
+
+<!-- ═══════════ BEFORE & AFTER ═══════════ -->
+<section class="ba-section" id="ba">
+  <div class="ba-header">
+    <div class="sec-tag">Architecture</div>
+    <h2 class="sec-h2">Before &amp; After</h2>
+  </div>
+  <div class="ba-grid">
+    <div class="ba-col">
+      <div class="ba-col-label">Before</div>
+      <img src="pokk-img1.png" alt="Before: manual workflow" />
+    </div>
+    <div class="ba-col">
+      <div class="ba-col-label after">After</div>
+      <img src="pokk-img3.png" alt="After: automated workflow" />
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WHAT CHANGED ═══════════ -->
+<section class="outcome-section" id="outcome">
+  <div class="sec-tag">The "After" — The Outcome</div>
+  <h2 class="sec-h2" style="margin-bottom:24px;">What Changed</h2>
+  <p class="outcome-intro">
+    Before this system, every missed call was a lost patient. Now the AI agent handles every inbound call,
+    checks doctor availability in real time, books the slot, and fires an SMS confirmation - all without a
+    single human involved.
+  </p>
+  <div class="outcome-cards">
+    <div class="outcome-card">
+      <div class="oc-label">Revenue</div>
+      <p class="oc-body">Clinics went from losing patients to missed calls, to recovering $10,000+ per month in booked appointments.</p>
+    </div>
+    <div class="outcome-card">
+      <div class="oc-label">Automation</div>
+      <p class="oc-body">The AI agent books, reschedules, and cancels appointments autonomously - staff no longer touch the phone.</p>
+    </div>
+    <div class="outcome-card">
+      <div class="oc-label">Reliability</div>
+      <p class="oc-body">Every call gets a response. Every booking writes to the database. Every patient gets an SMS confirmation code.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-cs-section">
+  <div>
+    <div class="cta-cs-text">Need this adapted for your business?</div>
+  </div>
+  <a href="/#contact" class="cta-cs-btn">Book a Free Audit →</a>
+</section>
+
+  <script src="index.js"></script>
+</body>
+</html>
