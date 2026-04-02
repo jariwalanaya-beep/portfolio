@@ -236,8 +236,9 @@ ul {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(241, 245, 249, 0.88);
-    animation: videoLoaderPulse 1s ease-in-out infinite;
+    background: rgba(31, 125, 83, 0.95);
+    box-shadow: 0 0 10px rgba(31, 125, 83, 0.35);
+    animation: videoLoaderBounce 0.9s ease-in-out infinite;
 }
 
 .video-loader-dots span:nth-child(2) {
@@ -257,16 +258,16 @@ ul {
     visibility: hidden;
 }
 
-@keyframes videoLoaderPulse {
+@keyframes videoLoaderBounce {
     0%,
     100% {
-        opacity: 0.25;
-        transform: scale(0.72);
+        opacity: 0.45;
+        transform: translateY(4px) scale(0.9);
     }
 
     50% {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(-6px) scale(1);
     }
 }
 
