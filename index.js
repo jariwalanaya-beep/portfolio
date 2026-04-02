@@ -98,7 +98,8 @@ if (ctaSubmit) {
             return;
         }
         ctaSubmit.textContent = '✓ Request Sent!';
-        ctaSubmit.style.background = 'linear-gradient(135deg, #22c55e, #10b981)';
+        ctaSubmit.style.background = 'linear-gradient(135deg, #1F7D53, #2C8B5F)';
+        ctaSubmit.style.color = '#f1f5f9';
         ctaEmail.value = '';
         setTimeout(() => { ctaSubmit.textContent = 'Book Free Audit →'; ctaSubmit.style.background = ''; }, 3500);
     });
