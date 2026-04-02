@@ -113,6 +113,31 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     });
 });
 
+// ---- Video loading overlay ----
+document.querySelectorAll('video').forEach((video) => {
+    const host = video.parentElement;
+    if (!host) return;
+
+    host.classList.add('video-loading-host');
+    if (host.querySelector('.video-loader-overlay')) return;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'video-loader-overlay';
+    overlay.innerHTML = '<div class="video-loader-dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>';
+    host.appendChild(overlay);
+
+    const markReady = () => host.classList.add('video-ready');
+
+    if (video.readyState >= 2) {
+        markReady();
+    } else {
+        video.addEventListener('loadeddata', markReady, { once: true });
+        video.addEventListener('canplay', markReady, { once: true });
+        video.addEventListener('playing', markReady, { once: true });
+        video.addEventListener('error', markReady, { once: true });
+    }
+});
+
 // ---- Live dashboard counter ----
 const taskCounter = document.querySelector('.dm-stat-n');
 if (taskCounter) {

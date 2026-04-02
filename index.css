@@ -206,6 +206,71 @@ ul {
 }
 
 /* ============================
+   VIDEO LOADER
+   ============================ */
+.video-loading-host {
+    position: relative;
+}
+
+.video-loader-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 6, 8, 0.45);
+    backdrop-filter: blur(1px);
+    z-index: 4;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 220ms ease, visibility 220ms ease;
+}
+
+.video-loader-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.video-loader-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(241, 245, 249, 0.88);
+    animation: videoLoaderPulse 1s ease-in-out infinite;
+}
+
+.video-loader-dots span:nth-child(2) {
+    animation-delay: 0.14s;
+}
+
+.video-loader-dots span:nth-child(3) {
+    animation-delay: 0.28s;
+}
+
+.video-loader-dots span:nth-child(4) {
+    animation-delay: 0.42s;
+}
+
+.video-ready .video-loader-overlay {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes videoLoaderPulse {
+    0%,
+    100% {
+        opacity: 0.25;
+        transform: scale(0.72);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ============================
    NAV
    ============================ */
 .nav {
