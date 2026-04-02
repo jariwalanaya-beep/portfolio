@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "mkdir -p dist && cp index.html index.css index.js case-study.html case-study-dashboard.html karlspace-case-study.html 1772001775286.png pokk-img*.png *.mp4 dist/ && cp -r pokk dist/ 2>/dev/null || true && cp -r dashboard-assets dist/ 2>/dev/null || true",
+    "build": "mkdir -p dist && cp *.html index.css index.js *.png *.mp4 dist/ 2>/dev/null || true && cp -r pokk dist/ 2>/dev/null || true && cp -r dashboard-assets dist/ 2>/dev/null || true",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
