@@ -669,137 +669,128 @@ if (mascot && mascotSpeech) {
 // ==== MOBIUS STRIP ANIMATION ====
 const mobiusCanvas = document.getElementById('mobius-canvas');
 if (mobiusCanvas) {
-    const mCtx = mobiusCanvas.getContext('2d', { alpha: true });
-    
-    // Scale for high-DPI displays
-    const dpr = window.devicePixelRatio || 1;
-    const width = 700;
-    const height = 700;
-    
-    mobiusCanvas.width = width * dpr;
-    mobiusCanvas.height = height * dpr;
-    mCtx.scale(dpr, dpr);
-    
-    // Ribbon geometry
-    const mR = 225;       // Radius/scale of figure 8
-    const maxV = 55;      // Width of the strip
-    const stepsU = 130;   // Reduced length resolution for less particles
-    const stepsV = 6;     // Width resolution (number of lines)
-    
-    let mFrame = 0;
-    
-    function renderMobius() {
-      mFrame++;
-      mCtx.clearRect(0, 0, width, height);
+        const mCtx = mobiusCanvas.getContext('2d', { alpha: true });
+        let width = 700;
+        let height = 700;
+        let dpr = Math.min(2, window.devicePixelRatio || 1);
+        const palette = [
+            [31, 125, 83],
+            [44, 139, 95],
+            [62, 155, 112]
+        ];
 
-      const cx = width / 2;
-      const cy = height / 2;
-      
-      const time = mFrame * 0.007; // Smooth global rotation
-      
-      // Gentle wobble in Y
-      const wobbleY = Math.cos(time * 0.3) * 0.1;
-      const cosY = Math.cos(wobbleY);
-      const sinY = Math.sin(wobbleY);
-      
-      // Slight fixed tilt X so we view it beautifully
-      const tiltX = 0.5;
-      const cosX = Math.cos(tiltX);
-      const sinX = Math.sin(tiltX);
-      
-      // Gentle wobble in Z
-      const wobbleZ = Math.sin(time * 0.5) * 0.2;
-      const cosZ = Math.cos(wobbleZ);
-      const sinZ = Math.sin(wobbleZ);
+        // Geometry tuned for a clean dotted infinity ribbon.
+        const stepsU = 168;
+        const stepsV = 8;
+        let radius = 220;
+        let stripHalfWidth = 52;
+        let mFrame = 0;
 
-      const particles = [];
+        function setupMobiusCanvas() {
+            const isMobile = window.innerWidth <= 640;
+            width = isMobile ? 520 : 700;
+            height = isMobile ? 520 : 700;
+            radius = isMobile ? 162 : 220;
+            stripHalfWidth = isMobile ? 38 : 52;
+            dpr = Math.min(2, window.devicePixelRatio || 1);
 
-      // Calculate 3D points
-      for (let j = 0; j <= stepsV; j++) {
-        const v = -maxV + (j / stepsV) * (maxV * 2);
-
-        for (let i = 0; i <= stepsU * 2; i++) {
-          const offsetU = Math.sin(i * 13.5 + j * 7.1) * 0.02;
-          const offsetV = Math.cos(i * 11.2 - j * 5.3) * 2.0;
-
-          // Slow down the forward travel completely
-          const u = (i / stepsU) * Math.PI * 2 + time * 0.3 + offsetU;
-          
-          // Pure Figure-8 (Lemniscate of Gerono) base curve
-          const bx = mR * Math.cos(u);
-          const by = mR * Math.sin(u) * Math.cos(u);
-          const bz = (mR * 0.3) * Math.sin(u);
-
-          // Sub-tangents to find normal
-          const dx = -mR * Math.sin(u);
-          const dy = mR * (Math.cos(u) * Math.cos(u) - Math.sin(u) * Math.sin(u));
-          const len = Math.sqrt(dx*dx + dy*dy);
-          const nx = -dy / len;
-          const ny = dx / len;
-
-          const twist = u / 2;
-          const adjustedV = v + offsetV;
-          
-          // Twist the strip width
-          const x = bx + adjustedV * Math.cos(twist) * nx;
-          const y = by + adjustedV * Math.cos(twist) * ny;
-          const z = bz + adjustedV * Math.sin(twist);
-
-          // Apply 3D Rotations
-          const rx1 = x * cosZ - y * sinZ;
-          const ry1 = x * sinZ + y * cosZ;
-          const rz1 = z;
-
-          const rx2 = rx1 * cosY + rz1 * sinY;
-          const rz2 = -rx1 * sinY + rz1 * cosY;
-          
-          const ry3 = ry1 * cosX - rz2 * sinX;
-          const rz3 = ry1 * sinX + rz2 * cosX;
-          
-          // Perspective
-          const fov = 1000;
-          const depth = fov + rz3;
-          const scale = depth > 0 ? fov / depth : 0;
-
-          if (scale > 0 && cx + rx2 * scale > 0 && cx + rx2 * scale < width) {
-            particles.push({
-              sx: cx + rx2 * scale,
-              sy: cy + ry3 * scale,
-              scale: scale
-            });
-          }
+            mobiusCanvas.width = Math.floor(width * dpr);
+            mobiusCanvas.height = Math.floor(height * dpr);
+            mCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
-      }
 
-      // Fast Sort from back to front
-      particles.sort((a, b) => a.scale - b.scale);
+        let mobiusResizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(mobiusResizeTimer);
+            mobiusResizeTimer = setTimeout(setupMobiusCanvas, 180);
+        });
+        setupMobiusCanvas();
 
-      // Pre-calculate fill styles up to 2 decimal places to avoid string interpolation overhead in loop
-      // Map scale to a bounded opacity cache
-      const alphaCache = new Map();
-      const getAlphaColor = (s) => {
-        const val = Math.min(1, Math.max(0.1, s * 1.5 - 0.3)).toFixed(2);
-        if (!alphaCache.has(val)) alphaCache.set(val, `rgba(34, 197, 94, ${val})`);
-        return alphaCache.get(val);
-      };
+        function renderMobius() {
+            mFrame += 1;
+            mCtx.clearRect(0, 0, width, height);
 
-      // Draw particles
-      mCtx.beginPath(); // Batch begin path? Can't if colors change, but can disable shadows for perf
-      mCtx.shadowBlur = 0; // Disable heavy canvas shadows completely, rely on sizes representing depth
-      
-      particles.forEach((p) => {
-        const s = Math.max(0.1, p.scale);
-        const size = s * 1.8;
-        
-        mCtx.beginPath();
-        mCtx.arc(p.sx, p.sy, size, 0, Math.PI * 2);
-        mCtx.fillStyle = getAlphaColor(s);
-        mCtx.fill();
-      });
+            const cx = width * 0.5;
+            const cy = height * 0.5;
+            const t = mFrame * 0.006;
 
-      requestAnimationFrame(renderMobius);
-    }
-    
-    renderMobius();
+            const tiltX = 0.44;
+            const wobbleY = Math.sin(t * 0.46) * 0.16;
+            const wobbleZ = Math.cos(t * 0.31) * 0.2;
+            const cosX = Math.cos(tiltX);
+            const sinX = Math.sin(tiltX);
+            const cosY = Math.cos(wobbleY);
+            const sinY = Math.sin(wobbleY);
+            const cosZ = Math.cos(wobbleZ);
+            const sinZ = Math.sin(wobbleZ);
+
+            const particles = [];
+            for (let j = 0; j <= stepsV; j++) {
+                const v = -stripHalfWidth + (j / stepsV) * (stripHalfWidth * 2);
+                const laneOffset = (j - stepsV * 0.5) * 0.15;
+
+                for (let i = 0; i <= stepsU * 2; i++) {
+                    const u = (i / stepsU) * Math.PI * 2 + t * 0.52 + laneOffset;
+
+                    // Lemniscate-like base curve with gentle depth breathing.
+                    const bx = radius * Math.cos(u);
+                    const by = radius * Math.sin(u) * Math.cos(u);
+                    const bz = radius * 0.32 * Math.sin(u * 1.02 + t * 0.25);
+
+                    const dx = -radius * Math.sin(u);
+                    const dy = radius * (Math.cos(u) * Math.cos(u) - Math.sin(u) * Math.sin(u));
+                    const normalLen = Math.hypot(dx, dy) || 1;
+                    const nx = -dy / normalLen;
+                    const ny = dx / normalLen;
+
+                    const twist = u * 0.5;
+                    const x = bx + v * Math.cos(twist) * nx;
+                    const y = by + v * Math.cos(twist) * ny;
+                    const z = bz + v * Math.sin(twist);
+
+                    const rx = x * cosZ - y * sinZ;
+                    const ry = x * sinZ + y * cosZ;
+                    const rz = z;
+
+                    const r2x = rx * cosY + rz * sinY;
+                    const r2z = -rx * sinY + rz * cosY;
+
+                    const r3y = ry * cosX - r2z * sinX;
+                    const r3z = ry * sinX + r2z * cosX;
+
+                    const fov = 960;
+                    const depth = fov + r3z;
+                    const scale = depth > 0 ? fov / depth : 0;
+                    if (scale <= 0) continue;
+
+                    const sx = cx + r2x * scale;
+                    const sy = cy + r3y * scale;
+                    if (sx < -8 || sx > width + 8 || sy < -8 || sy > height + 8) continue;
+
+                    particles.push({ sx, sy, scale, lane: j / stepsV });
+                }
+            }
+
+            particles.sort((a, b) => a.scale - b.scale);
+
+            mCtx.globalCompositeOperation = 'lighter';
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                const s = Math.max(0.12, p.scale);
+                const [r, g, b] = palette[Math.min(palette.length - 1, Math.floor(p.lane * palette.length))];
+                const alpha = Math.min(0.95, Math.max(0.2, s * 1.42 - 0.24));
+                const dotSize = Math.max(0.8, s * 1.65);
+
+                mCtx.beginPath();
+                mCtx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+                mCtx.arc(p.sx, p.sy, dotSize, 0, Math.PI * 2);
+                mCtx.fill();
+            }
+            mCtx.globalCompositeOperation = 'source-over';
+
+            requestAnimationFrame(renderMobius);
+        }
+
+        renderMobius();
 }
 

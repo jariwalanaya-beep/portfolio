@@ -375,11 +375,14 @@
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
       gap: 28px;
-      padding: 54px var(--section-pad-x);
+      width: min(1240px, calc(100% - 48px));
+      margin: 0 auto 24px;
+      padding: 48px 42px;
       position: relative;
       overflow: hidden;
       background: transparent;
       border-top: 1px solid var(--border);
+      border-radius: 20px;
     }
 
     .cta-copy {
@@ -391,6 +394,7 @@
       justify-self: start;
       width: 100%;
       max-width: 700px;
+      padding-right: 12px;
       text-align: left;
       position: relative;
       z-index: 1;
@@ -400,10 +404,10 @@
       font-family: "Space Grotesk", sans-serif;
       font-size: clamp(2.15rem, 3.7vw, 3.25rem);
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.06;
       letter-spacing: -1.1px;
       color: #edf4fb;
-      max-width: 20ch;
+      max-width: 24ch;
     }
 
     .cta-btn {
@@ -482,7 +486,10 @@
       .compare-table th,
       .compare-table td { padding: 15px 12px; }
       .compare-table th { letter-spacing: 1.4px; font-size: 0.84rem; }
-      .cta-section { padding: 50px var(--section-pad-x-tablet); }
+      .cta-section {
+        width: min(1120px, calc(100% - 36px));
+        padding: 44px var(--section-pad-x-tablet);
+      }
       .cta-copy { max-width: 600px; }
       .cta-text { font-size: clamp(1.95rem, 3.8vw, 2.6rem); }
       .stats-strip { grid-template-columns: 1fr 1fr; gap:12px; padding: 20px var(--section-pad-x-tablet) 0; }
@@ -494,7 +501,12 @@
       .hero-right { padding: 36px 32px; }
       .ba-grid { grid-template-columns: 1fr; }
       .how-steps { grid-template-columns: 1fr; }
-      .cta-section { grid-template-columns: 1fr; gap: 20px; padding: 42px var(--section-pad-x-tablet); }
+      .cta-section {
+        width: calc(100% - 28px);
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 42px var(--section-pad-x-tablet);
+      }
       .cta-copy { max-width: 100%; }
       .cta-actions { justify-content: flex-start; }
       .navbar { padding: 0 24px; }
@@ -512,7 +524,11 @@
       .ba-grid { padding: 0 var(--section-pad-x-mobile); gap: 16px; }
       .how-section { padding: var(--section-pad-y-mobile) var(--section-pad-x-mobile); }
       .compare-section { padding: var(--section-pad-y-mobile) var(--section-pad-x-mobile) 62px; }
-      .cta-section { padding: 38px var(--section-pad-x-mobile); }
+      .cta-section {
+        width: calc(100% - 18px);
+        margin-bottom: 14px;
+        padding: 38px var(--section-pad-x-mobile);
+      }
       .cta-text { font-size: clamp(1.72rem, 9vw, 2.08rem); letter-spacing: -0.8px; max-width: 16ch; }
       .cta-actions { width: 100%; flex-direction: column; align-items: stretch; gap: 10px; }
       .cta-btn,
