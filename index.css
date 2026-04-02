@@ -1139,6 +1139,8 @@ ul {
     font-weight: 700;
     color: white;
     flex-shrink: 0;
+    object-fit: cover;
+    object-position: center;
 }
 
 .t-author strong {
