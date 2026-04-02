@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="1772001775286.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #04070c;
@@ -31,9 +31,10 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: Inter, system-ui, sans-serif;
+      font-family: Manrope, system-ui, sans-serif;
       color: var(--text);
       overflow-x: hidden;
+      letter-spacing: 0.01em;
     }
 
     /* ═══════════════════════ NAVBAR ═══════════════════════ */
@@ -47,7 +48,7 @@
     }
 
     .nav-logo {
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: 1.05rem; font-weight: 700;
       color: #fff; text-decoration: none; letter-spacing: 0.2px;
     }
@@ -74,7 +75,7 @@
 
     /* ═══════════════════════ HERO ═══════════════════════ */
     .hero {
-      min-height: 84vh;
+      min-height: 82vh;
       display: grid;
       grid-template-columns: 1.05fr 1fr;
       align-items: center;
@@ -88,13 +89,18 @@
       display: flex; flex-direction: column; justify-content: center;
       border-right: 1px solid var(--border);
       height: 100%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
     }
 
     .hero-tag {
       display: inline-flex; align-items: center; gap: 10px;
-      font-size: 0.9rem; font-weight: 700; letter-spacing: 3px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 2.1px;
       text-transform: uppercase; color: var(--primary);
       margin-bottom: 28px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 125, 83, 0.36);
+      background: rgba(31, 125, 83, 0.09);
     }
     .hero-tag::before {
       content: ""; display: inline-block; width: 22px; height: 2px;
@@ -102,16 +108,17 @@
     }
 
     .hero-title {
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: clamp(2.6rem, 5vw, 4.8rem);
       font-weight: 800; line-height: 1.02;
-      letter-spacing: -2px; margin-bottom: 22px;
+      letter-spacing: -1.8px; margin-bottom: 18px;
+      max-width: 11ch;
     }
 
     .hero-sub {
       font-size: clamp(1rem, 1.35vw, 1.18rem);
       color: #b8ccde; line-height: 1.7;
-      margin-bottom: 24px; max-width: 48ch;
+      margin-bottom: 28px; max-width: 50ch;
     }
 
     .hero-bullets { list-style: none; display: grid; gap: 14px; }
@@ -137,7 +144,7 @@
       box-shadow: 0 0 64px rgba(31, 125, 83, 0.12), 0 24px 48px rgba(0, 0, 0, 0.4);
       width: 100%;
       max-width: 640px;
-      animation: heroFloat 3s ease-in-out infinite;
+      animation: heroFloat 5s ease-in-out infinite;
     }
     .hero-img-wrap img { border-radius: 10px; width: 100%; display: block; border: 1px solid rgba(255, 255, 255, 0.1); }
 
@@ -149,9 +156,13 @@
 
     .sec-tag {
       display: inline-flex; align-items: center; gap: 10px;
-      font-size: 0.9rem; font-weight: 700; letter-spacing: 3px;
+      font-size: 0.79rem; font-weight: 700; letter-spacing: 2.1px;
       text-transform: uppercase; color: var(--primary);
       margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 125, 83, 0.3);
+      background: rgba(31, 125, 83, 0.07);
     }
     .sec-tag::before {
       content: ""; display: inline-block; width: 18px; height: 2px;
@@ -159,10 +170,11 @@
     }
 
     .sec-h2 {
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: clamp(2rem, 3.1vw, 3.15rem); font-weight: 700;
       line-height: 1.1; letter-spacing: -1px; color: var(--text);
       margin-bottom: 16px;
+      max-width: 16ch;
     }
 
     /* ═══════════════════════ STATS STRIP ═══════════════════════ */
@@ -176,11 +188,11 @@
     }
 
     .stat-cell {
-      padding: 34px 30px;
+      padding: 30px 26px;
       border:1px solid var(--border);
       border-radius:20px;
-      background:rgba(255,255,255,0.03);
-      transition: border-color 220ms, background 220ms;
+      background: linear-gradient(180deg, rgba(10, 18, 27, 0.9), rgba(7, 13, 20, 0.86));
+      transition: border-color 220ms, background 220ms, transform 220ms;
       position:relative;
       overflow:hidden;
       min-height: 168px;
@@ -193,6 +205,7 @@
     .stat-cell:hover {
       border-color:rgba(31, 125, 83,0.3);
       background:rgba(31, 125, 83,0.03);
+      transform: translateY(-3px);
     }
     .stat-cell::before {
       content:""; position:absolute; top:0; left:0; right:0; height:2px;
@@ -200,7 +213,7 @@
     }
 
     .stat-num {
-      font-family:"Space Grotesk",sans-serif;
+      font-family:"Sora",sans-serif;
       font-size:clamp(1.75rem,2.35vw,2.45rem);
       font-weight:800; line-height:1;
       letter-spacing:-0.8px; margin-bottom:2px;
@@ -286,6 +299,7 @@
       position: relative;
       overflow: hidden;
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      transition: border-color 200ms, transform 200ms;
     }
     .how-step::before {
       content: "";
@@ -297,15 +311,24 @@
       background: var(--grad);
     }
 
+    .how-step:hover {
+      border-color: rgba(31, 125, 83, 0.4);
+      transform: translateY(-3px);
+    }
+
     .how-num {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.25rem;
+      font-family: "Sora", sans-serif;
+      font-size: 1rem;
       font-weight: 800;
       color: var(--primary);
-      letter-spacing: 1.4px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       line-height: 1;
       margin-top: 2px;
+      border: 1px solid rgba(31, 125, 83, 0.3);
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(31, 125, 83, 0.08);
     }
 
     .how-step p {
@@ -331,12 +354,12 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
       overflow-x: auto;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.005));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.006));
     }
 
     .compare-table th,
     .compare-table td {
-      padding: 16px 14px;
+      padding: 18px 15px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       text-align: left;
       white-space: nowrap;
@@ -349,11 +372,23 @@
     }
 
     .compare-table th {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.95rem;
+      font-family: "Sora", sans-serif;
+      font-size: 0.82rem;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.6px;
       color: #cfd9e6;
+      background: rgba(10, 18, 27, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .compare-table tbody tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    .compare-table td {
+      font-size: 0.93rem;
     }
 
     .compare-table td:last-child {
@@ -380,9 +415,10 @@
       padding: 48px 42px;
       position: relative;
       overflow: hidden;
-      background: transparent;
+      background: linear-gradient(180deg, rgba(8, 14, 21, 0.82), rgba(7, 12, 18, 0.7));
       border-top: 1px solid var(--border);
       border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .cta-copy {
@@ -401,7 +437,7 @@
     }
 
     .cta-text {
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Sora", sans-serif;
       font-size: clamp(2.15rem, 3.7vw, 3.25rem);
       font-weight: 800;
       line-height: 1.06;
@@ -417,7 +453,7 @@
       font-size: 1rem; border-radius: 999px;
       padding: 18px 36px;
       background: var(--grad);
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Sora", sans-serif;
       box-shadow: 0 8px 28px rgba(31, 125, 83, 0.3);
       transition: box-shadow 200ms;
       white-space: nowrap;
@@ -466,7 +502,7 @@
 
     @keyframes heroFloat {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+      50% { transform: translateY(-7px); }
     }
 
     /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
@@ -646,45 +682,45 @@
             <th>Feature</th>
             <th>Power BI</th>
             <th>Google Analytics</th>
-            <th>This</th>
+            <th>Karlspace</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Setup time</td>
-            <td>Days-Weeks</td>
+            <td>How fast can you go live?</td>
+            <td>Days–Weeks</td>
             <td>Hours</td>
             <td>Minutes</td>
           </tr>
           <tr>
-            <td>Requires IT/developer</td>
+            <td>Needs technical help?</td>
             <td>Yes</td>
-            <td>Partial</td>
+            <td>Sometimes</td>
             <td>No</td>
           </tr>
           <tr>
-            <td>Works with your Sheet</td>
-            <td>Export needed</td>
-            <td>No</td>
-            <td>Direct</td>
+            <td>Uses your existing Google Sheet</td>
+            <td>Requires export</td>
+            <td>Not possible</td>
+            <td>Direct connection</td>
           </tr>
           <tr>
-            <td>Cost</td>
-            <td>$10-$20/user/mo</td>
-            <td>Free but complex</td>
-            <td>Affordable</td>
+            <td>Pricing for small teams</td>
+            <td>Expensive per user</td>
+            <td>Free but hard to use</td>
+            <td>Affordable &amp; transparent</td>
           </tr>
           <tr>
-            <td>Made for small business</td>
+            <td>Designed for small businesses</td>
             <td>No</td>
             <td>No</td>
             <td>Yes</td>
           </tr>
           <tr>
-            <td>Your team can read it</td>
-            <td>Maybe</td>
-            <td>No</td>
-            <td>Always</td>
+            <td>Non-technical team can use it</td>
+            <td>Difficult</td>
+            <td>Very difficult</td>
+            <td>Extremely easy</td>
           </tr>
         </tbody>
       </table>
