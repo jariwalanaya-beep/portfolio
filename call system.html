@@ -275,8 +275,9 @@
     .stat-num {
       font-family:"Space Grotesk",sans-serif;
       font-size:clamp(1.75rem,2.35vw,2.45rem);
-      font-weight:800; line-height:1;
-      letter-spacing:-0.8px; margin-bottom:2px;
+      font-weight:800; line-height:1.08;
+      letter-spacing:0; margin-bottom:2px;
+      padding-left:2px;
       background:var(--grad);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
       background-clip:text;
@@ -375,6 +376,7 @@
       .ba-grid { grid-template-columns:1fr; padding:0 24px; gap:16px; }
       .outcome-section { padding:48px 24px; }
       .stats-strip { grid-template-columns:1fr; gap:10px; padding:0 24px 10px; }
+      .stat-cell { min-height:auto; padding:26px 22px; }
       .cta-section { padding:48px 24px; }
       .cta-btn { width:100%; justify-content:center; }
     }
