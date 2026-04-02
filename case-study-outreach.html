@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Lead Generation Case Study | Karlspace</title>
+  <meta name="description" content="How one form triggers an AI that scrapes LinkedIn & social media, writes a personalised opening line per prospect, and follows up for 3 weeks automatically." />
+  <link rel="stylesheet" href="index.css" />
+  <link rel="icon" type="image/png" href="1772001775286.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:       #04070c;
+    --bg2:      #060c12;
+    --border:   rgba(255,255,255,0.09);
+    --text:     #e9f0f8;
+    --muted:    #7a8fa8;
+    --primary:  #22c55e;
+    --secondary:#f6b93b;
+    --grad:     linear-gradient(110deg,#22c55e 0%,#16a34a 50%,#f6b93b 100%);
+  }
+
+  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family: Inter, system-ui, sans-serif; color: var(--text); overflow-x: hidden; }
+
+  /* ═══════════════════════ NAVBAR ═══════════════════════ */
+  .navbar {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display: flex; align-items:center; justify-content:space-between;
+    padding: 0 64px; height: 64px;
+    background: rgba(4,7,12,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family:"Space Grotesk",sans-serif; font-size:1.05rem; font-weight:700; color:#fff; text-decoration:none; letter-spacing:0.2px; }
+  .nav-logo span { color:var(--primary); }
+  .nav-links { display:flex; gap:8px; list-style:none; }
+  .nav-links a { text-decoration:none; font-size:0.84rem; font-weight:500; color:var(--muted); padding:6px 14px; border-radius:999px; border:1px solid transparent; transition: color 180ms, border-color 180ms; }
+  .nav-links a:hover { color:var(--text); border-color:var(--border); }
+  .nav-back { text-decoration:none; font-size:0.84rem; font-weight:600; color:var(--text); padding:8px 18px; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,0.03); transition: border-color 180ms; white-space:nowrap; }
+  .nav-back:hover { border-color:rgba(34,197,94,0.5); }
+
+  /* ═══════════════════════ HERO ═══════════════════════ */
+  .hero-cs {
+    min-height: 88vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0;
+    padding-top: 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-cs-left {
+    padding: 60px 40px;
+    display: flex; flex-direction:column; justify-content:center;
+    border-right: 1px solid var(--border);
+    height: 100%;
+  }
+  .hero-cs-tag { display:inline-flex; align-items:center; gap:10px; font-size:0.9rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--primary); margin-bottom:28px; }
+  .hero-cs-tag::before { content:""; display:inline-block; width:22px; height:2px; background:var(--grad); border-radius:2px; }
+  .hero-cs-title { font-family:"Space Grotesk",sans-serif; font-size:clamp(2.8rem,4.6vw,5rem); font-weight:800; line-height:1.02; letter-spacing:-2.5px; margin-bottom:32px; }
+  .hero-cs-title .highlight { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-cs-sub { font-size:clamp(1rem,1.4vw,1.18rem); color:#b8ccde; line-height:1.7; margin-bottom:44px; max-width:48ch; }
+  .hero-cs-bullets { list-style:none; display:grid; gap:14px; }
+  .hero-cs-bullets li { display:flex; gap:12px; font-size:clamp(0.95rem,1.1vw,1.08rem); color:#d0dcea; line-height:1.5; }
+  .hero-cs-bullets li::before { content:"—"; color:var(--primary); font-weight:700; flex-shrink:0; }
+
+  .hero-cs-right {
+    padding: 48px 40px;
+    display: flex; align-items:center; justify-content:center;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(34,197,94,0.04), transparent 60%);
+  }
+  .hero-cs-img-wrap {
+    border:1px solid rgba(34,197,94,0.22); border-radius:18px;
+    background:linear-gradient(150deg,rgba(34,197,94,0.07),rgba(255,255,255,0.02));
+    padding:14px;
+    box-shadow: 0 0 64px rgba(34,197,94,0.12), 0 24px 48px rgba(0,0,0,0.4);
+    width: 100%; max-width: 540px;
+    animation: heroFloat 3s ease-in-out infinite;
+  }
+  .hero-cs-img-wrap img { border-radius:10px; width:100%; display:block; border:1px solid rgba(255,255,255,0.1); }
+
+  /* ═══════════════════════ SEC LABELS ═══════════════════════ */
+  .sec-tag { display:inline-flex; align-items:center; gap:10px; font-size:0.9rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--primary); margin-bottom:14px; }
+  .sec-tag::before { content:""; display:inline-block; width:18px; height:2px; background:var(--grad); border-radius:2px; }
+  .sec-h2 { font-family:"Space Grotesk",sans-serif; font-size:clamp(1.8rem,3vw,3rem); font-weight:700; line-height:1.1; letter-spacing:-1px; color:var(--text); }
+
+  /* ═══════════════════════ BEFORE & AFTER ═══════════════════════ */
+  .ba-section { border-bottom: 1px solid var(--border); padding: 0 0 56px; }
+  .ba-header { padding: 56px 40px 28px; }
+  .ba-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; padding: 0 40px; margin-top: 16px; }
+  .ba-col { border:1px solid var(--border); border-radius:16px; overflow:hidden; transition: border-color 220ms; background: rgba(255,255,255,0.02); }
+  .ba-col:hover { border-color:rgba(34,197,94,0.3); }
+  .ba-col-label { padding:14px 22px; border-bottom:1px solid var(--border); font-family:"Space Grotesk",sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); background: rgba(255,255,255,0.03); }
+  .ba-col-label.after { color:var(--primary); }
+  .ba-list { list-style: none; padding: 24px 26px; display: grid; gap: 14px; }
+  .ba-list li { display: flex; gap: 12px; font-size: 0.97rem; color: #cdd8ea; line-height: 1.55; }
+  .ba-list li::before { content: "✕"; color: #e05555; flex-shrink: 0; margin-top: 2px; font-size: 0.8rem; font-weight: 700; }
+  .ba-col.after-col .ba-list li::before { content: "✓"; color: var(--primary); }
+
+  /* ═══════════════════════ EMAIL SEQUENCE ═══════════════════════ */
+  .sequence-section {
+    padding: 64px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sequence-steps {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .seq-step {
+    border: 1px solid rgba(34,197,94,0.18);
+    border-radius: 20px;
+    padding: 30px 26px;
+    background: linear-gradient(180deg, rgba(7,13,20,0.96), rgba(6,11,17,0.9));
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    transition: border-color 220ms, background 220ms;
+  }
+  .seq-step:hover {
+    border-color: rgba(34,197,94,0.38);
+    background: linear-gradient(180deg, rgba(10,20,14,0.96), rgba(8,16,12,0.9));
+  }
+  .seq-step::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 0; height: 2px;
+    background: var(--grad);
+  }
+  .seq-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 2px solid rgba(34,197,94,0.4);
+    background: rgba(34,197,94,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.85rem; font-weight: 800;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+  .seq-content { display: flex; flex-direction: column; gap: 10px; }
+  .seq-title { font-family: "Space Grotesk", sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.35; }
+  .seq-body { font-size: 0.93rem; color: #c7d5e6; line-height: 1.68; }
+  .seq-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+  .seq-tag { font-size: 0.74rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; border: 1px solid rgba(34,197,94,0.28); color: var(--primary); background: rgba(34,197,94,0.06); }
+
+  /* ═══════════════════════ COMPARE TABLE ═══════════════════════ */
+  .compare-section { padding: 64px 40px 80px; border-bottom: 1px solid var(--border); }
+  .compare-intro { font-size: 1rem; color: #c7d5e6; line-height: 1.75; max-width: 80ch; margin: 20px 0 28px; }
+  .compare-table-wrap { border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow-x: auto; background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.005)); }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
+  .compare-table th, .compare-table td { padding: 15px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; white-space: nowrap; }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+  .compare-table th:first-child, .compare-table td:first-child { width: 34%; white-space: normal; }
+  .compare-table th { font-family: "Space Grotesk", sans-serif; font-size: 0.84rem; text-transform: uppercase; letter-spacing: 2px; color: #cfd9e6; background: rgba(255,255,255,0.03); }
+  .compare-table th:last-child { color: var(--primary); }
+  .compare-table td:last-child { color: var(--primary); font-weight: 700; }
+  .tick { color: var(--primary); font-weight: 700; }
+  .cross { color: #e05555; }
+  .compare-note { margin-top: 24px; color: #c7d5e6; line-height: 1.75; font-size: 0.97rem; max-width: 85ch; }
+
+  /* ═══════════════════════ CTA ═══════════════════════ */
+  .cta-cs-section { display:grid; grid-template-columns:1fr auto; align-items:center; gap:60px; padding: 54px 40px; background:transparent; }
+  .cta-cs-text { font-family:"Space Grotesk",sans-serif; font-size:clamp(1.5rem,2.6vw,2.3rem); font-weight:700; line-height:1.3; color:var(--text); }
+  .cta-cs-btn { flex-shrink:0; display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:#041008; font-weight:800; font-size:1rem; border-radius:999px; padding:18px 36px; background:var(--grad); font-family:"Space Grotesk",sans-serif; box-shadow: 0 8px 28px rgba(34,197,94,0.3); transition: box-shadow 200ms, transform 200ms; white-space:nowrap; letter-spacing:0.2px; }
+  .cta-cs-btn:hover { box-shadow:0 16px 40px rgba(34,197,94,0.42); transform: translateY(-1px); }
+
+  @keyframes heroFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+  /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+  @media(max-width:1100px) {
+    .navbar { padding:0 32px; }
+    .hero-cs-left { padding:56px 36px; }
+    .hero-cs-right { padding:44px 32px; }
+    .ba-header { padding:48px 32px 28px; }
+    .ba-grid { padding:0 32px; gap:18px; }
+    .sequence-section { padding:56px 32px; }
+    .compare-section { padding:56px 32px 72px; }
+    .compare-table { min-width: 760px; font-size: 0.9rem; }
+    .compare-table th, .compare-table td { padding: 14px 12px; }
+    .cta-cs-section { padding:56px 32px; }
+  }
+  @media(max-width:900px) {
+    .hero-cs { grid-template-columns:1fr; min-height:auto; }
+    .hero-cs-left { border-right:none; border-bottom:1px solid var(--border); padding:56px 28px; }
+    .hero-cs-right { padding:36px 28px; }
+    .ba-grid { grid-template-columns:1fr; }
+    .sequence-steps { grid-template-columns: repeat(2, 1fr); }
+    .cta-cs-section { grid-template-columns:1fr; gap:28px; }
+    .navbar { padding:0 24px; }
+    .nav-links { display:none; }
+  }
+  @media(max-width:640px) {
+    .hero-cs-left { padding:48px 24px; }
+    .hero-cs-right { padding:32px 24px; }
+    .ba-section { padding:0 0 48px; }
+    .ba-header { padding:36px 24px 24px; }
+    .ba-grid { padding:0 24px; gap:16px; }
+    .sequence-section { padding:48px 24px; }
+    .sequence-steps { grid-template-columns: 1fr; }
+    .compare-section { padding:48px 24px 64px; }
+    .compare-table { min-width: 640px; }
+    .cta-cs-section { padding:44px 24px; }
+    .cta-cs-btn { width:100%; justify-content:center; }
+  }
+</style>
+</head>
+<body>
+
+  <canvas id="bg-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.8;"></canvas>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav class="navbar">
+  <a href="/" class="nav-logo">Karl<span>space</span></a>
+  <ul class="nav-links">
+    <li><a href="#ba">Before &amp; After</a></li>
+    <li><a href="#sequence">Email Sequence</a></li>
+    <li><a href="#compare">Comparison</a></li>
+  </ul>
+  <a href="/#case-studies" class="nav-back">← Back to Case Studies</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero-cs" style="position: relative; z-index: 1;">
+  <div class="hero-cs-left">
+    <div class="hero-cs-tag">Case Study</div>
+    <h1 class="hero-cs-title">From <span class="highlight">Keyword to Lead</span> — Fully Automated.</h1>
+    <p class="hero-cs-sub">Fill out one form. The system finds your ideal prospects across LinkedIn, Instagram, Facebook, YouTube, and Google — writes a personalised opening line for each one — then follows up automatically for 3 weeks. You wake up to replies, not tasks.</p>
+    <ul class="hero-cs-bullets">
+      <li>Tell it who you want — industry, job title, company size, country — and it finds them</li>
+      <li>AI studies each prospect's profile and writes a personal opening line, not a copy-paste template</li>
+      <li>6 follow-up emails go out automatically over 3 weeks — all in one conversation thread</li>
+      <li>Works across LinkedIn, Instagram, Facebook, YouTube, and Google simultaneously</li>
+      <li>Every lead and every email tracked in one place — full visibility, zero manual logging</li>
+    </ul>
+  </div>
+  <div class="hero-cs-right">
+    <div class="hero-cs-img-wrap">
+      <img src="Pasted image.png" alt="AI Lead Generation System Dashboard" />
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BEFORE & AFTER ═══════════ -->
+<section class="ba-section" id="ba">
+  <div class="ba-header">
+    <div class="sec-tag">Before &amp; After</div>
+    <h2 class="sec-h2">From scattered spreadsheets to a self-running pipeline</h2>
+  </div>
+  <div class="ba-grid">
+    <div class="ba-col">
+      <div class="ba-col-label">Before</div>
+      <ul class="ba-list">
+        <li>Browse LinkedIn for hours, manually copy names and emails into a spreadsheet</li>
+        <li>Write a personalised opener for each person from scratch — or send a template and hope</li>
+        <li>Send the first email, add a reminder to follow up in a few days</li>
+        <li>Miss the follow-up, or send a generic "just checking in" that gets ignored</li>
+        <li>No idea who's been contacted, how many times, or what was said</li>
+        <li>Half a day's work for 20 leads — and the outreach still isn't done</li>
+      </ul>
+    </div>
+    <div class="ba-col after-col">
+      <div class="ba-col-label after">After</div>
+      <ul class="ba-list">
+        <li>Fill one form: who you want, which industry, what size company, which country</li>
+        <li>AI finds the right people and writes a personal opening line for each one</li>
+        <li>All leads land in your Google Sheet — name, contact, opener — ready to use</li>
+        <li>Load a contact into the dashboard and 6 emails schedule themselves over 3 weeks</li>
+        <li>Every follow-up goes out as a reply in the same thread, from your own Gmail</li>
+        <li>Complete visibility: who's at which step, what was sent, what's coming next</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ EMAIL SEQUENCE ═══════════ -->
+<section class="sequence-section" id="sequence">
+  <div class="sec-tag">Email Sequence</div>
+  <h2 class="sec-h2">The outreach system that follows up for you</h2>
+  <div class="sequence-steps">
+
+    <div class="seq-step">
+      <div class="seq-num">1</div>
+      <div class="seq-content">
+        <div class="seq-title">You set it up once from the dashboard</div>
+        <p class="seq-body">Open the outreach dashboard, enter a prospect’s name and email, write your 6 messages, choose a subject line, and pick a send date and time. That’s it. Everything from here runs on its own.</p>
+      </div>
+    </div>
+
+    <div class="seq-step">
+      <div class="seq-num">2</div>
+      <div class="seq-content">
+        <div class="seq-title">The system remembers every contact</div>
+        <p class="seq-body">All 6 messages are saved against that contact — along with where they are in the sequence and when the next message is due. No spreadsheet to manage, no calendar reminders to set.</p>
+      </div>
+    </div>
+
+    <div class="seq-step">
+      <div class="seq-num">3</div>
+      <div class="seq-content">
+        <div class="seq-title">It checks the clock every hour</div>
+        <p class="seq-body">Every hour, the system looks at every active contact and asks: &quot;Is anyone due a message right now?&quot; If yes, it sends. If no, it waits. You never need to think about timing again.</p>
+      </div>
+    </div>
+
+    <div class="seq-step">
+      <div class="seq-num">4</div>
+      <div class="seq-content">
+        <div class="seq-title">Emails go out from your own Inbox — as replies</div>
+        <p class="seq-body">The first email starts a fresh conversation. Every follow-up after that is a reply in the same thread — so the prospect sees one ongoing conversation, not six separate emails. Sent from your Gmail, not a third-party tool.</p>
+        <div class="seq-tags">
+          <span class="seq-tag">Day 0 — First touch</span>
+          <span class="seq-tag">Day 3 — Follow-up</span>
+          <span class="seq-tag">Day 6 — Value add</span>
+          <span class="seq-tag">Day 10 — Case study</span>
+          <span class="seq-tag">Day 16 — Different angle</span>
+          <span class="seq-tag">Day 23 — Final note</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="seq-step">
+      <div class="seq-num">5</div>
+      <div class="seq-content">
+        <div class="seq-title">Sequence ends cleanly — nothing falls through the cracks</div>
+        <p class="seq-body">After the last message, the conversation is automatically tagged as complete in your inbox. You always know who’s been fully followed up and who hasn’t. No guessing, no loose ends.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ COMPARISON TABLE ═══════════ -->
+<section class="compare-section" id="compare">
+  <div class="sec-tag">Why Not Apollo / Hunter / Lemlist?</div>
+  <h2 class="sec-h2">Built for builders, not SaaS subscribers</h2>
+  <p class="compare-intro">Apollo gives you a database. Hunter finds emails. Lemlist sends sequences. You still need to connect them all, pay three monthly bills, and manually move data between them. This system does everything in one place — and unlike those tools, you own every piece of it.</p>
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Apollo / Hunter</th>
+          <th>Lemlist / Instantly</th>
+          <th>This System</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Scrapes LinkedIn profiles</td>
+          <td><span class="tick">✓</span></td>
+          <td><span class="cross">✕</span></td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>Scrapes social media pages</td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="cross">✕</span></td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>AI-written personalised icebreaker</td>
+          <td><span class="cross">✕</span></td>
+          <td>Partial (templates)</td>
+          <td>✓ per profile</td>
+        </tr>
+        <tr>
+          <td>Industry AI mapping (no junk)</td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="cross">✕</span></td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>6-step threaded email sequences</td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="tick">✓</span></td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>Your own Gmail account (no warm-up)</td>
+          <td><span class="cross">✕</span></td>
+          <td>Separate inbox</td>
+          <td>✓ native Gmail</td>
+        </tr>
+        <tr>
+          <td>Data lives in your Sheets + Postgres</td>
+          <td><span class="cross">✕</span></td>
+          <td><span class="cross">✕</span></td>
+          <td>✓ you own it</td>
+        </tr>
+        <tr>
+          <td>Monthly subscription required</td>
+          <td>$49–$99/mo</td>
+          <td>$59–$150/mo</td>
+          <td>One-time build</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="compare-note">Apollo and Lemlist are great for large sales teams with a dedicated person managing them. This was built for founders and business owners who want the same results without the subscriptions, the setup complexity, or the dependency on a tool that can change its pricing any time.</p>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-cs-section">
+  <div class="cta-cs-text">Need this adapted for your business?</div>
+  <a href="/#contact" class="cta-cs-btn">Book a Free Audit →</a>
+</section>
+
+  <script src="index.js"></script>
+</body>
+</html>
