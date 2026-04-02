@@ -102,7 +102,7 @@
 
   .hero-cs-title {
     font-family:"Space Grotesk",sans-serif;
-    font-size:clamp(2.8rem,4.8vw,5.2rem);
+    font-size:clamp(2.2rem,4vw,4.2rem);
     font-weight:800; line-height:1.02;
     letter-spacing:-2.5px; margin-bottom:32px;
   }
@@ -170,34 +170,47 @@
   /* ═══════════════════════ BEFORE & AFTER ═══════════════════════ */
   .ba-section {
     border-bottom: 1px solid var(--border);
-    padding: 0 0 56px;
+    padding: 0 0 64px;
   }
 
   .ba-header {
-    padding: 48px 40px 28px;
+    padding: 56px 40px 26px;
+  }
+
+  .ba-header .sec-h2 {
+    max-width: 20ch;
+    line-height: 1.08;
   }
 
   .ba-grid {
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:24px;
+    gap:22px;
     padding: 0 40px;
-    margin-top: 16px;
+    margin-top: 22px;
+    align-items: stretch;
   }
 
   .ba-col {
-    border:1px solid var(--border); border-radius:16px;
+    border:1px solid var(--border); border-radius:18px;
     overflow:hidden;
-    transition: border-color 220ms;
+    transition: border-color 220ms, transform 220ms, box-shadow 220ms;
     background: rgba(255,255,255,0.02);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
   }
-  .ba-col:hover { border-color:rgba(31, 125, 83,0.3); }
+  .ba-col:hover {
+    border-color:rgba(31, 125, 83,0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgba(0,0,0,0.28);
+  }
 
   .ba-col-label {
-    padding:14px 22px;
+    padding:16px 22px;
     border-bottom:1px solid var(--border);
     font-family:"Space Grotesk",sans-serif;
-    font-size:0.75rem; font-weight:700; letter-spacing:2px;
+    font-size:0.78rem; font-weight:700; letter-spacing:2.4px;
     text-transform:uppercase; color:var(--muted);
     background: rgba(255,255,255,0.03);
   }
@@ -205,16 +218,21 @@
 
   .ba-list {
     list-style: none;
-    padding: 24px 26px;
+    padding: 26px 28px 28px;
     display: grid;
-    gap: 14px;
+    gap: 0;
   }
   .ba-list li {
     display: flex; gap: 12px;
-    font-size: 0.98rem; color: #cdd8ea; line-height: 1.5;
+    font-size: 1.02rem; color: #cdd8ea; line-height: 1.55;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .ba-list li:last-child {
+    border-bottom: none;
   }
   .ba-list li::before {
-    content: "•"; color: var(--muted); flex-shrink: 0; margin-top: 2px;
+    content: "•"; color: var(--muted); flex-shrink: 0; margin-top: 4px;
   }
   .ba-col.after-col .ba-list li::before {
     color: var(--primary);
@@ -418,6 +436,8 @@
     .ba-section { padding:0 0 48px; }
     .ba-header { padding:36px 24px 24px; }
     .ba-grid { padding:0 24px; gap:16px; }
+    .ba-list { padding:20px 20px 22px; }
+    .ba-list li { font-size:0.95rem; padding:10px 0; }
     .how-section { padding:48px 24px; }
     .compare-section { padding:48px 24px 64px; }
     .compare-table { min-width: 640px; }

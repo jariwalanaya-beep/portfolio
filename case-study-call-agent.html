@@ -588,23 +588,23 @@
 
   <div class="faq-grid">
     <article class="faq-item">
-      <h3 class="faq-q">Q1: Can the AI agent handle multiple doctors who have different working hours?</h3>
-      <p class="faq-a">A: Yes, completely. Each doctor has their own schedule stored (Monday to Sunday with separate start and end times). When a patient requests an appointment, the system checks only the selected doctor's availability and avoids double-bookings. It works perfectly even if one doctor works 9 AM-5 PM and another works 2 PM-10 PM.</p>
+      <h3 class="faq-q">Q1: If a patient requests a specific doctor but that doctor is fully booked, what happens?</h3>
+      <p class="faq-a">A: The agent scans forward in 30-minute increments for the same doctor on the same day. If no slot is found before 10 PM closing time, it informs the patient. It does not reassign to another doctor automatically.</p>
     </article>
 
     <article class="faq-item">
-      <h3 class="faq-q">Q2: What happens if the requested time is not available?</h3>
-      <p class="faq-a">A: The agent intelligently finds the next available slot on the same day for that doctor (or any doctor if no preference). It replies with the suggested time and asks for confirmation. If no slots are left before closing, it clearly informs the patient and offers to check another day or escalate to staff.</p>
+      <h3 class="faq-q">Q2: Is there a double-booking risk when multiple patients book at the same time?</h3>
+      <p class="faq-a">A: Both flows check the live PostgreSQL table before inserting. However, there is no transaction lock between simultaneous requests, so a race condition on the same slot is a known edge case worth discussing before deployment.</p>
     </article>
 
     <article class="faq-item">
-      <h3 class="faq-q">Q3: How does the system prevent double-bookings and keep everything accurate?</h3>
-      <p class="faq-a">A: Every booking runs a real-time availability check against the live appointments table in the database. It considers doctor-specific schedules and 30-minute slots. Once booked, the slot is immediately reserved, and a unique appointment code is generated. SMS and Email confirmations are sent instantly with the code.</p>
+      <h3 class="faq-q">Q3: Where does the appointment code come from and what gets stored?</h3>
+      <p class="faq-a">A: A 6-character code is randomly generated from uppercase letters and numbers before the database insert. Each record stores: patient name, phone, doctor name, date, start time, end time, code, and timestamp. The code is then sent to the patient via SMS.</p>
     </article>
 
     <article class="faq-item">
-      <h3 class="faq-q">Q4: Can patients cancel or reschedule appointments easily?</h3>
-      <p class="faq-a">A: Yes. Patients just need to provide their name and appointment code (sent via SMS/Email). The AI verifies the code, cancels the appointment in the database, and sends a confirmation email. The slot instantly becomes available again for others.</p>
+      <h3 class="faq-q">Q4: How does the agent verify identity before cancelling an appointment?</h3>
+      <p class="faq-a">A: The patient provides their appointment code. The agent queries the database by code only - if no match is found, it asks for the correct one. If found, the record is deleted and an SMS confirmation is sent. Note: the name is not cross-checked, only the code is validated.</p>
     </article>
   </div>
 </section>

@@ -3,739 +3,661 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Case Study | Karlspace</title>
+  <title>Google Sheets to Live Dashboard Case Study | Karlspace</title>
+  <meta name="description" content="How a Google Sheet turns into a live business dashboard with real-time KPIs, trend views, and zero technical setup." />
   <link rel="stylesheet" href="index.css" />
   <link rel="icon" type="image/png" href="1772001775286.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #04070c;
-      --bg2: #060c12;
-      --border: rgba(255, 255, 255, 0.09);
-      --text: #e9f0f8;
-      --muted: #7a8fa8;
-      --primary: #1F7D53;
-      --secondary: #255F38;
-      --grad: linear-gradient(110deg, #1F7D53 0%, #2C8B5F 50%, #255F38 100%);
-      --section-pad-y: 64px;
-      --section-pad-x: 40px;
-      --section-pad-y-tablet: 54px;
-      --section-pad-x-tablet: 32px;
-      --section-pad-y-mobile: 46px;
-      --section-pad-x-mobile: 24px;
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+<style>
+  :root {
+    --bg:       #04070c;
+    --bg2:      #060c12;
+    --border:   rgba(255,255,255,0.09);
+    --text:     #e9f0f8;
+    --muted:    #7a8fa8;
+    --primary:  #1F7D53;
+    --secondary:#255F38;
+    --grad:     linear-gradient(110deg,#1F7D53 0%,#2C8B5F 50%,#255F38 100%);
+  }
 
-    body {
-      font-family: Manrope, system-ui, sans-serif;
-      color: var(--text);
-      overflow-x: hidden;
-      letter-spacing: 0.01em;
-    }
+  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
 
-    /* ═══════════════════════ NAVBAR ═══════════════════════ */
-    .navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 64px; height: 64px;
-      background: rgba(4, 7, 12, 0.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
 
-    .nav-logo {
-      font-family: "Sora", sans-serif;
-      font-size: 1.05rem; font-weight: 700;
-      color: #fff; text-decoration: none; letter-spacing: 0.2px;
-    }
-    .nav-logo span { color: var(--primary); }
+  /* ═══════════════════════ NAVBAR ═══════════════════════ */
+  .navbar {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display: flex; align-items:center; justify-content:space-between;
+    padding: 0 64px; height: 64px;
+    background: rgba(4,7,12,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
 
-    .nav-links { display: flex; gap: 8px; list-style: none; }
-    .nav-links a {
-      text-decoration: none; font-size: 0.84rem; font-weight: 500;
-      color: var(--muted); padding: 6px 14px; border-radius: 999px;
-      border: 1px solid transparent;
-      transition: color 180ms, border-color 180ms;
-    }
-    .nav-links a:hover { color: var(--text); border-color: var(--border); }
+  .nav-logo {
+    font-family:"Space Grotesk",sans-serif;
+    font-size:1.05rem; font-weight:700;
+    color:#fff; text-decoration:none; letter-spacing:0.2px;
+  }
+  .nav-logo span { color:var(--primary); }
 
-    .nav-back {
-      text-decoration: none; font-size: 0.84rem; font-weight: 600;
-      color: var(--text); padding: 8px 18px; border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.03);
-      transition: border-color 180ms;
-      white-space: nowrap;
-    }
-    .nav-back:hover { border-color: rgba(31, 125, 83, 0.5); }
+  .nav-links {
+    display:flex; gap:8px; list-style:none;
+  }
+  .nav-links a {
+    text-decoration:none; font-size:0.84rem; font-weight:500;
+    color:var(--muted); padding:6px 14px; border-radius:999px;
+    border:1px solid transparent;
+    transition: color 180ms, border-color 180ms;
+  }
+  .nav-links a:hover { color:var(--text); border-color:var(--border); }
 
-    /* ═══════════════════════ HERO ═══════════════════════ */
-    .hero {
-      min-height: 82vh;
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      align-items: center;
-      gap: 0;
-      padding-top: 64px;
-      border-bottom: 1px solid var(--border);
-    }
+  .nav-back {
+    text-decoration:none; font-size:0.84rem; font-weight:600;
+    color:var(--text); padding:8px 18px; border-radius:999px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,0.03);
+    transition: border-color 180ms;
+    white-space:nowrap;
+  }
+  .nav-back:hover { border-color:rgba(31, 125, 83,0.5); }
 
-    .hero-left {
-      padding: 48px 40px;
-      display: flex; flex-direction: column; justify-content: center;
-      border-right: 1px solid var(--border);
-      height: 100%;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
-    }
+  /* ═══════════════════════ HERO ═══════════════════════ */
+  .hero-cs {
+    min-height: 88vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0;
+    padding-top: 64px;
+    border-bottom: 1px solid var(--border);
+  }
 
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 0.8rem; font-weight: 700; letter-spacing: 2.1px;
-      text-transform: uppercase; color: var(--primary);
-      margin-bottom: 28px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(31, 125, 83, 0.36);
-      background: rgba(31, 125, 83, 0.09);
-    }
-    .hero-tag::before {
-      content: ""; display: inline-block; width: 22px; height: 2px;
-      background: var(--grad); border-radius: 2px;
-    }
+  .hero-cs-left {
+    padding: 40px;
+    display: flex; flex-direction:column; justify-content:center;
+    border-right: 1px solid var(--border);
+    height: 100%;
+  }
 
-    .hero-title {
-      font-family: "Sora", sans-serif;
-      font-size: clamp(2.6rem, 5vw, 4.8rem);
-      font-weight: 800; line-height: 1.02;
-      letter-spacing: -1.8px; margin-bottom: 18px;
-      max-width: 11ch;
-    }
+  .hero-cs-tag {
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:0.9rem; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:var(--primary);
+    margin-bottom:28px;
+  }
+  .hero-cs-tag::before {
+    content:""; display:inline-block; width:22px; height:2px;
+    background:var(--grad); border-radius:2px;
+  }
 
-    .hero-sub {
-      font-size: clamp(1rem, 1.35vw, 1.18rem);
-      color: #b8ccde; line-height: 1.7;
-      margin-bottom: 28px; max-width: 50ch;
-    }
+  .hero-cs-title {
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(2.2rem,4vw,4.2rem);
+    font-weight:800; line-height:1.02;
+    letter-spacing:-2.5px; margin-bottom:32px;
+  }
+  .hero-cs-title .highlight {
+    background: var(--grad);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-    .hero-bullets { list-style: none; display: grid; gap: 14px; }
-    .hero-bullets li {
-      display: flex; gap: 12px; font-size: clamp(0.98rem, 1.15vw, 1.12rem);
-      color: #d0dcea; line-height: 1.45;
-    }
-    .hero-bullets li::before {
-      content: "—"; color: var(--primary); font-weight: 700; flex-shrink: 0;
-    }
+  .hero-cs-sub {
+    font-size:clamp(1.05rem,1.5vw,1.2rem);
+    color:#b8ccde; line-height:1.7;
+    margin-bottom:44px; max-width:46ch;
+  }
 
-    .hero-right {
-      padding: 48px 40px;
-      display: flex; align-items: center; justify-content: center;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(31, 125, 83, 0.04), transparent 60%);
-    }
+  .hero-cs-bullets { list-style:none; display:grid; gap:14px; }
+  .hero-cs-bullets li {
+    display:flex; gap:12px; font-size:clamp(0.98rem,1.15vw,1.12rem);
+    color:#d0dcea; line-height:1.45;
+  }
+  .hero-cs-bullets li::before {
+    content:"—"; color:var(--primary); font-weight:700; flex-shrink:0;
+  }
 
-    .hero-img-wrap {
-      border: 1px solid rgba(31, 125, 83, 0.22); border-radius: 18px;
-      background: linear-gradient(150deg, rgba(31, 125, 83, 0.07), rgba(255, 255, 255, 0.02));
-      padding: 14px;
-      box-shadow: 0 0 64px rgba(31, 125, 83, 0.12), 0 24px 48px rgba(0, 0, 0, 0.4);
-      width: 100%;
-      max-width: 640px;
-      animation: heroFloat 5s ease-in-out infinite;
-    }
-    .hero-img-wrap img { border-radius: 10px; width: 100%; display: block; border: 1px solid rgba(255, 255, 255, 0.1); }
+  .hero-cs-right {
+    padding: 40px;
+    display: flex; align-items:center; justify-content:center;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(31, 125, 83,0.04), transparent 60%);
+  }
 
-    /* ═══════════════════════ BENEFITS ═══════════════════════ */
-    .benefits {
-      padding: 50px 40px 20px;
-      border-bottom: 1px solid var(--border);
-    }
+  .hero-cs-img-wrap {
+    border:1px solid rgba(31, 125, 83,0.22); border-radius:18px;
+    background:linear-gradient(150deg,rgba(31, 125, 83,0.07),rgba(255,255,255,0.02));
+    padding:14px;
+    box-shadow: 0 0 64px rgba(31, 125, 83,0.12), 0 24px 48px rgba(0,0,0,0.4);
+    width: 100%;
+    max-width: 640px;
+    animation: heroFloat 3s ease-in-out infinite;
+  }
+  .hero-cs-img-wrap img {
+    border-radius:10px; width:100%; display:block;
+    border:1px solid rgba(255,255,255,0.1);
+  }
 
-    .sec-tag {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 0.79rem; font-weight: 700; letter-spacing: 2.1px;
-      text-transform: uppercase; color: var(--primary);
-      margin-bottom: 14px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(31, 125, 83, 0.3);
-      background: rgba(31, 125, 83, 0.07);
-    }
-    .sec-tag::before {
-      content: ""; display: inline-block; width: 18px; height: 2px;
-      background: var(--grad); border-radius: 2px;
-    }
+  /* ═══════════════════════ SECTION LABELS ═══════════════════════ */
+  .sec-tag {
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:0.9rem; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:var(--primary);
+    margin-bottom:14px;
+  }
+  .sec-tag::before {
+    content:""; display:inline-block; width:18px; height:2px;
+    background:var(--grad); border-radius:2px;
+  }
+  .sec-h2 {
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(1.8rem,3vw,3rem); font-weight:700;
+    line-height:1.1; letter-spacing:-1px; color:var(--text);
+  }
 
-    .sec-h2 {
-      font-family: "Sora", sans-serif;
-      font-size: clamp(2rem, 3.1vw, 3.15rem); font-weight: 700;
-      line-height: 1.1; letter-spacing: -1px; color: var(--text);
-      margin-bottom: 16px;
-      max-width: 16ch;
-    }
+  /* ═══════════════════════ RESULT STATS ═══════════════════════ */
+  .stats-section {
+    border-bottom: 1px solid var(--border);
+    padding: 56px 40px;
+  }
 
-    /* ═══════════════════════ STATS STRIP ═══════════════════════ */
-    .stats-strip {
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:20px;
-      padding:24px var(--section-pad-x) 0;
-      background:transparent;
-      align-items:stretch;
-    }
+  .stats-grid {
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:16px;
+    margin-top:22px;
+  }
 
-    .stat-cell {
-      padding: 30px 26px;
-      border:1px solid var(--border);
-      border-radius:20px;
-      background: linear-gradient(180deg, rgba(10, 18, 27, 0.9), rgba(7, 13, 20, 0.86));
-      transition: border-color 220ms, background 220ms, transform 220ms;
-      position:relative;
-      overflow:hidden;
-      min-height: 168px;
-      height: 100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:8px;
-    }
-    .stat-cell:hover {
-      border-color:rgba(31, 125, 83,0.3);
-      background:rgba(31, 125, 83,0.03);
-      transform: translateY(-3px);
-    }
-    .stat-cell::before {
-      content:""; position:absolute; top:0; left:0; right:0; height:2px;
-      background:var(--grad);
-    }
+  .stat-card {
+    border:1px solid rgba(31, 125, 83,0.18);
+    border-radius:20px;
+    padding:28px 24px;
+    background: linear-gradient(180deg, rgba(7,13,20,0.96), rgba(6,11,17,0.9));
+    position:relative;
+    overflow:hidden;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    transition: border-color 220ms, background 220ms, transform 220ms;
+  }
+  .stat-card::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 0; height: 2px;
+    background: var(--grad);
+  }
+  .stat-card:hover {
+    border-color: rgba(31, 125, 83,0.38);
+    background: linear-gradient(180deg, rgba(10,20,14,0.96), rgba(8,16,12,0.9));
+    transform: translateY(-2px);
+  }
 
-    .stat-num {
-      font-family:"Sora",sans-serif;
-      font-size:clamp(1.75rem,2.35vw,2.45rem);
-      font-weight:800; line-height:1;
-      letter-spacing:-0.8px; margin-bottom:2px;
-      background:var(--grad);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      background-clip:text;
-      display:block;
+  .stat-value {
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(1.6rem,2.6vw,2.2rem);
+    font-weight:800;
+    line-height:1;
+    margin-bottom:10px;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-title {
+    font-size:0.98rem;
+    font-weight:700;
+    color:#d9e5f2;
+    line-height:1.35;
+    margin-bottom:6px;
+  }
+
+  .stat-desc {
+    font-size:0.84rem;
+    color:var(--muted);
+    line-height:1.45;
+  }
+
+  /* ═══════════════════════ BEFORE & AFTER ═══════════════════════ */
+  .ba-section {
+    border-bottom: 1px solid var(--border);
+    padding: 0 0 64px;
+  }
+
+  .ba-header {
+    padding: 56px 40px 26px;
+  }
+
+  .ba-header .sec-h2 {
+    max-width: 20ch;
+    line-height: 1.08;
+  }
+
+  .ba-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    padding: 0 40px;
+    margin-top: 22px;
+    align-items: stretch;
+  }
+
+  .ba-col {
+    border:1px solid var(--border); border-radius:18px;
+    overflow:hidden;
+    transition: border-color 220ms, transform 220ms, box-shadow 220ms;
+    background: rgba(255,255,255,0.02);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+  .ba-col:hover {
+    border-color:rgba(31, 125, 83,0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgba(0,0,0,0.28);
+  }
+
+  .ba-col-label {
+    padding:16px 22px;
+    border-bottom:1px solid var(--border);
+    font-family:"Space Grotesk",sans-serif;
+    font-size:0.78rem; font-weight:700; letter-spacing:2.4px;
+    text-transform:uppercase; color:var(--muted);
+    background: rgba(255,255,255,0.03);
+  }
+  .ba-col-label.after { color:var(--primary); }
+
+  .ba-col img {
+    width: 100%;
+    display: block;
+  }
+
+  /* ═══════════════════════ HOW IT WORKS ═══════════════════════ */
+  .how-section {
+    padding: 64px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .how-steps {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 32px;
+  }
+
+  .how-step {
+    border: 1px solid rgba(31, 125, 83,0.18);
+    border-radius: 20px;
+    padding: 28px 26px;
+    background: linear-gradient(180deg, rgba(7,13,20,0.96), rgba(6,11,17,0.9));
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    transition: border-color 220ms, background 220ms;
+  }
+  .how-step:hover {
+    border-color: rgba(31, 125, 83,0.38);
+    background: linear-gradient(180deg, rgba(10,20,14,0.96), rgba(8,16,12,0.9));
+  }
+  .how-step::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 0; height: 2px;
+    background: var(--grad);
+  }
+
+  .how-num {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .how-step p {
+    color: #c7d5e6;
+    line-height: 1.68;
+    font-size: 0.97rem;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* ═══════════════════════ COMPARE TABLE ═══════════════════════ */
+  .compare-section {
+    padding: 64px 40px 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .compare-table-wrap {
+    margin-top: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow-x: auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.005));
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .compare-table th,
+  .compare-table td {
+    padding: 16px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    text-align: left;
+    white-space: nowrap;
+  }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+
+  .compare-table th:first-child,
+  .compare-table td:first-child {
+    width: 31%;
+    white-space: normal;
+  }
+
+  .compare-table th {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #cfd9e6;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .compare-table td:last-child {
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  /* ═══════════════════════ CTA ═══════════════════════ */
+  .cta-cs-section {
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:24px;
+    padding: 54px 40px;
+    position:relative;
+    overflow:hidden;
+    background:transparent;
+  }
+
+  .cta-cs-text {
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(1.5rem,2.6vw,2.3rem);
+    font-weight:700;
+    line-height:1.3;
+    color:var(--text);
+  }
+
+  .cta-cs-actions {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .cta-cs-btn {
+    flex-shrink:0;
+    display:inline-flex; align-items:center; gap:10px;
+    text-decoration:none; color:#f1f5f9; font-weight:800;
+    font-size:1rem; border-radius:999px;
+    padding:18px 30px;
+    background:var(--grad);
+    font-family:"Space Grotesk",sans-serif;
+    box-shadow: 0 8px 28px rgba(31, 125, 83,0.3);
+    transition: box-shadow 200ms, transform 200ms;
+    white-space:nowrap;
+    letter-spacing:0.2px;
+  }
+  .cta-cs-btn:hover {
+    box-shadow:0 16px 40px rgba(31, 125, 83,0.42);
+    transform: translateY(-1px);
+  }
+
+  .cta-cs-btn.secondary {
+    background: rgba(31, 125, 83,0.1);
+    border: 1px solid rgba(31, 125, 83,0.35);
+    box-shadow: none;
+  }
+  .cta-cs-btn.secondary:hover {
+    border-color: rgba(31, 125, 83,0.6);
+    box-shadow: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
     }
-    .stat-label {
-      font-size:0.9rem;
-      font-weight:700;
-      color:#d9e5f2;
-      line-height:1.35;
-      margin-bottom:1px;
-      max-width:22ch;
-    }
+  }
 
-    .stat-desc {
-      font-size:0.75rem;
-      color:var(--muted);
-      line-height:1.32;
-      max-width:32ch;
-    }
+  @keyframes heroFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
 
-    /* ═══════════════════════ BEFORE & AFTER ═══════════════════════ */
-    .ba-section { border-bottom: 1px solid var(--border); padding: 0 0 56px; }
+  /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+  @media(max-width:1100px) {
+    .navbar { padding:0 32px; }
+    .hero-cs-left { padding:60px 40px; }
+    .hero-cs-right { padding:48px 36px; }
+    .stats-section { padding:56px 32px; }
+    .stats-grid { grid-template-columns:1fr 1fr; }
+    .ba-header { padding:48px 32px 28px; }
+    .ba-grid { padding:0 32px; gap:18px; }
+    .how-section { padding:56px 32px; }
+    .compare-section { padding:56px 32px 72px; }
+    .compare-table-wrap { border-radius:14px; }
+    .compare-table { min-width: 720px; font-size: 0.9rem; }
+    .compare-table th, .compare-table td { padding: 14px 12px; }
+    .cta-cs-section { padding:64px 32px; }
+  }
 
-    .ba-header { padding: 42px var(--section-pad-x) 26px; }
+  @media(max-width:900px) {
+    .hero-cs { grid-template-columns:1fr; min-height:auto; }
+    .hero-cs-left { border-right:none; border-bottom:1px solid var(--border); padding:60px 32px; }
+    .hero-cs-right { padding:40px 32px; }
+    .ba-grid { grid-template-columns:1fr; }
+    .how-steps { grid-template-columns:1fr; }
+    .cta-cs-section { grid-template-columns:1fr; gap:20px; }
+    .cta-cs-actions { justify-content:flex-start; }
+    .navbar { padding:0 24px; }
+    .nav-links { display:none; }
+  }
 
-    .ba-header.tight-bottom { padding-bottom: 8px; }
-
-    .ba-header.spacious-top { padding-top: 56px; }
-
-    .ba-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      padding: 0 var(--section-pad-x);
-      margin-top: 20px;
-    }
-
-    .ba-col {
-      display: flex; flex-direction: column;
-      border: 1px solid var(--border); border-radius: 16px;
-      overflow: hidden;
-      transition: border-color 220ms;
-    }
-    .ba-col:hover { border-color: rgba(31, 125, 83, 0.3); }
-
-    .ba-col-label {
-      padding: 14px 22px;
-      border-bottom: 1px solid var(--border);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--muted);
-      background: rgba(255, 255, 255, 0.03);
-    }
-    .ba-col-label.after { color: var(--primary); }
-    .ba-col img { width: 100%; display: block; }
-
-    /* ═══════════════════════ HOW IT WORKS ═══════════════════════ */
-    .how-section {
-      padding: var(--section-pad-y) var(--section-pad-x);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .how-steps {
-      display: grid;
-      gap: 16px;
-      max-width: 1200px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .how-step {
-      border: 1px solid rgba(31, 125, 83, 0.18);
-      border-radius: 20px;
-      padding: 24px 24px;
-      background: linear-gradient(180deg, rgba(7, 13, 20, 0.96), rgba(6, 11, 17, 0.9));
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: flex-start;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-      transition: border-color 200ms, transform 200ms;
-    }
-    .how-step::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 2px;
-      background: var(--grad);
-    }
-
-    .how-step:hover {
-      border-color: rgba(31, 125, 83, 0.4);
-      transform: translateY(-3px);
-    }
-
-    .how-num {
-      font-family: "Sora", sans-serif;
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-top: 2px;
-      border: 1px solid rgba(31, 125, 83, 0.3);
-      border-radius: 999px;
-      padding: 8px 12px;
-      background: rgba(31, 125, 83, 0.08);
-    }
-
-    .how-step p {
-      color: #c7d5e6;
-      line-height: 1.68;
-      font-size: 1rem;
-      max-width: none;
-      margin: 0;
-    }
-
-    /* ═══════════════════════ COMPARE TABLE ═══════════════════════ */
-    .compare-section { padding: var(--section-pad-y) var(--section-pad-x) 72px; }
-
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 18px;
-      font-size: 0.95rem;
-    }
-
-    .compare-table-wrap {
-      margin-top: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      overflow-x: auto;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.006));
-    }
-
-    .compare-table th,
-    .compare-table td {
-      padding: 18px 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      text-align: left;
-      white-space: nowrap;
-    }
-
-    .compare-table th:first-child,
-    .compare-table td:first-child {
-      width: 31%;
-      white-space: normal;
-    }
-
-    .compare-table th {
-      font-family: "Sora", sans-serif;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 1.6px;
-      color: #cfd9e6;
-      background: rgba(10, 18, 27, 0.9);
-      position: sticky;
-      top: 0;
-      z-index: 2;
-    }
-
-    .compare-table tbody tr:nth-child(even) {
-      background: rgba(255, 255, 255, 0.01);
-    }
-
-    .compare-table td {
-      font-size: 0.93rem;
-    }
-
-    .compare-table td:last-child {
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .compare-note {
-      margin-top: 22px;
-      color: #c7d5e6;
-      line-height: 1.7;
-      font-size: 1rem;
-      max-width: 85ch;
-    }
-
-    /* ═══════════════════════ CTA ═══════════════════════ */
-    .cta-section {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 28px;
-      width: min(1240px, calc(100% - 48px));
-      margin: 0 auto 24px;
-      padding: 48px 42px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(180deg, rgba(8, 14, 21, 0.82), rgba(7, 12, 18, 0.7));
-      border-top: 1px solid var(--border);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .cta-copy {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 0;
-      justify-self: start;
-      width: 100%;
-      max-width: 700px;
-      padding-right: 12px;
-      text-align: left;
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta-text {
-      font-family: "Sora", sans-serif;
-      font-size: clamp(2.15rem, 3.7vw, 3.25rem);
-      font-weight: 800;
-      line-height: 1.06;
-      letter-spacing: -1.1px;
-      color: #edf4fb;
-      max-width: 24ch;
-    }
-
-    .cta-btn {
-      flex-shrink: 0;
-      display: inline-flex; align-items: center; gap: 10px;
-      text-decoration: none; color: #f1f5f9; font-weight: 800;
-      font-size: 1rem; border-radius: 999px;
-      padding: 18px 36px;
-      background: var(--grad);
-      font-family: "Sora", sans-serif;
-      box-shadow: 0 8px 28px rgba(31, 125, 83, 0.3);
-      transition: box-shadow 200ms;
-      white-space: nowrap;
-      letter-spacing: 0.2px;
-      position: relative;
-      z-index: 1;
-    }
-    .cta-btn:hover {
-      box-shadow: 0 16px 40px rgba(31, 125, 83, 0.42);
-      transform: translateY(-1px);
-    }
-
-    .cta-actions {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 12px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #d9e8f7;
-      font-weight: 700;
-      font-size: 0.96rem;
-      border-radius: 999px;
-      padding: 16px 28px;
-      border: 1px solid rgba(31, 125, 83, 0.38);
-      background: rgba(31, 125, 83, 0.08);
-      transition: border-color 180ms, background 180ms;
-      white-space: nowrap;
-    }
-
-    .cta-btn-secondary:hover {
-      border-color: rgba(31, 125, 83, 0.62);
-      background: rgba(31, 125, 83, 0.16);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-    }
-
-    @keyframes heroFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-7px); }
-    }
-
-    /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
-    @media (max-width: 1100px) {
-      .navbar { padding: 0 32px; }
-      .hero-left { padding: 56px 40px; }
-      .hero-right { padding: 44px 36px; }
-      .benefits { padding: 60px 48px 28px; }
-      .ba-header { padding: 40px var(--section-pad-x-tablet) 30px; }
-      .ba-header.tight-bottom { padding-bottom: 8px; }
-      .ba-header.spacious-top { padding-top: 48px; }
-      .ba-grid { padding: 0 var(--section-pad-x-tablet); gap: 18px; }
-      .how-section { padding: var(--section-pad-y-tablet) var(--section-pad-x-tablet); }
-      .compare-section { padding: var(--section-pad-y-tablet) var(--section-pad-x-tablet) 72px; }
-      .compare-table-wrap { margin-top: 14px; border-radius: 14px; }
-      .compare-table { min-width: 760px; font-size: 0.9rem; margin-top: 0; }
-      .compare-table th,
-      .compare-table td { padding: 15px 12px; }
-      .compare-table th { letter-spacing: 1.4px; font-size: 0.84rem; }
-      .cta-section {
-        width: min(1120px, calc(100% - 36px));
-        padding: 44px var(--section-pad-x-tablet);
-      }
-      .cta-copy { max-width: 600px; }
-      .cta-text { font-size: clamp(1.95rem, 3.8vw, 2.6rem); }
-      .stats-strip { grid-template-columns: 1fr 1fr; gap:12px; padding: 20px var(--section-pad-x-tablet) 0; }
-    }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 52px 32px; }
-      .hero-right { padding: 36px 32px; }
-      .ba-grid { grid-template-columns: 1fr; }
-      .how-steps { grid-template-columns: 1fr; }
-      .cta-section {
-        width: calc(100% - 28px);
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 42px var(--section-pad-x-tablet);
-      }
-      .cta-copy { max-width: 100%; }
-      .cta-actions { justify-content: flex-start; }
-      .navbar { padding: 0 24px; }
-      .nav-links { display: none; }
-    }
-
-    @media (max-width: 640px) {
-      .hero-left { padding: 46px 24px; }
-      .hero-right { padding: 30px 24px; }
-      .benefits { padding: 48px 24px 24px; }
-      .ba-section { padding: 0 0 48px; }
-      .ba-header { padding: 34px var(--section-pad-x-mobile) 24px; }
-      .ba-header.tight-bottom { padding-bottom: 8px; }
-      .ba-header.spacious-top { padding-top: 42px; }
-      .ba-grid { padding: 0 var(--section-pad-x-mobile); gap: 16px; }
-      .how-section { padding: var(--section-pad-y-mobile) var(--section-pad-x-mobile); }
-      .compare-section { padding: var(--section-pad-y-mobile) var(--section-pad-x-mobile) 62px; }
-      .cta-section {
-        width: calc(100% - 18px);
-        margin-bottom: 14px;
-        padding: 38px var(--section-pad-x-mobile);
-      }
-      .cta-text { font-size: clamp(1.72rem, 9vw, 2.08rem); letter-spacing: -0.8px; max-width: 16ch; }
-      .cta-actions { width: 100%; flex-direction: column; align-items: stretch; gap: 10px; }
-      .cta-btn,
-      .cta-btn-secondary { width: 100%; justify-content: center; }
-      .stats-strip { grid-template-columns: 1fr; gap:10px; padding: 18px var(--section-pad-x-mobile) 0; }
-      .stat-cell { padding: 30px 24px; min-height: auto; }
-      .sec-h2 { font-size: clamp(1.8rem, 8vw, 2.2rem); }
-      .compare-table { min-width: 680px; }
-    }
-  </style>
+  @media(max-width:640px) {
+    .hero-cs-left { padding:48px 24px; }
+    .hero-cs-right { padding:32px 24px; }
+    .stats-section { padding:48px 24px; }
+    .stats-grid { grid-template-columns:1fr; }
+    .ba-section { padding:0 0 48px; }
+    .ba-header { padding:36px 24px 24px; }
+    .ba-grid { padding:0 24px; gap:16px; }
+    .how-section { padding:48px 24px; }
+    .compare-section { padding:48px 24px 64px; }
+    .compare-table { min-width: 640px; }
+    .cta-cs-section { padding:48px 24px; }
+    .cta-cs-actions { width:100%; }
+    .cta-cs-btn { width:100%; justify-content:center; }
+  }
+</style>
 </head>
 <body>
+
   <canvas id="bg-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.8;"></canvas>
 
-  <nav class="navbar">
-    <a href="index.html" class="nav-logo">Karl<span>space</span></a>
-    <ul class="nav-links">
-      <li><a href="#benefits">Benefits</a></li>
-      <li><a href="#before-after">Before &amp; After</a></li>
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#compare">Comparison</a></li>
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">Karl<span>space</span></a>
+  <ul class="nav-links">
+    <li><a href="#stats">Result</a></li>
+    <li><a href="#ba">Before &amp; After</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#compare">Comparison</a></li>
+  </ul>
+  <a href="index.html#case-studies" class="nav-back">← Back to Case Studies</a>
+</nav>
+
+<section class="hero-cs" style="position: relative; z-index: 1;">
+  <div class="hero-cs-left">
+    <div class="hero-cs-tag">Case Study</div>
+    <h1 class="hero-cs-title">Google Sheets<br><span class="highlight">→ Live Dashboard</span></h1>
+    <p class="hero-cs-sub">Turn your messy spreadsheet into a beautiful, real-time business dashboard - no Power BI, no Google Analytics, no data team needed.</p>
+    <ul class="hero-cs-bullets">
+      <li>Live KPI snapshots, trend comparisons, and anomaly alerts</li>
+      <li>Auto-maps columns into charts without rebuilding a dashboard</li>
+      <li>Always updated the moment your Sheet changes</li>
     </ul>
-    <a href="index.html#case-studies" class="nav-back">&larr; Back to Case Studies</a>
-  </nav>
+  </div>
+  <div class="hero-cs-right">
+    <div class="hero-cs-img-wrap">
+      <img src="dashboard-assets/dashboard-main.png" alt="Live business dashboard" />
+    </div>
+  </div>
+</section>
 
-  <section class="hero" id="overview" style="position: relative; z-index: 1;">
-    <div class="hero-left">
-      <div class="hero-tag">Case Study</div>
-      <h1 class="hero-title">Google Sheets &rarr; Live Dashboard</h1>
-      <p class="hero-sub">Turn your messy spreadsheet into a beautiful, real-time business dashboard &mdash; no Power BI, no Google Analytics, no data team needed.</p>
-      <ul class="hero-bullets">
-        <li>Live KPI snapshots, trend comparisons, and anomaly alerts</li>
-        <li>Auto-maps columns into charts without rebuilding a dashboard</li>
-        <li>Always updated the moment your Sheet changes</li>
-      </ul>
-    </div>
-    <div class="hero-right">
-      <div class="hero-img-wrap">
-        <img src="dashboard-assets/dashboard-main.png" alt="Live business dashboard" />
-      </div>
-    </div>
-  </section>
+<section class="stats-section" id="stats">
+  <div class="sec-tag">Result</div>
+  <h2 class="sec-h2">From spreadsheet confusion to live clarity</h2>
+  <div class="stats-grid">
+    <article class="stat-card">
+      <div class="stat-value">24hrs</div>
+      <div class="stat-title">Fast Setup</div>
+      <p class="stat-desc">From sharing your Sheet to a live, usable dashboard.</p>
+    </article>
 
-  <section class="ba-section" id="before-after">
-    <div class="ba-header tight-bottom">
-      <div class="sec-tag">Result</div>
-    </div>
-    
-    <div class="stats-strip" id="stats">
-      <div class="stat-cell">
-        <div class="stat-num">24hrs</div>
-        <div class="stat-label">Fast Setup</div>
-        <div class="stat-desc">From sharing your Sheet to a live, usable dashboard.</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Built around your data</div>
-        <div class="stat-desc">Layout, tabs, and charts mirror your actual dataset — not a fixed template.</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num">Zero</div>
-        <div class="stat-label">Zero data team</div>
-        <div class="stat-desc">No analyst, no developer, no IT department needed.</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-num">Live</div>
-        <div class="stat-label">Always live</div>
-        <div class="stat-desc">Dashboard updates the moment your Sheet updates.</div>
-      </div>
-    </div>
+    <article class="stat-card">
+      <div class="stat-value">100%</div>
+      <div class="stat-title">Built around your data</div>
+      <p class="stat-desc">Layout, tabs, and charts mirror your actual dataset - not a fixed template.</p>
+    </article>
 
-    <div class="ba-header spacious-top">
-      <div class="sec-tag">Before &amp; After</div>
-      <h2 class="sec-h2">From rows of data to instant clarity</h2>
-    </div>
+    <article class="stat-card">
+      <div class="stat-value">Zero</div>
+      <div class="stat-title">Zero data team</div>
+      <p class="stat-desc">No analyst, no developer, no IT department needed.</p>
+    </article>
 
-    <div class="ba-grid">
-      <div class="ba-col">
-        <div class="ba-col-label">Before</div>
-        <img src="dashboard-assets/1.png" alt="Spreadsheet data view" />
-      </div>
-      <div class="ba-col">
-        <div class="ba-col-label after">After</div>
-        <img src="dashboard-assets/2.png" alt="Live dashboard view" />
-      </div>
-    </div>
-  </section>
+    <article class="stat-card">
+      <div class="stat-value">Live</div>
+      <div class="stat-title">Always live</div>
+      <p class="stat-desc">Dashboard updates the moment your Sheet updates.</p>
+    </article>
+  </div>
+</section>
 
-  <section class="how-section" id="how">
-    <div class="sec-tag">How It Works</div>
-    <h2 class="sec-h2">From Sheet to dashboard in a day</h2>
-    <div class="how-steps">
-      <div class="how-step">
-        <div class="how-num">Step 1</div>
-        <p>Connect your Sheet. Share your Google Sheet link. That is it &mdash; no exports, no CSV uploads, no reformatting.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-num">Step 2</div>
-        <p>We map your data. The system reads your columns sales, expenses, staff, inventory and auto-assigns the right charts and KPIs.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-num">Step 3</div>
-        <p>Your dashboard goes live in under 24 hours, ready for your whole team to open on any device.</p>
-      </div>
+<section class="ba-section" id="ba">
+  <div class="ba-header">
+    <div class="sec-tag">Before &amp; After</div>
+    <h2 class="sec-h2">From rows of data to instant clarity</h2>
+  </div>
+  <div class="ba-grid">
+    <div class="ba-col">
+      <div class="ba-col-label">Before</div>
+      <img src="dashboard-assets/1.png" alt="Spreadsheet data view" />
     </div>
-  </section>
+    <div class="ba-col">
+      <div class="ba-col-label after">After</div>
+      <img src="dashboard-assets/2.png" alt="Live dashboard view" />
+    </div>
+  </div>
+</section>
 
-  <section class="compare-section" id="compare">
-    <div class="sec-tag">Why Not Power BI?</div>
-    <h2 class="sec-h2">Built for owners, not data teams</h2>
-    <div class="compare-table-wrap">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Power BI</th>
-            <th>Google Analytics</th>
-            <th>Karlspace</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>How fast can you go live?</td>
-            <td>Days–Weeks</td>
-            <td>Hours</td>
-            <td>Minutes</td>
-          </tr>
-          <tr>
-            <td>Needs technical help?</td>
-            <td>Yes</td>
-            <td>Sometimes</td>
-            <td>No</td>
-          </tr>
-          <tr>
-            <td>Uses your existing Google Sheet</td>
-            <td>Requires export</td>
-            <td>Not possible</td>
-            <td>Direct connection</td>
-          </tr>
-          <tr>
-            <td>Pricing for small teams</td>
-            <td>Expensive per user</td>
-            <td>Free but hard to use</td>
-            <td>Affordable &amp; transparent</td>
-          </tr>
-          <tr>
-            <td>Designed for small businesses</td>
-            <td>No</td>
-            <td>No</td>
-            <td>Yes</td>
-          </tr>
-          <tr>
-            <td>Non-technical team can use it</td>
-            <td>Difficult</td>
-            <td>Very difficult</td>
-            <td>Extremely easy</td>
-          </tr>
-        </tbody>
-      </table>
+<section class="how-section" id="how">
+  <div class="sec-tag">How It Works</div>
+  <h2 class="sec-h2">From Sheet to dashboard in a day</h2>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-num">Step 1</div>
+      <p>Connect your Sheet. Share your Google Sheet link. That is it - no exports, no CSV uploads, no reformatting.</p>
     </div>
-  </section>
+    <div class="how-step">
+      <div class="how-num">Step 2</div>
+      <p>We map your data. The system reads your columns sales, expenses, staff, inventory and auto-assigns the right charts and KPIs.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">Step 3</div>
+      <p>Your dashboard goes live in under 24 hours, ready for your whole team to open on any device.</p>
+    </div>
+  </div>
+</section>
 
-  <section class="cta-section">
-    <div class="cta-copy">
-      <div class="cta-text">Need this adapted for your business?</div>
-    </div>
-    <div class="cta-actions">
-      <a href="https://profit-palace-92.lovable.app/" target="_blank" rel="noopener noreferrer" class="cta-btn-secondary">View Project</a>
-      <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="cta-btn">Book a Free Audit &rarr;</a>
-    </div>
-  </section>
+<section class="compare-section" id="compare">
+  <div class="sec-tag">Why Not Power BI?</div>
+  <h2 class="sec-h2">Built for owners, not data teams</h2>
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Power BI</th>
+          <th>Google Analytics</th>
+          <th>Karlspace</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>How fast can you go live?</td>
+          <td>Days-Weeks</td>
+          <td>Hours</td>
+          <td>Minutes</td>
+        </tr>
+        <tr>
+          <td>Needs technical help?</td>
+          <td>Yes</td>
+          <td>Sometimes</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Uses your existing Google Sheet</td>
+          <td>Requires export</td>
+          <td>Not possible</td>
+          <td>Direct connection</td>
+        </tr>
+        <tr>
+          <td>Pricing for small teams</td>
+          <td>Expensive per user</td>
+          <td>Free but hard to use</td>
+          <td>Affordable &amp; transparent</td>
+        </tr>
+        <tr>
+          <td>Designed for small businesses</td>
+          <td>No</td>
+          <td>No</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Non-technical team can use it</td>
+          <td>Difficult</td>
+          <td>Very difficult</td>
+          <td>Extremely easy</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="cta-cs-section">
+  <div class="cta-cs-text">Need this adapted for your business?</div>
+  <div class="cta-cs-actions">
+    <a href="https://profit-palace-92.lovable.app/" target="_blank" rel="noopener noreferrer" class="cta-cs-btn secondary">View Project</a>
+    <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="cta-cs-btn">Book a Free Audit →</a>
+  </div>
+</section>
 
   <script src="index.js"></script>
 </body>
