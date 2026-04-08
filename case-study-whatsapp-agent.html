@@ -899,43 +899,63 @@
 
     @media(max-width:640px) {
       .hero-cs-left {
-        padding: 48px 24px;
+        padding: 40px 20px;
       }
 
       .hero-cs-right {
-        padding: 32px 24px;
+        padding: 32px 20px;
+      }
+      
+      .hero-cs-title {
+        font-size: 2.2rem;
+        line-height: 1.1;
+        letter-spacing: -1.5px;
+      }
+
+      .sec-h2 {
+        font-size: 1.7rem;
+        letter-spacing: -0.5px;
+      }
+
+      .nav-logo {
+        font-size: 1rem;
+      }
+
+      .nav-back {
+        font-size: 0.75rem;
+        padding: 6px 12px;
       }
 
       .stats-strip {
         grid-template-columns: 1fr;
         gap: 10px;
-        padding: 0 24px 10px;
+        padding: 0 20px 10px;
       }
 
       .stat-cell {
         min-height: auto;
-        padding: 26px 22px;
+        padding: 24px 20px;
       }
 
       .ba-section {
-        padding: 0 0 48px;
+        padding: 0 0 40px;
       }
 
       .ba-header {
-        padding: 36px 24px 24px;
+        padding: 32px 20px 20px;
       }
 
       .ba-grid {
-        padding: 0 24px;
+        padding: 0 20px;
         gap: 16px;
       }
 
       .how-section {
-        padding: 48px 24px;
+        padding: 40px 20px;
       }
 
       .faq-section {
-        padding: 48px 24px;
+        padding: 40px 20px;
       }
 
       .how-steps {
@@ -943,7 +963,7 @@
       }
 
       .compare-section {
-        padding: 48px 24px 64px;
+        padding: 40px 20px 56px;
       }
 
       .compare-table {
@@ -951,12 +971,78 @@
       }
 
       .cta-cs-section {
-        padding: 44px 24px;
+        padding: 40px 20px;
+        gap: 20px;
       }
 
       .cta-cs-btn {
         width: 100%;
         justify-content: center;
+      }
+      
+      .cta-cs-text {
+        font-size: 1.4rem;
+        text-align: center;
+      }
+    }
+
+    @media(max-width:480px) {
+      .hero-cs-title {
+        font-size: 2rem;
+        letter-spacing: -1px;
+      }
+      
+      .hero-cs-sub {
+        font-size: 0.95rem;
+      }
+
+      .sec-h2 {
+        font-size: 1.5rem;
+      }
+      
+      .faq-title {
+        font-size: 1.7rem;
+      }
+      
+      .nav-logo {
+        font-size: 0.9rem;
+      }
+
+      .nav-back {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+      }
+
+      .cta-cs-text {
+        font-size: 1.25rem;
+      }
+      
+      .hero-cs-left {
+        padding: 32px 16px;
+      }
+      .hero-cs-right {
+        padding: 24px 16px;
+      }
+      .stats-strip {
+        padding: 0 16px 10px;
+      }
+      .ba-header {
+        padding: 32px 16px 20px;
+      }
+      .ba-grid {
+        padding: 0 16px;
+      }
+      .how-section {
+        padding: 32px 16px;
+      }
+      .faq-section {
+        padding: 32px 16px;
+      }
+      .compare-section {
+        padding: 32px 16px 48px;
+      }
+      .cta-cs-section {
+        padding: 32px 16px;
       }
     }
   </style>
