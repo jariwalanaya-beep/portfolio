@@ -4,22 +4,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI WhatsApp Sales Agent for PC Hardware Shops | Karlspace</title>
+  <title>AI WhatsApp Sales Agent for PC Hardware Shops | 24/7 Instant Replies | Karlspace</title>
   <meta name="description"
-    content="Maximize sales with an AI WhatsApp Sales Agent for PC Hardware Shops. Instant replies, order tracking, and automated 24/7 support." />
+    content="Deploy an AI WhatsApp Sales Agent for your PC hardware shop. Get instant stock replies, live order tracking, COD handling, multilingual support, and 24/7 automated customer service. No missed messages." />
   <meta name="keywords"
-    content="AI WhatsApp Sales Agent, PC Hardware Automation, WhatsApp AI Bot, Customer Support AI, Karlspace" />
+    content="AI WhatsApp Sales Agent, PC Hardware WhatsApp Bot, WhatsApp AI for PC Shops, Automated WhatsApp Support, WhatsApp Order Tracking Bot, COD WhatsApp Bot, GPU Stock Bot, WhatsApp AI Agent India, 24/7 WhatsApp Support, AI Customer Service PC Hardware, Karlspace, WhatsApp Automation for Electronics" />
   <link rel="canonical" href="https://karlspace.ai/case-study-whatsapp-agent" />
-  <meta property="og:title" content="AI WhatsApp Sales Agent for PC Hardware Shops | Karlspace" />
+  <meta property="og:title" content="AI WhatsApp Sales Agent for PC Hardware Shops | 24/7 Instant Replies | Karlspace" />
   <meta property="og:description"
-    content="Maximize sales with an AI WhatsApp Sales Agent for PC Hardware Shops. Instant replies, order tracking, and automated 24/7 support." />
+    content="Deploy an AI WhatsApp Sales Agent for your PC hardware shop. Instant stock replies, live order tracking, COD handling, multilingual support, and 24/7 automated customer service." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://karlspace.ai/case-study-whatsapp-agent" />
   <meta property="og:image" content="https://karlspace.ai/whatsapp-hero.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI WhatsApp Sales Agent for PC Hardware Shops | Karlspace" />
+  <meta name="twitter:title" content="AI WhatsApp Sales Agent for PC Hardware Shops | 24/7 Instant Replies | Karlspace" />
   <meta name="twitter:description"
-    content="Maximize sales with an AI WhatsApp Sales Agent for PC Hardware Shops. Instant replies, order tracking, and automated 24/7 support." />
+    content="Deploy an AI WhatsApp Sales Agent for your PC hardware shop. Instant stock replies, live order tracking, COD handling, multilingual support, and 24/7 automated customer service." />
   <meta name="twitter:image" content="https://karlspace.ai/whatsapp-hero.png" />
   <link rel="stylesheet" href="index.css" />
   <link rel="icon" type="image/png" href="1772001775286.png" />
@@ -33,18 +33,29 @@
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "AI WhatsApp Sales Agent for PC Hardware Shops",
-      "serviceType": "AI WhatsApp Sales Agent automation",
-      "description": "Maximize sales with an AI WhatsApp Sales Agent for PC Hardware Shops. Instant replies, order tracking, and automated 24/7 support.",
+      "serviceType": "AI WhatsApp Sales Automation",
+      "description": "Deploy an AI WhatsApp Sales Agent for your PC hardware shop. Get instant stock replies, live order tracking, COD handling, multilingual support, and 24/7 automated customer service with zero missed messages.",
       "url": "https://karlspace.ai/case-study-whatsapp-agent",
       "provider": {
         "@type": "Person",
         "name": "Shivam",
+        "url": "https://karlspace.ai",
         "worksFor": {
           "@type": "Organization",
-          "name": "Karlspace"
+          "name": "Karlspace",
+          "url": "https://karlspace.ai"
         }
       },
-      "areaServed": "Worldwide"
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI Agent Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WhatsApp Stock Query Automation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WhatsApp Order Tracking Bot" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Multilingual WhatsApp AI Support" } }
+        ]
+      }
     }
   </script>
 
@@ -1460,155 +1471,169 @@
     }
 
     /* ─── RESPONSIVE ─────────────────────────────────────────── */
+
+    /* Hamburger button (hidden on desktop) */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+      transition: border-color .2s;
+    }
+    .nav-hamburger:hover { border-color: var(--border2); }
+    .nav-hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--muted);
+      border-radius: 2px;
+      transition: transform .25s, opacity .25s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav drawer */
+    .nav-mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 62px;
+      left: 0;
+      right: 0;
+      background: rgba(4,7,12,0.97);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      z-index: 199;
+      padding: 20px 24px 28px;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .nav-mobile-drawer.open { display: flex; }
+    .nav-mobile-drawer a {
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: color .18s, border-color .18s, background .18s;
+    }
+    .nav-mobile-drawer a:hover {
+      color: var(--text);
+      border-color: var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+
     @media(max-width:1200px) {
-      .flow-steps::after {
-        display: none;
-      }
-
-      .navbar {
-        padding: 0 36px;
-      }
-
-      .hero-left {
-        padding: 60px 44px;
-      }
-
-      .hero-right {
-        padding: 48px 36px;
-      }
-
-      .how-section,
-      .faq-section,
-      .cta-section {
-        padding-left: 40px;
-        padding-right: 40px;
-      }
-
-      .ba-header {
-        padding: 60px 40px 32px;
-      }
-
-      .ba-grid {
-        padding: 0 40px 48px;
-      }
+      .flow-steps::after { display: none; }
+      .navbar { padding: 0 36px; }
+      .hero-left { padding: 60px 44px; }
+      .hero-right { padding: 48px 36px; }
+      .how-section, .faq-section, .cta-section { padding-left: 40px; padding-right: 40px; }
+      .ba-header { padding: 60px 40px 32px; }
+      .ba-grid { padding: 0 40px 48px; }
     }
 
     @media(max-width:1000px) {
-      .stats-section {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        padding: 72px 40px;
-      }
-
-      .flow-steps {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-
-      .faq-layout {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .faq-sticky {
-        position: static;
-      }
+      .stats-section { grid-template-columns: 1fr; gap: 48px; padding: 72px 40px; }
+      .flow-steps { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+      .faq-sticky { position: static; }
     }
 
     @media(max-width:900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-
-      .hero-left {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 60px 40px;
-      }
-
-      .hero-right {
-        padding: 48px 40px;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .ba-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .navbar {
-        padding: 0 24px;
-      }
-
-      .nav-links {
-        display: none;
-      }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 60px 40px; }
+      .hero-right { padding: 48px 40px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .ba-grid { grid-template-columns: 1fr; }
+      .navbar { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
     }
 
     @media(max-width:640px) {
-      .hero-left {
-        padding: 48px 24px;
-      }
+      /* Navbar */
+      .navbar { height: 56px; padding: 0 20px; }
+      .nav-logo { font-size: .95rem; }
+      .nav-back { display: none; }
+      .nav-mobile-drawer { top: 56px; }
 
-      .hero-right {
-        padding: 36px 24px;
-      }
+      /* Hero */
+      .hero-left { padding: 44px 20px 40px; }
+      .hero-right { padding: 32px 20px 40px; }
+      .hero-title { font-size: 2.2rem; letter-spacing: -1.5px; line-height: 1.05; }
+      .hero-desc { font-size: .92rem; margin-bottom: 28px; }
+      .hero-list { gap: 10px; margin-bottom: 32px; }
+      .hero-list li { font-size: .88rem; }
+      .hero-actions { flex-direction: column; gap: 10px; }
+      .hero-actions .btn-primary,
+      .hero-actions .btn-ghost { width: 100%; justify-content: center; }
 
-      .hero-title {
-        font-size: 2.6rem;
-        letter-spacing: -2px;
-      }
+      /* WhatsApp widget */
+      .wa-widget { max-width: 100%; border-radius: 18px; }
+      .wa-bubble { font-size: .76rem; padding: 8px 10px; }
+      .wa-chip { font-size: .7rem; }
+      .wa-chart-value { font-size: .72rem; }
 
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
+      /* Stats section */
+      .stats-section { padding: 56px 20px; gap: 36px; }
+      .stats-widget-card { max-width: 100%; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .stat-cell { padding: 20px 16px; }
+      .stat-num { font-size: 2rem; }
+      .stat-label { font-size: .82rem; }
+      .stat-desc { font-size: .72rem; }
+      .stat-icon { width: 34px; height: 34px; font-size: 1rem; margin-bottom: 12px; }
 
-      .stat-cell {
-        padding: 24px 20px;
-      }
+      /* How it works */
+      .how-section { padding: 52px 20px; }
+      .how-head { margin-bottom: 40px; }
+      .flow-steps { grid-template-columns: 1fr; gap: 14px; }
+      .flow-step { padding: 20px 16px; }
+      .step-title { font-size: .88rem; }
+      .step-desc { font-size: .75rem; }
 
-      .how-section,
-      .faq-section,
-      .cta-section {
-        padding: 52px 24px;
-      }
+      /* Before & After */
+      .ba-header { padding: 48px 20px 24px; }
+      .ba-grid { padding: 0 20px 36px; gap: 14px; }
+      .ba-list { padding: 18px 18px; gap: 12px; }
+      .ba-list li { font-size: .88rem; }
 
-      .ba-header {
-        padding: 52px 24px 28px;
-      }
+      /* FAQ */
+      .faq-section { padding: 52px 20px; }
+      .faq-sticky-title { font-size: 1.6rem; }
+      .faq-q { font-size: .88rem; }
+      .faq-q-row { padding: 16px 18px; }
+      .faq-a { padding: 0 18px 16px; padding-top: 14px; font-size: .84rem; }
 
-      .ba-grid {
-        padding: 0 24px 40px;
-        gap: 16px;
-      }
-
-      .flow-steps {
-        grid-template-columns: 1fr;
-      }
-
-      .cta-actions {
-        flex-direction: column;
-        width: 100%;
-      }
-
+      /* CTA */
+      .cta-section { padding: 60px 20px; }
+      .cta-title { font-size: 1.9rem; letter-spacing: -1px; }
+      .cta-sub { font-size: .9rem; }
+      .cta-actions { flex-direction: column; width: 100%; gap: 10px; }
       .cta-actions .btn-primary,
-      .cta-actions .btn-ghost {
-        width: 100%;
-        justify-content: center;
-      }
+      .cta-actions .btn-ghost { width: 100%; justify-content: center; }
+
+      /* Section headings */
+      .sec-h2 { font-size: 1.7rem; letter-spacing: -.8px; }
+    }
+
+    @media(max-width:400px) {
+      .hero-title { font-size: 1.9rem; letter-spacing: -1px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-num { font-size: 1.8rem; }
+      .wa-widget { border-radius: 14px; }
+      .badge { font-size: .68rem; }
     }
 
     @media(prefers-reduced-motion:reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
@@ -1633,19 +1658,30 @@
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="/#case-studies" class="nav-back">← Back</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <!-- Mobile Nav Drawer -->
+  <nav class="nav-mobile-drawer" id="navDrawer" aria-label="Mobile navigation">
+    <a href="#stats" onclick="closeDrawer()">Results</a>
+    <a href="#how" onclick="closeDrawer()">How It Works</a>
+    <a href="#ba" onclick="closeDrawer()">Before &amp; After</a>
+    <a href="#faq" onclick="closeDrawer()">FAQ</a>
+    <a href="/#case-studies" onclick="closeDrawer()">← Back to Portfolio</a>
   </nav>
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
     <div class="hero-left">
       <div class="tag">Case Study</div>
-      <div class="badge"><span class="badge-dot"></span> Always On — 24/7</div>
+      <div class="badge"><span class="badge-dot"></span> Always On, 24/7</div>
       <h1 class="hero-title">
         AI WhatsApp Agent<br>
         for <span class="hl">PC Hardware</span>
       </h1>
       <p class="hero-desc">
-        Every customer message — product queries, order tracking, complaints — gets an instant, intelligent reply. No
+        Every customer message (product queries, order tracking, complaints) gets an instant, intelligent reply. No
         staff required.
       </p>
       <ul class="hero-list">
@@ -1797,12 +1833,12 @@
     <div class="ba-header reveal">
       <div class="sec-tag">Transformation</div>
       <h2 class="sec-h2">Before & After</h2>
-      <p class="ba-sub">The same shop — completely different operation. Manual delays on the left, instant AI replies on
+      <p class="ba-sub">The same shop, completely different operation. Manual delays on the left, instant AI replies on
         the right.</p>
     </div>
     <div class="ba-grid">
       <div class="ba-col reveal">
-        <div class="ba-col-label"><span></span> Before — Manual</div>
+        <div class="ba-col-label"><span></span> Before: Manual</div>
         <ul class="ba-list">
           <li>Replies depend on staff availability</li>
           <li>Stock and order checks are manual</li>
@@ -1811,7 +1847,7 @@
         </ul>
       </div>
       <div class="ba-col after reveal">
-        <div class="ba-col-label"><span></span> After — AI Automated</div>
+        <div class="ba-col-label"><span></span> After: AI Automated</div>
         <ul class="ba-list">
           <li>Every inbound chat gets an immediate response</li>
           <li>AI checks stock and order data automatically</li>
@@ -1840,8 +1876,7 @@
             <div class="faq-q">Can it answer product availability questions?</div>
             <div class="faq-chevron">▼</div>
           </div>
-          <div class="faq-a">Yes. The bot checks live records and responds with current stock status and pricing — no
-            manual lookup needed.</div>
+          <div class="faq-a">Yes. The bot checks live records and responds with current stock status and pricing, with no manual lookup needed.</div>
         </div>
         <div class="faq-item reveal">
           <div class="faq-q-row" onclick="toggleFaq(this)">
@@ -1856,16 +1891,14 @@
             <div class="faq-q">Does the customer need to type special commands?</div>
             <div class="faq-chevron">▼</div>
           </div>
-          <div class="faq-a">No. Customers type naturally and the bot understands regular conversation — no menus or
-            keywords required.</div>
+          <div class="faq-a">No. Customers type naturally and the bot understands regular conversation with no menus or keywords required.</div>
         </div>
         <div class="faq-item reveal">
           <div class="faq-q-row" onclick="toggleFaq(this)">
             <div class="faq-q">Can this work for other types of businesses?</div>
             <div class="faq-chevron">▼</div>
           </div>
-          <div class="faq-a">Yes. The flow adapts to any catalog-based business using WhatsApp for sales — electronics,
-            fashion, auto parts, and more.</div>
+          <div class="faq-a">Yes. The flow adapts to any catalog-based business using WhatsApp for sales: electronics, fashion, auto parts, and more.</div>
         </div>
       </div>
     </div>
@@ -1874,10 +1907,9 @@
   <!-- ═══ CTA ═══ -->
   <section class="cta-section">
     <div class="cta-inner reveal">
-      <div class="cta-eyebrow">✦ Free Audit — No Commitment</div>
+      <div class="cta-eyebrow">✦ Free Audit, No Commitment</div>
       <h2 class="cta-title">Want this for<br><span>your business?</span></h2>
-      <p class="cta-sub">We'll walk through your current workflow and show exactly how an AI WhatsApp agent would fit in
-        — free.</p>
+      <p class="cta-sub">We'll walk through your current workflow and show exactly how an AI WhatsApp agent would fit in, completely free.</p>
       <div class="cta-actions">
         <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
           class="btn-primary">
@@ -1966,7 +1998,7 @@
         // Series 5: Monitor Query + Compatibility
         [
           { type: 'user', text: 'Good 165Hz monitor in stock?' },
-          { type: 'bot', text: 'Yes! 27" QHD 165Hz LG Monitor (P006) — ₹18,999, 18 units left. 🖥️' },
+          { type: 'bot', text: 'Yes! 27" QHD 165Hz LG Monitor (P006) at ₹18,999, 18 units left. 🖥️' },
           { type: 'user', text: 'Will it work with Ryzen 7 7800X3D?' },
           { type: 'bot', text: 'Perfect match! Works with B650 motherboard (P012). Want me to build a full quote? ⚡' },
           { type: 'chip', label: 'Series 5 · Compatibility', detail: 'Full quote offered · Reply: 1.3s' }
@@ -2043,6 +2075,27 @@
       const isOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
       if (!isOpen) item.classList.add('open');
+    }
+
+    /* ── HAMBURGER MENU ── */
+    const hamburger = document.getElementById('navHamburger');
+    const drawer = document.getElementById('navDrawer');
+    if (hamburger && drawer) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = hamburger.classList.toggle('open');
+        drawer.classList.toggle('open', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen);
+      });
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !drawer.contains(e.target)) {
+          closeDrawer();
+        }
+      });
+    }
+    function closeDrawer() {
+      if (hamburger) { hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', false); }
+      if (drawer) drawer.classList.remove('open');
     }
   </script>
 </body>
