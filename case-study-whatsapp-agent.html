@@ -1732,9 +1732,9 @@
       </div>
       <div class="stat-cell reveal">
         <div class="stat-icon">🌐</div>
-        <span class="stat-num">3+</span>
+        <span class="stat-num">50+</span>
         <div class="stat-label">Multilingual AI</div>
-        <div class="stat-desc"><strong>Language Fluidity:</strong> Detects and responds naturally in English, Hindi, or Hinglish to match the customer's style.</div>
+        <div class="stat-desc"><strong>Language Fluidity:</strong> Detects and responds naturally in English, Chinese, or Hindi to match the customer's style.</div>
       </div>
       <div class="stat-cell reveal">
         <div class="stat-icon">🔄</div>
@@ -1931,26 +1931,45 @@
       if (!body || !chart) return;
 
       const conversations = [
+        // Series 1: GPU Stock & Same-Day Delivery
         [
           { type: 'user', text: 'RTX 4060 available? Need today delivery.' },
-          { type: 'bot', text: 'Yes, 3 units in stock. Rs 31,900. Same-day dispatch possible. ✓' },
-          { type: 'user', text: 'Track my order #GH2481' },
-          { type: 'bot', text: 'Packed & out for delivery. ETA tomorrow by 3 PM. 📦' },
-          { type: 'chip', label: 'Action Logged', detail: 'Sentiment: none · Reply time: 1.3s' }
+          { type: 'bot', text: 'Yes, 20 units in stock at ₹29,999. Same-day dispatch possible! ✅' },
+          { type: 'user', text: 'Mumbai delivery?' },
+          { type: 'bot', text: 'Done! Packed & out for delivery. ETA today by 6 PM. Track #GH2482 📦' },
+          { type: 'chip', label: 'Series 1 · GPU Stock', detail: 'Same-day dispatch confirmed · Reply: 1.2s' }
         ],
+        // Series 2: Order Tracking
         [
-          { type: 'user', text: 'Do you have i9-14900K in stock?' },
-          { type: 'bot', text: 'Yes! 2 units available. Price: Rs 52,500. Want to reserve one?' },
-          { type: 'user', text: 'Yes please, COD available?' },
-          { type: 'bot', text: 'COD available up to Rs 10,000. For higher amounts, UPI or card. Which do you prefer?' },
-          { type: 'chip', label: 'Action Logged', detail: 'Intent: purchase · Escalation: none · 1.1s' }
+          { type: 'user', text: 'Track my order ORD-1005' },
+          { type: 'bot', text: 'Order ORD-1005 is Shipped 🚚 Gaming Chair + RTX 4060 + 27" 165Hz Monitor. Total ₹61,997.' },
+          { type: 'user', text: 'When will it reach?' },
+          { type: 'bot', text: 'ETA tomorrow by 3 PM. Tracking link sent on WhatsApp already. 📍' },
+          { type: 'chip', label: 'Series 2 · Order Tracking', detail: 'Intent: tracking · Reply: 1.1s' }
         ],
+        // Series 3: Product Recommendation (1080p Gaming)
         [
-          { type: 'user', text: 'My GPU arrived damaged. Order #GH3102' },
-          { type: 'bot', text: '⚠️ Sorry to hear that! I\'ve flagged this for priority review. Our team will contact you within 2 hours.' },
-          { type: 'user', text: 'Ok thanks' },
-          { type: 'bot', text: 'Replacement process started. You\'ll get an SMS update shortly. 🔔' },
-          { type: 'chip', label: 'Action Logged', detail: 'Sentiment: complaint · Escalated to team · 1.6s' }
+          { type: 'user', text: 'Best GPU for 1080p gaming under 35k?' },
+          { type: 'bot', text: 'RTX 4060 (P020) is the best value at ₹29,999. Perfect for 1080p with DLSS 3. 🎮' },
+          { type: 'user', text: 'Any bundle with monitor?' },
+          { type: 'bot', text: 'Yes! Pair it with 27" 165Hz LG Monitor (₹18,999) and save ₹2,000 on bundle. 💡' },
+          { type: 'chip', label: 'Series 3 · Recommendation', detail: 'Bundle upsell triggered · Reply: 1.4s' }
+        ],
+        // Series 4: Shipping & Payment
+        [
+          { type: 'user', text: 'How long does shipping take?' },
+          { type: 'bot', text: 'Standard shipping 3–5 business days. Express (1–2 days) available for +₹199. 🚀' },
+          { type: 'user', text: 'COD available?' },
+          { type: 'bot', text: 'Yes! COD up to ₹30,000. Above that please pay via UPI/card. 💳' },
+          { type: 'chip', label: 'Series 4 · Shipping & Payment', detail: 'COD policy shared · Reply: 1.0s' }
+        ],
+        // Series 5: Monitor Query + Compatibility
+        [
+          { type: 'user', text: 'Good 165Hz monitor in stock?' },
+          { type: 'bot', text: 'Yes! 27" QHD 165Hz LG Monitor (P006) — ₹18,999, 18 units left. 🖥️' },
+          { type: 'user', text: 'Will it work with Ryzen 7 7800X3D?' },
+          { type: 'bot', text: 'Perfect match! Works with B650 motherboard (P012). Want me to build a full quote? ⚡' },
+          { type: 'chip', label: 'Series 5 · Compatibility', detail: 'Full quote offered · Reply: 1.3s' }
         ]
       ];
 
@@ -2011,7 +2030,7 @@
         while (true) {
           await runConversation(conversations[convIndex % conversations.length]);
           convIndex++;
-          await sleep(2800); // pause before next conversation
+          await sleep(5000); // 5-second pause before next series
         }
       }
 
