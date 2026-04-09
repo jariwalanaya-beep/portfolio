@@ -2078,23 +2078,23 @@
     }
 
     /* ── HAMBURGER MENU ── */
-    const hamburger = document.getElementById('navHamburger');
+    const navHamburgerBtn = document.getElementById('navHamburger');
     const drawer = document.getElementById('navDrawer');
-    if (hamburger && drawer) {
-      hamburger.addEventListener('click', () => {
-        const isOpen = hamburger.classList.toggle('open');
+    if (navHamburgerBtn && drawer) {
+      navHamburgerBtn.addEventListener('click', () => {
+        const isOpen = navHamburgerBtn.classList.toggle('open');
         drawer.classList.toggle('open', isOpen);
-        hamburger.setAttribute('aria-expanded', isOpen);
+        navHamburgerBtn.setAttribute('aria-expanded', isOpen);
       });
       // Close on outside click
       document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !drawer.contains(e.target)) {
+        if (!navHamburgerBtn.contains(e.target) && !drawer.contains(e.target)) {
           closeDrawer();
         }
       });
     }
     function closeDrawer() {
-      if (hamburger) { hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded', false); }
+      if (navHamburgerBtn) { navHamburgerBtn.classList.remove('open'); navHamburgerBtn.setAttribute('aria-expanded', false); }
       if (drawer) drawer.classList.remove('open');
     }
   </script>
