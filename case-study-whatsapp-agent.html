@@ -7,16 +7,19 @@
   <title>AI WhatsApp Sales Agent for PC Hardware Shops | Karlspace</title>
   <meta name="description"
     content="Maximize sales with an AI WhatsApp Sales Agent for PC Hardware Shops. Instant replies, order tracking, and automated 24/7 support." />
-  <meta name="keywords" content="AI WhatsApp Sales Agent, PC Hardware Automation, WhatsApp AI Bot, Customer Support AI, Karlspace" />
+  <meta name="keywords"
+    content="AI WhatsApp Sales Agent, PC Hardware Automation, WhatsApp AI Bot, Customer Support AI, Karlspace" />
   <link rel="canonical" href="https://karlspace.ai/case-study-whatsapp-agent" />
   <meta property="og:title" content="AI WhatsApp Sales Agent for PC Hardware Shops | Karlspace" />
-  <meta property="og:description" content="Maximize sales with an AI WhatsApp Sales Agent for PC Hardware Shops. Instant replies, order tracking, and automated 24/7 support." />
+  <meta property="og:description"
+    content="Maximize sales with an AI WhatsApp Sales Agent for PC Hardware Shops. Instant replies, order tracking, and automated 24/7 support." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://karlspace.ai/case-study-whatsapp-agent" />
   <meta property="og:image" content="https://karlspace.ai/whatsapp-hero.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AI WhatsApp Sales Agent for PC Hardware Shops | Karlspace" />
-  <meta name="twitter:description" content="Maximize sales with an AI WhatsApp Sales Agent for PC Hardware Shops. Instant replies, order tracking, and automated 24/7 support." />
+  <meta name="twitter:description"
+    content="Maximize sales with an AI WhatsApp Sales Agent for PC Hardware Shops. Instant replies, order tracking, and automated 24/7 support." />
   <meta name="twitter:image" content="https://karlspace.ai/whatsapp-hero.png" />
   <link rel="stylesheet" href="index.css" />
   <link rel="icon" type="image/png" href="1772001775286.png" />
@@ -44,43 +47,22 @@
       "areaServed": "Worldwide"
     }
   </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://karlspace.ai/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Case Studies",
-          "item": "https://karlspace.ai/#case-studies"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "AI WhatsApp Sales Agent",
-          "item": "https://karlspace.ai/case-study-whatsapp-agent"
-        }
-      ]
-    }
-  </script>
 
   <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
     :root {
       --bg: #04070c;
       --bg2: #060c12;
-      --border: rgba(255, 255, 255, 0.09);
+      --border: rgba(255, 255, 255, 0.07);
+      --border2: rgba(31, 125, 83, 0.2);
       --text: #e9f0f8;
-      --muted: #7a8fa8;
-      --primary: #1F7D53;
-      --secondary: #255F38;
-      --grad: linear-gradient(110deg, #1F7D53 0%, #2C8B5F 50%, #255F38 100%);
+      --muted: #6b84a0;
+      --p1: #1F7D53;
+      --p2: #14a86a;
+      --p3: #255F38;
+      --grad: linear-gradient(110deg, #1F7D53 0%, #19b370 50%, #255F38 100%);
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass2: rgba(31, 125, 83, 0.06);
     }
 
     *,
@@ -98,23 +80,61 @@
     body {
       font-family: Inter, system-ui, sans-serif;
       color: var(--text);
+      background: var(--bg);
       overflow-x: hidden;
     }
 
-    /* ═══════════════════════ NAVBAR ═══════════════════════ */
+    /* ─── BACKGROUND CANVAS ─────────────────────────────────── */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .55;
+    }
+
+    /* ─── GLOW ORBS ─────────────────────────────────────────── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(31, 125, 83, 0.18) 0%, transparent 70%);
+      top: -200px;
+      left: -150px;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(20, 168, 106, 0.1) 0%, transparent 70%);
+      bottom: 10%;
+      right: -100px;
+    }
+
+    /* ─── NAVBAR ─────────────────────────────────────────────── */
     .navbar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 64px;
-      height: 64px;
-      background: rgba(4, 7, 12, 0.85);
-      backdrop-filter: blur(14px);
+      padding: 0 60px;
+      height: 62px;
+      background: rgba(4, 7, 12, 0.82);
+      backdrop-filter: blur(20px) saturate(1.4);
       border-bottom: 1px solid var(--border);
     }
 
@@ -124,28 +144,28 @@
       font-weight: 700;
       color: #fff;
       text-decoration: none;
-      letter-spacing: 0.2px;
+      letter-spacing: .2px;
     }
 
     .nav-logo span {
-      color: var(--primary);
+      color: var(--p1);
     }
 
     .nav-links {
       display: flex;
-      gap: 8px;
+      gap: 2px;
       list-style: none;
     }
 
     .nav-links a {
       text-decoration: none;
-      font-size: 0.84rem;
+      font-size: .82rem;
       font-weight: 500;
       color: var(--muted);
       padding: 6px 14px;
       border-radius: 999px;
       border: 1px solid transparent;
-      transition: color 180ms, border-color 180ms;
+      transition: color .18s, border-color .18s;
     }
 
     .nav-links a:hover {
@@ -155,34 +175,36 @@
 
     .nav-back {
       text-decoration: none;
-      font-size: 0.84rem;
+      font-size: .82rem;
       font-weight: 600;
       color: var(--text);
-      padding: 8px 18px;
+      padding: 7px 16px;
       border-radius: 999px;
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.03);
-      transition: border-color 180ms;
+      transition: border-color .18s, background .18s;
       white-space: nowrap;
     }
 
     .nav-back:hover {
-      border-color: rgba(31, 125, 83, 0.5);
+      border-color: var(--border2);
+      background: rgba(31, 125, 83, 0.06);
     }
 
-    /* ═══════════════════════ HERO ═══════════════════════ */
-    .hero-cs {
-      min-height: 88vh;
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      gap: 0;
-      padding-top: 64px;
+      padding-top: 62px;
       border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
     }
 
-    .hero-cs-left {
-      padding: 60px 40px;
+    .hero-left {
+      padding: 72px 56px 72px 60px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -190,128 +212,683 @@
       height: 100%;
     }
 
-    .hero-cs-tag {
+    .tag {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.9rem;
+      font-size: .75rem;
       font-weight: 700;
-      letter-spacing: 3px;
+      letter-spacing: 3.5px;
       text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 28px;
+      color: var(--p2);
+      margin-bottom: 24px;
     }
 
-    .hero-cs-tag::before {
+    .tag::before {
       content: "";
       display: inline-block;
-      width: 22px;
+      width: 24px;
       height: 2px;
       background: var(--grad);
       border-radius: 2px;
     }
 
-    .hero-cs-title {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.8rem, 4.2vw, 4.5rem);
-      font-weight: 800;
-      line-height: 1.02;
-      letter-spacing: -2.5px;
-      margin-bottom: 32px;
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.28);
+      border-radius: 999px;
+      padding: 5px 14px 5px 10px;
+      font-size: .73rem;
+      font-weight: 600;
+      color: #4ade80;
+      letter-spacing: .5px;
+      margin-bottom: 28px;
+      width: fit-content;
     }
 
-    .hero-cs-title .highlight {
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: dotPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(1.5);
+      }
+    }
+
+    .hero-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3.2rem, 5vw, 5.8rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -3.5px;
+      margin-bottom: 28px;
+      color: #fff;
+    }
+
+    .hero-title .hl {
       background: var(--grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .hero-cs-sub {
-      font-size: clamp(1rem, 1.4vw, 1.18rem);
-      color: #b8ccde;
-      line-height: 1.7;
+    .hero-desc {
+      font-size: clamp(1rem, 1.3vw, 1.14rem);
+      color: #a8bdd4;
+      line-height: 1.75;
       margin-bottom: 44px;
-      max-width: 48ch;
+      max-width: 52ch;
     }
 
-    .hero-cs-bullets {
+    .hero-list {
       list-style: none;
       display: grid;
-      gap: 14px;
+      gap: 13px;
+      margin-bottom: 48px;
     }
 
-    .hero-cs-bullets li {
+    .hero-list li {
       display: flex;
+      align-items: flex-start;
       gap: 12px;
-      font-size: clamp(0.95rem, 1.1vw, 1.08rem);
-      color: #d0dcea;
+      font-size: .97rem;
+      color: #c4d5e6;
       line-height: 1.5;
     }
 
-    .hero-cs-bullets li::before {
-      content: "•";
-      color: var(--primary);
-      font-weight: 700;
+    .li-icon {
       flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      margin-top: -1px;
     }
 
-    .hero-cs-right {
-      padding: 48px 40px;
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: .92rem;
+      border-radius: 999px;
+      padding: 14px 28px;
+      background: var(--grad);
+      font-family: "Space Grotesk", sans-serif;
+      box-shadow: 0 6px 28px rgba(31, 125, 83, 0.35);
+      transition: box-shadow .2s, transform .2s;
+      letter-spacing: .2px;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 12px 40px rgba(31, 125, 83, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: .88rem;
+      border-radius: 999px;
+      padding: 13px 24px;
+      border: 1px solid var(--border);
+      transition: color .2s, border-color .2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ─── HERO RIGHT – WHATSAPP WIDGET ──────────────────────── */
+    .hero-right {
+      padding: 56px 48px;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100%;
-      background: linear-gradient(135deg, rgba(31, 125, 83, 0.04), transparent 60%);
-    }
-
-    .hero-cs-img-wrap {
-      border: 1px solid rgba(31, 125, 83, 0.22);
-      border-radius: 18px;
-      background: linear-gradient(150deg, rgba(31, 125, 83, 0.07), rgba(255, 255, 255, 0.02));
-      padding: 14px;
-      box-shadow: 0 0 64px rgba(31, 125, 83, 0.12), 0 24px 48px rgba(0, 0, 0, 0.4);
-      width: 100%;
-      max-width: 300px;
-      animation: heroFloat 3s ease-in-out infinite;
-    }
-
-    .hero-cs-img-wrap img {
-      border-radius: 10px;
-      width: 100%;
-      display: block;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* ═══════════════════════ STATS STRIP ═══════════════════════ */
-    .stats-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      padding: 40px;
-      background: transparent;
-      align-items: stretch;
-    }
-
-    .stat-cell {
-      padding: 40px 36px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.03);
-      transition: border-color 220ms, background 220ms;
+      background: radial-gradient(ellipse 80% 80% at 60% 50%, rgba(31, 125, 83, 0.07), transparent 70%);
       position: relative;
+    }
+
+    .wa-widget {
+      width: 100%;
+      max-width: 430px;
+      background: rgba(7, 12, 19, 0.78);
+      border: 1px solid rgba(31, 125, 83, 0.22);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 0 0 1px rgba(31, 125, 83, 0.06),
+        0 24px 64px rgba(0, 0, 0, 0.6),
+        0 0 80px rgba(31, 125, 83, 0.08);
       overflow: hidden;
-      min-height: 180px;
-      height: 100%;
+      animation: widgetFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes widgetFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .wa-top {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .wa-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .wa-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .wa-dots span:nth-child(1) {
+      background: #ff5f57;
+    }
+
+    .wa-dots span:nth-child(2) {
+      background: #febc2e;
+    }
+
+    .wa-dots span:nth-child(3) {
+      background: #28c840;
+    }
+
+    .wa-shop {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .72rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .wa-live {
+      font-size: .68rem;
+      color: #5ae49a;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .wa-live::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #5ae49a;
+      box-shadow: 0 0 6px #5ae49a;
+      animation: dotPulse 1.4s ease-in-out infinite;
+    }
+
+    .wa-body {
+      padding: 18px 16px 16px;
+      display: grid;
+      gap: 10px;
+      background: linear-gradient(180deg, rgba(6, 11, 17, .88), rgba(6, 11, 17, .94));
+    }
+
+    .wa-row {
+      display: flex;
+      align-items: flex-start;
       gap: 8px;
     }
 
+    .wa-row.user {
+      justify-content: flex-end;
+    }
+
+    .wa-bubble {
+      max-width: 78%;
+      padding: 9px 11px;
+      border-radius: 12px;
+      font-size: .8rem;
+      line-height: 1.45;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #d7e5f2;
+    }
+
+    .wa-row.bot .wa-bubble {
+      background: rgba(31, 125, 83, 0.12);
+      border-color: rgba(31, 125, 83, 0.25);
+      color: #cce8d7;
+      border-radius: 4px 12px 12px 12px;
+    }
+
+    .wa-row.user .wa-bubble {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px 4px 12px 12px;
+    }
+
+    .wa-chip {
+      margin-top: 2px;
+      border: 1px solid rgba(31, 125, 83, 0.24);
+      background: rgba(31, 125, 83, 0.08);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: .74rem;
+      color: #a8c3b2;
+      line-height: 1.4;
+    }
+
+    .wa-chip strong {
+      display: block;
+      color: #59e097;
+      font-size: .76rem;
+      margin-bottom: 2px;
+    }
+
+    /* ─── LIVE CHART ──────────────────────────────────────────── */
+    .wa-chart {
+      margin: 4px 0 0;
+      border: 1px solid rgba(31, 125, 83, 0.2);
+      background: rgba(4, 9, 14, 0.75);
+      border-radius: 12px;
+      padding: 12px 14px 10px;
+      overflow: hidden;
+    }
+
+    .wa-chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .wa-chart-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(90, 228, 154, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .wa-chart-label::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #5ae49a;
+      box-shadow: 0 0 6px #5ae49a;
+      animation: dotPulse 1.4s ease-in-out infinite;
+    }
+
+    .wa-chart-value {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .8rem;
+      font-weight: 800;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .wa-chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 48px;
+    }
+
+    .wa-bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      background: linear-gradient(180deg, #19b370 0%, #1F7D53 100%);
+      opacity: 0.85;
+      animation: liveBar var(--dur, 1.2s) ease-in-out var(--del, 0s) infinite alternate;
+      box-shadow: 0 0 6px rgba(25, 179, 112, 0.3);
+    }
+
+    @keyframes liveBar {
+      0% {
+        height: var(--lo, 20%);
+        opacity: 0.6;
+      }
+
+      100% {
+        height: var(--hi, 80%);
+        opacity: 1;
+      }
+    }
+
+    .wa-chart-axis {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      font-size: .58rem;
+      color: rgba(107, 132, 160, 0.6);
+    }
+
+    /* ─── CHAT ANIMATION ─────────────────────────────────────── */
+    .wa-msg-new {
+      animation: msgSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes msgSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Typing indicator bubble */
+    .wa-typing {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 11px 14px !important;
+      width: 56px;
+    }
+
+    .wa-typing span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(90, 228, 154, 0.7);
+      display: inline-block;
+      animation: typingBounce 1.1s ease-in-out infinite;
+    }
+
+    .wa-typing span:nth-child(2) {
+      animation-delay: 0.18s;
+    }
+
+    .wa-typing span:nth-child(3) {
+      animation-delay: 0.36s;
+    }
+
+    @keyframes typingBounce {
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.5;
+      }
+
+      30% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+    }
+
+    /* ─── SECTION HELPERS ────────────────────────────────────── */
+    .sec-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--p2);
+      margin-bottom: 14px;
+    }
+
+    .sec-tag::before {
+      content: "";
+      display: inline-block;
+      width: 16px;
+      height: 2px;
+      background: var(--grad);
+      border-radius: 2px;
+    }
+
+    .sec-h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.9rem, 3.2vw, 3rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -1.2px;
+      color: var(--text);
+    }
+
+    /* ─── STATS SECTION ──────────────────────────────────────── */
+    .stats-section {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 72px;
+      padding: 100px 80px;
+      min-height: 620px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+      align-items: center;
+    }
+
+    .stats-section::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(31, 125, 83, 0.09) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .stats-video-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .stats-widget-card {
+      width: 100%;
+      max-width: 300px;
+      background: rgba(8, 14, 24, 0.78);
+      border: 1px solid rgba(31, 125, 83, 0.22);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 0 0 1px rgba(31, 125, 83, 0.07),
+        0 32px 72px rgba(0, 0, 0, 0.55),
+        0 0 60px rgba(31, 125, 83, 0.09);
+      overflow: hidden;
+      animation: statsFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes statsFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-14px);
+      }
+    }
+
+    .stats-widget-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.025);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .stats-widget-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .stats-widget-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .stats-widget-dots span:nth-child(1) {
+      background: #ff5f56;
+    }
+
+    .stats-widget-dots span:nth-child(2) {
+      background: #ffbd2e;
+    }
+
+    .stats-widget-dots span:nth-child(3) {
+      background: #28c840;
+    }
+
+    .stats-widget-title {
+      font-size: .7rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: .9px;
+      text-transform: uppercase;
+    }
+
+    .stats-widget-live {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .66rem;
+      font-weight: 700;
+      color: #4ade80;
+      letter-spacing: .5px;
+    }
+
+    .stats-widget-live::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 6px #4ade80;
+      animation: dotPulse 1.8s ease-in-out infinite;
+    }
+
+    .stats-widget-video {
+      position: relative;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .stats-widget-video video {
+      width: 100%;
+      display: block;
+      opacity: .92;
+    }
+
+    .stats-widget-video-label {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(5, 8, 15, 0.82);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(31, 125, 83, 0.28);
+      border-radius: 7px;
+      padding: 4px 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .62rem;
+      font-weight: 700;
+      color: #4ade80;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    .stats-widget-video-label::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 4px #4ade80;
+      animation: dotPulse 1.6s ease-in-out infinite;
+    }
+
+    /* 2 columns, 3 rows stat cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      width: 100%;
+    }
+
+    .stat-cell {
+      background: rgba(8, 13, 22, 0.6);
+      border: 1px solid rgba(31, 125, 83, 0.12);
+      border-radius: 16px;
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+      transition: border-color .3s, background .3s, transform .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
     .stat-cell:hover {
-      border-color: rgba(31, 125, 83, 0.3);
-      background: rgba(31, 125, 83, 0.03);
+      background: rgba(10, 18, 30, 0.75);
+      border-color: rgba(31, 125, 83, 0.32);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(31, 125, 83, 0.12), 0 0 0 1px rgba(31, 125, 83, 0.18);
     }
 
     .stat-cell::before {
@@ -322,114 +899,302 @@
       right: 0;
       height: 2px;
       background: var(--grad);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+      border-radius: 18px 18px 0 0;
+    }
+
+    .stat-cell:hover::before {
+      transform: scaleX(1);
+    }
+
+    .stat-cell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 20% 10%, rgba(31, 125, 83, 0.08) 0%, transparent 60%);
+      border-radius: 18px;
+      opacity: 0;
+      transition: opacity .4s;
+      pointer-events: none;
+    }
+
+    .stat-cell:hover::after {
+      opacity: 1;
+    }
+
+    .stat-icon {
+      font-size: 1.1rem;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
     }
 
     .stat-num {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.75rem, 2.35vw, 2.45rem);
+      font-size: clamp(2rem, 3vw, 2.6rem);
       font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: 0;
-      margin-bottom: 2px;
-      padding-left: 2px;
+      line-height: 1;
       background: var(--grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       display: block;
+      margin-bottom: 8px;
+      letter-spacing: -1px;
     }
 
     .stat-label {
-      font-size: 0.9rem;
+      font-size: .88rem;
       font-weight: 700;
-      color: #d9e5f2;
-      line-height: 1.35;
-      margin-bottom: 1px;
-      max-width: 22ch;
+      color: #dce8f5;
+      line-height: 1.3;
+      margin-bottom: 6px;
     }
 
     .stat-desc {
-      font-size: 0.74rem;
+      font-size: .75rem;
       color: var(--muted);
-      line-height: 1.32;
-      max-width: 32ch;
+      line-height: 1.55;
+      max-width: none;
     }
 
-    /* ═══════════════════════ SEC LABELS ═══════════════════════ */
-    .sec-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 14px;
+    /* ─── HOW IT WORKS ───────────────────────────────────────── */
+    .how-section {
+      padding: 100px 72px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
     }
 
-    .sec-tag::before {
+    .how-head {
+      margin-bottom: 72px;
+    }
+
+    .how-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 56ch;
+      margin-top: 16px;
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      position: relative;
+    }
+
+    .flow-steps::after {
       content: "";
-      display: inline-block;
-      width: 18px;
+      position: absolute;
+      top: 40px;
+      left: calc(8.33% + 10px);
+      right: calc(8.33% + 10px);
+      height: 1px;
+      background: linear-gradient(90deg,
+          transparent 0%, rgba(31, 125, 83, 0.3) 8%,
+          rgba(20, 168, 106, 0.6) 50%, rgba(31, 125, 83, 0.3) 92%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .flow-step {
+      background: rgba(8, 13, 22, 0.6);
+      border: 1px solid rgba(31, 125, 83, 0.1);
+      border-radius: 16px;
+      padding: 24px 16px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: border-color .3s, transform .3s, box-shadow .3s, background .3s;
+    }
+
+    .flow-step:hover {
+      border-color: rgba(31, 125, 83, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(31, 125, 83, 0.1), 0 0 0 1px rgba(31, 125, 83, 0.15);
+      background: rgba(10, 18, 30, 0.75);
+    }
+
+    .flow-step::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 2px;
       background: var(--grad);
-      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+      border-radius: 20px 20px 0 0;
     }
 
-    .sec-h2 {
+    .flow-step:hover::before {
+      transform: scaleX(1);
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 0%, rgba(31, 125, 83, 0.08) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .4s;
+      pointer-events: none;
+      border-radius: 20px;
+    }
+
+    .flow-step:hover::after {
+      opacity: 1;
+    }
+
+    .step-bubble {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.8rem, 3vw, 3rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -1px;
-      color: var(--text);
+      font-size: .65rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 16px;
+      box-shadow: 0 0 24px rgba(31, 125, 83, 0.5);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
     }
 
-    /* ═══════════════════════ BEFORE & AFTER ═══════════════════════ */
+    .step-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      margin-bottom: 16px;
+      transition: background .25s, border-color .25s, transform .25s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .flow-step:hover .step-icon-wrap {
+      background: rgba(31, 125, 83, 0.18);
+      border-color: rgba(31, 125, 83, 0.4);
+      transform: scale(1.05);
+    }
+
+    .step-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.25;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-desc {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 22ch;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ─── BEFORE & AFTER ─────────────────────────────────────── */
     .ba-section {
       border-bottom: 1px solid var(--border);
-      padding: 0 0 56px;
+      position: relative;
+      z-index: 1;
     }
 
     .ba-header {
-      padding: 56px 40px 28px;
+      padding: 80px 60px 36px;
+    }
+
+    .ba-sub {
+      font-size: .96rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 60ch;
+      margin-top: 12px;
     }
 
     .ba-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      padding: 0 60px 60px;
       gap: 24px;
-      padding: 0 40px;
-      margin-top: 16px;
     }
 
     .ba-col {
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
-      transition: border-color 220ms;
-      background: rgba(255, 255, 255, 0.02);
+      transition: border-color .25s, box-shadow .25s;
+      background: var(--glass);
     }
 
     .ba-col:hover {
-      border-color: rgba(31, 125, 83, 0.3);
+      border-color: var(--border2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .ba-col.after {
+      border-color: rgba(31, 125, 83, 0.16);
+    }
+
+    .ba-col.after:hover {
+      border-color: rgba(31, 125, 83, 0.36);
+      box-shadow: 0 8px 40px rgba(31, 125, 83, 0.12);
     }
 
     .ba-col-label {
-      padding: 14px 22px;
+      padding: 13px 20px;
       border-bottom: 1px solid var(--border);
       font-family: "Space Grotesk", sans-serif;
-      font-size: 0.75rem;
+      font-size: .68rem;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       color: var(--muted);
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.018);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .ba-col-label.after {
-      color: var(--primary);
+    .ba-col.after .ba-col-label {
+      color: var(--p2);
+    }
+
+    .ba-col-label span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
     }
 
     .ba-list {
@@ -442,7 +1207,7 @@
     .ba-list li {
       display: flex;
       gap: 12px;
-      font-size: 0.97rem;
+      font-size: .97rem;
       color: #cdd8ea;
       line-height: 1.55;
     }
@@ -452,440 +1217,326 @@
       color: #e05555;
       flex-shrink: 0;
       margin-top: 2px;
-      font-size: 0.8rem;
+      font-size: .8rem;
       font-weight: 700;
     }
 
-    .ba-col.after-col .ba-list li::before {
+    .ba-col.after .ba-list li::before {
       content: "✓";
-      color: var(--primary);
+      color: var(--p1);
     }
 
-    /* ═══════════════════════ HOW IT WORKS ═══════════════════════ */
-    .how-section {
-      padding: 64px 40px;
+    /* ─── FAQ ────────────────────────────────────────────────── */
+    .faq-section {
+      padding: 80px 60px;
       border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
     }
 
-    .how-container {
+    .faq-layout {
       display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 64px;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 80px;
       align-items: start;
     }
 
-    .how-left {
-      position: relative;
-      top: 0;
-      max-width: 300px;
-      margin: 75px auto 0;
+    .faq-sticky {
+      position: sticky;
+      top: 80px;
     }
 
-    .how-video {
-      width: 100%;
-      border-radius: 20px;
-      border: 1px solid rgba(31, 125, 83, 0.22);
-      padding: 10px;
-      background: linear-gradient(150deg, rgba(31, 125, 83, 0.07), rgba(255, 255, 255, 0.02));
-      box-shadow: 0 0 64px rgba(31, 125, 83, 0.12), 0 24px 48px rgba(0, 0, 0, 0.4);
-      display: block;
+    .faq-sticky-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 18px;
     }
 
-    .how-steps {
-      display: grid;
-      gap: 16px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin-top: 32px;
+    .faq-sticky-desc {
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
     }
 
-    .how-step {
-      border: 1px solid rgba(31, 125, 83, 0.18);
-      border-radius: 20px;
-      padding: 28px 26px;
-      background: linear-gradient(180deg, rgba(7, 13, 20, 0.96), rgba(6, 11, 17, 0.9));
+    .faq-cta-mini {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--p2);
+      font-size: .85rem;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(31, 125, 83, 0.3);
+      padding-bottom: 2px;
+      transition: border-color .2s, color .2s;
+    }
+
+    .faq-cta-mini:hover {
+      color: var(--p1);
+      border-color: var(--p1);
+    }
+
+    .faq-list {
       display: flex;
       flex-direction: column;
       gap: 14px;
-      align-items: flex-start;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-      transition: border-color 220ms, background 220ms;
-    }
-
-    .how-step:hover {
-      border-color: rgba(31, 125, 83, 0.38);
-      background: linear-gradient(180deg, rgba(10, 20, 14, 0.96), rgba(8, 16, 12, 0.9));
-    }
-
-    .how-step::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 2px;
-      background: var(--grad);
-    }
-
-    .how-num {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 2px solid rgba(31, 125, 83, 0.4);
-      background: rgba(31, 125, 83, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--primary);
-      flex-shrink: 0;
-    }
-
-    .how-step-title {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text);
-      margin: 0;
-    }
-
-    .how-step p {
-      color: #c7d5e6;
-      line-height: 1.68;
-      font-size: 0.97rem;
-      max-width: none;
-      margin: 0;
-    }
-
-    /* ═══════════════════════ FAQ ═══════════════════════ */
-    .faq-section {
-      padding: 56px 40px;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .faq-intro {
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 18px;
-      max-width: 72ch;
-    }
-
-    .faq-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 24px;
-      row-gap: 28px;
-      width: 100%;
-      max-width: none;
-      margin-top: 32px;
-    }
-
-    .faq-head {
-      width: 100%;
-      max-width: none;
-      margin-bottom: 16px;
-    }
-
-    .faq-title {
-      max-width: 100%;
-      margin-bottom: 0;
-      font-size: clamp(2.1rem, 3.5vw, 3.45rem);
-      line-height: 1.05;
-      letter-spacing: -1.2px;
     }
 
     .faq-item {
-      border: 1px solid rgba(31, 125, 83, 0.18);
+      border: 1px solid rgba(31, 125, 83, 0.12);
       border-radius: 16px;
-      background: linear-gradient(180deg, rgba(7, 13, 20, 0.96), rgba(6, 11, 17, 0.9));
-      padding: 24px 24px;
-      position: relative;
+      background: var(--glass);
       overflow: hidden;
-      transition: border-color 200ms, transform 200ms;
-    }
-
-    .faq-item::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 2px;
-      background: var(--grad);
+      transition: border-color .2s;
     }
 
     .faq-item:hover {
-      border-color: rgba(31, 125, 83, 0.38);
-      transform: translateY(-2px);
+      border-color: rgba(31, 125, 83, 0.3);
+    }
+
+    .faq-q-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 22px;
+      cursor: pointer;
+      user-select: none;
     }
 
     .faq-q {
       font-family: "Space Grotesk", sans-serif;
-      font-size: 1.15rem;
+      font-size: .96rem;
       font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 12px;
+      color: var(--text);
       line-height: 1.4;
     }
 
-    .faq-a {
-      color: #c7d5e6;
-      line-height: 1.7;
-      font-size: 0.96rem;
-    }
-
-    /* ═══════════════════════ COMPARE TABLE ═══════════════════════ */
-    .compare-section {
-      padding: 64px 40px 80px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .compare-intro {
-      font-size: 1rem;
-      color: #c7d5e6;
-      line-height: 1.75;
-      max-width: 80ch;
-      margin: 20px 0 28px;
-    }
-
-    .compare-table-wrap {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      overflow-x: auto;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.005));
-    }
-
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.94rem;
-    }
-
-    .compare-table th,
-    .compare-table td {
-      padding: 15px 14px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: left;
-      white-space: nowrap;
-    }
-
-    .compare-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    .compare-table th:first-child,
-    .compare-table td:first-child {
-      width: 34%;
-      white-space: normal;
-    }
-
-    .compare-table th {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.84rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #cfd9e6;
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .compare-table th:last-child {
-      color: var(--primary);
-    }
-
-    .compare-table td:last-child {
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .tick {
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .cross {
-      color: #e05555;
-    }
-
-    .compare-note {
-      margin-top: 24px;
-      color: #c7d5e6;
-      line-height: 1.75;
-      font-size: 0.97rem;
-      max-width: 85ch;
-    }
-
-    /* ═══════════════════════ CTA ═══════════════════════ */
-    .cta-cs-section {
-      display: grid;
-      grid-template-columns: 1fr auto;
+    .faq-chevron {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
       align-items: center;
-      gap: 60px;
-      padding: 54px 40px;
-      background: transparent;
-    }
-
-    .cta-cs-text {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.5rem, 2.6vw, 2.3rem);
-      font-weight: 700;
-      line-height: 1.3;
-      color: var(--text);
-    }
-
-    .cta-cs-btn {
+      justify-content: center;
       flex-shrink: 0;
+      font-size: .7rem;
+      color: var(--muted);
+      transition: transform .25s, border-color .25s, background .25s;
+    }
+
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      border-color: rgba(31, 125, 83, 0.3);
+      background: rgba(31, 125, 83, 0.1);
+      color: var(--p2);
+    }
+
+    .faq-a {
+      padding: 0 22px 20px;
+      font-size: .88rem;
+      color: #8faabb;
+      line-height: 1.78;
+      display: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      margin-top: 0;
+      padding-top: 18px;
+    }
+
+    .faq-item.open .faq-a {
+      display: block;
+    }
+
+    /* ─── CTA ────────────────────────────────────────────────── */
+    .cta-section {
+      padding: 90px 60px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 120% at 50% 100%, rgba(31, 125, 83, 0.1), transparent 60%),
+        radial-gradient(ellipse 50% 80% at 10% 0%, rgba(31, 125, 83, 0.06), transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .cta-eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: #f1f5f9;
-      font-weight: 800;
-      font-size: 1rem;
+      gap: 8px;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.22);
       border-radius: 999px;
-      padding: 18px 36px;
-      background: var(--grad);
+      padding: 5px 14px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--p2);
+      margin-bottom: 28px;
+    }
+
+    .cta-title {
       font-family: "Space Grotesk", sans-serif;
-      box-shadow: 0 8px 28px rgba(31, 125, 83, 0.3);
-      transition: box-shadow 200ms, transform 200ms;
-      white-space: nowrap;
-      letter-spacing: 0.2px;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: #fff;
+      margin-bottom: 18px;
     }
 
-    .cta-cs-btn:hover {
-      box-shadow: 0 16px 40px rgba(31, 125, 83, 0.42);
-      transform: translateY(-1px);
+    .cta-title span {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    @keyframes heroFloat {
+    .cta-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 50ch;
+      margin-bottom: 36px;
+    }
 
-      0%,
-      100% {
-        transform: translateY(0);
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cta-note {
+      margin-top: 20px;
+      font-size: .76rem;
+      color: var(--muted);
+    }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media(max-width:1200px) {
+      .flow-steps::after {
+        display: none;
       }
 
-      50% {
-        transform: translateY(-12px);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-
-    /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
-    @media(max-width:1100px) {
       .navbar {
-        padding: 0 32px;
+        padding: 0 36px;
       }
 
-      .hero-cs-left {
-        padding: 56px 36px;
+      .hero-left {
+        padding: 60px 44px;
       }
 
-      .hero-cs-right {
-        padding: 44px 32px;
+      .hero-right {
+        padding: 48px 36px;
       }
 
-      .stats-strip {
-        gap: 16px;
-        padding: 0 48px 14px;
+      .how-section,
+      .faq-section,
+      .cta-section {
+        padding-left: 40px;
+        padding-right: 40px;
       }
 
       .ba-header {
-        padding: 48px 32px 28px;
+        padding: 60px 40px 32px;
       }
 
       .ba-grid {
-        padding: 0 32px;
-        gap: 18px;
-      }
-
-      .how-section {
-        padding: 56px 32px;
-      }
-
-      .faq-section {
-        padding: 56px 32px;
-      }
-
-      .compare-section {
-        padding: 56px 32px 72px;
-      }
-
-      .compare-table {
-        min-width: 760px;
-        font-size: 0.9rem;
-      }
-
-      .compare-table th,
-      .compare-table td {
-        padding: 14px 12px;
-      }
-
-      .cta-cs-section {
-        padding: 56px 32px;
+        padding: 0 40px 48px;
       }
     }
 
-    @media(max-width:900px) {
-      .hero-cs {
+    @media(max-width:1000px) {
+      .stats-section {
         grid-template-columns: 1fr;
-        min-height: auto;
+        gap: 48px;
+        padding: 72px 40px;
       }
 
-      .hero-cs-left {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 56px 28px;
+      .flow-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
       }
 
-      .hero-cs-right {
-        padding: 36px 28px;
-      }
-
-      .stats-strip {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        padding: 0 32px 12px;
-      }
-
-      .ba-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .how-container {
+      .faq-layout {
         grid-template-columns: 1fr;
         gap: 40px;
       }
 
-      .how-left {
-        position: relative;
-        top: 0;
-        max-width: 360px;
-        margin: 35px auto 0;
+      .faq-sticky {
+        position: static;
+      }
+    }
+
+    @media(max-width:900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
       }
 
-      .how-steps {
+      .hero-left {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 60px 40px;
+      }
+
+      .hero-right {
+        padding: 48px 40px;
+      }
+
+      .stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .faq-grid {
+      .ba-grid {
         grid-template-columns: 1fr;
-      }
-
-      .cta-cs-section {
-        grid-template-columns: 1fr;
-        gap: 28px;
       }
 
       .navbar {
@@ -898,151 +1549,65 @@
     }
 
     @media(max-width:640px) {
-      .hero-cs-left {
-        padding: 40px 20px;
+      .hero-left {
+        padding: 48px 24px;
       }
 
-      .hero-cs-right {
-        padding: 32px 20px;
-      }
-      
-      .hero-cs-title {
-        font-size: 2.2rem;
-        line-height: 1.1;
-        letter-spacing: -1.5px;
+      .hero-right {
+        padding: 36px 24px;
       }
 
-      .sec-h2 {
-        font-size: 1.7rem;
-        letter-spacing: -0.5px;
+      .hero-title {
+        font-size: 2.6rem;
+        letter-spacing: -2px;
       }
 
-      .nav-logo {
-        font-size: 1rem;
-      }
-
-      .nav-back {
-        font-size: 0.75rem;
-        padding: 6px 12px;
-      }
-
-      .stats-strip {
+      .stats-grid {
         grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 0 20px 10px;
       }
 
       .stat-cell {
-        min-height: auto;
         padding: 24px 20px;
       }
 
-      .ba-section {
-        padding: 0 0 40px;
+      .how-section,
+      .faq-section,
+      .cta-section {
+        padding: 52px 24px;
       }
 
       .ba-header {
-        padding: 32px 20px 20px;
+        padding: 52px 24px 28px;
       }
 
       .ba-grid {
-        padding: 0 20px;
+        padding: 0 24px 40px;
         gap: 16px;
       }
 
-      .how-section {
-        padding: 40px 20px;
-      }
-
-      .faq-section {
-        padding: 40px 20px;
-      }
-
-      .how-steps {
+      .flow-steps {
         grid-template-columns: 1fr;
       }
 
-      .compare-section {
-        padding: 40px 20px 56px;
+      .cta-actions {
+        flex-direction: column;
+        width: 100%;
       }
 
-      .compare-table {
-        min-width: 640px;
-      }
-
-      .cta-cs-section {
-        padding: 40px 20px;
-        gap: 20px;
-      }
-
-      .cta-cs-btn {
+      .cta-actions .btn-primary,
+      .cta-actions .btn-ghost {
         width: 100%;
         justify-content: center;
       }
-      
-      .cta-cs-text {
-        font-size: 1.4rem;
-        text-align: center;
-      }
     }
 
-    @media(max-width:480px) {
-      .hero-cs-title {
-        font-size: 2rem;
-        letter-spacing: -1px;
-      }
-      
-      .hero-cs-sub {
-        font-size: 0.95rem;
-      }
+    @media(prefers-reduced-motion:reduce) {
 
-      .sec-h2 {
-        font-size: 1.5rem;
-      }
-      
-      .faq-title {
-        font-size: 1.7rem;
-      }
-      
-      .nav-logo {
-        font-size: 0.9rem;
-      }
-
-      .nav-back {
-        font-size: 0.7rem;
-        padding: 6px 10px;
-      }
-
-      .cta-cs-text {
-        font-size: 1.25rem;
-      }
-      
-      .hero-cs-left {
-        padding: 32px 16px;
-      }
-      .hero-cs-right {
-        padding: 24px 16px;
-      }
-      .stats-strip {
-        padding: 0 16px 10px;
-      }
-      .ba-header {
-        padding: 32px 16px 20px;
-      }
-      .ba-grid {
-        padding: 0 16px;
-      }
-      .how-section {
-        padding: 32px 16px;
-      }
-      .faq-section {
-        padding: 32px 16px;
-      }
-      .compare-section {
-        padding: 32px 16px 48px;
-      }
-      .cta-cs-section {
-        padding: 32px 16px;
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
       }
     }
   </style>
@@ -1050,246 +1615,417 @@
 
 <body>
 
+  <!-- BACKGROUND PARTICLE CANVAS -->
   <canvas id="bg-canvas"
-    style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.8;"></canvas>
+    style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.55;"></canvas>
 
-  <!-- ═══════════ NAVBAR ═══════════ -->
-  <nav class="navbar">
+  <!-- GLOW ORBS -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar" id="navbar">
     <a href="/" class="nav-logo">Karl<span>space</span></a>
     <ul class="nav-links">
-      <li><a href="#stats">Result</a></li>
-      <li><a href="#ba">Before &amp; After</a></li>
+      <li><a href="#stats">Results</a></li>
       <li><a href="#how">How It Works</a></li>
+      <li><a href="#ba">Before & After</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
-    <a href="/#case-studies" class="nav-back">← Back to Case Studies</a>
+    <a href="/#case-studies" class="nav-back">← Back</a>
   </nav>
 
-  <!-- ═══════════ HERO ═══════════ -->
-  <section class="hero-cs" style="position: relative; z-index: 1;">
-    <div class="hero-cs-left">
-      <div class="hero-cs-tag">Case Study</div>
-      <h1 class="hero-cs-title">AI WhatsApp Chatbot<br>For <span class="highlight">PC Hardware Shops</span></h1>
-      <p class="hero-cs-sub">Every unanswered message is a sale for your competitor. Increase lead conversion with our smart WhatsApp automation India.</p>
-      <ul class="hero-cs-bullets">
-        <li><strong>Zero Delay:</strong> Instant responses for product inquiry automation, order tracking WhatsApp, and FAQs.</li>
-        <li><strong>No Manual Work:</strong> Eliminate staff dependency with complete PC hardware shop automation.</li>
-        <li><strong>Simple Setup:</strong> Runs securely on your existing Google Sheets CRM.</li>
-        <li><strong>Smart Support:</strong> Intelligent complaint escalation system detects and handles frustrated users.</li>
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="tag">Case Study</div>
+      <div class="badge"><span class="badge-dot"></span> Always On — 24/7</div>
+      <h1 class="hero-title">
+        AI WhatsApp Agent<br>
+        for <span class="hl">PC Hardware</span>
+      </h1>
+      <p class="hero-desc">
+        Every customer message — product queries, order tracking, complaints — gets an instant, intelligent reply. No
+        staff required.
+      </p>
+      <ul class="hero-list">
+        <li><span class="li-icon">⚡</span> Replies in under 2 seconds, around the clock</li>
+        <li><span class="li-icon">⚙️</span> Auto-checks live stock, pricing & order status</li>
+        <li><span class="li-icon">🚩</span> Flags complaints for fast human follow-up</li>
+        <li><span class="li-icon">📊</span> Plugs into your existing sheet-based workflow</li>
       </ul>
-      <p class="hero-cs-sub" style="margin-top: 32px; margin-bottom: 0;">Rapid response time. Live conversational AI sales. Repeat buyers activated.</p>
-    </div>
-    <div class="hero-cs-right">
-      <div class="hero-cs-img-wrap">
-        <img src="whatsapp-hero.png" alt="AI WhatsApp Sales Agent Dashboard interface" />
+      <div class="hero-actions">
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
+          class="btn-primary">Book a Free Audit →</a>
+        <a href="#how" class="btn-ghost">See how it works ↓</a>
       </div>
     </div>
-  </section>
 
-  <!-- ═══════════ HOW IT WORKS ═══════════ -->
-  <section class="how-section" id="how">
-    <div class="how-container">
-      <div class="how-left">
-        <video src="lv_0_20260408175004 (1).mp4" autoplay loop muted playsinline class="how-video"></video>
-      </div>
-      <div class="how-right">
-        <div class="sec-tag">How It Works</div>
-        <h2 class="sec-h2">Turn chats into revenue.<br>How our WhatsApp sales bot drives automated customer support.</h2>
-        <div class="how-steps">
-      <div class="how-step">
-        <div class="how-num">1</div>
-        <div class="how-step-title">Customer sends a WhatsApp message</div>
-        <p>The moment a prospect types, the system is already working. Their phone number is identified, custom context is loaded, and the conversational AI sales engine is ready before any human has even seen the notification.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-num">2</div>
-        <div class="how-step-title">New or returning customer handled automatically</div>
-        <p>First-time buyer or loyal repeat customer, the system adapts instantly. New leads are registered on the spot. Returning customers pick up exactly where they left off, significantly improving customer retention. No friction, no repeated questions.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-num">3</div>
-        <div class="how-step-title">The AI understands what they actually want</div>
-        <p>Not just keywords. Whether they are exploring products, verifying an order, seeking cart recovery, or raising a concern, the agent performs a live inventory lookup. Products, orders, carts, and FAQs are all queried in real time.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-num">4</div>
-        <div class="how-step-title">The reply sounds like your best salesperson wrote it</div>
-        <p>Warm, priced in ₹, addressed by first name, and ending with a gentle nudge. With built-in Hindi English support, there is no robotic language—just a personalised reply that boosts WhatsApp ecommerce India.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-num">5</div>
-        <div class="how-step-title">Complaints are caught before they escalate</div>
-        <p>The system scans every outgoing message for frustration signals. If detected, the complaint escalation system files a report with severity levels while the customer receives an empathetic rapid response. Trust gets protected.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-num">6</div>
-        <div class="how-step-title">Every conversation is logged and visible</div>
-        <p>The instant WhatsApp reply goes out, the data is saved, and your Google Sheets CRM updates in real time. You always know who asked what and exactly what was said, ensuring full visibility with zero manual work.</p>
+    <div class="hero-right">
+      <div class="wa-widget">
+        <div class="wa-top">
+          <div class="wa-dots"><span></span><span></span><span></span></div>
+          <div class="wa-shop">GearHub Support</div>
+          <div class="wa-live">Live AI</div>
+        </div>
+        <div class="wa-body" id="waBody">
+          <!-- messages injected by JS -->
+
+          <!-- Live chart -->
+          <div class="wa-chart">
+            <div class="wa-chart-header">
+              <div class="wa-chart-label">Live Activity</div>
+              <div class="wa-chart-value" id="waMsgCount">247 msgs today</div>
+            </div>
+            <div class="wa-chart-bars" id="waChartBars"></div>
+            <div class="wa-chart-axis">
+              <span>09:00</span><span>11:00</span><span>13:00</span><span>15:00</span><span>Now</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ STATS STRIP ═══════════ -->
-  <div class="stats-strip" id="stats">
-    <div class="stat-cell">
-      <div class="stat-num">&lt;2s</div>
-      <div class="stat-label">Reply Speed</div>
-      <div class="stat-desc">Customer gets a response before they can type again</div>
+  <!-- ═══ STATS ═══ -->
+  <div class="stats-section" id="stats">
+    <!-- Left: floating widget with video -->
+    <div class="stats-video-panel">
+      <div class="stats-widget-card reveal-left">
+        <div class="stats-widget-bar">
+          <div class="stats-widget-dots"><span></span><span></span><span></span></div>
+          <div class="stats-widget-title">Live System Demo</div>
+          <div class="stats-widget-live">Live</div>
+        </div>
+        <div class="stats-widget-video">
+          <video src="lv_0_20260408175004 (1).mp4" autoplay loop muted playsinline loading="lazy"></video>
+          <div class="stats-widget-video-label">AI Agent Running</div>
+        </div>
+      </div>
     </div>
-    <div class="stat-cell">
-      <div class="stat-num">24/7</div>
-      <div class="stat-label">Always On</div>
-      <div class="stat-desc">Handles enquiries at midnight the same as noon</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">0</div>
-      <div class="stat-label">Missed Messages</div>
-      <div class="stat-desc">Every inbound WhatsApp gets a response</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">Auto</div>
-      <div class="stat-label">Complaint Escalation</div>
-      <div class="stat-desc">Flagged, reported, and replied to without human input</div>
+
+    <!-- Grid: 3×2 stat cards -->
+    <div class="stats-grid">
+      <div class="stat-cell reveal">
+        <div class="stat-icon">⚡</div>
+        <span class="stat-num">&lt;1m</span>
+        <div class="stat-label">Reply Speed</div>
+        <div class="stat-desc"><strong>Instant Response:</strong> Optimized workflow paths to bypass heavy AI for greetings and send instant replies.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">🛡️</div>
+        <span class="stat-num">24/7</span>
+        <div class="stat-label">Always On</div>
+        <div class="stat-desc"><strong>Failover Protection:</strong> Error-handling logic ensures customers get a fallback response even if an API or Sheet fails.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">👤</div>
+        <span class="stat-num">0</span>
+        <div class="stat-label">Missed Messages</div>
+        <div class="stat-desc"><strong>Human Escalation:</strong> Automatically assigns tickets in Wati and alerts your team if the AI detects frustration.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">🎯</div>
+        <span class="stat-num">AI</span>
+        <div class="stat-label">Lead Scoring</div>
+        <div class="stat-desc"><strong>Conversion Focus:</strong> Analyzes intent to tag "Hot Leads" in your CRM based on high-value product interest.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">🌐</div>
+        <span class="stat-num">3+</span>
+        <div class="stat-label">Multilingual AI</div>
+        <div class="stat-desc"><strong>Language Fluidity:</strong> Detects and responds naturally in English, Hindi, or Hinglish to match the customer's style.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">🔄</div>
+        <span class="stat-num">24h</span>
+        <div class="stat-label">Proactive Recovery</div>
+        <div class="stat-desc"><strong>Smart Follow-ups:</strong> Automatically nudges customers 24 hours after a product inquiry if no purchase was made.</div>
+      </div>
     </div>
   </div>
 
-  <!-- ═══════════ BEFORE & AFTER ═══════════ -->
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="how-section" id="how">
+    <div class="how-head reveal">
+      <div class="sec-tag">The System</div>
+      <h2 class="sec-h2">How It Works</h2>
+      <p class="how-desc">Six automated steps. No human required from message received to reply sent. It is specifically designed for PC hardware and can be customized to meet your requirements.</p>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step reveal">
+        <div class="step-bubble">01</div>
+        <div class="step-icon-wrap">⚡️</div>
+        <div class="step-title">Instant Lead Capture</div>
+        <p class="step-desc"><strong>Never Miss a Sale:</strong><br>The moment a customer messages, the system captures the lead. No more lost opportunities due to slow human response times.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">02</div>
+        <div class="step-icon-wrap">🧠</div>
+        <div class="step-title">Deep Customer Memory</div>
+        <p class="step-desc"><strong>Personalized Recognition:</strong><br>The agent instantly identifies returning customers by name and pulls their history from your CRM, making every chat feel personal and high-touch.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">03</div>
+        <div class="step-icon-wrap">🔄</div>
+        <div class="step-title">Real-Time Inventory Sync</div>
+        <p class="step-desc"><strong>Live Catalog Access:</strong><br>Your agent "knows" your stock. It checks your live price sheets and product availability in a heartbeat so it never sells what you don't have.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">04</div>
+        <div class="step-icon-wrap">🤖</div>
+        <div class="step-title">Intelligent Sales Logic</div>
+        <p class="step-desc"><strong>Human-Grade Thinking:</strong><br>The system doesn't just follow scripts; it understands intent. It uses your store's "brain" to recommend the right hardware for the customer's specific needs.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">05</div>
+        <div class="step-icon-wrap">🤝</div>
+        <div class="step-title">Seamless Closing</div>
+        <p class="step-desc"><strong>Frictionless Response:</strong><br>By delivering the exact info needed instantly on WhatsApp, the agent moves customers from "just looking" to "ready to buy" without any technical hurdles.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">06</div>
+        <div class="step-icon-wrap">🛡️</div>
+        <div class="step-title">Automatic Business Safety</div>
+        <p class="step-desc"><strong>Smart Escalation:</strong><br>The agent handles 90% of chats but knows when a human touch is needed. Complaints or high-value leads are automatically flagged and sent to your team immediately.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BEFORE & AFTER ═══ -->
   <section class="ba-section" id="ba">
-    <div class="ba-header">
-      <div class="sec-tag">Before &amp; After</div>
-      <h2 class="sec-h2">From manual replies to instant automated intelligence</h2>
+    <div class="ba-header reveal">
+      <div class="sec-tag">Transformation</div>
+      <h2 class="sec-h2">Before & After</h2>
+      <p class="ba-sub">The same shop — completely different operation. Manual delays on the left, instant AI replies on
+        the right.</p>
     </div>
     <div class="ba-grid">
-      <div class="ba-col">
-        <div class="ba-col-label">Before</div>
+      <div class="ba-col reveal">
+        <div class="ba-col-label"><span></span> Before — Manual</div>
         <ul class="ba-list">
-          <li>Customer messages on WhatsApp asking about a product or order</li>
-          <li>Staff manually check the product sheet, order tracker, or cart - often in different tabs</li>
-          <li>Reply typed out by hand - takes 5 to 15 minutes per message</li>
-          <li>Complaints go untracked, fall through the cracks, or get a delayed generic reply</li>
-          <li>No visibility into what was said, who was contacted, or what's pending</li>
+          <li>Replies depend on staff availability</li>
+          <li>Stock and order checks are manual</li>
+          <li>Response quality varies by person</li>
+          <li>Complaint messages are easy to miss</li>
         </ul>
       </div>
-      <div class="ba-col after-col">
-        <div class="ba-col-label after">After</div>
+      <div class="ba-col after reveal">
+        <div class="ba-col-label"><span></span> After — AI Automated</div>
         <ul class="ba-list">
-          <li>Customer messages on WhatsApp - the AI picks it up instantly</li>
-          <li>System pulls the last 10 messages, identifies intent, and queries the right data source automatically</li>
-          <li>A warm, personalised plain-text reply is written by the AI and sent via WATI integration in under 2 seconds</li>
-          <li>If a complaint is detected, an internal escalation report is generated and a resolution reply sent
-            simultaneously</li>
-          <li>Every conversation is logged - who asked what, when, and what was said</li>
+          <li>Every inbound chat gets an immediate response</li>
+          <li>AI checks stock and order data automatically</li>
+          <li>Replies stay consistent and sales-focused</li>
+          <li>Risky chats are flagged for fast follow-up</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ FAQ ═══════════ -->
+  <!-- ═══ FAQ ═══ -->
   <section class="faq-section" id="faq">
-    <div class="faq-head">
-      <div class="sec-tag">Frequently Asked Questions</div>
-      <h2 class="sec-h2 faq-title">Details on the architecture</h2>
-    </div>
-
-    <div class="faq-grid">
-      <article class="faq-item">
-        <h3 class="faq-q">Q1: What happens if a customer asks about a product the shop doesn't carry?</h3>
-        <p class="faq-a">A: As an advanced AI agent for retail shop India, the system uses Pinecone vector search to find the closest matching product semantically. If nothing relevant is found, it responds honestly and suggests alternatives from the catalog.</p>
-      </article>
-
-      <article class="faq-item">
-        <h3 class="faq-q">Q2: How does complaint detection work?</h3>
-        <p class="faq-a">A: To automate WhatsApp customer queries safely, our AI scans the message for negative sentiment - "broken," "delayed," "wrong." If any are detected, it triggers the automatic complaint escalation system to notify your team with recommended follow-up actions.</p>
-      </article>
-
-      <article class="faq-item">
-        <h3 class="faq-q">Q3: Does the customer need to use any special commands or format their message?</h3>
-        <p class="faq-a">A: No. The customer types natively as they would to any person. It is a seamless WhatsApp bot for computer shop that relies purely on natural language understanding, completely invisible to the buyer.</p>
-      </article>
-
-      <article class="faq-item">
-        <h3 class="faq-q">Q4: Where does the product, cart, and order data live?</h3>
-        <p class="faq-a">A: All data lives securely in your Google Sheets CRM - one sheet each for products, carts, orders, and FAQs. This powers 24/7 WhatsApp support automation locally, requiring absolutely zero external database setup.</p>
-      </article>
-
-      <article class="faq-item">
-        <h3 class="faq-q">Q5: Can this work for shops other than PC hardware?</h3>
-        <p class="faq-a">A: Yes. The product catalog, rules, and logic are all adaptable. You can reduce missed customer messages and scale conversions for any product-led business leaning on WhatsApp as a channel.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ═══════════ COMPARISON TABLE ═══════════ -->
-  <section class="compare-section" id="compare">
-    <div class="sec-tag">Why Not Just a Human or a Bot Builder?</div>
-    <h2 class="sec-h2">Built for scale, not basic menus</h2>
-    <div class="compare-table-wrap">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Human Agent</th>
-            <th>Generic Bot Builder</th>
-            <th>This System</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Reply time</td>
-            <td>5–15 min</td>
-            <td>Instant but scripted</td>
-            <td>Instant and intelligent</td>
-          </tr>
-          <tr>
-            <td>Understands natural language</td>
-            <td><span class="tick">Yes</span></td>
-            <td>Limited</td>
-            <td><span class="tick">Yes</span></td>
-          </tr>
-          <tr>
-            <td>Pulls live order / cart data</td>
-            <td>Manual lookup</td>
-            <td>Rarely</td>
-            <td><span class="tick">Automatic</span></td>
-          </tr>
-          <tr>
-            <td>Handles complaints intelligently</td>
-            <td>Inconsistent</td>
-            <td><span class="cross">No</span></td>
-            <td><span class="tick">Yes - with escalation report</span></td>
-          </tr>
-          <tr>
-            <td>Works outside business hours</td>
-            <td><span class="cross">No</span></td>
-            <td><span class="tick">Yes</span></td>
-            <td><span class="tick">Yes</span></td>
-          </tr>
-          <tr>
-            <td>Needs a dashboard to manage</td>
-            <td><span class="cross">No</span></td>
-            <td><span class="tick">Yes</span></td>
-            <td><span class="cross">No</span></td>
-          </tr>
-          <tr>
-            <td>Personalised reply per customer</td>
-            <td><span class="tick">Yes</span></td>
-            <td><span class="cross">No</span></td>
-            <td><span class="tick">Yes</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="faq-layout">
+      <div class="faq-sticky reveal-left">
+        <div class="sec-tag">FAQ</div>
+        <h2 class="faq-sticky-title">Common Questions</h2>
+        <p class="faq-sticky-desc">Everything you need to know before deploying the agent for your shop.</p>
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
+          class="faq-cta-mini">
+          Still have questions? Book a call →
+        </a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">Can it answer product availability questions?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">Yes. The bot checks live records and responds with current stock status and pricing — no
+            manual lookup needed.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">What if a customer is angry or complaining?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">The system detects complaint-like sentiment and flags those chats for priority manual
+            follow-up, so no unhappy customer is missed.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">Does the customer need to type special commands?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">No. Customers type naturally and the bot understands regular conversation — no menus or
+            keywords required.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">Can this work for other types of businesses?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">Yes. The flow adapts to any catalog-based business using WhatsApp for sales — electronics,
+            fashion, auto parts, and more.</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════ CTA ═══════════ -->
-  <section class="cta-cs-section">
-    <div class="cta-cs-text">Need this adapted for your business?</div>
-    <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
-      class="cta-cs-btn">Book a Free Audit →</a>
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section">
+    <div class="cta-inner reveal">
+      <div class="cta-eyebrow">✦ Free Audit — No Commitment</div>
+      <h2 class="cta-title">Want this for<br><span>your business?</span></h2>
+      <p class="cta-sub">We'll walk through your current workflow and show exactly how an AI WhatsApp agent would fit in
+        — free.</p>
+      <div class="cta-actions">
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
+          class="btn-primary">
+          Book a Free Audit →
+        </a>
+        <a href="/#case-studies" class="btn-ghost">See More Case Studies</a>
+      </div>
+      <p class="cta-note">30-minute call · No sales pressure · Real answers</p>
+    </div>
   </section>
 
   <script src="index.js"></script>
+  <script>
+    /* ── SCROLL REVEAL ── */
+    const revealEls = document.querySelectorAll('.reveal,.reveal-left');
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const siblings = [...e.target.parentElement.querySelectorAll('.reveal:not(.visible),.reveal-left:not(.visible)')];
+        const idx = siblings.indexOf(e.target);
+        setTimeout(() => e.target.classList.add('visible'), Math.max(0, idx) * 90);
+        revealIO.unobserve(e.target);
+      });
+    }, { threshold: .1 });
+    revealEls.forEach(el => revealIO.observe(el));
+
+    /* ── LIVE CHART BARS ── */
+    (function () {
+      const container = document.getElementById('waChartBars');
+      if (!container) return;
+      // heights: [lo%, hi%] for each bar — creates a realistic usage curve
+      const barData = [
+        [15, 35], [20, 45], [30, 60], [50, 80], [65, 90], [55, 75], [40, 65],
+        [30, 55], [45, 70], [60, 85], [70, 95], [55, 80], [40, 60], [25, 50],
+        [35, 65], [50, 78], [68, 92], [75, 98], [60, 82], [45, 70], [30, 55]
+      ];
+      barData.forEach(([lo, hi], i) => {
+        const b = document.createElement('div');
+        b.className = 'wa-bar';
+        const dur = (0.9 + Math.random() * 0.8).toFixed(2);
+        const del = (i * 0.06).toFixed(2);
+        b.style.cssText = `--lo:${lo}%;--hi:${hi}%;--dur:${dur}s;--del:${del}s;height:${lo}%`;
+        container.appendChild(b);
+      });
+    })();
+
+    /* ── LIVE CHAT ANIMATION ── */
+    (function () {
+      const body = document.getElementById('waBody');
+      const chart = body ? body.querySelector('.wa-chart') : null;
+      if (!body || !chart) return;
+
+      const conversations = [
+        [
+          { type: 'user', text: 'RTX 4060 available? Need today delivery.' },
+          { type: 'bot', text: 'Yes, 3 units in stock. Rs 31,900. Same-day dispatch possible. ✓' },
+          { type: 'user', text: 'Track my order #GH2481' },
+          { type: 'bot', text: 'Packed & out for delivery. ETA tomorrow by 3 PM. 📦' },
+          { type: 'chip', label: 'Action Logged', detail: 'Sentiment: none · Reply time: 1.3s' }
+        ],
+        [
+          { type: 'user', text: 'Do you have i9-14900K in stock?' },
+          { type: 'bot', text: 'Yes! 2 units available. Price: Rs 52,500. Want to reserve one?' },
+          { type: 'user', text: 'Yes please, COD available?' },
+          { type: 'bot', text: 'COD available up to Rs 10,000. For higher amounts, UPI or card. Which do you prefer?' },
+          { type: 'chip', label: 'Action Logged', detail: 'Intent: purchase · Escalation: none · 1.1s' }
+        ],
+        [
+          { type: 'user', text: 'My GPU arrived damaged. Order #GH3102' },
+          { type: 'bot', text: '⚠️ Sorry to hear that! I\'ve flagged this for priority review. Our team will contact you within 2 hours.' },
+          { type: 'user', text: 'Ok thanks' },
+          { type: 'bot', text: 'Replacement process started. You\'ll get an SMS update shortly. 🔔' },
+          { type: 'chip', label: 'Action Logged', detail: 'Sentiment: complaint · Escalated to team · 1.6s' }
+        ]
+      ];
+
+      let msgCount = 247;
+      const countEl = document.getElementById('waMsgCount');
+      let convIndex = 0;
+
+      function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+      function makeTyping() {
+        const row = document.createElement('div');
+        row.className = 'wa-row bot wa-typing-row';
+        row.innerHTML = `<div class="wa-bubble wa-typing">
+          <span></span><span></span><span></span>
+        </div>`;
+        return row;
+      }
+
+      function makeBubble(msg) {
+        if (msg.type === 'chip') {
+          const chip = document.createElement('div');
+          chip.className = 'wa-chip wa-msg-new';
+          chip.innerHTML = `<strong>${msg.label}</strong>${msg.detail}`;
+          return chip;
+        }
+        const row = document.createElement('div');
+        row.className = `wa-row ${msg.type} wa-msg-new`;
+        row.innerHTML = `<div class="wa-bubble">${msg.text}</div>`;
+        return row;
+      }
+
+      async function runConversation(msgs) {
+        // clear existing messages (keep chart)
+        const children = [...body.children];
+        children.forEach(c => { if (!c.classList.contains('wa-chart')) body.removeChild(c); });
+
+        for (const msg of msgs) {
+          if (msg.type === 'bot') {
+            const typing = makeTyping();
+            body.insertBefore(typing, chart);
+            await sleep(1200);
+            body.removeChild(typing);
+          } else if (msg.type === 'user') {
+            await sleep(600);
+          } else {
+            await sleep(800);
+          }
+          const el = makeBubble(msg);
+          body.insertBefore(el, chart);
+          // tick counter
+          msgCount++;
+          if (countEl) countEl.textContent = `${msgCount} msgs today`;
+          await sleep(msg.type === 'chip' ? 1000 : 800);
+        }
+      }
+
+      async function loop() {
+        while (true) {
+          await runConversation(conversations[convIndex % conversations.length]);
+          convIndex++;
+          await sleep(2800); // pause before next conversation
+        }
+      }
+
+      loop();
+    })();
+
+    /* ── FAQ ACCORDION ── */
+    function toggleFaq(row) {
+      const item = row.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
 </body>
 
 </html>

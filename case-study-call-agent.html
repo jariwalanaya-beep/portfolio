@@ -1,671 +1,1995 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Voice Call Agent for Clinics - 24/7 Booking Automation | Karlspace</title>
+  <title>AI Voice Call Agent for Clinics – 24/7 Booking Automation | Karlspace</title>
+  <meta name="description"
+    content="AI voice call agent that books, reschedules, and cancels clinic appointments 24/7. Zero missed calls, instant SMS confirmations, and $10k+ revenue recovered per month." />
   <link rel="stylesheet" href="index.css" />
   <link rel="icon" type="image/png" href="1772001775286.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "AI Voice Call Agent for Clinics",
-      "serviceType": "AI appointment booking automation",
-      "description": "AI voice call agent that answers inbound clinic calls, books appointments, handles rescheduling or cancellations, and sends SMS confirmations 24/7.",
-      "url": "https://karlspace.ai/case-study-call-agent",
-      "provider": {
-        "@type": "Person",
-        "name": "Shivam",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Karlspace"
-        }
-      },
-      "areaServed": "Worldwide"
-    }
-  </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://karlspace.ai/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Case Studies",
-          "item": "https://karlspace.ai/#case-studies"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "AI Voice Call Agent for Clinics",
-          "item": "https://karlspace.ai/case-study-call-agent"
-        }
-      ]
-    }
-  </script>
-  
-<style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
 
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Service","name":"AI Voice Call Agent for Clinics","serviceType":"AI appointment booking automation","description":"24/7 AI voice agent that answers inbound clinic calls, books appointments, handles rescheduling, and sends SMS confirmations.","provider":{"@type":"Person","name":"Shivam","worksFor":{"@type":"Organization","name":"Karlspace"}},"areaServed":"Worldwide"}
+  </script>
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
     :root {
-      --bg:       #04070c;
-      --bg2:      #060c12;
-      --border:   rgba(255,255,255,0.09);
-      --text:     #e9f0f8;
-      --muted:    #7a8fa8;
-      --primary:  #1F7D53;
-      --secondary:#255F38;
-      --grad:     linear-gradient(110deg,#1F7D53 0%,#2C8B5F 50%,#255F38 100%);
+      --bg: #05080f;
+      --bg2: #080d17;
+      --border: rgba(255, 255, 255, 0.07);
+      --border2: rgba(31, 125, 83, 0.2);
+      --text: #eaf0f8;
+      --muted: #6b84a0;
+      --p1: #1F7D53;
+      --p2: #14a86a;
+      --p3: #255F38;
+      --grad: linear-gradient(110deg, #1F7D53 0%, #19b370 50%, #255F38 100%);
+      --grad-r: linear-gradient(270deg, #1F7D53 0%, #19b370 50%, #255F38 100%);
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass2: rgba(31, 125, 83, 0.06);
     }
 
-    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:smooth; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
 
     body {
       font-family: Inter, system-ui, sans-serif;
       color: var(--text);
+      background: var(--bg);
       overflow-x: hidden;
     }
 
-    /* ═══════════════════════ NAVBAR ═══════════════════════ */
+    /* ─── BACKGROUND CANVAS ────────────────────────────────── */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .55;
+    }
+
+    /* ─── GLOBAL GLOW ORBS ─────────────────────────────────── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(31, 125, 83, 0.18) 0%, transparent 70%);
+      top: -200px;
+      left: -150px;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(20, 168, 106, 0.1) 0%, transparent 70%);
+      bottom: 10%;
+      right: -100px;
+    }
+
+    /* ─── NAVBAR ────────────────────────────────────────────── */
     .navbar {
-      position: fixed; top:0; left:0; right:0; z-index:100;
-      display: flex; align-items:center; justify-content:space-between;
-      padding: 0 64px; height: 64px;
-      background: rgba(4,7,12,0.85);
-      backdrop-filter: blur(14px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      height: 62px;
+      background: rgba(5, 8, 15, 0.82);
+      backdrop-filter: blur(20px) saturate(1.4);
       border-bottom: 1px solid var(--border);
     }
 
     .nav-logo {
-      font-family:"Space Grotesk",sans-serif;
-      font-size:1.05rem; font-weight:700;
-      color:#fff; text-decoration:none; letter-spacing:0.2px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: .2px;
     }
-    .nav-logo span { color:var(--primary); }
+
+    .nav-logo span {
+      color: var(--p1);
+    }
 
     .nav-links {
-      display:flex; gap:8px; list-style:none;
+      display: flex;
+      gap: 2px;
+      list-style: none;
     }
+
     .nav-links a {
-      text-decoration:none; font-size:0.84rem; font-weight:500;
-      color:var(--muted); padding:6px 14px; border-radius:999px;
-      border:1px solid transparent;
-      transition: color 180ms, border-color 180ms;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: color .18s, border-color .18s, background .18s;
     }
-    .nav-links a:hover { color:var(--text); border-color:var(--border); }
+
+    .nav-links a:hover {
+      color: var(--text);
+      border-color: var(--border);
+    }
 
     .nav-back {
-      text-decoration:none; font-size:0.84rem; font-weight:600;
-      color:var(--text); padding:8px 18px; border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.03);
-      transition: border-color 180ms;
-      white-space:nowrap;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text);
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      transition: border-color .18s, background .18s;
+      white-space: nowrap;
     }
-    .nav-back:hover { border-color:rgba(31, 125, 83,0.5); }
 
-    /* ═══════════════════════ HERO ═══════════════════════ */
-    .hero-cs {
-      min-height: 88vh;
+    .nav-back:hover {
+      border-color: var(--border2);
+      background: rgba(31, 125, 83, 0.06);
+    }
+
+    /* ─── HERO ──────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      gap: 0;
-      padding-top: 64px;
+      padding-top: 62px;
       border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
     }
 
-    .hero-cs-left {
-      padding: 40px;
-      display: flex; flex-direction:column; justify-content:center;
+    .hero-left {
+      padding: 72px 56px 72px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       border-right: 1px solid var(--border);
       height: 100%;
     }
 
-    .hero-cs-tag {
-      display:inline-flex; align-items:center; gap:10px;
-      font-size:0.9rem; font-weight:700; letter-spacing:3px;
-      text-transform:uppercase; color:var(--primary);
-      margin-bottom:28px;
-    }
-    .hero-cs-tag::before {
-      content:""; display:inline-block; width:22px; height:2px;
-      background:var(--grad); border-radius:2px;
-    }
-
-    .hero-cs-title {
-      font-family:"Space Grotesk",sans-serif;
-      font-size:clamp(3.3rem,5.7vw,5.9rem);
-      font-weight:800; line-height:0.97;
-      letter-spacing:-3px; margin-bottom:32px;
+    /* tag line */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--p2);
+      margin-bottom: 24px;
     }
 
-    .hero-cs-sub {
-      font-size:clamp(1.05rem,1.5vw,1.28rem);
-      color:#b8ccde; line-height:1.7;
-      margin-bottom:44px; max-width:44ch;
+    .tag::before {
+      content: "";
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--grad);
+      border-radius: 2px;
     }
 
-    .hero-cs-bullets { list-style:none; display:grid; gap:16px; }
-    .hero-cs-bullets li {
-      display:flex; gap:12px; font-size:clamp(0.98rem,1.15vw,1.14rem);
-      color:#d0dcea; line-height:1.45;
-    }
-    .hero-cs-bullets li::before {
-      content:"•"; color:var(--primary); font-weight:700; flex-shrink:0;
+    /* live badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.28);
+      border-radius: 999px;
+      padding: 5px 14px 5px 10px;
+      font-size: .73rem;
+      font-weight: 600;
+      color: #4ade80;
+      letter-spacing: .5px;
+      margin-bottom: 28px;
+      width: fit-content;
     }
 
-    .hero-cs-right {
-      padding: 40px;
-      display: flex; align-items:center; justify-content:center;
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: dotPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(1.5);
+      }
+    }
+
+    .hero-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3.2rem, 5vw, 5.8rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -3.5px;
+      margin-bottom: 28px;
+      color: #fff;
+    }
+
+    .hero-title .hl {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: clamp(1rem, 1.3vw, 1.14rem);
+      color: #a8bdd4;
+      line-height: 1.75;
+      margin-bottom: 44px;
+      max-width: 70ch;
+    }
+
+    /* bullets */
+    .hero-list {
+      list-style: none;
+      display: grid;
+      gap: 13px;
+      margin-bottom: 48px;
+    }
+
+    .hero-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: .97rem;
+      color: #c4d5e6;
+      line-height: 1.5;
+    }
+
+    .li-icon {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      margin-top: -1px;
+    }
+
+    /* CTA buttons */
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: .92rem;
+      border-radius: 999px;
+      padding: 14px 28px;
+      background: var(--grad);
+      font-family: "Space Grotesk", sans-serif;
+      box-shadow: 0 6px 28px rgba(31, 125, 83, 0.35);
+      transition: box-shadow .2s, transform .2s;
+      letter-spacing: .2px;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 12px 40px rgba(31, 125, 83, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: .88rem;
+      border-radius: 999px;
+      padding: 13px 24px;
+      border: 1px solid var(--border);
+      transition: color .2s, border-color .2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ─── HERO RIGHT - VOICE WIDGET ─────────────────────────── */
+    .hero-right {
+      padding: 56px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 100%;
-      background: linear-gradient(135deg, rgba(31, 125, 83,0.04), transparent 60%);
+      background: radial-gradient(ellipse 80% 80% at 60% 50%, rgba(31, 125, 83, 0.07), transparent 70%);
+      position: relative;
     }
 
-    .hero-cs-img-wrap {
-      border:1px solid rgba(31, 125, 83,0.22); border-radius:18px;
-      background:linear-gradient(150deg,rgba(31, 125, 83,0.07),rgba(255,255,255,0.02));
-      padding:14px;
-      box-shadow: 0 0 64px rgba(31, 125, 83,0.12), 0 24px 48px rgba(0,0,0,0.4);
+    .voice-widget {
       width: 100%;
-      max-width: 540px;
-      animation: heroFloat 3s ease-in-out infinite;
-    }
-    .hero-cs-img-wrap img,
-    .hero-cs-img-wrap video {
-      border-radius:10px; width:100%; display:block;
-      border:1px solid rgba(255,255,255,0.1);
+      max-width: 500px;
+      background: rgba(8, 14, 24, 0.7);
+      border: 1px solid rgba(31, 125, 83, 0.18);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 0 0 1px rgba(31, 125, 83, 0.06),
+        0 24px 64px rgba(0, 0, 0, 0.6),
+        0 0 80px rgba(31, 125, 83, 0.08);
+      overflow: hidden;
+      animation: widgetFloat 4s ease-in-out infinite;
     }
 
-    /* ═══════════════════════ BEFORE & AFTER ═══════════════════════ */
+    @keyframes widgetFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* widget top bar */
+    .widget-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .widget-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .widget-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .widget-dots span:nth-child(1) {
+      background: #ff5f57;
+    }
+
+    .widget-dots span:nth-child(2) {
+      background: #febc2e;
+    }
+
+    .widget-dots span:nth-child(3) {
+      background: #28c840;
+    }
+
+    .widget-title {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .widget-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .68rem;
+      color: #4ade80;
+      font-weight: 500;
+    }
+
+    .widget-status::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 6px #4ade80;
+      animation: dotPulse 1.4s ease-in-out infinite;
+    }
+
+    /* voice orb */
+    .voice-orb-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 24px 32px;
+      gap: 28px;
+    }
+
+    .voice-orb {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #19b370, #1F7D53 50%, #0d4a2e);
+      box-shadow:
+        0 0 0 12px rgba(31, 125, 83, 0.1),
+        0 0 0 24px rgba(31, 125, 83, 0.05),
+        0 0 60px rgba(25, 179, 112, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      position: relative;
+      animation: orbPulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes orbPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 12px rgba(31, 125, 83, 0.1), 0 0 0 24px rgba(31, 125, 83, 0.05), 0 0 60px rgba(25, 179, 112, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 18px rgba(31, 125, 83, 0.14), 0 0 0 36px rgba(31, 125, 83, 0.06), 0 0 90px rgba(25, 179, 112, 0.55);
+      }
+    }
+
+    /* waveform bars */
+    .waveform {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 48px;
+    }
+
+    .wave-bar {
+      width: 4px;
+      border-radius: 999px;
+      background: var(--grad);
+      animation: waveAnim var(--d, 0.8s) ease-in-out var(--del, 0s) infinite alternate;
+    }
+
+    @keyframes waveAnim {
+      from {
+        height: 6px;
+        opacity: .4;
+      }
+
+      to {
+        height: var(--h, 30px);
+        opacity: 1;
+      }
+    }
+
+    /* transcript rows */
+    .transcript {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 20px 24px;
+    }
+
+    .tr-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .tr-row.agent {
+      flex-direction: row;
+    }
+
+    .tr-row.patient {
+      flex-direction: row-reverse;
+    }
+
+    .tr-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(31, 125, 83, 0.15);
+      border: 1px solid rgba(31, 125, 83, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      flex-shrink: 0;
+    }
+
+    .tr-bubble {
+      max-width: 76%;
+      padding: 9px 13px;
+      border-radius: 12px;
+      font-size: .8rem;
+      line-height: 1.5;
+    }
+
+    .agent .tr-bubble {
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.18);
+      color: #c8e8d4;
+      border-radius: 4px 12px 12px 12px;
+    }
+
+    .patient .tr-bubble {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #b8cde0;
+      border-radius: 12px 4px 12px 12px;
+    }
+
+    /* sms chip at bottom */
+    .sms-chip {
+      margin: 0 20px 20px;
+      background: rgba(31, 125, 83, 0.08);
+      border: 1px solid rgba(31, 125, 83, 0.2);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sms-icon {
+      font-size: 1.1rem;
+    }
+
+    .sms-text {
+      font-size: .76rem;
+      color: #a0bca8;
+      line-height: 1.4;
+    }
+
+    .sms-text strong {
+      color: #4ade80;
+      display: block;
+      font-size: .78rem;
+    }
+
+
+    /* ─── STATS SECTION ─────────────────────────────────────── */
+    .stats-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      padding: 100px 80px;
+      min-height: 640px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+      align-items: center;
+    }
+
+    .stats-section::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(31, 125, 83, 0.09) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Left: floating widget container */
+    .stats-video-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .stats-widget-card {
+      width: 100%;
+      max-width: 520px;
+      background: rgba(8, 14, 24, 0.78);
+      border: 1px solid rgba(31, 125, 83, 0.22);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 0 0 1px rgba(31, 125, 83, 0.07),
+        0 32px 72px rgba(0, 0, 0, 0.55),
+        0 0 60px rgba(31, 125, 83, 0.09);
+      overflow: hidden;
+      animation: statsFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes statsFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-14px);
+      }
+    }
+
+    .stats-widget-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.025);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .stats-widget-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .stats-widget-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .stats-widget-dots span:nth-child(1) {
+      background: #ff5f56;
+    }
+
+    .stats-widget-dots span:nth-child(2) {
+      background: #ffbd2e;
+    }
+
+    .stats-widget-dots span:nth-child(3) {
+      background: #28c840;
+    }
+
+    .stats-widget-title {
+      font-size: .7rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: .9px;
+      text-transform: uppercase;
+    }
+
+    .stats-widget-live {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .66rem;
+      font-weight: 700;
+      color: #4ade80;
+      letter-spacing: .5px;
+    }
+
+    .stats-widget-live::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 6px #4ade80;
+      animation: dotPulse 1.8s ease-in-out infinite;
+    }
+
+    .stats-widget-video {
+      position: relative;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .stats-widget-video video {
+      width: 100%;
+      display: block;
+      opacity: .92;
+    }
+
+    .stats-widget-video-label {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(5, 8, 15, 0.82);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(31, 125, 83, 0.28);
+      border-radius: 7px;
+      padding: 4px 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .62rem;
+      font-weight: 700;
+      color: #4ade80;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    .stats-widget-video-label::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 4px #4ade80;
+      animation: dotPulse 1.6s ease-in-out infinite;
+    }
+
+    /* Right: 2×2 separated card grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .stat-cell {
+      background: rgba(8, 13, 22, 0.6);
+      border: 1px solid rgba(31, 125, 83, 0.12);
+      border-radius: 20px;
+      padding: 44px 38px;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+      transition: border-color .3s, background .3s, transform .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .stat-cell:hover {
+      background: rgba(10, 18, 30, 0.75);
+      border-color: rgba(31, 125, 83, 0.32);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(31, 125, 83, 0.12), 0 0 0 1px rgba(31, 125, 83, 0.18);
+    }
+
+    .stat-cell::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--grad);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+      border-radius: 18px 18px 0 0;
+    }
+
+    .stat-cell:hover::before {
+      transform: scaleX(1);
+    }
+
+    .stat-cell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 20% 10%, rgba(31, 125, 83, 0.08) 0%, transparent 60%);
+      border-radius: 18px;
+      opacity: 0;
+      transition: opacity .4s;
+      pointer-events: none;
+    }
+
+    .stat-cell:hover::after {
+      opacity: 1;
+    }
+
+    .stat-icon {
+      font-size: 1.4rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 13px;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .stat-num {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.8rem, 4vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin-bottom: 12px;
+      letter-spacing: -1.5px;
+    }
+
+    .stat-label {
+      font-size: .95rem;
+      font-weight: 700;
+      color: #dce8f5;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .stat-desc {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 22ch;
+    }
+
+    /* ─── SECTION HELPERS ───────────────────────────────────── */
+    .sec-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--p2);
+      margin-bottom: 14px;
+    }
+
+    .sec-tag::before {
+      content: "";
+      display: inline-block;
+      width: 16px;
+      height: 2px;
+      background: var(--grad);
+      border-radius: 2px;
+    }
+
+    .sec-h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.9rem, 3.2vw, 3rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -1.2px;
+      color: var(--text);
+    }
+
+    /* ─── HOW IT WORKS ───────────────────────────────── */
+    .how-section {
+      padding: 100px 72px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .how-head {
+      margin-bottom: 72px;
+    }
+
+    .how-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 56ch;
+      margin-top: 16px;
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    /* arrow connector between cards */
+    .flow-steps::after {
+      content: "";
+      position: absolute;
+      top: 54px;
+      /* centre of the icon circle */
+      left: calc(25% - 10px);
+      right: calc(25% - 10px);
+      height: 1px;
+      background: linear-gradient(90deg,
+          transparent 0%,
+          rgba(31, 125, 83, 0.3) 8%,
+          rgba(20, 168, 106, 0.6) 50%,
+          rgba(31, 125, 83, 0.3) 92%,
+          transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .flow-step {
+      background: rgba(8, 13, 22, 0.6);
+      border: 1px solid rgba(31, 125, 83, 0.1);
+      border-radius: 20px;
+      padding: 40px 32px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: border-color .3s, transform .3s, box-shadow .3s, background .3s;
+    }
+
+    .flow-step:hover {
+      border-color: rgba(31, 125, 83, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(31, 125, 83, 0.1), 0 0 0 1px rgba(31, 125, 83, 0.15);
+      background: rgba(10, 18, 30, 0.75);
+    }
+
+    /* top gradient accent */
+    .flow-step::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--grad);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .flow-step:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* inner glow */
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 0%, rgba(31, 125, 83, 0.08) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .4s;
+      pointer-events: none;
+      border-radius: 20px;
+    }
+
+    .flow-step:hover::after {
+      opacity: 1;
+    }
+
+    /* step number */
+    .step-bubble {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 28px;
+      box-shadow: 0 0 24px rgba(31, 125, 83, 0.5);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* icon box */
+    .step-icon-wrap {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      transition: background .25s, border-color .25s, transform .25s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .flow-step:hover .step-icon-wrap {
+      background: rgba(31, 125, 83, 0.18);
+      border-color: rgba(31, 125, 83, 0.4);
+      transform: scale(1.05);
+    }
+
+    .step-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.3;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-desc {
+      font-size: .86rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 22ch;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ─── BEFORE & AFTER ────────────────────────────────────── */
     .ba-section {
       border-bottom: 1px solid var(--border);
-      padding: 0 0 40px;
+      position: relative;
+      z-index: 1;
     }
 
     .ba-header {
-      padding: 40px 40px 24px;
+      padding: 80px 60px 36px;
     }
-    .sec-tag {
-      display:inline-flex; align-items:center; gap:10px;
-      font-size:0.9rem; font-weight:700; letter-spacing:3px;
-      text-transform:uppercase; color:var(--primary);
-      margin-bottom:14px;
-    }
-    .sec-tag::before {
-      content:""; display:inline-block; width:18px; height:2px;
-      background:var(--grad); border-radius:2px;
-    }
-    .sec-h2 {
-      font-family:"Space Grotesk",sans-serif;
-      font-size:clamp(1.8rem,3vw,3rem); font-weight:700;
-      line-height:1.1; letter-spacing:-1px; color:var(--text);
+
+    .ba-sub {
+      font-size: .96rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 60ch;
+      margin-top: 12px;
     }
 
     .ba-grid {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:24px;
-      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 0 60px 60px;
+      gap: 24px;
     }
 
     .ba-col {
-      display:flex; flex-direction:column;
-      border:1px solid var(--border); border-radius:16px;
-      overflow:hidden;
-      transition: border-color 220ms;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: border-color .25s, box-shadow .25s;
+      background: var(--glass);
     }
-    .ba-col:hover { border-color:rgba(31, 125, 83,0.3); }
+
+    .ba-col:hover {
+      border-color: var(--border2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .ba-col.after {
+      border-color: rgba(31, 125, 83, 0.16);
+    }
+
+    .ba-col.after:hover {
+      border-color: rgba(31, 125, 83, 0.36);
+      box-shadow: 0 8px 40px rgba(31, 125, 83, 0.12);
+    }
 
     .ba-col-label {
-      padding:14px 22px;
-      border-bottom:1px solid var(--border);
-      font-family:"Space Grotesk",sans-serif;
-      font-size:0.75rem; font-weight:700; letter-spacing:2px;
-      text-transform:uppercase; color:var(--muted);
-      background: rgba(255,255,255,0.03);
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--border);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.018);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .ba-col-label.after { color:var(--primary); }
-    .ba-col img { width:100%; display:block; }
 
-    /* ═══════════════════════ WHAT CHANGED ═══════════════════════ */
+    .ba-col.after .ba-col-label {
+      color: var(--p2);
+    }
+
+    .ba-col-label span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .ba-col img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ─── OUTCOME CARDS ─────────────────────────────────────── */
     .outcome-section {
-      padding: 50px 40px;
+      padding: 80px 60px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
     }
 
-    .outcome-intro {
-      font-size:clamp(1rem,1.4vw,1.12rem);
-      color:var(--muted); line-height:1.75;
-      max-width:74ch; margin-bottom:44px;
+    .outcome-head {
+      margin-bottom: 20px;
+    }
+
+    .outcome-sub {
+      font-size: .98rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 64ch;
+      margin-bottom: 52px;
     }
 
     .outcome-cards {
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:20px;
-    }
-
-    .outcome-card {
-      border:1px solid var(--border); border-radius:20px;
-      padding:40px 36px;
-      background:rgba(255,255,255,0.03);
-      position:relative; overflow:hidden;
-      transition: border-color 220ms, background 220ms;
-    }
-    .outcome-card:hover {
-      border-color:rgba(31, 125, 83,0.3);
-      background:rgba(31, 125, 83,0.03);
-    }
-
-    /* ═══════════════════════ FAQ ═══════════════════════ */
-    .faq-section {
-      padding: 56px 40px;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .faq-intro {
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 18px;
-      max-width: 72ch;
-    }
-
-    .faq-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 24px;
-      row-gap: 28px;
-      width: 100%;
-      max-width: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
-    .faq-head {
-      width: 100%;
-      max-width: none;
-      margin-bottom: 16px;
+    .oc {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 40px 32px;
+      background: var(--glass);
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, background .25s, transform .25s, box-shadow .25s;
     }
 
-    .faq-title {
-      max-width: 100%;
-      margin-bottom: 0;
-      font-size: clamp(2.1rem, 3.5vw, 3.45rem);
-      line-height: 1.05;
-      letter-spacing: -1.2px;
+    .oc:hover {
+      border-color: rgba(31, 125, 83, 0.28);
+      background: rgba(31, 125, 83, 0.04);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(31, 125, 83, 0.06);
+    }
+
+    .oc::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--grad);
+      border-radius: 999px 999px 0 0;
+    }
+
+    .oc-icon {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(31, 125, 83, 0.4));
+    }
+
+    .oc-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--p2);
+      margin-bottom: 10px;
+    }
+
+    .oc-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .oc-body {
+      font-size: .88rem;
+      color: #9ab5cb;
+      line-height: 1.75;
+    }
+
+    /* ─── FAQ ────────────────────────────────────────────────── */
+    .faq-section {
+      padding: 80px 60px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .faq-sticky {
+      position: sticky;
+      top: 80px;
+    }
+
+    .faq-sticky-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .faq-sticky-desc {
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .faq-cta-mini {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--p2);
+      font-size: .85rem;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(31, 125, 83, 0.3);
+      padding-bottom: 2px;
+      transition: border-color .2s, color .2s;
+    }
+
+    .faq-cta-mini:hover {
+      color: var(--p1);
+      border-color: var(--p1);
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
     .faq-item {
-      border: 1px solid rgba(31, 125, 83, 0.18);
+      border: 1px solid rgba(31, 125, 83, 0.12);
       border-radius: 16px;
-      background: linear-gradient(180deg, rgba(7, 13, 20, 0.96), rgba(6, 11, 17, 0.9));
-      padding: 18px 20px;
-      position: relative;
+      background: var(--glass);
       overflow: hidden;
-      transition: border-color 200ms, transform 200ms;
-    }
-
-    .faq-item::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 2px;
-      background: var(--grad);
+      transition: border-color .2s;
     }
 
     .faq-item:hover {
-      border-color: rgba(31, 125, 83, 0.38);
-      transform: translateY(-2px);
+      border-color: rgba(31, 125, 83, 0.3);
+    }
+
+    .faq-q-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 22px;
+      cursor: pointer;
+      user-select: none;
     }
 
     .faq-q {
       font-family: "Space Grotesk", sans-serif;
-      font-size: 1.28rem;
+      font-size: .96rem;
       font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 8px;
+      color: var(--text);
       line-height: 1.4;
     }
 
+    .faq-chevron {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: .7rem;
+      color: var(--muted);
+      transition: transform .25s, border-color .25s, background .25s;
+    }
+
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      border-color: rgba(31, 125, 83, 0.3);
+      background: rgba(31, 125, 83, 0.1);
+      color: var(--p2);
+    }
+
     .faq-a {
-      color: #c7d5e6;
-      line-height: 1.7;
-      font-size: 0.96rem;
-    }
-    .outcome-card::before {
-      content:""; position:absolute; top:0; left:0; right:0; height:2px;
-      background:var(--grad);
-    }
-    .oc-label {
-      font-size:0.82rem; font-weight:700; letter-spacing:2.5px;
-      text-transform:uppercase; color:var(--primary); margin-bottom:16px;
-      display:flex; align-items:center; gap:8px;
-    }
-    .oc-label::before {
-      content:""; display:inline-block;
-      width:14px; height:2px;
-      background:var(--grad); border-radius:2px;
-    }
-    .oc-body {
-      font-size:1.05rem; color:#ccd8ea; line-height:1.75;
+      padding: 0 22px 20px;
+      font-size: .88rem;
+      color: #8faabb;
+      line-height: 1.78;
+      display: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      margin-top: 0;
+      padding-top: 18px;
     }
 
-    /* ═══════════════════════ STATS STRIP ═══════════════════════ */
-    .stats-strip {
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:20px;
-      padding:40px;
-      background:transparent;
-      align-items:stretch;
+    .faq-item.open .faq-a {
+      display: block;
     }
 
-    .stat-cell {
-      padding: 40px 36px;
-      border:1px solid var(--border);
-      border-radius:20px;
-      background:rgba(255,255,255,0.03);
-      transition: border-color 220ms, background 220ms;
-      position:relative;
-      overflow:hidden;
-      min-height: 180px;
-      height: 100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:8px;
-    }
-    .stat-cell:hover {
-      border-color:rgba(31, 125, 83,0.3);
-      background:rgba(31, 125, 83,0.03);
-    }
-    .stat-cell::before {
-      content:""; position:absolute; top:0; left:0; right:0; height:2px;
-      background:var(--grad);
+    /* ─── CTA ────────────────────────────────────────────────── */
+    .cta-section {
+      padding: 90px 60px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
     }
 
-    .stat-num {
-      font-family:"Space Grotesk",sans-serif;
-      font-size:clamp(1.75rem,2.35vw,2.45rem);
-      font-weight:800; line-height:1.08;
-      letter-spacing:0; margin-bottom:2px;
-      padding-left:2px;
-      background:var(--grad);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      background-clip:text;
-      display:block;
-    }
-    .stat-label {
-      font-size:0.9rem;
-      font-weight:700;
-      color:#d9e5f2;
-      line-height:1.35;
-      margin-bottom:1px;
-      max-width:22ch;
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 120% at 50% 100%, rgba(31, 125, 83, 0.1), transparent 60%),
+        radial-gradient(ellipse 50% 80% at 10% 0%, rgba(31, 125, 83, 0.06), transparent 60%);
+      pointer-events: none;
     }
 
-    .stat-desc {
-      font-size:0.74rem;
-      color:var(--muted);
-      line-height:1.32;
-      max-width:32ch;
+    .cta-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+    .cta-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.22);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--p2);
+      margin-bottom: 28px;
+    }
+
+    .cta-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .cta-title span {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 50ch;
+      margin-bottom: 36px;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cta-note {
+      margin-top: 20px;
+      font-size: .76rem;
+      color: var(--muted);
+    }
+
+    /* ─── SCROLL REVEAL ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media(max-width:1200px) {
+      .navbar {
+        padding: 0 36px;
+      }
+
+      .hero-left {
+        padding: 60px 44px;
+      }
+
+      .hero-right {
+        padding: 48px 36px;
+      }
+
+      .how-section,
+      .faq-section,
+      .outcome-section,
+      .cta-section {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+
+      .ba-header {
+        padding: 60px 40px 32px;
+      }
+
+      .ba-grid {
+        padding: 0 40px 48px;
+      }
+
+      .flow-steps::before {
+        display: none;
+      }
+    }
+
+    @media(max-width:1000px) {
+
+      .how-section,
+      .faq-section,
+      .outcome-section {
+        padding-top: 64px;
+        padding-bottom: 64px;
+      }
+
+      .flow-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+        padding-top: 0;
+      }
+
+      .flow-step {
+        padding: 0;
+      }
+
+      .faq-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .faq-sticky {
+        position: static;
+      }
+
+      .outcome-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-left {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 60px 40px;
+      }
+
+      .hero-right {
+        padding: 48px 40px;
+      }
+
+      .stats-section {
+        padding: 72px 32px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ba-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .navbar {
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media(max-width:640px) {
+      .hero-left {
+        padding: 48px 24px;
+      }
+
+      .hero-right {
+        padding: 36px 24px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat-cell {
+        padding: 36px 22px;
+      }
+
+      .how-section,
+      .faq-section,
+      .outcome-section,
+      .cta-section {
+        padding: 52px 24px;
+      }
+
+      .ba-header {
+        padding: 52px 24px 28px;
+      }
+
+      .ba-grid {
+        padding: 0 24px 40px;
+        gap: 16px;
+      }
+
+      .flow-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .outcome-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        letter-spacing: -2px;
+      }
+
+      .cta-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .cta-actions .btn-primary,
+      .cta-actions .btn-ghost {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *::before,
+      *::after {
         animation: none !important;
         transition: none !important;
       }
     }
-
-    @keyframes heroFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-
-    /* ═══════════════════════ CTA ═══════════════════════ */
-    .cta-cs-section {
-      display:grid; grid-template-columns:1fr auto;
-      align-items:center; gap:60px;
-      padding: 50px 40px;
-      position:relative; overflow:hidden;
-      background:transparent;
-    }
-
-    .cta-cs-text {
-      font-family:"Space Grotesk",sans-serif;
-      font-size:clamp(1.5rem,2.6vw,2.3rem); font-weight:700;
-      line-height:1.3; color:var(--text);
-    }
-    .cta-cs-sub {
-      font-size:1.02rem; color:var(--muted); line-height:1.65;
-      margin-top:12px; max-width:52ch;
-    }
-
-    .cta-cs-btn {
-      flex-shrink:0;
-      display:inline-flex; align-items:center; gap:10px;
-      text-decoration:none; color:#f1f5f9; font-weight:800;
-      font-size:1rem; border-radius:999px;
-      padding:18px 36px;
-      background:var(--grad);
-      font-family:"Space Grotesk",sans-serif;
-      box-shadow: 0 8px 28px rgba(31, 125, 83,0.3);
-      transition: box-shadow 200ms;
-      white-space:nowrap;
-      letter-spacing:0.2px;
-    }
-    .cta-cs-btn:hover { box-shadow:0 16px 40px rgba(31, 125, 83,0.42); }
-
-    
-    .cta-cs-copy { display: flex; flex-direction: column; }
-    .cta-cs-actions { display: flex; gap: 16px; align-items: center; }
-    .cta-cs-btn-secondary {
-      text-decoration:none; color:var(--text); font-weight:600;
-      font-size:0.95rem; border-radius:999px;
-      padding:16px 32px; border:1px solid rgba(255,255,255,0.2);
-      transition: background 200ms, border-color 200ms;
-    }
-    .cta-cs-btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.4); }
-
-    /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
-    @media(max-width:1100px) {
-      .navbar { padding:0 32px; }
-      .hero-cs-left { padding:60px 48px 60px 48px; }
-      .hero-cs-right { padding:48px 40px; }
-      .stats-strip { gap:16px; padding:0 48px 14px; }
-      .ba-header { padding:48px 48px 36px; }
-      .ba-grid { padding:0 48px; gap:18px; }
-      .outcome-section { padding:64px 48px; }
-      .faq-section { padding:64px 48px; }
-      .cta-cs-section { padding:64px 48px; }
-    }
-
-    @media(max-width:900px) {
-      .hero-cs { grid-template-columns:1fr; min-height:auto; }
-      .hero-cs-left { border-right:none; border-bottom:1px solid var(--border); padding:60px 32px; }
-      .hero-cs-right { padding:40px 32px; }
-      .outcome-cards { grid-template-columns:1fr; }
-      .faq-section { padding:56px 32px; }
-      .faq-grid { grid-template-columns:1fr; }
-      .stats-strip { grid-template-columns:1fr 1fr; gap:12px; padding:0 32px 12px; }
-      .cta-cs-section { grid-template-columns:1fr; gap:28px; }
-      .navbar { padding:0 24px; }
-      .nav-links { display:none; }
-    }
-
-    @media(max-width:640px) {
-      .hero-cs-left { padding:48px 24px; }
-      .hero-cs-right { padding:32px 24px; }
-      .ba-section { padding:0 0 48px; }
-      .ba-header { padding:36px 24px 28px; }
-      .ba-grid { grid-template-columns:1fr; padding:0 24px; gap:16px; }
-      .outcome-section { padding:48px 24px; }
-      .faq-section { padding:48px 24px; }
-      .stats-strip { grid-template-columns:1fr; gap:10px; padding:0 24px 10px; }
-      .stat-cell { min-height:auto; padding:26px 22px; }
-      .cta-cs-section { padding:48px 24px; }
-      .cta-cs-actions { width:100%; flex-direction:column; }
-      .cta-cs-btn { width:100%; justify-content:center; }
-      .cta-cs-btn-secondary { width:100%; text-align:center; }
-    }
-
   </style>
 </head>
+
 <body>
 
-  <!-- PARTICLE VOID -->
-  <canvas id="bg-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.8;"></canvas>
+  <!-- BACKGROUND PARTICLE CANVAS -->
+  <canvas id="bg-canvas"></canvas>
 
+  <!-- GLOW ORBS -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-<!-- ═══════════ NAVBAR ═══════════ -->
-<nav class="navbar">
-  <a href="/" class="nav-logo">Karl<span>space</span></a>
-  <ul class="nav-links">
-    <li><a href="#ba">Before &amp; After</a></li>
-    <li><a href="#outcome">What Changed</a></li>
-    <li><a href="#stats">Stats</a></li>
-  </ul>
-  <a href="/#case-studies" class="nav-back">← Back to Case Studies</a>
-</nav>
-
-<!-- ═══════════ HERO ═══════════ -->
-<section class="hero-cs" style="position: relative; z-index: 1;">
-  <div class="hero-cs-left">
-    <div class="hero-cs-tag">Case Study</div>
-    <h1 class="hero-cs-title">AI Voice Call Agent<br>for <span class="highlight">Clinics</span></h1>
-    <p class="hero-cs-sub">The AI voice agent that books, reschedules, and cancels clinic appointments - automatically, 24/7.</p>
-    <ul class="hero-cs-bullets">
-      <li>AI agent answers calls and books appointments in real time</li>
-      <li>Sends instant SMS confirmation with appointment code</li>
-      <li>Reschedules or cancels based on patient request</li>
-      <li>Syncs directly to doctor schedules - zero double bookings</li>
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar">
+    <a href="/" class="nav-logo">Karl<span>space</span></a>
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#ba">Before &amp; After</a></li>
+      <li><a href="#outcome">Outcomes</a></li>
+      <li><a href="#faq">FAQ</a></li>
     </ul>
-  </div>
-  <div class="hero-cs-right">
-    <div class="hero-cs-img-wrap">
-      <video src="case-study-demo.mp4" autoplay loop muted playsinline></video>
+    <a href="/#case-studies" class="nav-back">← Back</a>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="tag">Case Study</div>
+      <div class="badge"><span class="badge-dot"></span> Always Live - 24/7</div>
+      <h1 class="hero-title">
+        AI Voice Call Agent<br>
+        for <span class="hl">Clinics</span>
+      </h1>
+      <p class="hero-desc">
+        Your front desk never sleeps again. Every inbound call booked,<br>
+        rescheduled, or cancelled automatically, always on.
+      </p>
+      <ul class="hero-list">
+        <li>
+          <span class="li-icon">📞</span>
+          Answers every call instantly; day or night
+        </li>
+        <li>
+          <span class="li-icon">📅</span>
+          Live slot check, zero double bookings
+        </li>
+        <li>
+          <span class="li-icon">💬</span>
+          Instant SMS with a unique appointment code
+        </li>
+        <li>
+          <span class="li-icon">✅</span>
+          Reschedules &amp; cancellations fully automated
+        </li>
+      </ul>
+      <div class="hero-actions">
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
+          class="btn-primary">
+          Book a Free Audit →
+        </a>
+        <a href="#how" class="btn-ghost">See how it works ↓</a>
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- ═══════════ STATS STRIP ═══════════ -->
-<div class="stats-strip" id="stats">
-  <div class="stat-cell">
-    <div class="stat-num">24/7</div>
-    <div class="stat-label">Never Sleeps</div>
-    <div class="stat-desc">Handles calls at 2am on Sunday the same as 9am Monday</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-num">&lt;60s</div>
-    <div class="stat-label">Booked. Done.</div>
-    <div class="stat-desc">Call answered, slot checked, appointment confirmed - in under a minute</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-num">$10k+</div>
-    <div class="stat-label">Back in the Bank</div>
-    <div class="stat-desc">Revenue recovered every month from calls that used to just ring out</div>
-  </div>
-  <div class="stat-cell">
-    <div class="stat-num">0 Missed</div>
-    <div class="stat-label">Zero Missed Calls</div>
-    <div class="stat-desc">Every inbound call gets a response - no voicemail, no lost patients</div>
-  </div>
-</div>
+    <div class="hero-right">
+      <div class="voice-widget">
+        <!-- Window bar -->
+        <div class="widget-bar">
+          <div class="widget-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="widget-title">AI Call Agent</div>
+          <div class="widget-status">Active</div>
+        </div>
 
-<!-- ═══════════ BEFORE & AFTER ═══════════ -->
-<section class="ba-section" id="ba">
-  <div class="ba-header">
-    <div class="sec-tag">Architecture</div>
-    <h2 class="sec-h2">Before &amp; After</h2>
-  </div>
-  <div class="ba-grid">
-    <div class="ba-col">
-      <div class="ba-col-label">Before</div>
-      <img src="pokk-img1.png" alt="Manual clinic call workflow before AI booking automation" />
+        <!-- Voice orb + waveform -->
+        <div class="voice-orb-wrap">
+          <div class="voice-orb">🎙️</div>
+          <div class="waveform" id="waveform"></div>
+        </div>
+
+        <!-- Transcript -->
+        <div class="transcript">
+          <div class="tr-row agent">
+            <div class="tr-avatar">🤖</div>
+            <div class="tr-bubble">Hi! I'm Aria from City Clinic. How can I help you today?</div>
+          </div>
+          <div class="tr-row patient">
+            <div class="tr-avatar">👤</div>
+            <div class="tr-bubble">I'd like to book with Dr. Marcel this Thursday if possible.</div>
+          </div>
+          <div class="tr-row agent">
+            <div class="tr-avatar">🤖</div>
+            <div class="tr-bubble">Dr. Marcel has 10:30 AM available. Shall I confirm that?</div>
+          </div>
+        </div>
+
+        <!-- SMS chip -->
+        <div class="sms-chip">
+          <span class="sms-icon">📱</span>
+          <div class="sms-text">
+            <strong>Confirmation Sent ✓</strong>
+            Code <b>AX7K2P</b> - Thu 10:30 AM · Dr. Marcel
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="ba-col">
-      <div class="ba-col-label after">After</div>
-      <img src="pokk-img3.png" alt="AI call agent workflow with automated booking, rescheduling, and SMS confirmation" />
+  </section>
+
+  <!-- ═══ OUTCOMES ═══ -->
+  <section class="outcome-section" id="outcome">
+    <div class="outcome-head reveal">
+      <div class="sec-tag">Results</div>
+      <h2 class="sec-h2">What Actually Changed</h2>
     </div>
-  </div>
-</section>
-
-<!-- ═══════════ WHAT CHANGED ═══════════ -->
-<section class="outcome-section" id="outcome">
-  <div class="sec-tag">The "After" - The Outcome</div>
-  <h2 class="sec-h2" style="margin-bottom:24px;">What Changed</h2>
-  <p class="outcome-intro">
-    Before this system, every missed call was a lost patient. Now the AI agent handles every inbound call,
-    checks doctor availability in real time, books the slot, and fires an SMS confirmation - all without a
-    single human involved.
-  </p>
-  <div class="outcome-cards">
-    <div class="outcome-card">
-      <div class="oc-label">Revenue</div>
-      <p class="oc-body">Clinics went from losing patients to missed calls, to recovering $10,000+ per month in booked appointments.</p>
+    <p class="outcome-sub reveal">
+      Before: a missed call is a lost patient. After: the AI catches every call, fills every slot, and sends every
+      confirmation. No humans involved.
+    </p>
+    <div class="outcome-cards">
+      <div class="oc reveal">
+        <span class="oc-icon">💰</span>
+        <div class="oc-label">Revenue</div>
+        <div class="oc-title">$10,000+ back per month</div>
+        <p class="oc-body">Clinics stopped losing patients to missed calls. Every inbound call now converts to a booked
+          appointment.</p>
+      </div>
+      <div class="oc reveal">
+        <span class="oc-icon">⚙️</span>
+        <div class="oc-label">Automation</div>
+        <div class="oc-title">Staff touch zero phones</div>
+        <p class="oc-body">Booking, rescheduling, and cancellations are fully handled by the agent - staff focus on
+          in-clinic care.</p>
+      </div>
+      <div class="oc reveal">
+        <span class="oc-icon">🔒</span>
+        <div class="oc-label">Reliability</div>
+        <div class="oc-title">Every call. Every time.</div>
+        <p class="oc-body">Zero missed calls. Every booking in the database. Every patient gets an SMS - no exceptions,
+          no voicemail.</p>
+      </div>
     </div>
-    <div class="outcome-card">
-      <div class="oc-label">Automation</div>
-      <p class="oc-body">The AI agent books, reschedules, and cancels appointments autonomously - staff no longer touch the phone.</p>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <div class="stats-section" id="stats">
+
+    <!-- Left: floating widget with video -->
+    <div class="stats-video-panel">
+      <div class="stats-widget-card reveal-left">
+        <!-- macOS chrome bar -->
+        <div class="stats-widget-bar">
+          <div class="stats-widget-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="stats-widget-title">Live System Demo</div>
+          <div class="stats-widget-live">Live</div>
+        </div>
+        <!-- video -->
+        <div class="stats-widget-video">
+          <video src="case-study-demo.mp4" autoplay loop muted playsinline loading="lazy"></video>
+          <div class="stats-widget-video-label">AI Agent Running</div>
+        </div>
+      </div>
     </div>
-    <div class="outcome-card">
-      <div class="oc-label">Reliability</div>
-      <p class="oc-body">Every call gets a response. Every booking writes to the database. Every patient gets an SMS confirmation code.</p>
+
+    <!-- Right: 2×2 separate stat cards -->
+    <div class="stats-grid">
+      <div class="stat-cell reveal">
+        <div class="stat-icon">📞</div>
+        <span class="stat-num">24/7</span>
+        <div class="stat-label">Always Answering</div>
+        <div class="stat-desc">No hold music. No missed calls. Ever.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">⚡</div>
+        <span class="stat-num">&lt;60s</span>
+        <div class="stat-label">Call to Confirmed</div>
+        <div class="stat-desc">Slot checked and booked in under a minute</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">💰</div>
+        <span class="stat-num">$10k+</span>
+        <div class="stat-label">Revenue Recovered</div>
+        <div class="stat-desc">Per month from calls that used to ring out</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">✅</div>
+        <span class="stat-num">0</span>
+        <div class="stat-label">Missed Calls</div>
+        <div class="stat-desc">Every patient gets a live response, guaranteed</div>
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- ═══════════ FAQ ═══════════ -->
-<section class="faq-section" id="faq">
-  <div class="faq-head">
-    <div class="sec-tag">Frequently Asked Questions</div>
-    <h2 class="sec-h2 faq-title">Frequently Asked Questions</h2>
   </div>
 
-  <div class="faq-grid">
-    <article class="faq-item">
-      <h3 class="faq-q">Q1: If a patient requests a specific doctor but that doctor is fully booked, what happens?</h3>
-      <p class="faq-a">A: The agent scans forward in 30-minute increments for the same doctor on the same day. If no slot is found before 10 PM closing time, it informs the patient. It does not reassign to another doctor automatically.</p>
-    </article>
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="how-section" id="how">
+    <div class="how-head reveal">
+      <div class="sec-tag">The System</div>
+      <h2 class="sec-h2">How It Works</h2>
+      <p class="how-desc">Four steps. Fully automated. No human intervention required from the moment a patient dials
+        in.</p>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step reveal">
+        <div class="step-bubble">01</div>
+        <div class="step-icon-wrap">📲</div>
+        <div class="step-title">Patient Calls In</div>
+        <p class="step-desc">The AI answers instantly - no hold, no voicemail. Detects intent in seconds.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">02</div>
+        <div class="step-icon-wrap">🗂️</div>
+        <div class="step-title">Live Slot Check</div>
+        <p class="step-desc">Queries the clinic's live schedule for available doctor slots in real time.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">03</div>
+        <div class="step-icon-wrap">✍️</div>
+        <div class="step-title">Appointment Booked</div>
+        <p class="step-desc">Patient data written to the database. Unique 6-char code generated.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">04</div>
+        <div class="step-icon-wrap">📱</div>
+        <div class="step-title">SMS Sent</div>
+        <p class="step-desc">Instant confirmation to the patient - with their code for future changes.</p>
+      </div>
+    </div>
+  </section>
 
-    <article class="faq-item">
-      <h3 class="faq-q">Q2: Is there a double-booking risk when multiple patients book at the same time?</h3>
-      <p class="faq-a">A: Both flows check the live PostgreSQL table before inserting. However, there is no transaction lock between simultaneous requests, so a race condition on the same slot is a known edge case worth discussing before deployment.</p>
-    </article>
+  <!-- ═══ BEFORE & AFTER ═══ -->
+  <section class="ba-section" id="ba">
+    <div class="ba-header reveal">
+      <div class="sec-tag">Architecture</div>
+      <h2 class="sec-h2">Before &amp; After</h2>
+      <p class="ba-sub">The same clinic - completely different operation. On the left, scattered manual bookings. On the
+        right, every slot filled by the AI agent.</p>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-col reveal">
+        <div class="ba-col-label"><span></span> Before - Manual</div>
+        <img src="pokk-img1.png" alt="Manual clinic booking workflow" loading="lazy" />
+      </div>
+      <div class="ba-col after reveal">
+        <div class="ba-col-label"><span></span> After - AI Automated</div>
+        <img src="pokk-img3.png" alt="AI automated clinic booking full schedule" loading="lazy" />
+      </div>
+    </div>
+  </section>
 
-    <article class="faq-item">
-      <h3 class="faq-q">Q3: Where does the appointment code come from and what gets stored?</h3>
-      <p class="faq-a">A: A 6-character code is randomly generated from uppercase letters and numbers before the database insert. Each record stores: patient name, phone, doctor name, date, start time, end time, code, and timestamp. The code is then sent to the patient via SMS.</p>
-    </article>
+  <!-- ═══ FAQ ═══ -->
+  <section class="faq-section" id="faq">
+    <div class="faq-layout">
+      <div class="faq-sticky reveal-left">
+        <div class="sec-tag">FAQ</div>
+        <h2 class="faq-sticky-title">Common Questions</h2>
+        <p class="faq-sticky-desc">Everything you need to know before deploying the agent for your clinic.</p>
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
+          class="faq-cta-mini">
+          Still have questions? Book a call →
+        </a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">What if a patient's preferred doctor is fully booked?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">The agent scans forward in 30-minute increments for the same doctor on the same day. If
+            nothing's available before closing, it informs the patient - it does not silently reassign to another
+            doctor.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">Can two patients accidentally book the same slot?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">Both requests check the live database before inserting. Simultaneous requests on the exact
+            same slot are a known edge case worth discussing if your clinic is very high-volume.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">What gets stored and where does the code come from?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">A random 6-character alphanumeric code is generated per booking. The record stores patient
+            name, phone, doctor, date, time slot, code, and timestamp. The code is sent via SMS immediately after
+            confirmation.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">How does cancellation work?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">The patient provides their appointment code. The agent matches it against the database - if
+            found, the record is deleted and an SMS confirms the cancellation. Only the code is validated, not the name.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <article class="faq-item">
-      <h3 class="faq-q">Q4: How does the agent verify identity before cancelling an appointment?</h3>
-      <p class="faq-a">A: The patient provides their appointment code. The agent queries the database by code only - if no match is found, it asks for the correct one. If found, the record is deleted and an SMS confirmation is sent. Note: the name is not cross-checked, only the code is validated.</p>
-    </article>
-  </div>
-</section>
-
-<!-- ═══════════ CTA ═══════════ -->
-<section class="cta-cs-section">
-  <div>
-    <div class="cta-cs-text">Need this adapted for your business?</div>
-  </div>
-  <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="cta-cs-btn">Book a Free Audit →</a>
-</section>
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section">
+    <div class="cta-inner reveal">
+      <div class="cta-eyebrow">✦ Free Audit - No Commitment</div>
+      <h2 class="cta-title">Want this for<br><span>your clinic?</span></h2>
+      <p class="cta-sub">We'll walk through your current booking process and show you exactly how an AI voice agent
+        would fit in - free.</p>
+      <div class="cta-actions">
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
+          class="btn-primary">
+          Book a Free Audit →
+        </a>
+        <a href="/#case-studies" class="btn-ghost">See More Case Studies</a>
+      </div>
+      <p class="cta-note">30-minute call · No sales pressure · Real answers</p>
+    </div>
+  </section>
 
   <script src="index.js"></script>
+  <script>
+    /* ── WAVEFORM BARS ── */
+    (function () {
+      const wf = document.getElementById('waveform');
+      if (!wf) return;
+      const heights = [8, 16, 28, 40, 36, 22, 44, 30, 18, 42, 26, 38, 14, 32, 46, 20, 34, 12, 40, 28, 16, 36, 24, 44, 18];
+      const delays = [0, .12, .24, .08, .36, .18, .42, .06, .3, .15, .27, .09, .21, .33, .03, .39, .45, .51, .57, .63, .69, .75, .81, .87, .93];
+      const durs = [.7, .85, .65, .9, .75, .8, .7, .95, .6, .85, .7, .9, .65, .75, .8, .7, .85, .6, .9, .75, .65, .8, .7, .95, .6];
+      heights.forEach((h, i) => {
+        const b = document.createElement('div');
+        b.className = 'wave-bar';
+        b.style.cssText = `--h:${h}px;--d:${durs[i]}s;--del:${delays[i]}s;height:${h}px`;
+        wf.appendChild(b);
+      });
+    })();
+
+    /* ── SCROLL REVEAL ── */
+    const revealEls = document.querySelectorAll('.reveal,.reveal-left');
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const siblings = [...e.target.parentElement.querySelectorAll('.reveal:not(.visible),.reveal-left:not(.visible)')];
+        const idx = siblings.indexOf(e.target);
+        setTimeout(() => e.target.classList.add('visible'), Math.max(0, idx) * 90);
+        revealIO.unobserve(e.target);
+      });
+    }, { threshold: .1 });
+    revealEls.forEach(el => revealIO.observe(el));
+
+    /* ── FAQ ACCORDION ── */
+    function toggleFaq(row) {
+      const item = row.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
 </body>
+
 </html>

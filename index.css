@@ -1552,7 +1552,7 @@ ul {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* case-studies 2-col override already inline — handled below */
+    /* case-studies 2-col override already inline - handled below */
 }
 
 /* ── Medium screens (≤1200px) ── */
@@ -1571,7 +1571,7 @@ ul {
 /* ── Small Tablet (≤900px) ── */
 @media (max-width: 900px) {
 
-    /* Hide Möbius canvas entirely — it overlaps content */
+    /* Hide Möbius canvas entirely - it overlaps content */
     #mobius-canvas {
         display: none !important;
     }
@@ -1848,7 +1848,7 @@ ul {
         justify-content: center;
     }
 
-    /* Case studies section — override inline grid */
+    /* Case studies section - override inline grid */
     .case-studies-grid {
         grid-template-columns: 1fr !important;
         gap: 20px !important;

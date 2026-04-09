@@ -52,46 +52,74 @@
   <!-- PAGE LOADER -->
   <style>
     #page-loader {
-      position:fixed;inset:0;z-index:9999;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      background:#050608;
-      transition:opacity 0.5s ease,visibility 0.5s ease;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #050608;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
     /* Logo text */
     .loader-logo {
-      font-family:'Space Grotesk',sans-serif;
-      font-size:1.5rem;font-weight:700;color:#fff;
-      letter-spacing:0.3px;margin-bottom:22px;
-      opacity:0;animation:loaderFadeIn 0.4s ease 0.15s forwards;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.3px;
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: loaderFadeIn 0.4s ease 0.15s forwards;
     }
-    .loader-logo span { color:#1F7D53; }
+
+    .loader-logo span {
+      color: #1F7D53;
+    }
+
     @keyframes loaderFadeIn {
-      to { opacity:1; }
+      to {
+        opacity: 1;
+      }
     }
+
     /* Progress bar */
     .loader-bar {
-      width:140px;height:2px;border-radius:2px;
-      background:rgba(255,255,255,0.06);
-      margin-top:18px;overflow:hidden;
+      width: 140px;
+      height: 2px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.06);
+      margin-top: 18px;
+      overflow: hidden;
     }
+
     .loader-bar-fill {
-      width:0;height:100%;border-radius:2px;
-      background:linear-gradient(90deg,#1F7D53,#2C8B5F);
-      animation:loaderProgress 1.5s ease forwards;
+      width: 0;
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #1F7D53, #2C8B5F);
+      animation: loaderProgress 1.5s ease forwards;
     }
+
     @keyframes loaderProgress {
-      to { width:100%; }
+      to {
+        width: 100%;
+      }
     }
   </style>
   <div id="page-loader">
     <div class="loader-logo">Karl<span>space</span></div>
     <div class="video-loader-dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <div class="loader-bar">
+      <div class="loader-bar-fill"></div>
+    </div>
   </div>
 
   <!-- PARTICLE VOID -->
-  <canvas id="bg-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.8;"></canvas>
+  <canvas id="bg-canvas"
+    style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.8;"></canvas>
 
 
 
@@ -118,25 +146,37 @@
       align-items: center;
       gap: 8px;
       padding: 6px 14px 6px 8px;
-      background: rgba(31,125,83,0.1);
-      border: 1px solid rgba(31,125,83,0.28);
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.28);
       border-radius: 50px;
       font-size: 0.78rem;
       font-weight: 600;
-      color: rgba(44,139,95,0.95);
+      color: rgba(44, 139, 95, 0.95);
       margin-bottom: 28px;
       letter-spacing: 0.01em;
     }
+
     .hero-badge-dot {
-      width: 7px; height: 7px;
+      width: 7px;
+      height: 7px;
       background: #2C8B5F;
       border-radius: 50%;
-      box-shadow: 0 0 8px rgba(44,139,95,0.7);
+      box-shadow: 0 0 8px rgba(44, 139, 95, 0.7);
       animation: heroPulse 2s ease-in-out infinite;
     }
+
     @keyframes heroPulse {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.75); }
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.75);
+      }
     }
 
     /* Hero headline upgrade */
@@ -150,10 +190,11 @@
       margin-bottom: 8px;
       max-width: 680px;
     }
+
     .hero-sub-v2 {
       font-size: clamp(1rem, 1.8vw, 1.2rem);
       font-weight: 400;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255, 255, 255, 0.45);
       line-height: 1.65;
       max-width: 520px;
       margin-bottom: 36px;
@@ -167,6 +208,7 @@
       flex-wrap: wrap;
       margin-bottom: 0;
     }
+
     .hero-btn-primary {
       display: inline-flex;
       align-items: center;
@@ -180,32 +222,35 @@
       border: none;
       text-decoration: none;
       cursor: pointer;
-      box-shadow: 0 8px 28px rgba(31,125,83,0.35);
+      box-shadow: 0 8px 28px rgba(31, 125, 83, 0.35);
       transition: transform 0.2s, box-shadow 0.2s;
     }
+
     .hero-btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 36px rgba(31,125,83,0.45);
+      box-shadow: 0 12px 36px rgba(31, 125, 83, 0.45);
     }
+
     .hero-btn-ghost {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 13px 24px;
       background: transparent;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255, 255, 255, 0.65);
       font-weight: 600;
       font-size: 0.92rem;
       border-radius: 50px;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       text-decoration: none;
       cursor: pointer;
       transition: border-color 0.2s, color 0.2s, background 0.2s;
     }
+
     .hero-btn-ghost:hover {
-      border-color: rgba(44,139,95,0.4);
+      border-color: rgba(44, 139, 95, 0.4);
       color: #fff;
-      background: rgba(44,139,95,0.07);
+      background: rgba(44, 139, 95, 0.07);
     }
 
     /* Stats row */
@@ -213,8 +258,8 @@
       display: flex;
       align-items: stretch;
       gap: 0;
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 20px;
       backdrop-filter: blur(12px);
       overflow: hidden;
@@ -222,6 +267,7 @@
       max-width: 700px;
       margin: 64px auto 0;
     }
+
     .hero-stat-v2 {
       flex: 1;
       display: flex;
@@ -232,15 +278,17 @@
       position: relative;
       text-decoration: none;
     }
-    .hero-stat-v2 + .hero-stat-v2::before {
+
+    .hero-stat-v2+.hero-stat-v2::before {
       content: '';
       position: absolute;
       left: 0;
       top: 20%;
       bottom: 20%;
       width: 1px;
-      background: rgba(255,255,255,0.07);
+      background: rgba(255, 255, 255, 0.07);
     }
+
     .hero-stat-v2-num {
       font-family: 'Inter', sans-serif;
       font-size: 3.2rem;
@@ -249,14 +297,16 @@
       line-height: 1;
       letter-spacing: -1px;
     }
+
     .hero-stat-v2-label {
       font-size: 0.88rem;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255, 255, 255, 0.45);
       font-weight: 500;
       margin-top: 10px;
       text-align: center;
       line-height: 1.45;
     }
+
     /* $ prefix sits at top-left of the number, smaller */
     .hero-stat-prefix {
       font-family: 'Inter', sans-serif;
@@ -267,6 +317,7 @@
       align-self: flex-start;
       margin-top: 6px;
     }
+
     .hero-stat-num-row {
       display: flex;
       align-items: flex-start;
@@ -276,13 +327,14 @@
     .hero-stats-label {
       text-align: center;
       font-size: 1.15rem;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255, 255, 255, 0.35);
       font-weight: 400;
       margin-bottom: 32px;
       letter-spacing: 0.02em;
     }
+
     .hero-stats-label strong {
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       font-weight: 600;
     }
 
@@ -293,20 +345,25 @@
         grid-template-columns: 1fr 1fr;
         gap: 0;
       }
+
       .hero-stat-v2 {
         padding: 24px 16px;
       }
+
       /* Remove the vertical line from every second item since they wrap */
       .hero-stat-v2:nth-child(2n+1)::before {
         display: none;
       }
+
       /* Add top borders for the bottom row to keep the grid dividers */
       .hero-stat-v2:nth-child(n+3) {
-        border-top: 1px solid rgba(255,255,255,0.07);
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
       }
+
       .hero-stat-v2-num {
         font-size: 2.8rem;
       }
+
       .hero-stat-prefix {
         font-size: 1.25rem;
         margin-top: 4px;
@@ -318,25 +375,31 @@
         grid-template-columns: 1fr;
         border-radius: 16px;
       }
+
       /* On single column, every top border is visible except the first */
       .hero-stat-v2:nth-child(n+2) {
-        border-top: 1px solid rgba(255,255,255,0.07);
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
       }
+
       /* Hide all side dividers */
       .hero-stat-v2::before {
         display: none !important;
       }
+
       .hero-cta-v2 {
         flex-direction: column;
         align-items: stretch;
       }
+
       .hero-cta-v2 a {
         justify-content: center;
       }
+
       .hero-badge {
         font-size: 0.72rem;
         padding: 5px 12px 5px 6px;
       }
+
       .hero-stat-v2-num {
         font-size: 2.4rem;
       }
@@ -350,7 +413,8 @@
       <div class="glow glow-2"></div>
     </div>
     <!-- Mobius Strip Animation Canvas -->
-    <canvas id="mobius-canvas" style="position: absolute; right: 0; top: -20px; width: 700px; height: 700px; z-index: 5; pointer-events: none; opacity: 1; mix-blend-mode: screen;"></canvas>
+    <canvas id="mobius-canvas"
+      style="position: absolute; right: 0; top: -20px; width: 700px; height: 700px; z-index: 5; pointer-events: none; opacity: 1; mix-blend-mode: screen;"></canvas>
 
     <div class="container hero-content">
 
@@ -361,25 +425,35 @@
 
       <!-- Sub -->
       <p class="hero-sub-v2 animate-in delay-3">
-        Build AI systems that actually match how your business works — not generic templates. Stop doing repetitive work. Start running on infrastructure.
+        Build AI systems that actually match how your business works - not generic templates. Stop doing repetitive
+        work. Start running on infrastructure.
       </p>
 
       <!-- Dual CTA -->
       <div class="hero-cta-v2 animate-in delay-4">
-        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="hero-btn-primary" id="hero-cta-primary">
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
+          class="hero-btn-primary" id="hero-cta-primary">
           Book a Free Audit
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12,5 19,12 12,19" />
+          </svg>
         </a>
         <a href="#case-studies" class="hero-btn-ghost">
           View Case Studies
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6,9 12,15 18,9" />
+          </svg>
         </a>
       </div>
     </div>
 
     <!-- Stats -->
-    <div class="hero-stats-wrapper animate-in delay-4" style="width: 100%; max-width: 860px; margin: 0 auto; position: relative; z-index: 10; padding: 0 24px;">
-      <div style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); margin-bottom: 28px; margin-top: 72px;"></div>
+    <div class="hero-stats-wrapper animate-in delay-4"
+      style="width: 100%; max-width: 860px; margin: 0 auto; position: relative; z-index: 10; padding: 0 24px;">
+      <div
+        style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); margin-bottom: 28px; margin-top: 72px;">
+      </div>
       <p class="hero-stats-label"><strong>Founders</strong> I've built for</p>
       <div class="hero-stats-v2">
         <div class="hero-stat-v2">
@@ -402,15 +476,17 @@
           <span class="hero-stat-v2-label">Deadlines Missed</span>
         </div>
       </div>
-      <div style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); margin-top: 32px;"></div>
+      <div
+        style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); margin-top: 32px;">
+      </div>
     </div>
   </section>
 
   <script>
     // Fire hero stat counters on page load (hero is always in viewport so IntersectionObserver won't trigger)
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        document.querySelectorAll('.hero-stats-wrapper .hero-stat-n[data-target]').forEach(function(el) {
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        document.querySelectorAll('.hero-stats-wrapper .hero-stat-n[data-target]').forEach(function (el) {
           var target = parseInt(el.dataset.target || '0', 10);
           var start = parseInt(el.dataset.start || '0', 10);
           var suffix = el.dataset.suffix || '';
@@ -446,8 +522,18 @@
       gap: 24px;
       margin-top: 48px;
     }
-    @media (max-width: 1024px) { .proj-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px)  { .proj-grid { grid-template-columns: 1fr; } }
+
+    @media (max-width: 1024px) {
+      .proj-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .proj-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
     /* Bottom row: center the last 2 cards */
     .proj-grid-bottom {
@@ -459,13 +545,25 @@
       margin-left: auto;
       margin-right: auto;
     }
-    @media (max-width: 1024px) { .proj-grid-bottom { max-width: 100%; grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px)  { .proj-grid-bottom { grid-template-columns: 1fr; max-width: 100%; } }
+
+    @media (max-width: 1024px) {
+      .proj-grid-bottom {
+        max-width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .proj-grid-bottom {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
+    }
 
     .proj-card {
       position: relative;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 20px;
       overflow: hidden;
       cursor: pointer;
@@ -474,23 +572,27 @@
       flex-direction: column;
       text-decoration: none;
     }
+
     .proj-card:hover {
-      border-color: rgba(31,125,83,0.5);
+      border-color: rgba(31, 125, 83, 0.5);
       transform: translateY(-6px);
-      box-shadow: 0 24px 60px rgba(31,125,83,0.12), 0 0 0 1px rgba(31,125,83,0.2);
+      box-shadow: 0 24px 60px rgba(31, 125, 83, 0.12), 0 0 0 1px rgba(31, 125, 83, 0.2);
     }
 
-    /* Top preview strip — faux browser chrome */
+    /* Top preview strip - faux browser chrome */
     .proj-preview {
       position: relative;
       width: 100%;
       height: 160px;
-      background: rgba(10,20,15,0.8);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(10, 20, 15, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       overflow: hidden;
       flex-shrink: 0;
     }
-    .proj-card--wide .proj-preview { height: 220px; }
+
+    .proj-card--wide .proj-preview {
+      height: 220px;
+    }
 
     /* Fake browser bar */
     .proj-browser-bar {
@@ -498,19 +600,32 @@
       align-items: center;
       gap: 6px;
       padding: 10px 16px;
-      background: rgba(255,255,255,0.04);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
+
     .proj-dot {
-      width: 9px; height: 9px; border-radius: 50%;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
     }
-    .proj-dot:nth-child(1) { background: #ff5f57; }
-    .proj-dot:nth-child(2) { background: #ffbd2e; }
-    .proj-dot:nth-child(3) { background: #28c840; }
+
+    .proj-dot:nth-child(1) {
+      background: #ff5f57;
+    }
+
+    .proj-dot:nth-child(2) {
+      background: #ffbd2e;
+    }
+
+    .proj-dot:nth-child(3) {
+      background: #28c840;
+    }
+
     .proj-url-bar {
       flex: 1;
       height: 20px;
-      background: rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.06);
       border-radius: 4px;
       margin-left: 8px;
     }
@@ -520,31 +635,38 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: calc(100% - 41px); /* subtract browser bar */
+      height: calc(100% - 41px);
+      /* subtract browser bar */
       position: relative;
     }
+
     .proj-icon-bg {
-      width: 72px; height: 72px;
+      width: 72px;
+      height: 72px;
       border-radius: 20px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 2rem;
-      background: rgba(31,125,83,0.12);
-      border: 1px solid rgba(31,125,83,0.2);
-      box-shadow: 0 0 40px rgba(31,125,83,0.15);
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.2);
+      box-shadow: 0 0 40px rgba(31, 125, 83, 0.15);
       transition: transform 0.3s, box-shadow 0.3s;
     }
+
     .proj-card:hover .proj-icon-bg {
       transform: scale(1.1);
-      box-shadow: 0 0 60px rgba(31,125,83,0.3);
+      box-shadow: 0 0 60px rgba(31, 125, 83, 0.3);
     }
+
     /* Subtle grid lines inside preview */
     .proj-preview::after {
       content: '';
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
       background-size: 32px 32px;
       pointer-events: none;
     }
@@ -564,16 +686,22 @@
       justify-content: space-between;
       margin-bottom: 14px;
     }
+
     .proj-num {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.12em;
-      color: rgba(31,125,83,0.7);
+      color: rgba(31, 125, 83, 0.7);
     }
+
     .proj-tags {
-      display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
+
     .proj-tag {
       font-size: 0.68rem;
       font-weight: 600;
@@ -581,9 +709,9 @@
       text-transform: uppercase;
       padding: 3px 10px;
       border-radius: 20px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.5);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.5);
     }
 
     /* Title */
@@ -596,12 +724,15 @@
       margin: 0 0 10px;
       transition: color 0.2s;
     }
-    .proj-card:hover .proj-title { color: #fff; }
+
+    .proj-card:hover .proj-title {
+      color: #fff;
+    }
 
     /* Description */
     .proj-desc {
       font-size: 0.88rem;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255, 255, 255, 0.45);
       line-height: 1.65;
       flex: 1;
       margin-bottom: 20px;
@@ -613,31 +744,44 @@
       align-items: center;
       justify-content: space-between;
     }
+
     .proj-cta-text {
       font-size: 0.85rem;
       font-weight: 600;
-      color: rgba(31,125,83,0.9);
+      color: rgba(31, 125, 83, 0.9);
       transition: color 0.2s;
     }
-    .proj-card:hover .proj-cta-text { color: #2C8B5F; }
+
+    .proj-card:hover .proj-cta-text {
+      color: #2C8B5F;
+    }
+
     .proj-arrow {
-      width: 36px; height: 36px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background: rgba(31,125,83,0.1);
-      border: 1px solid rgba(31,125,83,0.2);
-      display: flex; align-items: center; justify-content: center;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: background 0.25s, transform 0.25s;
     }
+
     .proj-card:hover .proj-arrow {
-      background: rgba(31,125,83,0.25);
+      background: rgba(31, 125, 83, 0.25);
       transform: translate(3px, -3px);
     }
-    .proj-arrow svg { stroke: #2C8B5F; }
+
+    .proj-arrow svg {
+      stroke: #2C8B5F;
+    }
 
     /* Divider line */
     .proj-divider {
-      width: 100%; height: 1px;
-      background: rgba(255,255,255,0.06);
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.06);
       margin-bottom: 20px;
     }
   </style>
@@ -672,12 +816,16 @@
               </div>
             </div>
             <h3 class="proj-title">AI Voice Call Agent for Clinics</h3>
-            <p class="proj-desc">Handles calls 24/7, books slots, manages cancellations &amp; updates your database — so 90% of routine calls never reach a human agent.</p>
+            <p class="proj-desc">Handles calls 24/7, books slots, manages cancellations &amp; updates your database - so
+              90% of routine calls never reach a human agent.</p>
             <div class="proj-divider"></div>
             <div class="proj-cta">
               <span class="proj-cta-text">Read Full Case Study</span>
               <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5,5 19,5 19,19"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                  <line x1="5" y1="19" x2="19" y2="5" />
+                  <polyline points="5,5 19,5 19,19" />
+                </svg>
               </div>
             </div>
           </div>
@@ -703,12 +851,16 @@
               </div>
             </div>
             <h3 class="proj-title">AI WhatsApp Sales Agent</h3>
-            <p class="proj-desc">Reads every message, pulls live inventory from Google Sheets and replies in under 2 seconds. 24/7. Zero staff needed.</p>
+            <p class="proj-desc">Reads every message, pulls live inventory from Google Sheets and replies in under 2
+              seconds. 24/7. Zero staff needed.</p>
             <div class="proj-divider"></div>
             <div class="proj-cta">
               <span class="proj-cta-text">Read Full Case Study</span>
               <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5,5 19,5 19,19"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                  <line x1="5" y1="19" x2="19" y2="5" />
+                  <polyline points="5,5 19,5 19,19" />
+                </svg>
               </div>
             </div>
           </div>
@@ -735,12 +887,17 @@
               </div>
             </div>
             <h3 class="proj-title">AI Lead Generation &amp; Outreach Automation</h3>
-            <p class="proj-desc">Fill out one form. The AI scrapes LinkedIn, Instagram, Facebook, YouTube &amp; Google — writes a personalised opening line per prospect — then sends 6 follow-up emails over 3 weeks automatically. You wake up to replies, not tasks.</p>
+            <p class="proj-desc">Fill out one form. The AI scrapes LinkedIn, Instagram, Facebook, YouTube &amp; Google -
+              writes a personalised opening line per prospect - then sends 6 follow-up emails over 3 weeks
+              automatically. You wake up to replies, not tasks.</p>
             <div class="proj-divider"></div>
             <div class="proj-cta">
               <span class="proj-cta-text">Read Full Case Study</span>
               <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5,5 19,5 19,19"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                  <line x1="5" y1="19" x2="19" y2="5" />
+                  <polyline points="5,5 19,5 19,19" />
+                </svg>
               </div>
             </div>
           </div>
@@ -767,12 +924,17 @@
               </div>
             </div>
             <h3 class="proj-title">AI Email Campaign via Telegram</h3>
-            <p class="proj-desc">Type one message in Telegram. The AI identifies the right customers or suppliers from your database, writes the email in the correct tone, and sends it automatically — no dashboard, no templates, no manual work required.</p>
+            <p class="proj-desc">Type one message in Telegram. The AI identifies the right customers or suppliers from
+              your database, writes the email in the correct tone, and sends it automatically - no dashboard, no
+              templates, no manual work required.</p>
             <div class="proj-divider"></div>
             <div class="proj-cta">
               <span class="proj-cta-text">Read Full Case Study</span>
               <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5,5 19,5 19,19"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                  <line x1="5" y1="19" x2="19" y2="5" />
+                  <polyline points="5,5 19,5 19,19" />
+                </svg>
               </div>
             </div>
           </div>
@@ -798,12 +960,16 @@
               </div>
             </div>
             <h3 class="proj-title">Google Sheets to Live Dashboard</h3>
-            <p class="proj-desc">Reads your Google Sheets live, visualises every metric instantly and updates in real time — no Power BI, no data team, no setup headaches.</p>
+            <p class="proj-desc">Reads your Google Sheets live, visualises every metric instantly and updates in real
+              time - no Power BI, no data team, no setup headaches.</p>
             <div class="proj-divider"></div>
             <div class="proj-cta">
               <span class="proj-cta-text">Read Full Case Study</span>
               <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5,5 19,5 19,19"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                  <line x1="5" y1="19" x2="19" y2="5" />
+                  <polyline points="5,5 19,5 19,19" />
+                </svg>
               </div>
             </div>
           </div>
@@ -863,9 +1029,11 @@
       <div class="testimonials-grid">
         <div class="testimonial-card" id="testimonial-1">
           <div class="t-stars">★★★★★</div>
-          <blockquote>"We had lead data scattered across multiple sheets. Karlspace turned it into a structured database and deployed an outreach system that runs continuously."</blockquote>
+          <blockquote>"We had lead data scattered across multiple sheets. Karlspace turned it into a structured database
+            and deployed an outreach system that runs continuously."</blockquote>
           <div class="t-author">
-            <img class="t-avatar" src="Gemini_Generated_Image_yxwd24yxwd24yxwd.png" alt="Fintech startup client testimonial avatar" loading="lazy" />
+            <img class="t-avatar" src="Gemini_Generated_Image_yxwd24yxwd24yxwd.png"
+              alt="Fintech startup client testimonial avatar" loading="lazy" />
             <div>
               <strong>Fintech Startup</strong>
               <span>Client</span>
@@ -875,9 +1043,11 @@
         </div>
         <div class="testimonial-card featured-t" id="testimonial-2">
           <div class="t-stars">★★★★★</div>
-          <blockquote>"Most vendors sell fragile automations. Karlspace delivered a full operational backbone."</blockquote>
+          <blockquote>"Most vendors sell fragile automations. Karlspace delivered a full operational backbone."
+          </blockquote>
           <div class="t-author">
-            <img class="t-avatar" src="5072b157-ca75-435b-ba0d-88bbdbab37a6-Photoroom.png" alt="E-commerce brand client testimonial avatar" loading="lazy" />
+            <img class="t-avatar" src="5072b157-ca75-435b-ba0d-88bbdbab37a6-Photoroom.png"
+              alt="E-commerce brand client testimonial avatar" loading="lazy" />
             <div>
               <strong>E-commerce Brand</strong>
               <span>Client</span>
@@ -889,7 +1059,8 @@
           <div class="t-stars">★★★★★</div>
           <blockquote>"The visibility into every automated task changed how we run operations."</blockquote>
           <div class="t-author">
-            <img class="t-avatar" src="057c590f-b88e-42b0-9190-6b99e0d2cc91-Photoroom (1).png" alt="Recruitment agency client testimonial avatar" loading="lazy" />
+            <img class="t-avatar" src="057c590f-b88e-42b0-9190-6b99e0d2cc91-Photoroom (1).png"
+              alt="Recruitment agency client testimonial avatar" loading="lazy" />
             <div>
               <strong>Recruitment Agency</strong>
               <span>Client</span>
@@ -966,16 +1137,23 @@
 
 
   <!-- CTA -->
-  <section class="cta-section" id="contact" style="padding: 120px 0; text-align: center; position: relative; z-index: 10;">
+  <section class="cta-section" id="contact"
+    style="padding: 120px 0; text-align: center; position: relative; z-index: 10;">
     <div class="container">
-      <h2 style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-display); font-weight: 700; margin-bottom: 12px; color: #fff;">Need AI agents like this?</h2>
-      <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px;">Reach me on X to build your automation system</p>
-      
+      <h2
+        style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-display); font-weight: 700; margin-bottom: 12px; color: #fff;">
+        Need AI agents like this?</h2>
+      <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px;">Reach me on X to build your
+        automation system</p>
+
       <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-        <a href="https://x.com/karlspace_" target="_blank" class="btn-cs-gradient" style="padding: 12px 28px; font-size: 0.95rem; text-decoration: none;">
+        <a href="https://x.com/karlspace_" target="_blank" class="btn-cs-gradient"
+          style="padding: 12px 28px; font-size: 0.95rem; text-decoration: none;">
           DM on X
         </a>
-        <a href="mailto:shivam@karlspace.in" style="background: transparent; border: 1px solid rgba(34, 197, 94, 0.3); color: var(--primary-light); font-weight: 500; padding: 11px 28px; border-radius: 50px; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; cursor: pointer;" onmouseover="this.style.background='rgba(34,197,94,0.08)';" onmouseout="this.style.background='transparent';">
+        <a href="mailto:shivam@karlspace.in"
+          style="background: transparent; border: 1px solid rgba(34, 197, 94, 0.3); color: var(--primary-light); font-weight: 500; padding: 11px 28px; border-radius: 50px; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; cursor: pointer;"
+          onmouseover="this.style.background='rgba(34,197,94,0.08)';" onmouseout="this.style.background='transparent';">
           shivam@karlspace.in
         </a>
       </div>
@@ -984,12 +1162,12 @@
 
   <script>
     // Auto-dismiss page loader after 1.5 seconds
-    setTimeout(function() {
+    setTimeout(function () {
       var loader = document.getElementById('page-loader');
       if (loader) {
         loader.style.opacity = '0';
         loader.style.visibility = 'hidden';
-        setTimeout(function() { loader.remove(); }, 400);
+        setTimeout(function () { loader.remove(); }, 400);
       }
     }, 1500);
   </script>
