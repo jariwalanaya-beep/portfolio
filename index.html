@@ -111,62 +111,325 @@
   </nav>
 
   <!-- HERO -->
+  <style>
+    /* ── Hero Upgrade ── */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px 6px 8px;
+      background: rgba(31,125,83,0.1);
+      border: 1px solid rgba(31,125,83,0.28);
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(44,139,95,0.95);
+      margin-bottom: 28px;
+      letter-spacing: 0.01em;
+    }
+    .hero-badge-dot {
+      width: 7px; height: 7px;
+      background: #2C8B5F;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(44,139,95,0.7);
+      animation: heroPulse 2s ease-in-out infinite;
+    }
+    @keyframes heroPulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.75); }
+    }
+
+    /* Hero headline upgrade */
+    .hero-headline-v2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      color: #fff;
+      margin-bottom: 8px;
+      max-width: 680px;
+    }
+    .hero-sub-v2 {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 400;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+      max-width: 520px;
+      margin-bottom: 36px;
+    }
+
+    /* Dual CTA */
+    .hero-cta-v2 {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+    .hero-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(90deg, #1F7D53 0%, #2C8B5F 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 50px;
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(31,125,83,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(31,125,83,0.45);
+    }
+    .hero-btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      background: transparent;
+      color: rgba(255,255,255,0.65);
+      font-weight: 600;
+      font-size: 0.92rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .hero-btn-ghost:hover {
+      border-color: rgba(44,139,95,0.4);
+      color: #fff;
+      background: rgba(44,139,95,0.07);
+    }
+
+    /* Stats row */
+    .hero-stats-v2 {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+      width: 100%;
+      max-width: 700px;
+      margin: 64px auto 0;
+    }
+    .hero-stat-v2 {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      position: relative;
+      text-decoration: none;
+    }
+    .hero-stat-v2 + .hero-stat-v2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      bottom: 20%;
+      width: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+    .hero-stat-v2-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 300;
+      color: #2C8B5F;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    .hero-stat-v2-label {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 500;
+      margin-top: 10px;
+      text-align: center;
+      line-height: 1.45;
+    }
+    /* $ prefix sits at top-left of the number, smaller */
+    .hero-stat-prefix {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: #2C8B5F;
+      line-height: 1;
+      align-self: flex-start;
+      margin-top: 6px;
+    }
+    .hero-stat-num-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .hero-stats-label {
+      text-align: center;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.35);
+      font-weight: 400;
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
+    }
+    .hero-stats-label strong {
+      color: rgba(255,255,255,0.7);
+      font-weight: 600;
+    }
+
+    /* ── Responsive adjustments for Hero V2 ── */
+    @media (max-width: 900px) {
+      .hero-stats-v2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+      }
+      .hero-stat-v2 {
+        padding: 24px 16px;
+      }
+      /* Remove the vertical line from every second item since they wrap */
+      .hero-stat-v2:nth-child(2n+1)::before {
+        display: none;
+      }
+      /* Add top borders for the bottom row to keep the grid dividers */
+      .hero-stat-v2:nth-child(n+3) {
+        border-top: 1px solid rgba(255,255,255,0.07);
+      }
+      .hero-stat-v2-num {
+        font-size: 2.8rem;
+      }
+      .hero-stat-prefix {
+        font-size: 1.25rem;
+        margin-top: 4px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-stats-v2 {
+        grid-template-columns: 1fr;
+        border-radius: 16px;
+      }
+      /* On single column, every top border is visible except the first */
+      .hero-stat-v2:nth-child(n+2) {
+        border-top: 1px solid rgba(255,255,255,0.07);
+      }
+      /* Hide all side dividers */
+      .hero-stat-v2::before {
+        display: none !important;
+      }
+      .hero-cta-v2 {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .hero-cta-v2 a {
+        justify-content: center;
+      }
+      .hero-badge {
+        font-size: 0.72rem;
+        padding: 5px 12px 5px 6px;
+      }
+      .hero-stat-v2-num {
+        font-size: 2.4rem;
+      }
+    }
+  </style>
+
   <section class="hero" id="hero" style="flex-direction: column; justify-content: center;">
     <div class="hero-bg">
       <div class="grid-overlay"></div>
       <div class="glow glow-1"></div>
       <div class="glow glow-2"></div>
     </div>
-    <!-- Mobius Strip Animation Canvas - outside hero-bg so overflow:hidden doesn't clip it -->
+    <!-- Mobius Strip Animation Canvas -->
     <canvas id="mobius-canvas" style="position: absolute; right: 0; top: -20px; width: 700px; height: 700px; z-index: 5; pointer-events: none; opacity: 1; mix-blend-mode: screen;"></canvas>
+
     <div class="container hero-content">
-      <h2 class="hero-headline hero-line-big animate-in delay-1">
-        Your Business Runs on <span class="highlight">Decisions.</span>
-      </h2>
-      <p class="hero-line-mid animate-in delay-2">
-        Make Them with AI That Understands<br />
-        Your <span class="gradient-text">Operations.</span>
+
+      <!-- Headline -->
+      <h1 class="hero-headline-v2 animate-in delay-1">
+        Your Business Runs<br>on <span class="highlight">Decisions.</span>
+      </h1>
+
+      <!-- Sub -->
+      <p class="hero-sub-v2 animate-in delay-3">
+        Build AI systems that actually match how your business works — not generic templates. Stop doing repetitive work. Start running on infrastructure.
       </p>
-      <p class="hero-line-small animate-in delay-3">
-        Stop Doing Repetitive Work. Start Running on system.
-      </p>
-      <p class="hero-sub animate-in delay-4">
-        Build systems that actually match how your business works not generic templates.
-      </p>
-      <div class="hero-cta animate-in delay-4">
-        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="hero-cta-primary">Book a Free Audit →</a>
-      </div>
+
+      <!-- Dual CTA -->
+      <div class="hero-cta-v2 animate-in delay-4">
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="hero-btn-primary" id="hero-cta-primary">
+          Book a Free Audit
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+        <a href="#case-studies" class="hero-btn-ghost">
+          View Case Studies
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+        </a>
       </div>
     </div>
-    <div class="hero-stats-wrapper animate-in delay-4" style="display: flex; flex-direction: column; align-items: center; position: relative; margin: 108px auto 0; width: 100%; max-width: 800px; z-index: 10;">
-      <div style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); margin-bottom: 24px;"></div>
-      
-      <h3 style="font-family: var(--font); font-size: 1.3rem; font-weight: 300; color: #fff; margin-bottom: 32px; letter-spacing: -0.2px;">
-        <span style="color: var(--text-muted);">Founders</span> I've built for
-      </h3>
 
-      <div class="hero-stats" style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; background: transparent; border: none; padding: 0; box-shadow: none;">
-        <div class="hero-stat" style="padding: 0; align-items: center; display: flex; flex-direction: column;">
-          <span class="hero-stat-n" data-target="34" data-start="1" data-suffix="+" style="font-size: 2.8rem; font-weight: 400; font-family: var(--font-display); color: var(--primary-light); background: none; -webkit-text-fill-color: var(--primary-light); line-height: 1;">1+</span>
-          <span class="hero-stat-l" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 400; margin-top: 8px; text-align: center;">AI Systems Built</span>
+    <!-- Stats -->
+    <div class="hero-stats-wrapper animate-in delay-4" style="width: 100%; max-width: 860px; margin: 0 auto; position: relative; z-index: 10; padding: 0 24px;">
+      <div style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); margin-bottom: 28px; margin-top: 72px;"></div>
+      <p class="hero-stats-label"><strong>Founders</strong> I've built for</p>
+      <div class="hero-stats-v2">
+        <div class="hero-stat-v2">
+          <span class="hero-stat-v2-num hero-stat-n" data-target="34" data-start="0" data-suffix="+">0+</span>
+          <span class="hero-stat-v2-label">AI Systems Built</span>
         </div>
-        <div class="hero-stat" style="padding: 0; align-items: center; display: flex; flex-direction: column;">
-          <span class="hero-stat-n" data-target="100" data-start="1" data-suffix="%" style="font-size: 2.8rem; font-weight: 400; font-family: var(--font-display); color: var(--primary-light); background: none; -webkit-text-fill-color: var(--primary-light); line-height: 1;">1%</span>
-          <span class="hero-stat-l" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 400; margin-top: 8px; text-align: center;">Client Satisfaction</span>
+        <div class="hero-stat-v2">
+          <span class="hero-stat-v2-num hero-stat-n" data-target="100" data-start="0" data-suffix="%">0%</span>
+          <span class="hero-stat-v2-label">Client Satisfaction</span>
         </div>
-        <div class="hero-stat" style="padding: 0; align-items: center; display: flex; flex-direction: column;">
-          <span class="hero-stat-n" data-target="120" data-start="1" data-prefix="$" data-suffix="k+" style="font-size: 2.8rem; font-weight: 400; font-family: var(--font-display); color: var(--primary-light); background: none; -webkit-text-fill-color: var(--primary-light); line-height: 1;">$1k+</span>
-          <span class="hero-stat-l" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 400; margin-top: 8px; text-align: center;">Revenue Recovered<br>for Clients</span>
+        <div class="hero-stat-v2">
+          <div class="hero-stat-num-row">
+            <span class="hero-stat-prefix">$</span>
+            <span class="hero-stat-v2-num hero-stat-n" data-target="120" data-start="0" data-suffix="k+">0k+</span>
+          </div>
+          <span class="hero-stat-v2-label">Revenue Recovered<br>for Clients</span>
         </div>
-        <div class="hero-stat" style="padding: 0; align-items: center; display: flex; flex-direction: column;">
-          <span class="hero-stat-n" style="font-size: 2.8rem; font-weight: 400; font-family: var(--font-display); color: var(--primary-light); background: none; -webkit-text-fill-color: var(--primary-light); line-height: 1;">0!</span>
-          <span class="hero-stat-l" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 400; margin-top: 8px; text-align: center;">Deadlines Missed</span>
+        <div class="hero-stat-v2">
+          <span class="hero-stat-v2-num">0!</span>
+          <span class="hero-stat-v2-label">Deadlines Missed</span>
         </div>
       </div>
-      
-      <div style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); margin-top: 32px;"></div>
+      <div style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); margin-top: 32px;"></div>
     </div>
   </section>
+
+  <script>
+    // Fire hero stat counters on page load (hero is always in viewport so IntersectionObserver won't trigger)
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.querySelectorAll('.hero-stats-wrapper .hero-stat-n[data-target]').forEach(function(el) {
+          var target = parseInt(el.dataset.target || '0', 10);
+          var start = parseInt(el.dataset.start || '0', 10);
+          var suffix = el.dataset.suffix || '';
+          var duration = 1600;
+          if (!isFinite(target)) return;
+          var startTime = null;
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var progress = Math.min((ts - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var value = Math.round(start + (target - start) * eased);
+            el.textContent = value + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+      }, 1600); // wait for page loader to finish
+    });
+  </script>
 
 
 
@@ -175,6 +438,210 @@
 
 
   <!-- CASE STUDIES -->
+  <style>
+    /* ── Project Showcase Cards ── */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    @media (max-width: 1024px) { .proj-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .proj-grid { grid-template-columns: 1fr; } }
+
+    /* Bottom row: center the last 2 cards */
+    .proj-grid-bottom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+      max-width: calc(66.66% - 8px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: 1024px) { .proj-grid-bottom { max-width: 100%; grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .proj-grid-bottom { grid-template-columns: 1fr; max-width: 100%; } }
+
+    .proj-card {
+      position: relative;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+    .proj-card:hover {
+      border-color: rgba(31,125,83,0.5);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(31,125,83,0.12), 0 0 0 1px rgba(31,125,83,0.2);
+    }
+
+    /* Top preview strip — faux browser chrome */
+    .proj-preview {
+      position: relative;
+      width: 100%;
+      height: 160px;
+      background: rgba(10,20,15,0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .proj-card--wide .proj-preview { height: 220px; }
+
+    /* Fake browser bar */
+    .proj-browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .proj-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+    }
+    .proj-dot:nth-child(1) { background: #ff5f57; }
+    .proj-dot:nth-child(2) { background: #ffbd2e; }
+    .proj-dot:nth-child(3) { background: #28c840; }
+    .proj-url-bar {
+      flex: 1;
+      height: 20px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    /* Icon glyph inside preview */
+    .proj-icon-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(100% - 41px); /* subtract browser bar */
+      position: relative;
+    }
+    .proj-icon-bg {
+      width: 72px; height: 72px;
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      background: rgba(31,125,83,0.12);
+      border: 1px solid rgba(31,125,83,0.2);
+      box-shadow: 0 0 40px rgba(31,125,83,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .proj-card:hover .proj-icon-bg {
+      transform: scale(1.1);
+      box-shadow: 0 0 60px rgba(31,125,83,0.3);
+    }
+    /* Subtle grid lines inside preview */
+    .proj-preview::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    /* Card body */
+    .proj-body {
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    /* Number + tags row */
+    .proj-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .proj-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(31,125,83,0.7);
+    }
+    .proj-tags {
+      display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;
+    }
+    .proj-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Title */
+    .proj-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      line-height: 1.35;
+      margin: 0 0 10px;
+      transition: color 0.2s;
+    }
+    .proj-card:hover .proj-title { color: #fff; }
+
+    /* Description */
+    .proj-desc {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    /* CTA row */
+    .proj-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .proj-cta-text {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(31,125,83,0.9);
+      transition: color 0.2s;
+    }
+    .proj-card:hover .proj-cta-text { color: #2C8B5F; }
+    .proj-arrow {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(31,125,83,0.1);
+      border: 1px solid rgba(31,125,83,0.2);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .proj-card:hover .proj-arrow {
+      background: rgba(31,125,83,0.25);
+      transform: translate(3px, -3px);
+    }
+    .proj-arrow svg { stroke: #2C8B5F; }
+
+    /* Divider line */
+    .proj-divider {
+      width: 100%; height: 1px;
+      background: rgba(255,255,255,0.06);
+      margin-bottom: 20px;
+    }
+  </style>
+
   <section class="case-studies" id="case-studies">
     <div class="container">
       <div class="section-header">
@@ -182,86 +649,165 @@
         <h2 class="section-title">Case Studies &amp; <span class="gradient-text">Live Demos</span></h2>
         <p class="section-sub">Actual systems deployed. Not hypothetical concepts.</p>
       </div>
-      
-      <div class="services-grid case-studies-grid" style="grid-template-columns: repeat(3, 1fr); gap: 20px;">
-        
 
+      <div class="proj-grid">
 
-        <!-- Case 2: Google Sheets Dashboard -->
-        <div class="service-card featured" style="padding: 40px 32px;">
-          <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Google Sheets to Live Dashboard</h3>
-          <p style="font-size: 0.95rem; margin-bottom: 24px;">Most businesses drown in spreadsheet data but can't see what it means. Rows pile up, patterns hide, decisions get delayed. This AI dashboard reads your Google Sheets live, visualises every metric instantly, and updates in real time no Power BI, no data team, no setup headaches.</p>
-          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 10; pointer-events: auto;">
-            <a href="case-study-dashboard.html" class="btn-cs-gradient" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, #1F7D53 0%, #2C8B5F 40%, #255F38 100%); color: #f1f5f9; font-weight: 700; padding: 10px 24px; border-radius: 50px; font-size: 0.95rem; border: none; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-              Read Full Case Study
-            </a>
+        <!-- 01: AI Voice Call Agent -->
+        <a href="case-study-call-agent.html" class="proj-card" id="proj-call-agent">
+          <div class="proj-preview">
+            <div class="proj-browser-bar">
+              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
+              <div class="proj-url-bar"></div>
+            </div>
+            <div class="proj-icon-wrap">
+              <div class="proj-icon-bg">📞</div>
+            </div>
           </div>
-        </div>
-
-
-        <!-- Case 4: AI Call Agent -->
-        <div class="service-card featured" style="padding: 40px 32px;">
-          <h3 style="font-size: 1.4rem; margin-bottom: 12px;">AI Voice Call Agent for Clinics</h3>
-          <p style="font-size: 0.95rem; margin-bottom: 24px;">If you receive calls outside business hours, you have a revenue leak. This system handles calls, books slots, manages complex cancellations, and updates your central database 24/7. It handles 90% of routine calls so human agents only step in for high-value cases.</p>
-          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 10; pointer-events: auto;">
-            <style>
-              .btn-cs-gradient {
-                display: inline-flex; align-items: center; gap: 8px;
-                background: linear-gradient(90deg, #1F7D53 0%, #2C8B5F 40%, #255F38 100%);
-                color: #f1f5f9; font-weight: 700; padding: 10px 24px;
-                border-radius: 50px; font-size: 0.95rem; border: none;
-                transition: transform 0.2s, box-shadow 0.2s;
-                position: relative; z-index: 10; cursor: pointer;
-              }
-              .btn-cs-gradient:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 24px rgba(31, 125, 83, 0.3);
-              }
-            </style>
-            <a href="case-study-call-agent.html" class="btn-cs-gradient" id="open-case-study-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-              Read Full Case Study
-            </a>
+          <div class="proj-body">
+            <div class="proj-meta">
+              <span class="proj-num">PROJECT 01</span>
+              <div class="proj-tags">
+                <span class="proj-tag">Voice AI</span>
+                <span class="proj-tag">Clinics</span>
+              </div>
+            </div>
+            <h3 class="proj-title">AI Voice Call Agent for Clinics</h3>
+            <p class="proj-desc">Handles calls 24/7, books slots, manages cancellations &amp; updates your database — so 90% of routine calls never reach a human agent.</p>
+            <div class="proj-divider"></div>
+            <div class="proj-cta">
+              <span class="proj-cta-text">Read Full Case Study</span>
+              <div class="proj-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5,5 19,5 19,19"/></svg>
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
 
-
-        <!-- Case 5: AI Email Campaign -->
-        <div class="service-card featured" style="padding: 40px 32px;">
-          <h3 style="font-size: 1.4rem; margin-bottom: 12px;">AI Email Campaign via Telegram</h3>
-          <p style="font-size: 0.95rem; margin-bottom: 24px;">Type one message in Telegram. The AI identifies the right customers or suppliers from your database, writes the email in the correct tone, and sends it automatically - no dashboard, no templates, no manual work required.</p>
-          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 10; pointer-events: auto;">
-            <a href="case-study-email-campaign.html" class="btn-cs-gradient" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, #1F7D53 0%, #2C8B5F 40%, #255F38 100%); color: #f1f5f9; font-weight: 700; padding: 10px 24px; border-radius: 50px; font-size: 0.95rem; border: none; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-              Read Full Case Study
-            </a>
+        <!-- 02: AI WhatsApp Sales Agent -->
+        <a href="case-study-whatsapp-agent.html" class="proj-card" id="proj-whatsapp">
+          <div class="proj-preview">
+            <div class="proj-browser-bar">
+              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
+              <div class="proj-url-bar"></div>
+            </div>
+            <div class="proj-icon-wrap">
+              <div class="proj-icon-bg">💬</div>
+            </div>
           </div>
-        </div>
-
-        <!-- Case 6: AI Lead Generation -->
-        <div class="service-card" style="padding: 40px 32px;">
-          <h3 style="font-size: 1.4rem; margin-bottom: 12px;">AI Lead Generation &amp; Outreach Automation</h3>
-          <p style="font-size: 0.95rem; margin-bottom: 24px;">Fill out one form. The AI scrapes LinkedIn, Instagram, Facebook, YouTube, and Google - writes a personalised opening line per prospect - then sends 6 follow-up emails over 3 weeks automatically. You wake up to replies, not tasks.</p>
-          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 10; pointer-events: auto;">
-            <a href="case-study-outreach.html" class="btn-cs-gradient" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, #1F7D53 0%, #2C8B5F 40%, #255F38 100%); color: #f1f5f9; font-weight: 700; padding: 10px 24px; border-radius: 50px; font-size: 0.95rem; border: none; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-              Read Full Case Study
-            </a>
+          <div class="proj-body">
+            <div class="proj-meta">
+              <span class="proj-num">PROJECT 02</span>
+              <div class="proj-tags">
+                <span class="proj-tag">WhatsApp</span>
+                <span class="proj-tag">Sales</span>
+              </div>
+            </div>
+            <h3 class="proj-title">AI WhatsApp Sales Agent</h3>
+            <p class="proj-desc">Reads every message, pulls live inventory from Google Sheets and replies in under 2 seconds. 24/7. Zero staff needed.</p>
+            <div class="proj-divider"></div>
+            <div class="proj-cta">
+              <span class="proj-cta-text">Read Full Case Study</span>
+              <div class="proj-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5,5 19,5 19,19"/></svg>
+              </div>
+            </div>
           </div>
-        </div>
+        </a>
 
-        <!-- Case 7: AI WhatsApp Sales Agent -->
-        <div class="service-card" style="padding: 40px 32px;">
-          <h3 style="font-size: 1.4rem; margin-bottom: 12px;">AI WhatsApp Sales Agent</h3>
-          <p style="font-size: 0.95rem; margin-bottom: 24px;">Most PC hardware shops lose sales because replies are slow. A customer asks about a GPU at 10 PM, no response, and they buy elsewhere. This AI WhatsApp sales agent reads every message, pulls live data from Google Sheets, and replies in under 2 seconds. 24/7. Zero staff needed.</p>
-          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 10; pointer-events: auto;">
-            <a href="case-study-whatsapp-agent.html" class="btn-cs-gradient" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, #1F7D53 0%, #2C8B5F 40%, #255F38 100%); color: #f1f5f9; font-weight: 700; padding: 10px 24px; border-radius: 50px; font-size: 0.95rem; border: none; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-              Read Full Case Study
-            </a>
+        <!-- 03: AI Lead Generation – wide -->
+        <a href="case-study-outreach.html" class="proj-card proj-card--wide" id="proj-outreach">
+          <div class="proj-preview">
+            <div class="proj-browser-bar">
+              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
+              <div class="proj-url-bar"></div>
+            </div>
+            <div class="proj-icon-wrap">
+              <div class="proj-icon-bg">🎯</div>
+            </div>
           </div>
-        </div>
+          <div class="proj-body">
+            <div class="proj-meta">
+              <span class="proj-num">PROJECT 03</span>
+              <div class="proj-tags">
+                <span class="proj-tag">Lead Gen</span>
+                <span class="proj-tag">Outreach</span>
+                <span class="proj-tag">Email</span>
+              </div>
+            </div>
+            <h3 class="proj-title">AI Lead Generation &amp; Outreach Automation</h3>
+            <p class="proj-desc">Fill out one form. The AI scrapes LinkedIn, Instagram, Facebook, YouTube &amp; Google — writes a personalised opening line per prospect — then sends 6 follow-up emails over 3 weeks automatically. You wake up to replies, not tasks.</p>
+            <div class="proj-divider"></div>
+            <div class="proj-cta">
+              <span class="proj-cta-text">Read Full Case Study</span>
+              <div class="proj-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5,5 19,5 19,19"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- 04: AI Email Campaign via Telegram – wide -->
+        <a href="case-study-email-campaign.html" class="proj-card proj-card--wide" id="proj-email">
+          <div class="proj-preview">
+            <div class="proj-browser-bar">
+              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
+              <div class="proj-url-bar"></div>
+            </div>
+            <div class="proj-icon-wrap">
+              <div class="proj-icon-bg">✉️</div>
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-meta">
+              <span class="proj-num">PROJECT 04</span>
+              <div class="proj-tags">
+                <span class="proj-tag">Telegram</span>
+                <span class="proj-tag">Email</span>
+                <span class="proj-tag">Automation</span>
+              </div>
+            </div>
+            <h3 class="proj-title">AI Email Campaign via Telegram</h3>
+            <p class="proj-desc">Type one message in Telegram. The AI identifies the right customers or suppliers from your database, writes the email in the correct tone, and sends it automatically — no dashboard, no templates, no manual work required.</p>
+            <div class="proj-divider"></div>
+            <div class="proj-cta">
+              <span class="proj-cta-text">Read Full Case Study</span>
+              <div class="proj-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5,5 19,5 19,19"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- 05: Google Sheets to Live Dashboard -->
+        <a href="case-study-dashboard.html" class="proj-card" id="proj-dashboard">
+          <div class="proj-preview">
+            <div class="proj-browser-bar">
+              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
+              <div class="proj-url-bar"></div>
+            </div>
+            <div class="proj-icon-wrap">
+              <div class="proj-icon-bg">📊</div>
+            </div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-meta">
+              <span class="proj-num">PROJECT 05</span>
+              <div class="proj-tags">
+                <span class="proj-tag">Dashboard</span>
+                <span class="proj-tag">Sheets</span>
+              </div>
+            </div>
+            <h3 class="proj-title">Google Sheets to Live Dashboard</h3>
+            <p class="proj-desc">Reads your Google Sheets live, visualises every metric instantly and updates in real time — no Power BI, no data team, no setup headaches.</p>
+            <div class="proj-divider"></div>
+            <div class="proj-cta">
+              <span class="proj-cta-text">Read Full Case Study</span>
+              <div class="proj-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5,5 19,5 19,19"/></svg>
+              </div>
+            </div>
+          </div>
+        </a>
 
       </div>
     </div>
