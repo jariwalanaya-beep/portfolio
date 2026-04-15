@@ -490,7 +490,21 @@
     .cta-cs-btn { width:100%; justify-content:center; }
   }
 
-</style>
+
+    /* ─── HAMBURGER + MOBILE NAV ─────────────────────────────── */
+    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; border:1px solid var(--border); border-radius:8px; background:rgba(255,255,255,0.03); transition:border-color .2s; }
+    .nav-hamburger:hover { border-color:var(--border2,rgba(255,255,255,0.15)); }
+    .nav-hamburger span { display:block; width:20px; height:2px; background:var(--muted); border-radius:2px; transition:transform .25s, opacity .25s; }
+    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity:0; }
+    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .nav-mobile-drawer { display:none; position:fixed; top:62px; left:0; right:0; background:rgba(4,7,12,0.97); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); z-index:199; padding:20px 24px 28px; flex-direction:column; gap:6px; }
+    .nav-mobile-drawer.open { display:flex; }
+    .nav-mobile-drawer a { text-decoration:none; font-size:.9rem; font-weight:500; color:var(--muted); padding:10px 14px; border-radius:10px; border:1px solid transparent; transition:color .18s, border-color .18s, background .18s; }
+    .nav-mobile-drawer a:hover { color:var(--text); border-color:var(--border); background:rgba(255,255,255,0.03); }
+    @media(max-width:900px) { .nav-hamburger { display:flex; } .nav-back { display:none; } }
+    @media(max-width:600px) { .nav-mobile-drawer { top:56px; } }
+  </style>
 </head>
 <body>
 
@@ -506,7 +520,16 @@
     <li><a href="#compare">Comparison</a></li>
   </ul>
   <a href="/#case-studies" class="nav-back">← Back to Case Studies</a>
-</nav>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <nav class="nav-mobile-drawer" id="navDrawer" aria-label="Mobile navigation">
+    <a href="#ba" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Before &amp; After</a>
+    <a href="#how" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">How It Works</a>
+    <a href="#compare" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Comparison</a>
+    <a href="/#case-studies" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">← Back to Portfolio</a>
+  </nav>
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero-cs" style="position: relative; z-index: 1;">
@@ -649,6 +672,22 @@
   <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="cta-cs-btn">Book a Free Audit →</a>
 </section>
 
-  <script src="index.js"></script>
+  <script src="index.js">
+    /* ── HAMBURGER MENU ── */
+    const _ham = document.getElementById('navHamburger');
+    const _drawer = document.getElementById('navDrawer');
+    if (_ham && _drawer) {
+      _ham.addEventListener('click', () => {
+        const open = _ham.classList.toggle('open');
+        _drawer.classList.toggle('open', open);
+        _ham.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', (e) => {
+        if (!_ham.contains(e.target) && !_drawer.contains(e.target)) {
+          _ham.classList.remove('open'); _drawer.classList.remove('open'); _ham.setAttribute('aria-expanded', false);
+        }
+      });
+    }
+  </script>
 </body>
 </html>

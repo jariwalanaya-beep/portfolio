@@ -1630,6 +1630,20 @@
         transition: none !important;
       }
     }
+  
+    /* ─── HAMBURGER + MOBILE NAV ─────────────────────────────── */
+    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; border:1px solid var(--border); border-radius:8px; background:rgba(255,255,255,0.03); transition:border-color .2s; }
+    .nav-hamburger:hover { border-color:var(--border2,rgba(255,255,255,0.15)); }
+    .nav-hamburger span { display:block; width:20px; height:2px; background:var(--muted); border-radius:2px; transition:transform .25s, opacity .25s; }
+    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity:0; }
+    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .nav-mobile-drawer { display:none; position:fixed; top:62px; left:0; right:0; background:rgba(4,7,12,0.97); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); z-index:199; padding:20px 24px 28px; flex-direction:column; gap:6px; }
+    .nav-mobile-drawer.open { display:flex; }
+    .nav-mobile-drawer a { text-decoration:none; font-size:.9rem; font-weight:500; color:var(--muted); padding:10px 14px; border-radius:10px; border:1px solid transparent; transition:color .18s, border-color .18s, background .18s; }
+    .nav-mobile-drawer a:hover { color:var(--text); border-color:var(--border); background:rgba(255,255,255,0.03); }
+    @media(max-width:900px) { .nav-hamburger { display:flex; } .nav-back { display:none; } }
+    @media(max-width:600px) { .nav-mobile-drawer { top:56px; } }
   </style>
 </head>
 
@@ -1652,6 +1666,16 @@
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="/#case-studies" class="nav-back">← Back</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <nav class="nav-mobile-drawer" id="navDrawer" aria-label="Mobile navigation">
+    <a href="#how" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">How It Works</a>
+    <a href="#ba" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Before &amp; After</a>
+    <a href="#outcome" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Outcomes</a>
+    <a href="#faq" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">FAQ</a>
+    <a href="/#case-studies" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">← Back to Portfolio</a>
   </nav>
 
   <!-- ═══ HERO ═══ -->
@@ -1862,6 +1886,124 @@
     </div>
   </section>
 
+  <!-- ═══ PRICING ═══ -->
+  <style>
+    .pricing-section { padding: 100px 72px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+    .pricing-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 900px; height: 500px; background: radial-gradient(ellipse at center, rgba(31,125,83,0.09) 0%, transparent 65%); pointer-events: none; }
+    .pricing-head { margin-bottom: 16px; }
+    .pricing-sub { font-size: 1rem; color: var(--muted); line-height: 1.7; margin-top: 12px; max-width: 52ch; }
+    .pricing-free-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(90,228,154,0.1); border: 1px solid rgba(90,228,154,0.28); border-radius: 999px; padding: 6px 16px; font-size: .78rem; font-weight: 700; color: #5ae49a; letter-spacing: .5px; margin-top: 20px; margin-bottom: 56px; }
+    .pricing-free-badge::before { content: "🎁"; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+    .price-card { background: rgba(8,13,22,0.6); border: 1px solid rgba(255,255,255,0.07); border-radius: 24px; padding: 36px 32px 32px; display: flex; flex-direction: column; backdrop-filter: blur(12px); transition: border-color .3s, transform .3s, box-shadow .3s; position: relative; overflow: hidden; }
+    .price-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.14); }
+    .price-card.popular { border-color: rgba(31,125,83,0.35); background: rgba(10,18,28,0.8); transform: translateY(-8px); box-shadow: 0 24px 64px rgba(31,125,83,0.15), 0 0 0 1px rgba(31,125,83,0.2); }
+    .price-card.popular:hover { transform: translateY(-14px); box-shadow: 0 32px 80px rgba(31,125,83,0.2), 0 0 0 1px rgba(31,125,83,0.3); }
+    .price-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--border); border-radius: 24px 24px 0 0; }
+    .price-card.popular::before { background: var(--grad); }
+    .popular-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--grad); border-radius: 999px; padding: 4px 12px; font-size: .68rem; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; width: fit-content; box-shadow: 0 4px 16px rgba(31,125,83,0.4); }
+    .plan-name { font-family: "Space Grotesk", sans-serif; font-size: 1rem; font-weight: 700; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+    .price-card.popular .plan-name { color: var(--p2); }
+    .price-setup { font-size: .82rem; color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .price-setup strong { color: #c8d8ea; }
+    .price-amount { display: flex; align-items: flex-end; gap: 4px; margin-bottom: 4px; }
+    .price-dollar { font-family: "Space Grotesk", sans-serif; font-size: 2.8rem; font-weight: 800; line-height: 1; color: #fff; }
+    .price-card.popular .price-dollar { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .price-period { font-size: .82rem; color: var(--muted); padding-bottom: 6px; }
+    .price-mins { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 600; color: #7ab8a0; background: rgba(31,125,83,0.1); border: 1px solid rgba(31,125,83,0.18); border-radius: 999px; padding: 4px 12px; margin: 16px 0 24px; }
+    .price-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
+    .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; flex: 1; margin-bottom: 32px; }
+    .price-features li { display: flex; align-items: flex-start; gap: 10px; font-size: .88rem; color: #b8cde0; line-height: 1.5; }
+    .price-features li::before { content: "✓"; color: var(--p2); font-weight: 700; font-size: .8rem; flex-shrink: 0; margin-top: 1px; }
+    .price-features li.feat-highlight { color: #d4eee0; font-weight: 500; }
+    .price-features li.feat-highlight::before { color: #5ae49a; }
+    .price-btn { display: block; text-align: center; text-decoration: none; font-family: "Space Grotesk", sans-serif; font-size: .9rem; font-weight: 700; border-radius: 999px; padding: 14px 24px; border: 1px solid rgba(31,125,83,0.3); color: var(--p2); background: rgba(31,125,83,0.08); transition: background .2s, border-color .2s, color .2s, box-shadow .2s; }
+    .price-btn:hover { background: rgba(31,125,83,0.16); border-color: rgba(31,125,83,0.5); color: #fff; }
+    .price-card.popular .price-btn { background: var(--grad); border-color: transparent; color: #fff; box-shadow: 0 6px 24px rgba(31,125,83,0.35); }
+    .price-card.popular .price-btn:hover { box-shadow: 0 10px 36px rgba(31,125,83,0.5); transform: translateY(-1px); }
+    @media(max-width:900px) { .pricing-grid { grid-template-columns: 1fr; } .price-card.popular { transform: none; } }
+    @media(max-width:640px) { .pricing-section { padding: 60px 20px; } .price-card { padding: 28px 22px 24px; } }
+  </style>
+
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-head reveal">
+      <div class="sec-tag">Pricing</div>
+      <h2 class="sec-h2">Simple, honest plans</h2>
+      <p class="pricing-sub">One setup fee, then a flat monthly rate. No hidden costs, no per-call fees. Pick the plan that fits your clinic and scale when you're ready.</p>
+      <div class="pricing-free-badge">First month completely free on any plan</div>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- STARTER -->
+      <div class="price-card reveal">
+        <div class="plan-name">Starter</div>
+        <div class="price-setup">Includes: <strong>Call Agent</strong></div>
+        <div class="price-setup">Setup fee: <strong>$200</strong> one-time</div>
+        <div class="price-amount">
+          <span class="price-dollar">$79</span>
+          <span class="price-period">/ month</span>
+        </div>
+        <div class="price-mins">📞 350 min / month</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>AI voice call agent setup</li>
+          <li>24/7 inbound call answering</li>
+          <li>Live slot check &amp; booking</li>
+          <li>Instant SMS confirmation</li>
+          <li>Reschedule &amp; cancellation handling</li>
+          <li>Email support</li>
+        </ul>
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
+      </div>
+
+      <!-- STANDARD (POPULAR) -->
+      <div class="price-card popular reveal">
+        <div class="popular-badge">✦ Most Popular</div>
+        <div class="plan-name">Standard</div>
+        <div class="price-setup">Includes: <strong>Call Agent + Website</strong></div>
+        <div class="price-setup">Setup fee: <strong>$350</strong> one-time</div>
+        <div class="price-amount">
+          <span class="price-dollar">$129</span>
+          <span class="price-period">/ month</span>
+        </div>
+        <div class="price-mins">📞 500 min / month</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Everything in Starter</li>
+          <li class="feat-highlight">Booking website included</li>
+          <li class="feat-highlight">Patients can book online too</li>
+          <li>Live availability on your site</li>
+          <li>Priority WhatsApp support</li>
+          <li>Monthly analytics report</li>
+        </ul>
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="price-card reveal">
+        <div class="plan-name">Premium</div>
+        <div class="price-setup">Includes: <strong>Call Agent + Website + Follow-ups</strong></div>
+        <div class="price-setup">Setup fee: <strong>$500</strong> one-time</div>
+        <div class="price-amount">
+          <span class="price-dollar">$179</span>
+          <span class="price-period">/ month</span>
+        </div>
+        <div class="price-mins">📞 800 min / month</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Everything in Standard</li>
+          <li class="feat-highlight">Automated follow-up calls after visits</li>
+          <li class="feat-highlight">No-show recovery &amp; re-booking</li>
+          <li>Patient history tracking</li>
+          <li>Custom branding on booking page</li>
+          <li>Dedicated support &amp; onboarding call</li>
+        </ul>
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ═══ BEFORE & AFTER ═══ -->
   <section class="ba-section" id="ba">
     <div class="ba-header reveal">
@@ -1934,6 +2076,7 @@
     </div>
   </section>
 
+
   <!-- ═══ CTA ═══ -->
   <section class="cta-section">
     <div class="cta-inner reveal">
@@ -1988,6 +2131,22 @@
       const isOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
       if (!isOpen) item.classList.add('open');
+    }
+  
+    /* ── HAMBURGER MENU ── */
+    const _ham = document.getElementById('navHamburger');
+    const _drawer = document.getElementById('navDrawer');
+    if (_ham && _drawer) {
+      _ham.addEventListener('click', () => {
+        const open = _ham.classList.toggle('open');
+        _drawer.classList.toggle('open', open);
+        _ham.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', (e) => {
+        if (!_ham.contains(e.target) && !_drawer.contains(e.target)) {
+          _ham.classList.remove('open'); _drawer.classList.remove('open'); _ham.setAttribute('aria-expanded', false);
+        }
+      });
     }
   </script>
 </body>
