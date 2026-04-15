@@ -1,0 +1,1134 @@
+{
+  "name": "what app agent 2.0",
+  "nodes": [
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "appointments",
+          "mode": "list",
+          "cachedResultName": "appointments"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ Math.random().toString(36).slice(2, 14) }}",
+            "doctor_name": "={{ $('Code in JavaScript9').item.json.doctor_name }}",
+            "patient_name": "={{ $('Code in JavaScript9').item.json.patient_name }}",
+            "patient_phone": "={{ $('Code in JavaScript9').item.json.patient_phone }}",
+            "code": "={{ $('Code in JavaScript9').item.json.appointment_code }}",
+            "appointment_start": "={{ $('Code in JavaScript9').item.json.time }}",
+            "appointment_day": "={{ $('Code in JavaScript9').item.json.date }}",
+            "appointment_end": "={{ $('Code in JavaScript9').item.json.appointment_end }}",
+            "created_at": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "patient_name",
+              "displayName": "patient_name",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "patient_phone",
+              "displayName": "patient_phone",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "doctor_name",
+              "displayName": "doctor_name",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "appointment_day",
+              "displayName": "appointment_day",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "appointment_start",
+              "displayName": "appointment_start",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "time",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "appointment_end",
+              "displayName": "appointment_end",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "time",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "code",
+              "displayName": "code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1776,
+        1360
+      ],
+      "id": "d9fc9ad9-6e1b-47fc-ba81-c16aeefa331c",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "JZlN3JQ9Dseddqpo",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\nconst doctorName = data.doctor_name;\nconst startTime = data.appointment_start;\nconst endTime = data.appointment_end;\nconst email = data.gmail;\nconst code = data.code;\nconst patientName = data.patient_name;\n\nreturn [\n  {\n    json: {\n      message: `Hello ${patientName}, your appointment is booked with ${doctorName} on ${startTime} to ${endTime}. Your appointment code is ${code}. We have sent the code and other details to your number sms.`\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        1360
+      ],
+      "id": "73d44557-090c-4dfe-b833-d71fb0ce826a",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.tool_name }}",
+                    "rightValue": "Create_Appointment",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "1360f927-d923-42ef-9f5e-41a456fcd288"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Create "
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "39af27b9-441b-4fc0-9ea0-abe6f0e8e303",
+                    "leftValue": "={{ $json.tool_name }}",
+                    "rightValue": "cancel_appointment",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Cancel"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d6482497-3851-4573-aab9-42897d58c90b",
+                    "leftValue": "={{ $json.tool_name }}",
+                    "rightValue": "Check_Availability",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Check"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "6954504f-77eb-4266-b77e-0536c28d0bf9",
+                    "leftValue": "={{ $json.tool_name }}",
+                    "rightValue": "Get_Doctors_Info",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Info"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d7273486-8539-4fdf-8cde-dca747956450",
+                    "leftValue": "={{ $json.tool_name }}",
+                    "rightValue": "Conversation",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "74fe8b38-77bf-4a8d-a6eb-a5db33cf0262",
+                    "leftValue": "={{ $json.tool_name }}",
+                    "rightValue": "First_default_message",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        1920
+      ],
+      "id": "724a3dc8-4669-4783-b230-c878df896c99",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// --------------------------------------------------\n// INPUTS\n// --------------------------------------------------\n\nconst doctors = $input.all().map(item => item.json);\nconst appointments = $('Select rows from a table1').all().map(item => item.json);\nconst req = $('Code in JavaScript8').first().json;\n\n// --------------------------------------------------\n// CONSTANTS\n// --------------------------------------------------\n\nconst CLINIC_START = 8 * 60;   // 08:00\nconst CLINIC_END   = 22 * 60;  // 22:00\nconst SLOT_SIZE    = 30;        // 30-minute slots\n\n// --------------------------------------------------\n// HELPERS\n// --------------------------------------------------\n\nfunction normalizeName(name = \"\") {\n  return name.toLowerCase().replace(/dr\\.?\\s*/g, \"\").trim();\n}\n\nfunction normalizeDate(dateStr) {\n  if (!dateStr) return null;\n  const d = new Date(dateStr);\n  const yyyy = d.getUTCFullYear();\n  const mm   = String(d.getUTCMonth() + 1).padStart(2, \"0\");\n  const dd   = String(d.getUTCDate()).padStart(2, \"0\");\n  return `${yyyy}-${mm}-${dd}`;\n}\n\nfunction timeToMinutes(time = \"\") {\n  const parts = time.split(\":\");\n  const h = parseInt(parts[0]) || 0;\n  const m = parseInt(parts[1]) || 0;\n  return h * 60 + m;\n}\n\nfunction minutesToTime(mins) {\n  const h = String(Math.floor(mins / 60)).padStart(2, \"0\");\n  const m = String(mins % 60).padStart(2, \"0\");\n  return `${h}:${m}`;\n}\n\nfunction formatTime12h(time24) {\n  const [hStr, mStr] = time24.split(\":\");\n  let h = parseInt(hStr);\n  const m = mStr;\n  const ampm = h >= 12 ? \"PM\" : \"AM\";\n  h = h % 12 || 12;\n  return `${h}:${m} ${ampm}`;\n}\n\nfunction formatDateFriendly(dateStr) {\n  const d = new Date(dateStr + \"T00:00:00Z\");\n  return d.toLocaleDateString(\"en-US\", {\n    weekday: \"long\", year: \"numeric\", month: \"long\", day: \"numeric\", timeZone: \"UTC\"\n  });\n}\n\n// --------------------------------------------------\n// SETUP\n// --------------------------------------------------\n\nconst requestedDate    = normalizeDate(req.date);\nconst requestedMin     = timeToMinutes(req.start_time);\nconst preferredRaw     = req.preferred_doctor ? req.preferred_doctor.trim() : null;\nconst friendlyDate     = formatDateFriendly(requestedDate);\nconst requestedTime12h = formatTime12h(minutesToTime(requestedMin));\n\nconst allDoctorNames = doctors.map(d => d.name || d.doctor_name).filter(Boolean);\n\nconst doctorsToCheck = preferredRaw\n  ? allDoctorNames.filter(d => normalizeName(d).includes(normalizeName(preferredRaw)))\n  : allDoctorNames;\n\nif (preferredRaw && doctorsToCheck.length === 0) {\n  return [{\n    json: {\n      status: \"DOCTOR_NOT_FOUND\",\n      message: `We couldn't find \"${preferredRaw}\" in our system. Please check the doctor's name and try again, or leave it blank to book with any available doctor.`,\n      date: requestedDate,\n      friendly_date: friendlyDate,\n      requested_time: minutesToTime(requestedMin)\n    }\n  }];\n}\n\n// --------------------------------------------------\n// CORE: Check if a slot is blocked\n// --------------------------------------------------\n\nfunction isSlotBlocked(slotStart, slotEnd, doctorName) {\n  return appointments.some(appt => {\n    if (normalizeName(appt.doctor_name) !== normalizeName(doctorName)) return false;\n    if (normalizeDate(appt.appointment_day) !== requestedDate) return false;\n    const apStart = timeToMinutes(appt.appointment_start);\n    const apEnd   = timeToMinutes(appt.appointment_end);\n    return slotStart < apEnd && slotEnd > apStart;\n  });\n}\n\n// --------------------------------------------------\n// STEP 1: Is requested time FREE?\n// --------------------------------------------------\n\nconst requestedSlotEnd = requestedMin + SLOT_SIZE;\nconst freeAtRequested  = [];\n\nfor (const doctor of doctorsToCheck) {\n  if (!isSlotBlocked(requestedMin, requestedSlotEnd, doctor)) {\n    freeAtRequested.push(doctor);\n  }\n}\n\nif (freeAtRequested.length > 0) {\n  const chosen   = freeAtRequested[Math.floor(Math.random() * freeAtRequested.length)];\n  const slot12h  = formatTime12h(minutesToTime(requestedMin));\n  const slotEnd12h = formatTime12h(minutesToTime(requestedSlotEnd));\n\n  return [{\n    json: {\n      status: \"TIME_AVAILABLE\",\n      message: `Great news! Your requested slot on ${friendlyDate} at ${slot12h} – ${slotEnd12h} is available with ${chosen}. Shall I go ahead and confirm the booking?`,\n      date: requestedDate,\n      friendly_date: friendlyDate,\n      slot: minutesToTime(requestedMin),\n      slot_end: minutesToTime(requestedSlotEnd),\n      slot_12h: slot12h,\n      slot_end_12h: slotEnd12h,\n      doctor_name: chosen\n    }\n  }];\n}\n\n// --------------------------------------------------\n// STEP 2: Requested time BLOCKED — find next free slot\n// --------------------------------------------------\n\nconst nextAvailable = [];\n\nfor (const doctor of doctorsToCheck) {\n  for (\n    let start = requestedMin + SLOT_SIZE;\n    start + SLOT_SIZE <= CLINIC_END;\n    start += SLOT_SIZE\n  ) {\n    const end = start + SLOT_SIZE;\n    if (!isSlotBlocked(start, end, doctor)) {\n      nextAvailable.push({ doctor, slotStart: start });\n      break;\n    }\n  }\n}\n\nif (nextAvailable.length > 0) {\n  nextAvailable.sort((a, b) => a.slotStart - b.slotStart);\n\n  const soonest = nextAvailable[0].slotStart;\n  const tied    = nextAvailable.filter(s => s.slotStart === soonest);\n  const chosen  = tied[Math.floor(Math.random() * tied.length)];\n\n  const nextSlot12h    = formatTime12h(minutesToTime(chosen.slotStart));\n  const nextSlotEnd12h = formatTime12h(minutesToTime(chosen.slotStart + SLOT_SIZE));\n\n  return [{\n    json: {\n      status: \"NEXT_AVAILABLE\",\n      message: `The ${requestedTime12h} slot on ${friendlyDate} is fully booked. However, the next available slot is at ${nextSlot12h} – ${nextSlotEnd12h} with ${chosen.doctor}. Would you like to book that instead?`,\n      date: requestedDate,\n      friendly_date: friendlyDate,\n      requested_time: minutesToTime(requestedMin),\n      requested_time_12h: requestedTime12h,\n      slot: minutesToTime(chosen.slotStart),\n      slot_end: minutesToTime(chosen.slotStart + SLOT_SIZE),\n      slot_12h: nextSlot12h,\n      slot_end_12h: nextSlotEnd12h,\n      doctor_name: chosen.doctor\n    }\n  }];\n}\n\n// --------------------------------------------------\n// STEP 3: Fully booked\n// --------------------------------------------------\n\nconst doctorLabel = preferredRaw || \"any of our doctors\";\n\nreturn [{\n  json: {\n    status: \"FULLY_BOOKED\",\n    message: `Unfortunately, there are no available slots remaining for ${doctorLabel} on ${friendlyDate} after ${requestedTime12h}. Please try a different date or contact the clinic directly for assistance.`,\n    date: requestedDate,\n    friendly_date: friendlyDate,\n    requested_time: minutesToTime(requestedMin),\n    requested_time_12h: requestedTime12h,\n    doctor_name: preferredRaw || \"Any doctor\"\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        2064
+      ],
+      "id": "02ff511b-9593-4477-8b38-8a2cc0e15406",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "appointments",
+          "mode": "list",
+          "cachedResultName": "appointments"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "code",
+              "value": "={{ $json.appointment_code }}"
+            }
+          ]
+        },
+        "combineConditions": "OR",
+        "options": {
+          "outputColumns": [
+            "code"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1328,
+        1600
+      ],
+      "id": "0281bcf4-9001-4afe-8cde-c0597fcea897",
+      "name": "Select rows from a table2",
+      "retryOnFail": false,
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "JZlN3JQ9Dseddqpo",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "appointments",
+          "mode": "list",
+          "cachedResultName": "appointments"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "appointment_day",
+              "value": "={{ $json.date }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1328,
+        1968
+      ],
+      "id": "d9e6b95c-8a65-4291-a5ab-1553de86c8fa",
+      "name": "Select rows from a table1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "JZlN3JQ9Dseddqpo",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "doctors",
+          "mode": "list",
+          "cachedResultName": "doctors"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1776,
+        2352
+      ],
+      "id": "26e8e3c1-be79-4375-8787-78d40f9f6f34",
+      "name": "Select rows from a table3",
+      "credentials": {
+        "postgres": {
+          "id": "JZlN3JQ9Dseddqpo",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nconst doctorNames = items.map(item => item.json.doctor_name);\n\nreturn [\n  {\n    json: {\n      sentence: `We have the following doctors available: ${doctorNames.join(', ')}.`\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        2352
+      ],
+      "id": "88c4522e-db10-468a-8730-157abcef321e",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2bd8e46e-f83e-472b-bead-4474c17f5509",
+              "leftValue": "={{ Object.keys($json).length }}",
+              "rightValue": "={{ 0 }}",
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": false
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1776,
+        1968
+      ],
+      "id": "c6a67791-fe56-4613-8b51-4d2618703319",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      message: \"Yes, you can create an appointment\"\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        1872
+      ],
+      "id": "f4cb74e8-caa5-4b9b-995a-1b987a285385",
+      "name": "Code in JavaScript6",
+      "executeOnce": false,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8c291ca6-edc1-47fc-91d6-38d370692014",
+              "leftValue": "={{ Object.keys($json).length }}",
+              "rightValue": "={{ 0 }}",
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1552,
+        1600
+      ],
+      "id": "2fc62c6c-f8cd-4ea3-8538-63d6719ec2ab",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "appointments",
+          "mode": "list",
+          "cachedResultName": "appointments"
+        },
+        "deleteCommand": "delete",
+        "where": {
+          "values": [
+            {
+              "column": "code",
+              "value": "={{ $json.code }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1904,
+        1696
+      ],
+      "id": "8f8e001e-6a4b-44f3-a7ec-a58de3a75d2d",
+      "name": "Delete table or rows",
+      "credentials": {
+        "postgres": {
+          "id": "JZlN3JQ9Dseddqpo",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first()?.json?.raw_output;\n\nif (!raw) {\n  throw new Error(\"No raw_output found in input\");\n}\n\nlet parsed;\n\ntry {\n  parsed = JSON.parse(raw);\n} catch (e) {\n  throw new Error(\"Invalid JSON in raw_output\");\n}\n\n// Extract values\nconst name = parsed.tool_name;\n\nreturn [\n  {\n    json: {\n      name: name,\n      date: parsed.date || null,\n      start_time: parsed.start_time || null,\n      preferred_doctor: parsed.preferred_doctor || null\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1104,
+        1968
+      ],
+      "id": "29df5e99-5513-4fab-91de-9cdb080adcc5",
+      "name": "Code in JavaScript8"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $json.parsed_output;\n\nif (!data) {\n  return [{ json: { error: \"No parsed output found\" } }];\n}\n\n// --------------------------------------------------\n// HELPER: ADD 30 MINUTES\n// --------------------------------------------------\nfunction add30Minutes(time) {\n  if (!time) return \"\";\n  const [h, m] = time.split(\":\").map(Number);\n  const total = h * 60 + m + 30;\n  const nh = Math.floor(total / 60) % 24;\n  const nm = total % 60;\n  return String(nh).padStart(2, \"0\") + \":\" + String(nm).padStart(2, \"0\");\n}\n\n// --------------------------------------------------\n// OUTPUT\n// --------------------------------------------------\nreturn [\n  {\n    json: {\n      action: data.tool_name || \"\",\n      patient_name: data.patient_name || \"\",\n      doctor_name: data.doctor_name || \"\",\n      date: data.date || \"\",\n      time: data.time || \"\",\n      appointment_end: add30Minutes(data.time),\n      appointment_code: data.appointment_code || \"\",\n      patient_phone: data.patient_phone || \"\"\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1552,
+        1360
+      ],
+      "id": "37f448cb-fd89-459d-a022-001c635604dd",
+      "name": "Code in JavaScript9"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Try parsed_output first, fallback to parsing raw_output\nlet parsed = $json.parsed_output;\n\nif (!parsed && $json.raw_output) {\n  try {\n    parsed = JSON.parse($json.raw_output);\n  } catch (e) {\n    return [{ json: { error: \"Invalid raw_output JSON\" } }];\n  }\n}\n\nif (!parsed) {\n  return [{ json: { error: \"No parsed output found\" } }];\n}\n\nreturn [\n  {\n    json: {\n      appointment_code: parsed.appointment_code || null,\n      patient_name: parsed.patient_name || null,\n      patient_phone: parsed.patient_phone || null,\n      tool_name: parsed.tool_name || null\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1104,
+        1600
+      ],
+      "id": "7dec6901-8a74-4b39-9415-ece50919b1ff",
+      "name": "Code in JavaScript10"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a medical clinic appointment assistant. Timezone: Asia/Kolkata.\nToday: {{$now.format('YYYY-MM-DD')}}.\nTomorrow: {{$now.plus(1, 'day').format('YYYY-MM-DD')}}.\nLast valid booking date: {{$now.plus(7, 'days').format('YYYY-MM-DD')}}.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nPRE-FILLED PATIENT INFO (from profile)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nStored Name:  {{ $('Webhook').item.json.body.name }}\nStored Phone: {{ $('Webhook').item.json.body.phone }}\n\nIf BOTH values are non-empty and patient has NOT been asked about them yet:\n→ Use Conversation tool to ask:\n  \"We have your details on file:\n   • 👤 Name: [stored name]\n   • 📞 Phone: [stored phone]\n   Would you like to use these, or provide different details?\"\n\nIf patient says YES / confirm / use these → pre-fill patient_name and patient_phone from stored values.\nIf patient says NO / change → ask them to provide new name and phone.\nIf stored values are empty → skip this step, collect normally.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCONVERSATION HISTORY (last 20 messages)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n{{ $json.body.history.map(h => `${h.sender}: ${h.text}`).join('\\n') }}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nSTAGE DETECTION — READ FULL HISTORY FIRST\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nRead ALL messages above carefully before deciding which tool to call.\nFollow EXACTLY this priority order:\n\nSTAGE 1 → History is empty or has only 1 message\n           Call: First_default_message\n\nSTAGE 2 → Stored name+phone exist but patient has NOT been asked yet\n           Call: Conversation (ask to confirm stored details)\n\nSTAGE 3 → Patient intent is vague, greeting only, or fields are missing\n           Call: Conversation (collect missing fields only)\n\nSTAGE 4 → All 5 fields collected (name, phone, date, time, doctor)\n           AND Check_Availability has NOT been called yet for these details\n           Call: Check_Availability\n\nSTAGE 5 → Check_Availability already returned TIME_AVAILABLE or NEXT_AVAILABLE in history\n           AND patient sends ANY confirmation word:\n           \"ok\", \"book\", \"book it\", \"ok book\", \"sure\", \"go ahead\", \"proceed\",\n           \"confirm\", \"yes\", \"yep\", \"done\", \"let's go\", \"fine\", \"alright\",\n           \"great\", \"schedule it\", \"create\", \"make it\"\n           → Call: Create_Appointment immediately\n           → Use EXACT date, time, doctor_name, patient_name, patient_phone from history\n           → DO NOT call Check_Availability again\n           → DO NOT ask any more questions\n\nSTAGE 6 → Check_Availability returned TIME_UNAVAILABLE\n           Call: Conversation (ask for different date or time)\n\nSTAGE 7 → Patient already confirmed and appointment was created\n           Do NOT book again. Use Conversation to assist with anything else.\n\nSTAGE 8 → Patient asks about doctors or specialties\n           Call: Get_Doctors_Info\n\nSTAGE 9 → Patient wants to cancel and provides code + name\n           Call: cancel_appointment\n\nCRITICAL STAGE RULES:\n- NEVER call Check_Availability again if history already shows TIME_AVAILABLE or NEXT_AVAILABLE\n- NEVER ask more questions once slot is available and patient says any confirmation word\n- NEVER re-ask for details already present in history\n- When in doubt about stage → re-read full history before deciding\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCRITICAL OUTPUT RULES\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nYou MUST respond with ONLY a single raw JSON object.\nNO plain text. NO markdown. NO code fences. NO explanation.\nYour entire response must start with { and end with }\nThe FIRST key in every JSON response must always be \"tool_name\".\nIf you return anything other than a raw JSON object, the system will break.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nTOOLS & EXACT JSON OUTPUT\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n── 1. First_default_message ──────────────\nWhen: STAGE 1 only.\n\n{\n  \"tool_name\": \"First_default_message\",\n  \"message\": \"Hello! 👋 Welcome to our clinic. I can help you:\\n• Book an appointment\\n• Cancel an appointment\\n• Check doctor availability\\n• Learn about our doctors\\n\\nHow can I assist you today?\"\n}\n\n── 2. Conversation ───────────────────────\nWhen: STAGE 2, 3, 6, 7 — vague intent, missing fields,\n      confirming stored profile, date/time rejections,\n      or slot unavailable.\n\nRules for message:\n- Only ask for fields still empty in \"collected\"\n- Never mention fields already filled\n- Be friendly and concise\n\n{\n  \"tool_name\": \"Conversation\",\n  \"message\": \"[Friendly message asking only for missing details]\",\n  \"collected\": {\n    \"patient_name\": \"[value from history or empty string]\",\n    \"patient_phone\": \"[value from history or empty string]\",\n    \"date\": \"[YYYY-MM-DD from history or empty string]\",\n    \"time\": \"[HH:MM from history or empty string]\",\n    \"preferred_doctor\": \"[name from history or empty string]\"\n  }\n}\n\n── 3. Get_Doctors_Info ───────────────────\nWhen: STAGE 8 — patient asks about doctors or specialties.\n\n{\n  \"tool_name\": \"Get_Doctors_Info\",\n  \"date\": \"YYYY-MM-DD\",\n  \"start_time\": \"HH:MM\",\n  \"preferred_doctor\": \"\"\n}\n\n── 4. Check_Availability ─────────────────\nWhen: STAGE 4 only — all 5 fields collected and not yet checked.\n      NEVER call this if history already shows TIME_AVAILABLE or NEXT_AVAILABLE.\n\n{\n  \"tool_name\": \"Check_Availability\",\n  \"date\": \"YYYY-MM-DD\",\n  \"start_time\": \"HH:MM\",\n  \"preferred_doctor\": \"\"\n}\n\n── 5. Create_Appointment ─────────────────\nWhen: STAGE 5 — slot was confirmed available in history\n      AND patient sends any confirmation word.\n      Copy EXACT values from history. NEVER modify any field.\n      NEVER call Check_Availability again before this.\n\n{\n  \"tool_name\": \"Create_Appointment\",\n  \"uid\": \"UUID-v5 generated from date|time|doctor_name\",\n  \"date\": \"YYYY-MM-DD\",\n  \"time\": \"HH:MM\",\n  \"doctor_name\": \"Doctor full name\",\n  \"patient_name\": \"Full name\",\n  \"patient_phone\": \"Phone number\",\n  \"appointment_code\": \"XXXXXX\"\n}\n\n── 6. cancel_appointment ─────────────────\nWhen: STAGE 9 — patient wants to cancel and provides code + name.\n      If code or name missing → use Conversation to ask first.\n\n{\n  \"tool_name\": \"cancel_appointment\",\n  \"appointment_code\": \"XXXXXX\",\n  \"patient_name\": \"Exact name as booked\",\n  \"patient_phone\": \"\"\n}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nSTRICT RULES\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n1.  Output must be ONE raw JSON object only — starts with { and ends with }\n2.  First key must always be \"tool_name\"\n3.  No markdown, no code blocks, no extra text outside the JSON\n4.  First_default_message ONLY when history is empty or has 1 message\n5.  NEVER call Check_Availability again if TIME_AVAILABLE or NEXT_AVAILABLE already in history\n6.  NEVER call cancel_appointment without appointment_code + patient_name\n7.  NEVER invent doctor names, time slots, or appointment codes\n8.  NEVER re-ask for details already in history or in collected fields\n9.  NEVER ask any question once slot is available and patient confirms — just Create_Appointment\n10. Clinic hours: 08:00–22:00 IST. Slots are 30 minutes.\n11. appointment_code = 6 chars, UPPERCASE, alphabetic only, NO spaces\n12. Same date+time+doctor_name must always produce the same uid and appointment_code\n13. If patient wants to change details → use Conversation to re-collect, then Check_Availability\n14. Use Conversation when intent is vague or any fields are still missing\n15. In Conversation, always populate \"collected\" with everything known so far\n16. If stored name+phone exist and not yet confirmed → ask via Conversation first\n17. Reject past dates → Conversation: \"Sorry, that date has already passed.\n    Please choose a date from tomorrow onward.\"\n18. Reject today's date → Conversation:\n    \"Sorry, same-day appointments are not available.\n    The earliest date you can book is tomorrow ({{$now.plus(1, 'day').format('YYYY-MM-DD')}}).\n    Would you like to book for tomorrow or another date?\"\n19. Reject dates beyond 7 days → Conversation:\n    \"Sorry, we only accept bookings up to 7 days in advance.\n    Please choose a date between {{$now.plus(1, 'day').format('YYYY-MM-DD')}}\n    and {{$now.plus(7, 'days').format('YYYY-MM-DD')}}.\"\n20. Create_Appointment must use EXACT values from history — never modify them\n21. Treat ALL of these as confirmation intent:\n    \"ok\", \"book\", \"book it\", \"ok book\", \"sure\", \"go ahead\", \"proceed\",\n    \"confirm\", \"yes\", \"yep\", \"done\", \"let's go\", \"fine\", \"alright\",\n    \"great\", \"schedule it\", \"create\", \"make it\"\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nTOOL RESULT → NEXT ACTION\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nCheck_Availability returns:\n- TIME_AVAILABLE   → respond with Conversation:\n                     \"✅ Your requested slot is available!\n                      • 🩺 Doctor: [doctor]\n                      • 📅 Date: [date]\n                      • 🕐 Time: [time]\n                      • 👤 Name: [patient_name]\n                      • 📞 Phone: [patient_phone]\n                      Reply BOOK to confirm your appointment.\"\n\n- NEXT_AVAILABLE   → respond with Conversation:\n                     \"⚠️ Your requested time is unavailable.\n                      Nearest available slot:\n                      • 🩺 Doctor: [doctor]\n                      • 📅 Date: [date]\n                      • 🕐 New Time: [new_time]\n                      • 👤 Name: [patient_name]\n                      • 📞 Phone: [patient_phone]\n                      Reply BOOK to confirm this slot or provide a different time.\"\n\n- TIME_UNAVAILABLE → respond with Conversation:\n                     \"Sorry, no slots are available for that date and doctor.\n                      Please choose a different date or time.\"\n\nCreate_Appointment returns:\n- success → {\n    \"tool_name\": \"Create_Appointment\",\n    \"message\": \"Your appointment is confirmed! 🎉\\n• 🩺 Doctor: [doctor_name]\\n• 📅 Date: [date]\\n• 🕐 Time: [time]\\n\\nAppointment Code: [appointment_code]\\nSave this code — you will need it to cancel or modify your appointment.\"\n  }\n- error → {\n    \"tool_name\": \"Create_Appointment\",\n    \"message\": \"Something went wrong. Please try again or contact the clinic directly.\"\n  }\n\ncancel_appointment returns:\n- success → {\n    \"tool_name\": \"cancel_appointment\",\n    \"message\": \"Your appointment has been successfully cancelled. We hope to see you again soon! 🙏\"\n  }\n- not found → {\n    \"tool_name\": \"cancel_appointment\",\n    \"message\": \"Appointment not found. Please double-check your appointment code and name.\"\n  }",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        192,
+        1968
+      ],
+      "id": "b91e059d-cb67-4d0a-8560-798e91a7e168",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  let parsed = {};\n\n  // Step 1: Safely parse JSON\n  try {\n    if (typeof item.json.output === \"string\") {\n      parsed = JSON.parse(item.json.output);\n    } else if (typeof item.json.output === \"object\" && item.json.output !== null) {\n      parsed = item.json.output;\n    }\n  } catch (e) {\n    parsed = {};\n  }\n\n  // Step 2: Normalize fields with fallbacks\n  const tool_name = parsed.tool_name || parsed.tool || \"unknown_tool\";\n  const message = parsed.message || parsed.text || \"\";\n\n  // Step 3: Return clean + extensible structure\n  return {\n    json: {\n      success: Object.keys(parsed).length > 0,\n      tool_name,\n      message,\n      raw_output: item.json.output,   // keep original (debugging)\n      parsed_output: parsed          // full parsed object (future use)\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        656,
+        1968
+      ],
+      "id": "4f95a5ed-5645-40ad-8850-f312abaed71e",
+      "name": "Code in JavaScript5"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "685c4d20-56a3-4759-8a47-f588cb9cb42d",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -64,
+        1968
+      ],
+      "id": "b2d1a4eb-65d8-4254-8c3d-a671f395aea4",
+      "name": "Webhook",
+      "webhookId": "685c4d20-56a3-4759-8a47-f588cb9cb42d"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "use to extract the data",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "shivam",
+          "mode": "list",
+          "cachedResultName": "shivam"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        288,
+        2192
+      ],
+      "id": "2ef2c576-0e99-4ac3-a9f9-d9c7999e4fb6",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "atBfhr0ZUQAHze77",
+          "name": "Pinecone account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "embed-english-v3.0"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsCohere",
+      "typeVersion": 1,
+      "position": [
+        368,
+        2400
+      ],
+      "id": "0d807cd9-93dc-472b-bc7d-f8368c3036a5",
+      "name": "Embeddings Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "xmqDj1uflUFesXUz",
+          "name": "Cohere account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map((item, index) => {\n  let message = \"\";\n\n  try {\n    // Priority 1: direct message\n    if (item.json.message) {\n      message = item.json.message;\n    }\n    // Priority 2: parsed_output\n    else if (item.json.parsed_output?.message) {\n      message = item.json.parsed_output.message;\n    }\n    // Priority 3: raw_output (stringified JSON)\n    else if (item.json.raw_output) {\n      const parsed = JSON.parse(item.json.raw_output);\n      message = parsed.message || \"\";\n    }\n    // Priority 4: sentence from first input\n    else if ($input.first()?.json?.sentence) {\n      message = $input.first().json.sentence;\n    }\n\n    // Fix line breaks\n    message = message.replace(/\\\\n/g, '\\n').trim();\n\n  } catch (e) {\n    message = \"Something went wrong.\";\n  }\n\n  return {\n    json: {\n      message\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3760,
+        1808
+      ],
+      "id": "5f2feb90-1b48-4f13-87ee-1a3280991ff2",
+      "name": "Code in JavaScript4"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        3984,
+        1808
+      ],
+      "id": "0f7962ec-daeb-4bda-9e38-e0402c25f689",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        160,
+        2192
+      ],
+      "id": "0014ff38-489e-4643-bb00-43ff91db35cf",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "9N8nxWjwECksZGvx",
+          "name": "Groq account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "doctors",
+          "mode": "list",
+          "cachedResultName": "doctors"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1552,
+        1968
+      ],
+      "id": "03ac76b8-6551-40ba-834f-552f7e1bea59",
+      "name": "Select rows from a table",
+      "credentials": {
+        "postgres": {
+          "id": "JZlN3JQ9Dseddqpo",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get input from previous node\nconst items = $input.all();\nconst inputData = items[0].json;\n\n// Check if appointment was found and deleted\nconst isEmpty = Object.keys(inputData).length === 0;\n\nlet responseMessage;\n\nif (isEmpty) {\n  // No appointment found - code didn't match\n  responseMessage = {\n    success: false,\n    status: \"not_found\",\n    message: \"❌ No appointment found with this code. Please check your cancellation code and try again.\",\n    code: null,\n    cancelled: false\n  };\n} else {\n  // Appointment was successfully deleted\n  responseMessage = {\n    success: true,\n    status: \"cancelled\",\n    message: \"✅ Your appointment has been successfully cancelled.\",\n    code: inputData.code || null,\n    cancelled: true,\n    cancelledAt: new Date().toISOString()\n  };\n}\n\nreturn [{ json: responseMessage }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2304,
+        1568
+      ],
+      "id": "52ead184-c81b-48e3-8172-8501db41f80d",
+      "name": "Code in JavaScript1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript9",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript10",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript8",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Select rows from a table3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table2": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table1": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table3": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript6",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript6": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Delete table or rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete table or rows": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript8": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript9": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript10": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript5": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Cohere": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript4": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "73c5e83e-406a-4b67-ac27-d03ba5565992",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a2c24dac369c790b2648677b77a269da338660e4d15a6e58cecc62de2e6d1acf"
+  },
+  "id": "xZPwcZ6vqw3DOy0I",
+  "tags": []
+}
