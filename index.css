@@ -64,6 +64,11 @@ html {
     scroll-behavior: smooth;
 }
 
+html,
+body {
+    max-width: 100%;
+}
+
 body {
     font-family: var(--font);
     background-color: var(--bg);
@@ -80,6 +85,22 @@ body {
 img {
     max-width: 100%;
     display: block;
+}
+
+video,
+iframe,
+svg {
+    max-width: 100%;
+}
+
+.table-scroll-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-scroll-wrap .compare-table {
+    min-width: 640px;
 }
 
 a {

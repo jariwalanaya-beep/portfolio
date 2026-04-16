@@ -636,7 +636,7 @@
 
     .stats-widget-card {
       width: 100%;
-      max-width: 520px;
+      max-width: 320px;
       background: rgba(8, 14, 24, 0.78);
       border: 1px solid rgba(31, 125, 83, 0.22);
       border-radius: 20px;
@@ -727,6 +727,42 @@
       overflow: hidden;
     }
 
+    .video-loading-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(180deg, rgba(3, 6, 10, 0.9) 0%, rgba(5, 10, 16, 0.95) 100%);
+      transition: opacity .35s ease, visibility .35s ease;
+    }
+
+    .video-loading-spinner {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid rgba(31, 125, 83, 0.3);
+      border-top-color: #4ade80;
+      animation: spinLoader .8s linear infinite;
+    }
+
+    .video-loading-text {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: #9ad8b6;
+    }
+
+    .stats-widget-video.is-loaded .video-loading-overlay {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
     .stats-widget-video video {
       width: 100%;
       display: block;
@@ -760,6 +796,12 @@
       background: #4ade80;
       box-shadow: 0 0 4px #4ade80;
       animation: dotPulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes spinLoader {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* Right: 2×2 separated card grid */
@@ -1814,7 +1856,11 @@
         </div>
         <!-- video -->
         <div class="stats-widget-video">
-          <video src="case-study-demo.mp4" autoplay loop muted playsinline loading="lazy"></video>
+          <div class="video-loading-overlay" aria-live="polite">
+            <div class="video-loading-spinner" aria-hidden="true"></div>
+            <div class="video-loading-text">Loading Demo...</div>
+          </div>
+          <video src="lv_0_20260416095455.mp4" autoplay loop muted playsinline loading="lazy"></video>
           <div class="stats-widget-video-label">AI Agent Running</div>
         </div>
       </div>
@@ -2110,6 +2156,28 @@
         b.style.cssText = `--h:${h}px;--d:${durs[i]}s;--del:${delays[i]}s;height:${h}px`;
         wf.appendChild(b);
       });
+    })();
+
+    /* ── VIDEO LOADING OVERLAY ── */
+    (function () {
+      const videoWrap = document.querySelector('.stats-widget-video');
+      if (!videoWrap) return;
+      const demoVideo = videoWrap.querySelector('video');
+      const loadingText = videoWrap.querySelector('.video-loading-text');
+      if (!demoVideo) return;
+
+      const markLoaded = () => videoWrap.classList.add('is-loaded');
+      if (demoVideo.readyState >= 3) {
+        markLoaded();
+        return;
+      }
+
+      demoVideo.addEventListener('loadeddata', markLoaded, { once: true });
+      demoVideo.addEventListener('canplay', markLoaded, { once: true });
+      demoVideo.addEventListener('error', () => {
+        if (loadingText) loadingText.textContent = 'Video Unavailable';
+        videoWrap.classList.add('is-loaded');
+      }, { once: true });
     })();
 
     /* ── SCROLL REVEAL ── */
