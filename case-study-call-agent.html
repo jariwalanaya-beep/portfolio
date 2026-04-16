@@ -1952,10 +1952,12 @@
     .price-card.popular .plan-name { color: var(--p2); }
     .price-setup { font-size: .82rem; color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
     .price-setup strong { color: #c8d8ea; }
+    .price-setup-fee { font-size: 1.05rem; font-weight: 600; color: #d3e0ee; margin-bottom: 10px; }
+    .price-setup-fee strong { font-size: 1.4em; font-weight: 800; color: #fff; line-height: 1; }
     .price-amount { display: flex; align-items: flex-end; gap: 4px; margin-bottom: 4px; }
-    .price-dollar { font-family: "Space Grotesk", sans-serif; font-size: 2.8rem; font-weight: 800; line-height: 1; color: #fff; }
+    .price-dollar { font-family: "Space Grotesk", sans-serif; font-size: 1.9rem; font-weight: 700; line-height: 1; color: #fff; }
     .price-card.popular .price-dollar { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .price-period { font-size: .82rem; color: var(--muted); padding-bottom: 6px; }
+    .price-period { font-size: .72rem; color: var(--muted); padding-bottom: 4px; }
     .price-mins { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 600; color: #7ab8a0; background: rgba(31,125,83,0.1); border: 1px solid rgba(31,125,83,0.18); border-radius: 999px; padding: 4px 12px; margin: 16px 0 24px; }
     .price-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
     .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; flex: 1; margin-bottom: 32px; }
@@ -1984,7 +1986,7 @@
       <div class="price-card reveal">
         <div class="plan-name">Starter</div>
         <div class="price-setup">Includes: <strong>Call Agent</strong></div>
-        <div class="price-setup">Setup fee: <strong>$200</strong> one-time</div>
+        <div class="price-setup price-setup-fee">Setup fee: <strong>$200</strong> one-time</div>
         <div class="price-amount">
           <span class="price-dollar">$79</span>
           <span class="price-period">/ month</span>
@@ -2007,7 +2009,7 @@
         <div class="popular-badge">✦ Most Popular</div>
         <div class="plan-name">Standard</div>
         <div class="price-setup">Includes: <strong>Call Agent + Website</strong></div>
-        <div class="price-setup">Setup fee: <strong>$350</strong> one-time</div>
+        <div class="price-setup price-setup-fee">Setup fee: <strong>$350</strong> one-time</div>
         <div class="price-amount">
           <span class="price-dollar">$129</span>
           <span class="price-period">/ month</span>
@@ -2029,7 +2031,7 @@
       <div class="price-card reveal">
         <div class="plan-name">Premium</div>
         <div class="price-setup">Includes: <strong>Call Agent + Website + Follow-ups</strong></div>
-        <div class="price-setup">Setup fee: <strong>$500</strong> one-time</div>
+        <div class="price-setup price-setup-fee">Setup fee: <strong>$500</strong> one-time</div>
         <div class="price-amount">
           <span class="price-dollar">$179</span>
           <span class="price-period">/ month</span>
