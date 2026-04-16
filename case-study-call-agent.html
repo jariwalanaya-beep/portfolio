@@ -940,55 +940,70 @@
 
     /* ─── HOW IT WORKS ───────────────────────────────── */
     .how-section {
-      padding: 100px 72px;
+      padding: 88px 72px 76px;
       border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      background:
+        radial-gradient(900px 440px at 92% -10%, rgba(31, 125, 83, 0.12), transparent 62%),
+        linear-gradient(180deg, rgba(5, 10, 16, 0.7) 0%, rgba(6, 10, 16, 0.38) 100%);
+    }
+
+    .how-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.82), transparent 88%);
+      opacity: .6;
+    }
+
+    .how-head {
+      margin-bottom: 34px;
+      max-width: 74ch;
       position: relative;
       z-index: 1;
     }
 
-    .how-head {
-      margin-bottom: 72px;
-    }
-
     .how-desc {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 56ch;
-      margin-top: 16px;
+      font-size: .92rem;
+      color: #98b4ca;
+      line-height: 1.75;
+      max-width: 62ch;
+      margin-top: 14px;
     }
 
     .flow-steps {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
       position: relative;
+      z-index: 1;
+      align-items: stretch;
     }
 
-    /* arrow connector between cards */
-    .flow-steps::after {
+    .flow-steps::before {
       content: "";
       position: absolute;
-      top: 54px;
-      /* centre of the icon circle */
-      left: calc(25% - 10px);
-      right: calc(25% - 10px);
+      left: 5%;
+      right: 5%;
+      top: 38px;
       height: 1px;
-      background: linear-gradient(90deg,
-          transparent 0%,
-          rgba(31, 125, 83, 0.3) 8%,
-          rgba(20, 168, 106, 0.6) 50%,
-          rgba(31, 125, 83, 0.3) 92%,
-          transparent 100%);
+      background: linear-gradient(90deg, transparent, rgba(31, 125, 83, 0.42) 12%, rgba(31, 125, 83, 0.42) 88%, transparent);
       pointer-events: none;
       z-index: 0;
     }
 
     .flow-step {
-      background: rgba(8, 13, 22, 0.6);
-      border: 1px solid rgba(31, 125, 83, 0.1);
-      border-radius: 20px;
-      padding: 40px 32px 36px;
+      background: linear-gradient(165deg, rgba(8, 15, 24, 0.72), rgba(7, 11, 18, 0.6));
+      border: 1px solid rgba(31, 125, 83, 0.15);
+      border-radius: 18px;
+      padding: 20px 18px 16px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -996,17 +1011,21 @@
       z-index: 1;
       overflow: hidden;
       backdrop-filter: blur(10px);
-      transition: border-color .3s, transform .3s, box-shadow .3s, background .3s;
+      transition: border-color .28s, transform .28s, box-shadow .28s, background .28s;
+      min-height: 196px;
     }
 
     .flow-step:hover {
-      border-color: rgba(31, 125, 83, 0.3);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(31, 125, 83, 0.1), 0 0 0 1px rgba(31, 125, 83, 0.15);
-      background: rgba(10, 18, 30, 0.75);
+      border-color: rgba(31, 125, 83, 0.36);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(31, 125, 83, 0.2);
+      background: linear-gradient(165deg, rgba(10, 18, 30, 0.82), rgba(8, 14, 23, 0.72));
     }
 
-    /* top gradient accent */
+    .flow-step:nth-child(odd) {
+      margin-top: 4px;
+    }
+
     .flow-step::before {
       content: "";
       position: absolute;
@@ -1017,7 +1036,7 @@
       background: var(--grad);
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform .4s ease;
+      transition: transform .35s ease;
       border-radius: 20px 20px 0 0;
     }
 
@@ -1025,14 +1044,13 @@
       transform: scaleX(1);
     }
 
-    /* inner glow */
     .flow-step::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 30% 0%, rgba(31, 125, 83, 0.08) 0%, transparent 60%);
+      background: radial-gradient(ellipse at 12% 0%, rgba(31, 125, 83, 0.1), transparent 64%);
       opacity: 0;
-      transition: opacity .4s;
+      transition: opacity .35s;
       pointer-events: none;
       border-radius: 20px;
     }
@@ -1041,65 +1059,72 @@
       opacity: 1;
     }
 
-    /* step number */
-    .step-bubble {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--grad);
+    .step-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: .78rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 28px;
-      box-shadow: 0 0 24px rgba(31, 125, 83, 0.5);
-      flex-shrink: 0;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 14px;
       position: relative;
       z-index: 2;
     }
 
-    /* icon box */
+    .step-bubble {
+      min-width: 54px;
+      height: 28px;
+      border-radius: 999px;
+      background: rgba(31, 125, 83, 0.16);
+      border: 1px solid rgba(31, 125, 83, 0.32);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .61rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: #94f6bf;
+      box-shadow: inset 0 0 0 1px rgba(31, 125, 83, 0.12);
+      text-transform: uppercase;
+    }
+
     .step-icon-wrap {
-      width: 60px;
-      height: 60px;
-      border-radius: 16px;
-      background: rgba(31, 125, 83, 0.1);
-      border: 1px solid rgba(31, 125, 83, 0.22);
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.24);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      margin-bottom: 24px;
+      font-size: 1rem;
       transition: background .25s, border-color .25s, transform .25s;
       position: relative;
       z-index: 2;
     }
 
     .flow-step:hover .step-icon-wrap {
-      background: rgba(31, 125, 83, 0.18);
-      border-color: rgba(31, 125, 83, 0.4);
-      transform: scale(1.05);
+      background: rgba(31, 125, 83, 0.2);
+      border-color: rgba(31, 125, 83, 0.42);
+      transform: translateY(-2px);
     }
 
     .step-title {
       font-family: "Space Grotesk", sans-serif;
-      font-size: 1.05rem;
+      font-size: .92rem;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       line-height: 1.3;
+      letter-spacing: .01em;
       position: relative;
       z-index: 2;
     }
 
     .step-desc {
-      font-size: .86rem;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 22ch;
+      font-size: .83rem;
+      color: #9ab5cb;
+      line-height: 1.62;
+      max-width: 100%;
       position: relative;
       z-index: 2;
     }
@@ -1183,90 +1208,6 @@
       display: block;
     }
 
-    /* ─── OUTCOME CARDS ─────────────────────────────────────── */
-    .outcome-section {
-      padding: 80px 60px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      z-index: 1;
-    }
-
-    .outcome-head {
-      margin-bottom: 20px;
-    }
-
-    .outcome-sub {
-      font-size: .98rem;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 64ch;
-      margin-bottom: 52px;
-    }
-
-    .outcome-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .oc {
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 40px 32px;
-      background: var(--glass);
-      position: relative;
-      overflow: hidden;
-      transition: border-color .25s, background .25s, transform .25s, box-shadow .25s;
-    }
-
-    .oc:hover {
-      border-color: rgba(31, 125, 83, 0.28);
-      background: rgba(31, 125, 83, 0.04);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(31, 125, 83, 0.06);
-    }
-
-    .oc::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--grad);
-      border-radius: 999px 999px 0 0;
-    }
-
-    .oc-icon {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      display: block;
-      filter: drop-shadow(0 0 10px rgba(31, 125, 83, 0.4));
-    }
-
-    .oc-label {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--p2);
-      margin-bottom: 10px;
-    }
-
-    .oc-title {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.12rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 12px;
-      line-height: 1.25;
-    }
-
-    .oc-body {
-      font-size: .88rem;
-      color: #9ab5cb;
-      line-height: 1.75;
-    }
 
     /* ─── FAQ ────────────────────────────────────────────────── */
     .faq-section {
@@ -1517,7 +1458,6 @@
 
       .how-section,
       .faq-section,
-      .outcome-section,
       .cta-section {
         padding-left: 40px;
         padding-right: 40px;
@@ -1539,20 +1479,23 @@
     @media(max-width:1000px) {
 
       .how-section,
-      .faq-section,
-      .outcome-section {
+      .faq-section {
         padding-top: 64px;
         padding-bottom: 64px;
       }
 
       .flow-steps {
         grid-template-columns: repeat(2, 1fr);
-        gap: 32px;
-        padding-top: 0;
+        gap: 12px;
+      }
+
+      .flow-steps::before {
+        display: none;
       }
 
       .flow-step {
-        padding: 0;
+        min-height: 178px;
+        margin-top: 0;
       }
 
       .faq-layout {
@@ -1564,9 +1507,6 @@
         position: static;
       }
 
-      .outcome-cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
 
     @media(max-width:900px) {
@@ -1625,7 +1565,6 @@
 
       .how-section,
       .faq-section,
-      .outcome-section,
       .cta-section {
         padding: 52px 24px;
       }
@@ -1641,10 +1580,20 @@
 
       .flow-steps {
         grid-template-columns: 1fr;
+        gap: 14px;
       }
 
-      .outcome-cards {
-        grid-template-columns: 1fr;
+      .flow-steps::before {
+        display: none;
+      }
+
+      .flow-step {
+        min-height: auto;
+        padding: 24px 20px 22px;
+      }
+
+      .step-desc {
+        max-width: 100%;
       }
 
       .hero-title {
@@ -1703,8 +1652,8 @@
     <a href="/" class="nav-logo">Karl<span>space</span></a>
     <ul class="nav-links">
       <li><a href="#how">How It Works</a></li>
+      <li><a href="#stats">Live Demo</a></li>
       <li><a href="#ba">Before &amp; After</a></li>
-      <li><a href="#outcome">Outcomes</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="/#case-studies" class="nav-back">← Back</a>
@@ -1714,8 +1663,8 @@
   </nav>
   <nav class="nav-mobile-drawer" id="navDrawer" aria-label="Mobile navigation">
     <a href="#how" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">How It Works</a>
+    <a href="#stats" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Live Demo</a>
     <a href="#ba" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Before &amp; After</a>
-    <a href="#outcome" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Outcomes</a>
     <a href="#faq" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">FAQ</a>
     <a href="/#case-studies" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">← Back to Portfolio</a>
   </nav>
@@ -1805,37 +1754,45 @@
     </div>
   </section>
 
-  <!-- ═══ OUTCOMES ═══ -->
-  <section class="outcome-section" id="outcome">
-    <div class="outcome-head reveal">
-      <div class="sec-tag">Results</div>
-      <h2 class="sec-h2">What Actually Changed</h2>
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="how-section" id="how">
+    <div class="how-head reveal">
+      <div class="sec-tag">How It Works</div>
+      <h2 class="sec-h2">From First Ring to Confirmed Booking</h2>
+      <p class="how-desc">The workflow is fully automated from call pickup to SMS confirmation, so your team stays focused on patients instead of phone admin.</p>
     </div>
-    <p class="outcome-sub reveal">
-      Before: a missed call is a lost patient. After: the AI catches every call, fills every slot, and sends every
-      confirmation. No humans involved.
-    </p>
-    <div class="outcome-cards">
-      <div class="oc reveal">
-        <span class="oc-icon">💰</span>
-        <div class="oc-label">Revenue</div>
-        <div class="oc-title">$10,000+ back per month</div>
-        <p class="oc-body">Clinics stopped losing patients to missed calls. Every inbound call now converts to a booked
-          appointment.</p>
+    <div class="flow-steps">
+      <div class="flow-step reveal">
+        <div class="step-row">
+          <div class="step-bubble">STEP 01</div>
+          <div class="step-icon-wrap">📲</div>
+        </div>
+        <div class="step-title">Patient Calls In</div>
+        <p class="step-desc">The AI answers instantly with no hold queue and no voicemail drop-off.</p>
       </div>
-      <div class="oc reveal">
-        <span class="oc-icon">⚙️</span>
-        <div class="oc-label">Automation</div>
-        <div class="oc-title">Staff touch zero phones</div>
-        <p class="oc-body">Booking, rescheduling, and cancellations are fully handled by the agent - staff focus on
-          in-clinic care.</p>
+      <div class="flow-step reveal">
+        <div class="step-row">
+          <div class="step-bubble">STEP 02</div>
+          <div class="step-icon-wrap">🗂️</div>
+        </div>
+        <div class="step-title">Live Slot Check</div>
+        <p class="step-desc">The agent checks your real schedule and filters to the right provider and time.</p>
       </div>
-      <div class="oc reveal">
-        <span class="oc-icon">🔒</span>
-        <div class="oc-label">Reliability</div>
-        <div class="oc-title">Every call. Every time.</div>
-        <p class="oc-body">Zero missed calls. Every booking in the database. Every patient gets an SMS - no exceptions,
-          no voicemail.</p>
+      <div class="flow-step reveal">
+        <div class="step-row">
+          <div class="step-bubble">STEP 03</div>
+          <div class="step-icon-wrap">✍️</div>
+        </div>
+        <div class="step-title">Appointment Locked</div>
+        <p class="step-desc">Booking data is written to the system with all required patient details.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-row">
+          <div class="step-bubble">STEP 04</div>
+          <div class="step-icon-wrap">📱</div>
+        </div>
+        <div class="step-title">Confirmation Sent</div>
+        <p class="step-desc">The patient receives SMS confirmation instantly, including their booking code.</p>
       </div>
     </div>
   </section>
@@ -1895,42 +1852,6 @@
     </div>
 
   </div>
-
-  <!-- ═══ HOW IT WORKS ═══ -->
-  <section class="how-section" id="how">
-    <div class="how-head reveal">
-      <div class="sec-tag">The System</div>
-      <h2 class="sec-h2">How It Works</h2>
-      <p class="how-desc">Four steps. Fully automated. No human intervention required from the moment a patient dials
-        in.</p>
-    </div>
-    <div class="flow-steps">
-      <div class="flow-step reveal">
-        <div class="step-bubble">01</div>
-        <div class="step-icon-wrap">📲</div>
-        <div class="step-title">Patient Calls In</div>
-        <p class="step-desc">The AI answers instantly - no hold, no voicemail. Detects intent in seconds.</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="step-bubble">02</div>
-        <div class="step-icon-wrap">🗂️</div>
-        <div class="step-title">Live Slot Check</div>
-        <p class="step-desc">Queries the clinic's live schedule for available doctor slots in real time.</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="step-bubble">03</div>
-        <div class="step-icon-wrap">✍️</div>
-        <div class="step-title">Appointment Booked</div>
-        <p class="step-desc">Patient data written to the database. Unique 6-char code generated.</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="step-bubble">04</div>
-        <div class="step-icon-wrap">📱</div>
-        <div class="step-title">SMS Sent</div>
-        <p class="step-desc">Instant confirmation to the patient - with their code for future changes.</p>
-      </div>
-    </div>
-  </section>
 
   <!-- ═══ PRICING ═══ -->
   <style>
