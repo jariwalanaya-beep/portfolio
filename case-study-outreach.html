@@ -9,19 +9,19 @@
     content="One form triggers an AI that scrapes LinkedIn & social media, writes a personalised opening line per prospect, and follows up automatically for 3 weeks. You wake up to replies." />
   <meta name="keywords"
     content="AI Lead Generation, Outreach Automation, LinkedIn Scraper, Personalised Email Outreach, AI Sales Automation, Automated Follow-up, Karlspace" />
-  <link rel="canonical" href="https://karlspace.ai/case-study-outreach" />
+  <link rel="canonical" href="https://karlspace.in/case-study-outreach" />
   <meta property="og:title" content="AI Lead Generation & Outreach Automation | Karlspace" />
   <meta property="og:description"
     content="One form triggers AI to find prospects, write personal openers, and follow up for 3 weeks - automatically." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://karlspace.ai/case-study-outreach" />
-  <meta property="og:image" content="https://karlspace.ai/1772001775286.png" />
+  <meta property="og:url" content="https://karlspace.in/case-study-outreach" />
+  <meta property="og:image" content="https://karlspace.in/1772001775286.png" />
   <meta property="og:site_name" content="Karlspace" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AI Lead Generation &amp; Outreach Automation | Karlspace" />
   <meta name="twitter:description"
     content="One form triggers AI to find prospects, write personal openers, and follow up for 3 weeks - automatically." />
-  <meta name="twitter:image" content="https://karlspace.ai/1772001775286.png" />
+  <meta name="twitter:image" content="https://karlspace.in/1772001775286.png" />
   <meta name="robots" content="index, follow" />
   <link rel="stylesheet" href="index.css" />
   <link rel="icon" type="image/png" href="1772001775286.png" />
@@ -37,15 +37,15 @@
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "AI Lead Generation and Outreach Automation",
-      "url": "https://karlspace.ai/case-study-outreach",
-      "image": "https://karlspace.ai/1772001775286.png",
+      "url": "https://karlspace.in/case-study-outreach",
+      "image": "https://karlspace.in/1772001775286.png",
       "serviceType": "Automated lead generation and email outreach",
       "description": "One form triggers AI to find prospects across social platforms, write personalised opening lines, and follow up automatically for 3 weeks.",
       "provider": {
         "@type": "Person",
         "name": "Shivam",
-        "url": "https://karlspace.ai",
-        "worksFor": { "@type": "Organization", "name": "Karlspace", "url": "https://karlspace.ai" }
+        "url": "https://karlspace.in",
+        "worksFor": { "@type": "Organization", "name": "Karlspace", "url": "https://karlspace.in" }
       },
       "areaServed": "Worldwide"
     },
@@ -53,8 +53,8 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karlspace.ai/" },
-        { "@type": "ListItem", "position": 2, "name": "AI Lead Gen & Outreach Engine", "item": "https://karlspace.ai/case-study-outreach" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karlspace.in/" },
+        { "@type": "ListItem", "position": 2, "name": "AI Lead Gen & Outreach Engine", "item": "https://karlspace.in/case-study-outreach" }
       ]
     }
   ]
@@ -397,6 +397,8 @@
     .reveal-left.visible { opacity:1; transform:translateX(0); }
 
     /* ─── RESPONSIVE ─────────────────────────────────────────── */
+
+    /* Tablet landscape */
     @media(max-width:1200px) {
       .navbar { padding:0 36px; }
       .hero-left { padding:60px 44px; }
@@ -404,43 +406,127 @@
       .how-section,.sequence-section,.compare-section,.faq-section,.outcome-section,.cta-section { padding-left:40px; padding-right:40px; }
       .ba-header { padding:60px 40px 32px; }
       .ba-grid { padding:0 40px 48px; }
-      .stats-section { padding:80px 48px; }
+      .stats-section { padding:80px 48px; gap:48px; }
     }
+
+    /* Tablet portrait */
     @media(max-width:1000px) {
       .how-section,.sequence-section,.compare-section,.faq-section,.outcome-section { padding-top:64px; padding-bottom:64px; }
-      .flow-steps { grid-template-columns:repeat(2,1fr); }
+      .flow-steps { grid-template-columns:repeat(2,1fr); gap:16px; }
       .faq-layout { grid-template-columns:1fr; gap:40px; }
       .faq-sticky { position:static; }
       .outcome-cards { grid-template-columns:repeat(2,1fr); }
       .sequence-steps { grid-template-columns:repeat(2,1fr); }
       .seq-row-2 { grid-template-columns:1fr 1fr; }
+      .stats-section { grid-template-columns:1fr; padding:72px 40px; gap:40px; }
+      .stats-widget-card { max-width:520px; margin:0 auto; }
+      .stats-grid { grid-template-columns:repeat(3,1fr); }
     }
+
+    /* Large phone */
     @media(max-width:900px) {
       .hero { grid-template-columns:1fr; min-height:auto; }
       .hero-left { border-right:none; border-bottom:1px solid var(--border); padding:60px 40px; }
       .hero-right { padding:48px 40px; }
-      .stats-section { grid-template-columns:1fr; padding:72px 32px; gap:48px; }
-      .stats-grid { grid-template-columns:repeat(3,1fr); }
+      .outreach-widget { max-width:460px; }
+      .stats-grid { grid-template-columns:repeat(2,1fr); }
       .ba-grid { grid-template-columns:1fr; }
       .navbar { padding:0 24px; }
       .nav-links { display:none; }
     }
+
+    /* Phone */
     @media(max-width:640px) {
-      .hero-left { padding:48px 24px; }
-      .hero-right { padding:36px 24px; }
-      .how-section,.sequence-section,.compare-section,.faq-section,.outcome-section,.cta-section { padding:52px 24px; }
-      .ba-header { padding:52px 24px 28px; }
-      .ba-grid { padding:0 24px 40px; gap:16px; }
-      .flow-steps { grid-template-columns:1fr; }
-      .sequence-steps { grid-template-columns:1fr; }
-      .seq-row-2 { grid-template-columns:1fr; }
-      .outcome-cards { grid-template-columns:1fr; }
-      .stats-grid { grid-template-columns:1fr; }
-      .stat-cell { padding:24px 20px; }
-      .cta-actions { flex-direction:column; width:100%; }
+      .navbar { height:56px; padding:0 16px; }
+      .nav-mobile-drawer { top:56px; }
+
+      /* Hero */
+      .hero-left { padding:40px 18px 36px; }
+      .hero-right { padding:28px 18px 36px; }
+      .hero-title { font-size:2.2rem; letter-spacing:-1.8px; line-height:1.06; }
+      .hero-desc { font-size:.9rem; margin-bottom:24px; }
+      .hero-list { gap:10px; margin-bottom:28px; }
+      .hero-list li { font-size:.88rem; }
+      .hero-actions { flex-direction:column; gap:10px; }
+      .hero-actions .btn-primary, .hero-actions .btn-ghost { width:100%; justify-content:center; }
+      .badge { font-size:.68rem; }
+
+      /* Outreach widget internals */
+      .outreach-widget { border-radius:16px; max-width:100%; }
+      .widget-bar { padding:11px 14px; }
+      .prospect-feed { padding:12px; gap:7px; }
+      .prospect-row { padding:8px 10px; }
+      .prospect-name { font-size:.75rem; }
+      .prospect-role { font-size:.65rem; }
+      .prospect-badge { font-size:.6rem; padding:2px 7px; }
+      .ai-writer-wrap { margin:0 12px 12px; padding:10px 12px; }
+      .ai-writer-text { font-size:.74rem; }
+      .widget-stats-row .ws-num { font-size:.88rem; }
+      .widget-stats-row .ws-label { font-size:.58rem; }
+      .widget-stat { padding:10px 6px; }
+
+      /* Stats */
+      .stats-section { padding:48px 18px; gap:32px; }
+      .stats-widget-card { max-width:100%; }
+      .stats-grid { grid-template-columns:1fr; gap:12px; }
+      .stat-cell { padding:20px 18px; }
+      .stat-num { font-size:2rem; letter-spacing:-.8px; }
+      .stat-label { font-size:.82rem; }
+      .stat-desc { font-size:.72rem; }
+      .stat-icon { width:34px; height:34px; font-size:1rem; margin-bottom:12px; }
+
+      /* How it works */
+      .how-section,.sequence-section,.compare-section,.faq-section,.outcome-section,.cta-section { padding:48px 18px; }
+      .flow-steps { grid-template-columns:1fr; gap:12px; }
+      .flow-step { padding:24px 20px; }
+      .step-title { font-size:.92rem; }
+      .step-desc { font-size:.78rem; }
+      .step-bubble { width:32px; height:32px; font-size:.65rem; margin-bottom:16px; }
+      .step-icon-wrap { width:44px; height:44px; font-size:1.35rem; margin-bottom:14px; }
+
+      /* Sequence */
+      .sequence-steps { grid-template-columns:1fr; gap:12px; }
+      .seq-row-2 { grid-template-columns:1fr; gap:12px; margin-top:12px; }
+      .seq-step { padding:24px 20px; }
+      .seq-title { font-size:.9rem; }
+      .seq-body { font-size:.84rem; }
+
+      /* Outcome */
+      .outcome-cards { grid-template-columns:1fr; gap:12px; }
+      .oc { padding:28px 22px; }
+
+      /* Before & After */
+      .ba-section { padding-bottom:0; }
+      .ba-header { padding:40px 18px 20px; }
+      .ba-grid { padding:0 18px 32px; gap:12px; }
+      .ba-list { padding:18px 18px; gap:12px; }
+      .ba-list li { font-size:.88rem; }
+
+      /* Compare */
+      .compare-wrap { border-radius:14px; }
+
+      /* FAQ */
+      .faq-sticky-title { font-size:1.55rem; }
+      .faq-q { font-size:.88rem; }
+      .faq-q-row { padding:16px 18px; gap:14px; }
+      .faq-a { padding:0 18px 16px; padding-top:14px; font-size:.84rem; }
+
+      /* CTA */
+      .cta-title { font-size:1.8rem; letter-spacing:-1px; }
+      .cta-sub { font-size:.9rem; }
+      .cta-actions { flex-direction:column; width:100%; gap:10px; }
       .cta-actions .btn-primary, .cta-actions .btn-ghost { width:100%; justify-content:center; }
-      .hero-title { letter-spacing:-2px; }
-      .compare-table { min-width:640px; }
+
+      /* Globals */
+      .sec-h2 { font-size:1.6rem; letter-spacing:-.7px; }
+      .sec-tag { font-size:.66rem; letter-spacing:2.5px; }
+    }
+
+    /* Very small phones */
+    @media(max-width:380px) {
+      .hero-title { font-size:1.9rem; letter-spacing:-1.4px; }
+      .stats-grid { grid-template-columns:1fr; }
+      .stat-num { font-size:1.8rem; }
     }
     /* ─── ARCHITECTURE SECTION ──────────────────────────────── */
     .arch-section {
@@ -725,7 +811,7 @@
     }
     .lc-step-body { font-size: .85rem; color: #9ab5cb; line-height: 1.7; }
 
-    /* responsive additions */
+    /* Architecture + Lead Collection responsive */
     @media(max-width:1200px) {
       .arch-section,.leadcoll-section { padding-left:40px; padding-right:40px; }
     }
@@ -736,8 +822,12 @@
       .leadcoll-layout { grid-template-columns:1fr; gap:40px; }
     }
     @media(max-width:640px) {
-      .arch-section,.leadcoll-section { padding:52px 24px; }
+      .arch-section,.leadcoll-section { padding:48px 18px; }
       .leadcoll-targets { grid-template-columns:1fr; }
+      .arch-pillar-header { padding:16px 20px; }
+      .arch-flow { padding:16px 16px 20px; }
+      .arch-sub-pillar { margin:14px 14px 18px; }
+      .lc-step { padding:20px 20px; }
     }
 
     @media(prefers-reduced-motion:reduce) {
@@ -771,14 +861,14 @@
 
   <!-- ═══ NAVBAR ═══ -->
   <nav class="navbar">
-    <a href="/" class="nav-logo">Karl<span>space</span></a>
+    <a href="index.html" class="nav-logo">Karl<span>space</span></a>
     <ul class="nav-links">
       <li><a href="#how">Lead Collection</a></li>
       <li><a href="#architecture">Architecture</a></li>
       <li><a href="#sequence">Email Sequence</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
-    <a href="/#case-studies" class="nav-back">← Back</a>
+    <a href="index.html#case-studies" class="nav-back">← Back</a>
       <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -788,7 +878,7 @@
     <a href="#architecture" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Architecture</a>
     <a href="#sequence" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Email Sequence</a>
     <a href="#faq" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">FAQ</a>
-    <a href="/#case-studies" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">← Back to Portfolio</a>
+    <a href="index.html#case-studies" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">← Back to Portfolio</a>
   </nav>
 
   <!-- ═══ HERO ═══ -->
@@ -1302,7 +1392,7 @@
         <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="btn-primary">
           Book a Free Audit →
         </a>
-        <a href="/#case-studies" class="btn-ghost">See More Case Studies</a>
+        <a href="index.html#case-studies" class="btn-ghost">See More Case Studies</a>
       </div>
       <p class="cta-note">30-minute call · No sales pressure · Real answers</p>
     </div>

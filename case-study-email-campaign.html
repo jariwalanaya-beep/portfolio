@@ -4,676 +4,641 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Email Campaign via Telegram - No Dashboard Needed | Karlspace</title>
-  <meta name="description" content="How a single Telegram message triggers an AI that finds the right customers, writes the email, and sends it automatically - no manual work." />
+  <meta name="description" content="Type one message in Telegram. AI finds the right customers, writes the email, and sends it automatically — no dashboard, no templates, no manual work." />
+  <meta name="keywords" content="AI Email Campaign, Telegram Bot Automation, Email Marketing AI, No-Code Email Automation, AI Business Automation, Karlspace" />
+  <link rel="canonical" href="https://karlspace.in/case-study-email-campaign" />
+  <meta property="og:title" content="AI Email Campaign via Telegram | Karlspace" />
+  <meta property="og:description" content="Type one Telegram message. AI finds the right contacts, writes the email, and sends it automatically." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://karlspace.in/case-study-email-campaign" />
+  <meta property="og:image" content="https://karlspace.in/1772001775286.png" />
+  <meta property="og:site_name" content="Karlspace" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Email Campaign via Telegram | Karlspace" />
+  <meta name="twitter:description" content="Type one Telegram message. AI writes and sends emails automatically." />
+  <meta name="twitter:image" content="https://karlspace.in/1772001775286.png" />
+  <meta name="robots" content="index, follow" />
   <link rel="stylesheet" href="index.css" />
   <link rel="icon" type="image/png" href="1772001775286.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
   <script type="application/ld+json">
+  [
     {
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "AI Email Campaign via Telegram",
-      "serviceType": "Telegram-triggered email campaign automation",
+      "url": "https://karlspace.in/case-study-email-campaign",
+      "image": "https://karlspace.in/1772001775286.png",
+      "serviceType": "Telegram-triggered AI email campaign automation",
       "description": "Type one message in Telegram and AI identifies the right contacts, writes campaign emails in the right tone, and sends them automatically.",
-      "url": "https://karlspace.ai/case-study-email-campaign",
       "provider": {
         "@type": "Person",
         "name": "Shivam",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Karlspace"
-        }
+        "url": "https://karlspace.in",
+        "worksFor": { "@type": "Organization", "name": "Karlspace", "url": "https://karlspace.in" }
       },
       "areaServed": "Worldwide"
-    }
-  </script>
-  <script type="application/ld+json">
+    },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://karlspace.ai/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Case Studies",
-          "item": "https://karlspace.ai/#case-studies"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "AI Email Campaign via Telegram",
-          "item": "https://karlspace.ai/case-study-email-campaign"
-        }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karlspace.in/" },
+        { "@type": "ListItem", "position": 2, "name": "AI Email Campaign via Telegram", "item": "https://karlspace.in/case-study-email-campaign" }
       ]
     }
+  ]
   </script>
 
-<style>
-
-  :root {
-    --bg:       #04070c;
-    --bg2:      #060c12;
-    --border:   rgba(255,255,255,0.09);
-    --text:     #e9f0f8;
-    --muted:    #7a8fa8;
-    --primary:  #1F7D53;
-    --secondary:#255F38;
-    --grad:     linear-gradient(110deg,#1F7D53 0%,#2C8B5F 50%,#255F38 100%);
-  }
-
-  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-  html { scroll-behavior:smooth; }
-
-  body {
-    font-family: Inter, system-ui, sans-serif;
-    color: var(--text);
-    overflow-x: hidden;
-  }
-
-  /* ═══════════════════════ NAVBAR ═══════════════════════ */
-  .navbar {
-    position: fixed; top:0; left:0; right:0; z-index:100;
-    display: flex; align-items:center; justify-content:space-between;
-    padding: 0 64px; height: 64px;
-    background: rgba(4,7,12,0.85);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo {
-    font-family:"Space Grotesk",sans-serif;
-    font-size:1.05rem; font-weight:700;
-    color:#fff; text-decoration:none; letter-spacing:0.2px;
-  }
-  .nav-logo span { color:var(--primary); }
-
-  .nav-links {
-    display:flex; gap:8px; list-style:none;
-  }
-  .nav-links a {
-    text-decoration:none; font-size:0.84rem; font-weight:500;
-    color:var(--muted); padding:6px 14px; border-radius:999px;
-    border:1px solid transparent;
-    transition: color 180ms, border-color 180ms;
-  }
-  .nav-links a:hover { color:var(--text); border-color:var(--border); }
-
-  .nav-back {
-    text-decoration:none; font-size:0.84rem; font-weight:600;
-    color:var(--text); padding:8px 18px; border-radius:999px;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,0.03);
-    transition: border-color 180ms;
-    white-space:nowrap;
-  }
-  .nav-back:hover { border-color:rgba(31, 125, 83,0.5); }
-
-  /* ═══════════════════════ HERO ═══════════════════════ */
-  .hero-cs {
-    min-height: 88vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 0;
-    padding-top: 64px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .hero-cs-left {
-    padding: 40px;
-    display: flex; flex-direction:column; justify-content:center;
-    border-right: 1px solid var(--border);
-    height: 100%;
-  }
-
-  .hero-cs-tag {
-    display:inline-flex; align-items:center; gap:10px;
-    font-size:0.9rem; font-weight:700; letter-spacing:3px;
-    text-transform:uppercase; color:var(--primary);
-    margin-bottom:28px;
-  }
-  .hero-cs-tag::before {
-    content:""; display:inline-block; width:22px; height:2px;
-    background:var(--grad); border-radius:2px;
-  }
-
-  .hero-cs-title {
-    font-family:"Space Grotesk",sans-serif;
-    font-size:clamp(2.2rem,4vw,4.2rem);
-    font-weight:800; line-height:1.02;
-    letter-spacing:-2.5px; margin-bottom:32px;
-  }
-  .hero-cs-title .highlight {
-    background: var(--grad);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-cs-sub {
-    font-size:clamp(1.05rem,1.5vw,1.2rem);
-    color:#b8ccde; line-height:1.7;
-    margin-bottom:44px; max-width:46ch;
-  }
-
-  .hero-cs-bullets { list-style:none; display:grid; gap:14px; }
-  .hero-cs-bullets li {
-    display:flex; gap:12px; font-size:clamp(0.98rem,1.15vw,1.12rem);
-    color:#d0dcea; line-height:1.45;
-  }
-  .hero-cs-bullets li::before {
-    content:"•"; color:var(--primary); font-weight:700; flex-shrink:0;
-  }
-
-  .hero-cs-right {
-    padding: 40px;
-    display: flex; align-items:center; justify-content:center;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(31, 125, 83,0.04), transparent 60%);
-  }
-
-  .hero-cs-img-wrap {
-    border:1px solid rgba(31, 125, 83,0.22); border-radius:18px;
-    background:linear-gradient(150deg,rgba(31, 125, 83,0.07),rgba(255,255,255,0.02));
-    padding:14px;
-    box-shadow: 0 0 64px rgba(31, 125, 83,0.12), 0 24px 48px rgba(0,0,0,0.4);
-    width: 100%;
-    max-width: 540px;
-    animation: heroFloat 3s ease-in-out infinite;
-  }
-  .hero-cs-img-wrap video {
-    border-radius:10px; width:100%; display:block;
-    border:1px solid rgba(255,255,255,0.1);
-  }
-
-
-
-  /* ═══════════════════════ SEC LABELS ═══════════════════════ */
-  .sec-tag {
-    display:inline-flex; align-items:center; gap:10px;
-    font-size:0.9rem; font-weight:700; letter-spacing:3px;
-    text-transform:uppercase; color:var(--primary);
-    margin-bottom:14px;
-  }
-  .sec-tag::before {
-    content:""; display:inline-block; width:18px; height:2px;
-    background:var(--grad); border-radius:2px;
-  }
-  .sec-h2 {
-    font-family:"Space Grotesk",sans-serif;
-    font-size:clamp(1.8rem,3vw,3rem); font-weight:700;
-    line-height:1.1; letter-spacing:-1px; color:var(--text);
-  }
-
-  /* ═══════════════════════ BEFORE & AFTER ═══════════════════════ */
-  .ba-section {
-    border-bottom: 1px solid var(--border);
-    padding: 0 0 64px;
-  }
-
-  .ba-header {
-    padding: 56px 40px 26px;
-  }
-
-  .ba-header .sec-h2 {
-    max-width: 20ch;
-    line-height: 1.08;
-  }
-
-  .ba-grid {
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:22px;
-    padding: 0 40px;
-    margin-top: 22px;
-    align-items: stretch;
-  }
-
-  .ba-col {
-    border:1px solid var(--border); border-radius:18px;
-    overflow:hidden;
-    transition: border-color 220ms, transform 220ms, box-shadow 220ms;
-    background: rgba(255,255,255,0.02);
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-  }
-  .ba-col:hover {
-    border-color:rgba(31, 125, 83,0.3);
-    transform: translateY(-3px);
-    box-shadow: 0 16px 34px rgba(0,0,0,0.28);
-  }
-
-  .ba-col-label {
-    padding:16px 22px;
-    border-bottom:1px solid var(--border);
-    font-family:"Space Grotesk",sans-serif;
-    font-size:0.78rem; font-weight:700; letter-spacing:2.4px;
-    text-transform:uppercase; color:var(--muted);
-    background: rgba(255,255,255,0.03);
-  }
-  .ba-col-label.after { color:var(--primary); }
-
-  .ba-list {
-    list-style: none;
-    padding: 26px 28px 28px;
-    display: grid;
-    gap: 0;
-  }
-  .ba-list li {
-    display: flex; gap: 12px;
-    font-size: 1.02rem; color: #cdd8ea; line-height: 1.55;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-  }
-  .ba-list li:last-child {
-    border-bottom: none;
-  }
-  .ba-list li::before {
-    content: "•"; color: var(--muted); flex-shrink: 0; margin-top: 4px;
-  }
-  .ba-col.after-col .ba-list li::before {
-    color: var(--primary);
-  }
-
-
-
-  /* ═══════════════════════ HOW IT WORKS ═══════════════════════ */
-  .how-section {
-    padding: 64px 40px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .how-steps {
-    display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-top: 32px;
-  }
-
-  .how-step {
-    border: 1px solid rgba(31, 125, 83,0.18);
-    border-radius: 20px;
-    padding: 28px 26px;
-    background: linear-gradient(180deg, rgba(7,13,20,0.96), rgba(6,11,17,0.9));
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    align-items: flex-start;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
-    transition: border-color 220ms, background 220ms;
-  }
-  .how-step:hover {
-    border-color: rgba(31, 125, 83,0.38);
-    background: linear-gradient(180deg, rgba(10,20,14,0.96), rgba(8,16,12,0.9));
-  }
-  .how-step::before {
-    content: "";
-    position: absolute; left: 0; right: 0; top: 0; height: 2px;
-    background: var(--grad);
-  }
-
-  .how-num {
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--primary);
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    line-height: 1;
-    margin-top: 2px;
-  }
-
-  .how-step-title {
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 1.05rem; font-weight: 700;
-    color: var(--text); margin: 0;
-  }
-
-  .how-step p {
-    color: #c7d5e6;
-    line-height: 1.68;
-    font-size: 0.97rem;
-    max-width: none;
-    margin: 0;
-  }
-
-  /* ═══════════════════════ COMPARE TABLE ═══════════════════════ */
-  .compare-section {
-    padding: 64px 40px 80px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .compare-table-wrap {
-    margin-top: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    overflow-x: auto;
-    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.005));
-  }
-
-  .compare-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95rem;
-  }
-
-  .compare-table th,
-  .compare-table td {
-    padding: 16px 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    text-align: left;
-    white-space: nowrap;
-  }
-  .compare-table tbody tr:last-child td { border-bottom: none; }
-
-  .compare-table th:first-child,
-  .compare-table td:first-child {
-    width: 31%;
-    white-space: normal;
-  }
-
-  .compare-table th {
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #cfd9e6;
-    background: rgba(255,255,255,0.03);
-  }
-
-  .compare-table td:last-child {
-    color: var(--primary);
-    font-weight: 700;
-  }
-
-  .compare-note {
-    margin-top: 24px;
-    color: #c7d5e6;
-    line-height: 1.75;
-    font-size: 1rem;
-    max-width: 85ch;
-  }
-
-  /* ═══════════════════════ CTA ═══════════════════════ */
-  .cta-cs-section {
-    display:grid; grid-template-columns:1fr auto;
-    align-items:center; gap:60px;
-    padding: 54px 40px;
-    position:relative; overflow:hidden;
-    background:transparent;
-  }
-
-  .cta-cs-text {
-    font-family:"Space Grotesk",sans-serif;
-    font-size:clamp(1.5rem,2.6vw,2.3rem); font-weight:700;
-    line-height:1.3; color:var(--text);
-  }
-
-  .cta-cs-btn {
-    flex-shrink:0;
-    display:inline-flex; align-items:center; gap:10px;
-    text-decoration:none; color:#f1f5f9; font-weight:800;
-    font-size:1rem; border-radius:999px;
-    padding:18px 36px;
-    background:var(--grad);
-    font-family:"Space Grotesk",sans-serif;
-    box-shadow: 0 8px 28px rgba(31, 125, 83,0.3);
-    transition: box-shadow 200ms, transform 200ms;
-    white-space:nowrap;
-    letter-spacing:0.2px;
-  }
-  .cta-cs-btn:hover {
-    box-shadow:0 16px 40px rgba(31, 125, 83,0.42);
-    transform: translateY(-1px);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation: none !important;
-      transition: none !important;
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --bg: #04070c; --bg2: #060c12;
+      --border: rgba(255,255,255,0.07); --border2: rgba(31,125,83,0.2);
+      --text: #e9f0f8; --muted: #6b84a0;
+      --p1: #1F7D53; --p2: #14a86a; --p3: #255F38;
+      --grad: linear-gradient(110deg,#1F7D53 0%,#19b370 50%,#255F38 100%);
+      --glass: rgba(255,255,255,0.03); --glass2: rgba(31,125,83,0.06);
     }
-  }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:Inter,system-ui,sans-serif; color:var(--text); background:var(--bg); overflow-x:hidden; }
+    #bg-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:.55; }
+    .orb { position:fixed; border-radius:50%; filter:blur(120px); pointer-events:none; z-index:0; }
+    .orb-1 { width:600px; height:600px; background:radial-gradient(circle,rgba(31,125,83,0.18) 0%,transparent 70%); top:-200px; left:-150px; }
+    .orb-2 { width:500px; height:500px; background:radial-gradient(circle,rgba(20,168,106,0.1) 0%,transparent 70%); bottom:10%; right:-100px; }
 
-  @keyframes heroFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-  }
-
-  /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
-  @media(max-width:1100px) {
-    .navbar { padding:0 32px; }
-    .hero-cs-left { padding:60px 40px; }
-    .hero-cs-right { padding:48px 36px; }
-    .ba-header { padding:48px 32px 28px; }
-    .ba-grid { padding:0 32px; gap:18px; }
-    .how-section { padding:56px 32px; }
-    .compare-section { padding:56px 32px 72px; }
-    .compare-table-wrap { border-radius:14px; }
-    .compare-table { min-width: 720px; font-size: 0.9rem; }
-    .compare-table th, .compare-table td { padding: 14px 12px; }
-    .cta-cs-section { padding:64px 32px; }
-  }
-
-  @media(max-width:900px) {
-    .hero-cs { grid-template-columns:1fr; min-height:auto; }
-    .hero-cs-left { border-right:none; border-bottom:1px solid var(--border); padding:60px 32px; }
-    .hero-cs-right { padding:40px 32px; }
-    .ba-grid { grid-template-columns:1fr; }
-    .how-steps { grid-template-columns:1fr; }
-    .cta-cs-section { grid-template-columns:1fr; gap:28px; }
-    .navbar { padding:0 24px; }
-    .nav-links { display:none; }
-  }
-
-  @media(max-width:640px) {
-    .hero-cs-left { padding:48px 24px; }
-    .hero-cs-right { padding:32px 24px; }
-    .ba-section { padding:0 0 48px; }
-    .ba-header { padding:36px 24px 24px; }
-    .ba-grid { padding:0 24px; gap:16px; }
-    .ba-list { padding:20px 20px 22px; }
-    .ba-list li { font-size:0.95rem; padding:10px 0; }
-    .how-section { padding:48px 24px; }
-    .compare-section { padding:48px 24px 64px; }
-    .compare-table { min-width: 640px; }
-    .cta-cs-section { padding:48px 24px; }
-    .cta-cs-btn { width:100%; justify-content:center; }
-  }
-
-
-    /* ─── HAMBURGER + MOBILE NAV ─────────────────────────────── */
+    /* ─── NAVBAR ─────────────────────────────────────────── */
+    .navbar { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:0 60px; height:62px; background:rgba(4,7,12,0.82); backdrop-filter:blur(20px) saturate(1.4); border-bottom:1px solid var(--border); }
+    .nav-logo { font-family:"Space Grotesk",sans-serif; font-size:1.05rem; font-weight:700; color:#fff; text-decoration:none; letter-spacing:.2px; }
+    .nav-logo span { color:var(--p1); }
+    .nav-links { display:flex; gap:2px; list-style:none; }
+    .nav-links a { text-decoration:none; font-size:.82rem; font-weight:500; color:var(--muted); padding:6px 14px; border-radius:999px; border:1px solid transparent; transition:color .18s,border-color .18s,background .18s; }
+    .nav-links a:hover { color:var(--text); border-color:var(--border); }
+    .nav-back { text-decoration:none; font-size:.82rem; font-weight:600; color:var(--text); padding:7px 16px; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,0.03); transition:border-color .18s,background .18s; white-space:nowrap; }
+    .nav-back:hover { border-color:var(--border2); background:rgba(31,125,83,0.06); }
     .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; border:1px solid var(--border); border-radius:8px; background:rgba(255,255,255,0.03); transition:border-color .2s; }
-    .nav-hamburger:hover { border-color:var(--border2,rgba(255,255,255,0.15)); }
-    .nav-hamburger span { display:block; width:20px; height:2px; background:var(--muted); border-radius:2px; transition:transform .25s, opacity .25s; }
-    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity:0; }
-    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .nav-hamburger:hover { border-color:var(--border2); }
+    .nav-hamburger span { display:block; width:20px; height:2px; background:var(--muted); border-radius:2px; transition:transform .25s,opacity .25s; }
+    .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .nav-hamburger.open span:nth-child(2){opacity:0}
+    .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
     .nav-mobile-drawer { display:none; position:fixed; top:62px; left:0; right:0; background:rgba(4,7,12,0.97); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); z-index:199; padding:20px 24px 28px; flex-direction:column; gap:6px; }
     .nav-mobile-drawer.open { display:flex; }
-    .nav-mobile-drawer a { text-decoration:none; font-size:.9rem; font-weight:500; color:var(--muted); padding:10px 14px; border-radius:10px; border:1px solid transparent; transition:color .18s, border-color .18s, background .18s; }
+    .nav-mobile-drawer a { text-decoration:none; font-size:.9rem; font-weight:500; color:var(--muted); padding:10px 14px; border-radius:10px; border:1px solid transparent; transition:color .18s,border-color .18s,background .18s; }
     .nav-mobile-drawer a:hover { color:var(--text); border-color:var(--border); background:rgba(255,255,255,0.03); }
-    @media(max-width:900px) { .nav-hamburger { display:flex; } .nav-back { display:none; } }
-    @media(max-width:600px) { .nav-mobile-drawer { top:56px; } }
+
+    /* ─── HERO ──────────────────────────────────────────── */
+    .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center; padding-top:62px; border-bottom:1px solid var(--border); position:relative; z-index:1; }
+    .hero-left { padding:72px 56px 72px 60px; display:flex; flex-direction:column; justify-content:center; border-right:1px solid var(--border); height:100%; }
+    .tag { display:inline-flex; align-items:center; gap:10px; font-size:.75rem; font-weight:700; letter-spacing:3.5px; text-transform:uppercase; color:var(--p2); margin-bottom:24px; }
+    .tag::before { content:""; display:inline-block; width:24px; height:2px; background:var(--grad); border-radius:2px; }
+    .badge { display:inline-flex; align-items:center; gap:8px; background:rgba(31,125,83,0.1); border:1px solid rgba(31,125,83,0.28); border-radius:999px; padding:5px 14px 5px 10px; font-size:.73rem; font-weight:600; color:#4ade80; letter-spacing:.5px; margin-bottom:28px; width:fit-content; }
+    .badge-dot { width:7px; height:7px; border-radius:50%; background:#4ade80; box-shadow:0 0 8px #4ade80; animation:dotPulse 1.8s ease-in-out infinite; }
+    @keyframes dotPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
+    .hero-title { font-family:"Space Grotesk",sans-serif; font-size:clamp(3rem,4.5vw,5.6rem); font-weight:800; line-height:.95; letter-spacing:-3.5px; margin-bottom:28px; color:#fff; }
+    .hero-title .hl { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-desc { font-size:clamp(1rem,1.3vw,1.14rem); color:#a8bdd4; line-height:1.75; margin-bottom:24px; max-width:52ch; }
+    .green-hl { color:#22c985; font-weight:700; }
+    .hero-list { list-style:none; display:grid; gap:13px; margin-bottom:48px; }
+    .hero-list li { display:flex; align-items:flex-start; gap:12px; font-size:.97rem; color:#c4d5e6; line-height:1.5; }
+    .li-icon { flex-shrink:0; width:30px; height:30px; border-radius:8px; background:rgba(31,125,83,0.12); border:1px solid rgba(31,125,83,0.22); display:flex; align-items:center; justify-content:center; font-size:.85rem; }
+    .hero-actions { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+    .btn-primary { display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#fff; font-weight:700; font-size:.92rem; border-radius:999px; padding:14px 28px; background:var(--grad); font-family:"Space Grotesk",sans-serif; box-shadow:0 6px 28px rgba(31,125,83,0.35); transition:box-shadow .2s,transform .2s; letter-spacing:.2px; }
+    .btn-primary:hover { box-shadow:0 12px 40px rgba(31,125,83,0.5); transform:translateY(-1px); }
+    .btn-ghost { display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--muted); font-weight:500; font-size:.88rem; border-radius:999px; padding:13px 24px; border:1px solid var(--border); transition:color .2s,border-color .2s; }
+    .btn-ghost:hover { color:var(--text); border-color:rgba(255,255,255,0.2); }
+
+    /* ─── HERO RIGHT – TELEGRAM WIDGET ─────────────────── */
+    .hero-right { padding:56px 48px; display:flex; align-items:center; justify-content:center; height:100%; background:radial-gradient(ellipse 80% 80% at 60% 50%,rgba(31,125,83,0.07),transparent 70%); }
+    .tg-widget { width:100%; max-width:440px; background:rgba(7,12,19,0.78); border:1px solid rgba(31,125,83,0.22); border-radius:24px; backdrop-filter:blur(20px); box-shadow:0 0 0 1px rgba(31,125,83,0.06),0 24px 64px rgba(0,0,0,0.6),0 0 80px rgba(31,125,83,0.08); overflow:hidden; animation:widgetFloat 4s ease-in-out infinite; }
+    @keyframes widgetFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .tg-top { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-bottom:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.02); }
+    .tg-dots { display:flex; gap:6px; }
+    .tg-dots span { width:10px; height:10px; border-radius:50%; }
+    .tg-dots span:nth-child(1){background:#ff5f57} .tg-dots span:nth-child(2){background:#febc2e} .tg-dots span:nth-child(3){background:#28c840}
+    .tg-name { font-size:.72rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+    .tg-status { display:flex; align-items:center; gap:5px; font-size:.68rem; color:#4ade80; font-weight:700; }
+    .tg-status::before { content:""; width:5px; height:5px; border-radius:50%; background:#4ade80; box-shadow:0 0 6px #4ade80; animation:dotPulse 1.4s ease-in-out infinite; }
+    .tg-body { padding:16px 14px; display:flex; flex-direction:column; gap:10px; }
+    .tg-msg { max-width:85%; padding:10px 13px; border-radius:14px; font-size:.8rem; line-height:1.5; border:1px solid rgba(255,255,255,0.07); }
+    .tg-msg.user { background:rgba(31,125,83,0.14); border-color:rgba(31,125,83,0.28); color:#cce8d7; align-self:flex-end; border-radius:14px 4px 14px 14px; }
+    .tg-msg.bot { background:rgba(255,255,255,0.03); color:#cdd8ea; align-self:flex-start; border-radius:4px 14px 14px 14px; }
+    .tg-msg.bot strong { color:#4ade80; }
+    .tg-processing { display:flex; align-items:center; gap:10px; padding:10px 13px; background:rgba(31,125,83,0.06); border:1px solid rgba(31,125,83,0.2); border-radius:12px; font-size:.75rem; color:#9ad8b6; }
+    .tg-spin { width:16px; height:16px; border-radius:50%; border:2px solid rgba(31,125,83,0.3); border-top-color:#4ade80; animation:spin .8s linear infinite; flex-shrink:0; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    .tg-stats { display:flex; border-top:1px solid rgba(255,255,255,0.05); }
+    .tg-stat { flex:1; padding:12px 8px; text-align:center; border-right:1px solid rgba(255,255,255,0.05); }
+    .tg-stat:last-child { border-right:none; }
+    .ts-num { font-family:"Space Grotesk",sans-serif; font-size:1rem; font-weight:800; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .ts-label { font-size:.6rem; color:var(--muted); margin-top:2px; }
+
+    /* ─── SECTION HELPERS ───────────────────────────────── */
+    .sec-tag { display:inline-flex; align-items:center; gap:9px; font-size:.72rem; font-weight:700; letter-spacing:3.5px; text-transform:uppercase; color:var(--p2); margin-bottom:14px; }
+    .sec-tag::before { content:""; display:inline-block; width:16px; height:2px; background:var(--grad); border-radius:2px; }
+    .sec-h2 { font-family:"Space Grotesk",sans-serif; font-size:clamp(1.9rem,3.2vw,3rem); font-weight:700; line-height:1.08; letter-spacing:-1.2px; color:var(--text); }
+
+    /* ─── STATS SECTION ────────────────────────────────── */
+    .stats-section { display:grid; grid-template-columns:1fr 1.15fr; gap:72px; padding:100px 80px; min-height:580px; border-bottom:1px solid var(--border); position:relative; z-index:1; align-items:center; }
+    .stats-section::before { content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:700px; height:500px; background:radial-gradient(ellipse at center,rgba(31,125,83,0.09) 0%,transparent 65%); pointer-events:none; }
+    .stats-left-panel { display:flex; align-items:center; justify-content:center; }
+    .stats-widget-card { width:100%; max-width:360px; background:rgba(8,14,24,0.78); border:1px solid rgba(31,125,83,0.22); border-radius:20px; backdrop-filter:blur(20px); box-shadow:0 0 0 1px rgba(31,125,83,0.07),0 32px 72px rgba(0,0,0,0.55),0 0 60px rgba(31,125,83,0.09); overflow:hidden; animation:statsFloat 4s ease-in-out infinite; }
+    @keyframes statsFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+    .swc-bar { display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:rgba(255,255,255,0.025); border-bottom:1px solid rgba(255,255,255,0.06); }
+    .swc-dots { display:flex; gap:6px; }
+    .swc-dots span { width:10px; height:10px; border-radius:50%; }
+    .swc-dots span:nth-child(1){background:#ff5f56} .swc-dots span:nth-child(2){background:#ffbd2e} .swc-dots span:nth-child(3){background:#28c840}
+    .swc-title { font-size:.7rem; font-weight:600; color:rgba(255,255,255,0.45); letter-spacing:.9px; text-transform:uppercase; }
+    .swc-live { display:flex; align-items:center; gap:5px; font-size:.66rem; font-weight:700; color:#4ade80; }
+    .swc-live::before { content:""; width:6px; height:6px; border-radius:50%; background:#4ade80; box-shadow:0 0 6px #4ade80; animation:dotPulse 1.8s ease-in-out infinite; }
+    .swc-video-wrap { position:relative; background:#000; }
+    .swc-video-wrap video { width:100%; display:block; opacity:.92; }
+    .swc-video-wrap .v-label { position:absolute; bottom:10px; left:10px; background:rgba(5,8,15,0.82); backdrop-filter:blur(8px); border:1px solid rgba(31,125,83,0.28); border-radius:7px; padding:4px 10px; display:flex; align-items:center; gap:5px; font-size:.62rem; font-weight:700; color:#4ade80; letter-spacing:.8px; text-transform:uppercase; }
+    .swc-video-wrap .v-label::before { content:""; width:5px; height:5px; border-radius:50%; background:#4ade80; box-shadow:0 0 4px #4ade80; animation:dotPulse 1.6s ease-in-out infinite; }
+
+    /* Stat cells */
+    .stats-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    .stat-cell { background:rgba(8,13,22,0.6); border:1px solid rgba(31,125,83,0.12); border-radius:16px; padding:24px 22px; display:flex; flex-direction:column; backdrop-filter:blur(10px); transition:border-color .3s,background .3s,transform .3s,box-shadow .3s; position:relative; overflow:hidden; cursor:default; }
+    .stat-cell:hover { background:rgba(10,18,30,0.75); border-color:rgba(31,125,83,0.32); transform:translateY(-4px); box-shadow:0 16px 48px rgba(31,125,83,0.12),0 0 0 1px rgba(31,125,83,0.18); }
+    .stat-cell::before { content:""; position:absolute; top:0; left:0; right:0; height:2px; background:var(--grad); transform:scaleX(0); transform-origin:left; transition:transform .4s ease; border-radius:18px 18px 0 0; }
+    .stat-cell:hover::before { transform:scaleX(1); }
+    .stat-cell::after { content:""; position:absolute; inset:0; background:radial-gradient(ellipse at 20% 10%,rgba(31,125,83,0.08) 0%,transparent 60%); border-radius:18px; opacity:0; transition:opacity .4s; pointer-events:none; }
+    .stat-cell:hover::after { opacity:1; }
+    .stat-icon { font-size:1.1rem; width:38px; height:38px; border-radius:10px; background:rgba(31,125,83,0.1); border:1px solid rgba(31,125,83,0.2); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+    .stat-num { font-family:"Space Grotesk",sans-serif; font-size:clamp(2rem,3vw,2.6rem); font-weight:800; line-height:1; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; margin-bottom:8px; letter-spacing:-1px; }
+    .stat-label { font-size:.88rem; font-weight:700; color:#dce8f5; line-height:1.3; margin-bottom:6px; }
+    .stat-desc { font-size:.75rem; color:var(--muted); line-height:1.55; }
+
+    /* ─── HOW IT WORKS ─────────────────────────────────── */
+    .how-section { padding:100px 72px; border-bottom:1px solid var(--border); position:relative; z-index:1; }
+    .how-head { margin-bottom:72px; }
+    .how-desc { font-size:1rem; color:var(--muted); line-height:1.8; max-width:56ch; margin-top:16px; }
+    .flow-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .flow-step { background:rgba(8,13,22,0.6); border:1px solid rgba(31,125,83,0.1); border-radius:20px; padding:32px 26px; display:flex; flex-direction:column; align-items:flex-start; position:relative; z-index:1; overflow:hidden; backdrop-filter:blur(10px); transition:border-color .3s,transform .3s,box-shadow .3s,background .3s; }
+    .flow-step:hover { border-color:rgba(31,125,83,0.3); transform:translateY(-5px); box-shadow:0 16px 48px rgba(31,125,83,0.1),0 0 0 1px rgba(31,125,83,0.15); background:rgba(10,18,30,0.75); }
+    .flow-step::before { content:""; position:absolute; top:0; left:0; right:0; height:2px; background:var(--grad); transform:scaleX(0); transform-origin:left; transition:transform .4s ease; border-radius:20px 20px 0 0; }
+    .flow-step:hover::before { transform:scaleX(1); }
+    .flow-step::after { content:""; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 0%,rgba(31,125,83,0.08) 0%,transparent 60%); opacity:0; transition:opacity .4s; pointer-events:none; border-radius:20px; }
+    .flow-step:hover::after { opacity:1; }
+    .step-bubble { width:36px; height:36px; border-radius:50%; background:var(--grad); display:flex; align-items:center; justify-content:center; font-family:"Space Grotesk",sans-serif; font-size:.7rem; font-weight:800; color:#fff; margin-bottom:20px; box-shadow:0 0 24px rgba(31,125,83,0.5); }
+    .step-icon-wrap { width:48px; height:48px; border-radius:14px; background:rgba(31,125,83,0.1); border:1px solid rgba(31,125,83,0.22); display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:18px; transition:background .25s,border-color .25s,transform .25s; }
+    .flow-step:hover .step-icon-wrap { background:rgba(31,125,83,0.18); border-color:rgba(31,125,83,0.4); transform:scale(1.05); }
+    .step-title { font-family:"Space Grotesk",sans-serif; font-size:1rem; font-weight:700; color:var(--text); margin-bottom:10px; line-height:1.25; }
+    .step-desc { font-size:.82rem; color:var(--muted); line-height:1.65; }
+
+    /* ─── BEFORE & AFTER ───────────────────────────────── */
+    .ba-section { border-bottom:1px solid var(--border); position:relative; z-index:1; }
+    .ba-header { padding:80px 60px 36px; }
+    .ba-sub { font-size:.96rem; color:var(--muted); line-height:1.75; max-width:60ch; margin-top:12px; }
+    .ba-grid { display:grid; grid-template-columns:1fr 1fr; padding:0 60px 60px; gap:24px; }
+    .ba-col { border:1px solid var(--border); border-radius:20px; overflow:hidden; transition:border-color .25s,box-shadow .25s; background:var(--glass); }
+    .ba-col:hover { border-color:var(--border2); box-shadow:0 8px 32px rgba(0,0,0,0.4); }
+    .ba-col.after { border-color:rgba(31,125,83,0.16); }
+    .ba-col.after:hover { border-color:rgba(31,125,83,0.36); box-shadow:0 8px 40px rgba(31,125,83,0.12); }
+    .ba-col-label { padding:13px 20px; border-bottom:1px solid var(--border); font-family:"Space Grotesk",sans-serif; font-size:.68rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); background:rgba(255,255,255,0.018); display:flex; align-items:center; gap:8px; }
+    .ba-col.after .ba-col-label { color:var(--p2); }
+    .ba-col-label span { width:6px; height:6px; border-radius:50%; background:currentColor; }
+    .ba-list { list-style:none; padding:24px 26px; display:grid; gap:14px; }
+    .ba-list li { display:flex; gap:12px; font-size:.97rem; color:#cdd8ea; line-height:1.55; align-items:flex-start; }
+    .ba-list li::before { content:"✕"; color:#e05555; flex-shrink:0; margin-top:3px; font-size:.8rem; font-weight:700; }
+    .ba-col.after .ba-list li::before { content:"✓"; color:var(--p2); }
+
+    /* ─── COMPARE TABLE ────────────────────────────────── */
+    .compare-section { padding:100px 72px; border-bottom:1px solid var(--border); position:relative; z-index:1; }
+    .compare-section::before { content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:400px; background:radial-gradient(ellipse at center,rgba(31,125,83,0.07) 0%,transparent 65%); pointer-events:none; }
+    .compare-head { margin-bottom:40px; }
+    .compare-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:20px; border:1px solid var(--border); background:rgba(6,10,16,0.7); backdrop-filter:blur(10px); }
+    .compare-table { width:100%; border-collapse:collapse; min-width:640px; }
+    .compare-table thead tr { background:rgba(255,255,255,0.025); border-bottom:1px solid rgba(255,255,255,0.08); }
+    .compare-table th { padding:16px 20px; text-align:left; font-family:"Space Grotesk",sans-serif; font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+    .compare-table th:first-child { color:rgba(255,255,255,0.5); }
+    .compare-table th.col-ai { color:var(--p2); }
+    .compare-table td { padding:15px 20px; font-size:.88rem; border-bottom:1px solid rgba(255,255,255,0.05); line-height:1.45; transition:background .2s; }
+    .compare-table tr:last-child td { border-bottom:none; }
+    .compare-table tbody tr:hover td { background:rgba(31,125,83,0.04); }
+    .compare-table td:first-child { color:#c8d8ea; font-weight:600; font-size:.85rem; }
+    .compare-table td.val-bad { color:#6b7f96; }
+    .compare-table td.val-mid { color:#8fa8c0; }
+    .compare-table td.val-good { color:#4ade80; font-weight:600; }
+    .compare-table th.col-ai,.compare-table td.col-ai { background:rgba(31,125,83,0.06); border-left:1px solid rgba(31,125,83,0.15); border-right:1px solid rgba(31,125,83,0.15); }
+    .compare-table thead th.col-ai { border-top:2px solid var(--p1); }
+
+    /* ─── FAQ ──────────────────────────────────────────── */
+    .faq-section { padding:80px 60px; border-bottom:1px solid var(--border); position:relative; z-index:1; }
+    .faq-layout { display:grid; grid-template-columns:1fr 1.8fr; gap:80px; align-items:start; }
+    .faq-sticky { position:sticky; top:80px; }
+    .faq-sticky-title { font-family:"Space Grotesk",sans-serif; font-size:clamp(1.8rem,2.8vw,2.6rem); font-weight:700; line-height:1.1; letter-spacing:-1px; color:var(--text); margin-bottom:18px; }
+    .faq-sticky-desc { font-size:.92rem; color:var(--muted); line-height:1.8; margin-bottom:28px; }
+    .faq-cta-mini { display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--p2); font-size:.85rem; font-weight:600; border-bottom:1px solid rgba(31,125,83,0.3); padding-bottom:2px; transition:border-color .2s,color .2s; }
+    .faq-cta-mini:hover { color:var(--p1); border-color:var(--p1); }
+    .faq-list { display:flex; flex-direction:column; gap:14px; }
+    .faq-item { border:1px solid rgba(31,125,83,0.12); border-radius:16px; background:var(--glass); overflow:hidden; transition:border-color .2s; }
+    .faq-item:hover { border-color:rgba(31,125,83,0.3); }
+    .faq-q-row { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:20px 22px; cursor:pointer; user-select:none; }
+    .faq-q { font-family:"Space Grotesk",sans-serif; font-size:.96rem; font-weight:700; color:var(--text); line-height:1.4; }
+    .faq-chevron { width:28px; height:28px; border-radius:8px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.7rem; color:var(--muted); transition:transform .25s,border-color .25s,background .25s; }
+    .faq-item.open .faq-chevron { transform:rotate(180deg); border-color:rgba(31,125,83,0.3); background:rgba(31,125,83,0.1); color:var(--p2); }
+    .faq-a { padding:0 22px 20px; font-size:.88rem; color:#8faabb; line-height:1.78; display:none; border-top:1px solid rgba(255,255,255,0.04); padding-top:18px; }
+    .faq-item.open .faq-a { display:block; }
+
+    /* ─── CTA ──────────────────────────────────────────── */
+    .cta-section { padding:90px 60px; position:relative; z-index:1; overflow:hidden; }
+    .cta-section::before { content:""; position:absolute; inset:0; background:radial-gradient(ellipse 70% 120% at 50% 100%,rgba(31,125,83,0.1),transparent 60%),radial-gradient(ellipse 50% 80% at 10% 0%,rgba(31,125,83,0.06),transparent 60%); pointer-events:none; }
+    .cta-inner { max-width:760px; margin:0 auto; display:flex; flex-direction:column; align-items:center; text-align:center; position:relative; }
+    .cta-eyebrow { display:inline-flex; align-items:center; gap:8px; background:rgba(31,125,83,0.1); border:1px solid rgba(31,125,83,0.22); border-radius:999px; padding:5px 14px; font-size:.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--p2); margin-bottom:28px; }
+    .cta-title { font-family:"Space Grotesk",sans-serif; font-size:clamp(2rem,4vw,3.6rem); font-weight:800; line-height:1.05; letter-spacing:-1.5px; color:#fff; margin-bottom:18px; }
+    .cta-title span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .cta-sub { font-size:1.02rem; color:var(--muted); line-height:1.75; max-width:50ch; margin-bottom:36px; }
+    .cta-actions { display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:center; }
+    .cta-note { margin-top:20px; font-size:.76rem; color:var(--muted); }
+
+    /* ─── SCROLL REVEAL ────────────────────────────────── */
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-left { opacity:0; transform:translateX(-28px); transition:opacity .6s ease,transform .6s ease; }
+    .reveal-left.visible { opacity:1; transform:translateX(0); }
+
+    /* ─── RESPONSIVE ───────────────────────────────────── */
+    /* Tablet landscape */
+    @media(max-width:1200px) {
+      .navbar{padding:0 36px} .hero-left{padding:60px 44px} .hero-right{padding:48px 36px}
+      .how-section,.faq-section,.cta-section,.compare-section{padding-left:40px;padding-right:40px}
+      .ba-header{padding:60px 40px 32px} .ba-grid{padding:0 40px 48px} .stats-section{padding:72px 48px;gap:48px}
+    }
+    /* Tablet portrait */
+    @media(max-width:1000px) {
+      .stats-section{grid-template-columns:1fr;gap:40px;padding:72px 40px}
+      .stats-widget-card{max-width:480px;margin:0 auto}
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
+      .flow-steps{grid-template-columns:repeat(2,1fr);gap:16px}
+      .faq-layout{grid-template-columns:1fr;gap:40px} .faq-sticky{position:static}
+    }
+    /* Large phone */
+    @media(max-width:900px) {
+      .hero{grid-template-columns:1fr;min-height:auto}
+      .hero-left{border-right:none;border-bottom:1px solid var(--border);padding:60px 40px}
+      .hero-right{padding:48px 40px}
+      .tg-widget{max-width:460px}
+      .stats-grid{grid-template-columns:repeat(2,1fr)} .ba-grid{grid-template-columns:1fr}
+      .navbar{padding:0 24px} .nav-links{display:none} .nav-hamburger{display:flex}
+    }
+    /* Phone */
+    @media(max-width:640px) {
+      .navbar{height:56px;padding:0 16px} .nav-back{display:none} .nav-mobile-drawer{top:56px}
+
+      /* Hero */
+      .hero-left{padding:40px 18px 36px} .hero-right{padding:28px 18px 36px}
+      .hero-title{font-size:2.2rem;letter-spacing:-1.8px;line-height:1.06}
+      .hero-desc{font-size:.9rem;margin-bottom:24px}
+      .hero-list{gap:10px;margin-bottom:28px} .hero-list li{font-size:.88rem}
+      .hero-actions{flex-direction:column;gap:10px}
+      .hero-actions .btn-primary,.hero-actions .btn-ghost{width:100%;justify-content:center}
+      .ba-header{padding:48px 20px 24px} .ba-grid{padding:0 20px 36px;gap:14px}
+      .compare-section{padding:56px 20px} .faq-section{padding:52px 20px}
+      .faq-sticky-title{font-size:1.6rem} .cta-section{padding:60px 20px}
+      .cta-title{font-size:1.9rem;letter-spacing:-1px}
+      .cta-actions{flex-direction:column;width:100%}
+      .cta-actions .btn-primary,.cta-actions .btn-ghost{width:100%;justify-content:center}
+      .sec-h2{font-size:1.7rem;letter-spacing:-.8px}
+    }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after{animation:none!important;transition:none!important} }
   </style>
 </head>
 <body>
+  <canvas id="bg-canvas"></canvas>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-  <!-- PARTICLE VOID -->
-  <canvas id="bg-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.8;"></canvas>
-
-<!-- ═══════════ NAVBAR ═══════════ -->
-<nav class="navbar">
-  <a href="/" class="nav-logo">Karl<span>space</span></a>
-  <ul class="nav-links">
-    <li><a href="#ba">Before &amp; After</a></li>
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#compare">Comparison</a></li>
-  </ul>
-  <a href="/#case-studies" class="nav-back">← Back to Case Studies</a>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">Karl<span>space</span></a>
+    <ul class="nav-links">
+      <li><a href="#stats">Results</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#ba">Before &amp; After</a></li>
+      <li><a href="#compare">Comparison</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="index.html#case-studies" class="nav-back">← Back</a>
     <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
   <nav class="nav-mobile-drawer" id="navDrawer" aria-label="Mobile navigation">
-    <a href="#ba" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Before &amp; After</a>
-    <a href="#how" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">How It Works</a>
-    <a href="#compare" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">Comparison</a>
-    <a href="/#case-studies" onclick="this.closest('.nav-mobile-drawer').classList.remove('open');document.getElementById('navHamburger').classList.remove('open')">← Back to Portfolio</a>
+    <a href="#stats" onclick="closeDrawer()">Results</a>
+    <a href="#how" onclick="closeDrawer()">How It Works</a>
+    <a href="#ba" onclick="closeDrawer()">Before &amp; After</a>
+    <a href="#compare" onclick="closeDrawer()">Comparison</a>
+    <a href="#faq" onclick="closeDrawer()">FAQ</a>
+    <a href="index.html#case-studies" onclick="closeDrawer()">← Back to Portfolio</a>
   </nav>
 
-<!-- ═══════════ HERO ═══════════ -->
-<section class="hero-cs" style="position: relative; z-index: 1;">
-  <div class="hero-cs-left">
-    <div class="hero-cs-tag">Case Study</div>
-    <h1 class="hero-cs-title">AI Email Campaign via Telegram<br><span class="highlight">No Dashboard Needed</span></h1>
-    <p class="hero-cs-sub">Type a message in Telegram. The AI understands your intent, finds the right customers or suppliers from your database, writes the email, and sends it - automatically. No dashboard, no templates, no manual work.</p>
-    <ul class="hero-cs-bullets">
-      <li>Type one message - reach every customer who bought a specific product</li>
-      <li>Send BOGO, discount, or restock alerts to the exact right people</li>
-      <li>Suppliers notified automatically - one product, multiple suppliers handled in one go</li>
-      <li>AI writes the email body in the right tone: promo for customers, B2B for suppliers</li>
-    </ul>
-  </div>
-  <div class="hero-cs-right">
-    <div class="hero-cs-img-wrap">
-      <video src="case-study-email-campaign.mp4" autoplay loop muted playsinline></video>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- ═══════════ BEFORE & AFTER ═══════════ -->
-<section class="ba-section" id="ba">
-  <div class="ba-header">
-    <div class="sec-tag">Before &amp; After</div>
-    <h2 class="sec-h2">From manual chaos to one text message</h2>
-  </div>
-  <div class="ba-grid">
-    <div class="ba-col">
-      <div class="ba-col-label">Before</div>
-      <ul class="ba-list">
-        <li>Owner manually exports customer list from spreadsheet</li>
-        <li>Writes email copy from scratch every time</li>
-        <li>Sends bulk email with no product-level targeting</li>
-        <li>Contacts each supplier one by one via phone or email</li>
-        <li>Hours wasted per campaign, errors common</li>
+  <!-- HERO -->
+  <section class="hero" id="overview">
+    <div class="hero-left">
+      <div class="tag">Case Study</div>
+      <div class="badge"><span class="badge-dot"></span> Fully Automated</div>
+      <h1 class="hero-title">
+        AI Email<br><span class="hl">via Telegram</span>
+      </h1>
+      <p class="hero-desc">
+        Type one message in Telegram. The AI <span class="green-hl">finds the right contacts</span>, writes the email in the right tone, and sends it — automatically. <span class="green-hl">No dashboard. No templates. No manual work.</span>
+      </p>
+      <ul class="hero-list">
+        <li><span class="li-icon">💬</span> Type once — reach every customer who bought a specific product</li>
+        <li><span class="li-icon">🎯</span> AI queries your database and targets only the relevant contacts</li>
+        <li><span class="li-icon">✍️</span> Writes promotional tone for customers, B2B tone for suppliers</li>
+        <li><span class="li-icon">📧</span> All suppliers notified automatically in the same flow</li>
       </ul>
+      <div class="hero-actions">
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="btn-primary">Build This for My Business →</a>
+        <a href="#how" class="btn-ghost">See how it works ↓</a>
+      </div>
     </div>
-    <div class="ba-col after-col">
-      <div class="ba-col-label after">After</div>
-      <ul class="ba-list">
-        <li>Owner types a single message in Telegram</li>
-        <li>AI identifies product ID and target audience</li>
-        <li>Database queried - only relevant customers fetched</li>
-        <li>All linked suppliers notified in the same flow</li>
-        <li>Every email sent via Gmail. Zero human involvement.</li>
-      </ul>
+
+    <!-- Telegram widget -->
+    <div class="hero-right">
+      <div class="tg-widget">
+        <div class="tg-top">
+          <div class="tg-dots"><span></span><span></span><span></span></div>
+          <div class="tg-name">✈️ Campaign Bot</div>
+          <div class="tg-status">Running</div>
+        </div>
+        <div class="tg-body">
+          <div class="tg-msg user">Send 20% discount email for Product X to all buyers. Notify suppliers too.</div>
+          <div class="tg-msg bot">✅ Got it. Querying database for Product X buyers...<br><strong>Found 148 customers</strong> · 3 suppliers linked</div>
+          <div class="tg-processing">
+            <div class="tg-spin"></div>
+            AI writing emails · Promotional tone for customers, B2B for suppliers…
+          </div>
+          <div class="tg-msg bot">🚀 <strong>Done!</strong> 148 customer emails sent · 3 supplier notifications delivered · All via Gmail</div>
+        </div>
+        <div class="tg-stats">
+          <div class="tg-stat"><div class="ts-num">148</div><div class="ts-label">Emails Sent</div></div>
+          <div class="tg-stat"><div class="ts-num">3</div><div class="ts-label">Suppliers</div></div>
+          <div class="tg-stat"><div class="ts-num">&lt;60s</div><div class="ts-label">Total Time</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-section" id="stats">
+    <div class="stats-left-panel">
+      <div class="stats-widget-card reveal-left">
+        <div class="swc-bar">
+          <div class="swc-dots"><span></span><span></span><span></span></div>
+          <div class="swc-title">Live Campaign Demo</div>
+          <div class="swc-live">Live</div>
+        </div>
+        <div class="swc-video-wrap">
+          <video src="case-study-email-campaign.mp4" autoplay loop muted playsinline loading="lazy"></video>
+          <div class="v-label">AI Agent Running</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-cell reveal">
+        <div class="stat-icon">⚡</div>
+        <span class="stat-num">&lt;60s</span>
+        <div class="stat-label">Campaign Sent</div>
+        <div class="stat-desc"><strong>From message to inbox:</strong> One Telegram message triggers the entire flow — query, write, send — in under 60 seconds.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">🎯</div>
+        <span class="stat-num">100%</span>
+        <div class="stat-label">Targeted Sends</div>
+        <div class="stat-desc"><strong>Product-level precision:</strong> Only customers who bought that specific product get the email. No spam, no wasted sends.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">✍️</div>
+        <span class="stat-num">AI</span>
+        <div class="stat-label">Written &amp; Sent</div>
+        <div class="stat-desc"><strong>Context-aware copy:</strong> Promotional tone for customer emails, professional B2B tone for supplier notifications — automatically.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">🔄</div>
+        <span class="stat-num">0</span>
+        <div class="stat-label">Manual Steps</div>
+        <div class="stat-desc"><strong>Fully hands-free:</strong> You type one message. The system does everything else — no dashboard, no manual CSV, no copying emails.</div>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- ═══════════ HOW IT WORKS ═══════════ -->
-<section class="how-section" id="how">
-  <div class="sec-tag">How It Works</div>
-  <h2 class="sec-h2">From one text to sent emails in seconds</h2>
-  <div class="how-steps">
-    <div class="how-step">
-      <div class="how-num">Step 1</div>
-      <div class="how-step-title">You type in Telegram</div>
-      <p>Send a plain-text message like "Send 20% discount email for Product X to all buyers." No special syntax. No form to fill. Just speak naturally.</p>
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how">
+    <div class="how-head reveal">
+      <div class="sec-tag">The System</div>
+      <h2 class="sec-h2">From one text to sent emails in seconds</h2>
+      <p class="how-desc">Three steps from typing in Telegram to emails landing in inboxes. No setup per campaign. No manual work. Just speak naturally.</p>
     </div>
-    <div class="how-step">
-      <div class="how-num">Step 2</div>
-      <div class="how-step-title">AI reads intent &amp; queries DB</div>
-      <p>The system extracts the product ID, identifies audience type (customers vs suppliers), and fetches only the relevant contacts from your database - nobody else.</p>
+    <div class="flow-steps">
+      <div class="flow-step reveal">
+        <div class="step-bubble">01</div>
+        <div class="step-icon-wrap">💬</div>
+        <div class="step-title">You Type in Telegram</div>
+        <p class="step-desc">Send a plain-text message like "Send 20% discount email for Product X to all buyers." No special syntax, no form to fill — just speak naturally.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">02</div>
+        <div class="step-icon-wrap">🧠</div>
+        <div class="step-title">AI Reads Intent &amp; Queries DB</div>
+        <p class="step-desc">The system extracts the product ID, identifies the audience type (customers vs suppliers), and fetches only the relevant contacts from your database — nobody else gets included.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">03</div>
+        <div class="step-icon-wrap">🚀</div>
+        <div class="step-title">Emails Written &amp; Sent</div>
+        <p class="step-desc">An LLM writes a context-aware subject line and body — promotional tone for customers, B2B tone for suppliers — then fires every email through Gmail instantly. Done.</p>
+      </div>
     </div>
-    <div class="how-step">
-      <div class="how-num">Step 3</div>
-      <div class="how-step-title">Emails written &amp; sent via Gmail</div>
-      <p>An LLM writes a context-aware subject line and body - promotional tone for customers, B2B tone for suppliers - then fires every email through Gmail instantly. Done.</p>
+  </section>
+
+  <!-- BEFORE & AFTER -->
+  <section class="ba-section" id="ba">
+    <div class="ba-header reveal">
+      <div class="sec-tag">Before &amp; After</div>
+      <h2 class="sec-h2">From manual chaos to one text message</h2>
+      <p class="ba-sub">The same business — running on a completely different operating system. On the left, hours of manual work per campaign. On the right, under 60 seconds.</p>
     </div>
-  </div>
-</section>
+    <div class="ba-grid">
+      <div class="ba-col reveal">
+        <div class="ba-col-label"><span></span> Before – Manual process</div>
+        <ul class="ba-list">
+          <li>Manually export customer list from spreadsheet for each campaign</li>
+          <li>Write email copy from scratch every single time</li>
+          <li>Send bulk email with no product-level targeting</li>
+          <li>Contact each supplier individually by phone or email</li>
+          <li>Hours wasted per campaign with frequent errors</li>
+          <li>No way to track whether emails reached the right people</li>
+        </ul>
+      </div>
+      <div class="ba-col after reveal">
+        <div class="ba-col-label"><span></span> After – AI Automated</div>
+        <ul class="ba-list">
+          <li>Type one plain-text message in Telegram — that's the entire input</li>
+          <li>AI identifies product ID and target audience automatically</li>
+          <li>Database queried — only relevant customers fetched, no extras</li>
+          <li>All linked suppliers notified in the same automated flow</li>
+          <li>Every email sent via Gmail with zero human involvement</li>
+          <li>Full campaign complete in under 60 seconds</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-<!-- ═══════════ COMPARISON TABLE ═══════════ -->
-<section class="compare-section" id="compare">
-  <div class="sec-tag">Why Not Mailchimp?</div>
-  <h2 class="sec-h2">Built for operators, not marketers</h2>
-  <div class="compare-table-wrap">
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>Mailchimp</th>
-          <th>Manual Email</th>
-          <th>This System</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Setup time per campaign</td>
-          <td>30–60 min</td>
-          <td>1–3 hours</td>
-          <td>&lt;60 seconds</td>
-        </tr>
-        <tr>
-          <td>Product-level targeting</td>
-          <td>Manual segments</td>
-          <td>None</td>
-          <td>Automatic</td>
-        </tr>
-        <tr>
-          <td>Supplier notification</td>
-          <td>Separate tool</td>
-          <td>Phone / email</td>
-          <td>Same trigger</td>
-        </tr>
-        <tr>
-          <td>Email copy written by AI</td>
-          <td>No</td>
-          <td>No</td>
-          <td>Yes</td>
-        </tr>
-        <tr>
-          <td>Requires a dashboard</td>
-          <td>Yes</td>
-          <td>Yes</td>
-          <td>No</td>
-        </tr>
-        <tr>
-          <td>Works from a phone</td>
-          <td>Partial</td>
-          <td>Painful</td>
-          <td>Always</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="compare-note">Mailchimp is built for marketing teams who have time to craft campaigns. This was built for owners who want results in the time it takes to send a WhatsApp message - and need both customers and suppliers reached in the same action.</p>
-</section>
+  <!-- COMPARISON TABLE -->
+  <section class="compare-section" id="compare">
+    <div class="compare-head reveal">
+      <div class="sec-tag">Why Not Mailchimp?</div>
+      <h2 class="sec-h2">Built for operators, not marketers</h2>
+    </div>
+    <div class="compare-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Mailchimp</th>
+            <th>Manual Email</th>
+            <th class="col-ai">This System</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Setup time per campaign</td>
+            <td class="val-bad">30–60 minutes</td>
+            <td class="val-bad">1–3 hours</td>
+            <td class="val-good col-ai">&lt;60 seconds</td>
+          </tr>
+          <tr>
+            <td>Product-level targeting</td>
+            <td class="val-mid">Manual segments required</td>
+            <td class="val-bad">None</td>
+            <td class="val-good col-ai">Automatic per message</td>
+          </tr>
+          <tr>
+            <td>Supplier notification</td>
+            <td class="val-bad">Separate tool or manual</td>
+            <td class="val-bad">Phone or manual email</td>
+            <td class="val-good col-ai">Same trigger, same flow</td>
+          </tr>
+          <tr>
+            <td>Email copy written by AI</td>
+            <td class="val-bad">No</td>
+            <td class="val-bad">No</td>
+            <td class="val-good col-ai">Yes — right tone per audience</td>
+          </tr>
+          <tr>
+            <td>Requires a dashboard</td>
+            <td class="val-bad">Yes</td>
+            <td class="val-bad">Yes</td>
+            <td class="val-good col-ai">No — just Telegram</td>
+          </tr>
+          <tr>
+            <td>Works from your phone</td>
+            <td class="val-mid">Partial</td>
+            <td class="val-bad">Painful</td>
+            <td class="val-good col-ai">Always — anywhere</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="faq-layout">
+      <div class="faq-sticky reveal-left">
+        <div class="sec-tag">FAQ</div>
+        <h2 class="faq-sticky-title">Common Questions</h2>
+        <p class="faq-sticky-desc">Everything you need to know before we build the email automation for your business.</p>
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="faq-cta-mini">Still have questions? Book a call →</a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">What database does this work with?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">It works with your existing data source — Google Sheets, Airtable, a SQL database, or any structured data format. We connect the AI to wherever your customer and supplier records already live. No migration needed.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">Can I customise the email tone and style?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">Yes. During setup, you provide a few example emails that represent your brand voice. The AI learns from these and replicates your style — including your typical greeting, sign-off, and level of formality — in every campaign it writes.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">Does this send from my actual Gmail or a third-party address?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">Your own Gmail account, using the official Gmail API. Emails show your real sender address and display name — building trust and avoiding spam filters that third-party bulk senders often trigger.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">What if I mis-type a message or make an error?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">The system confirms the campaign details back to you in Telegram before sending — showing you the product, audience count, and a preview of the email copy. You approve with a single message. Nothing goes out without your explicit confirmation.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">How is this different from just using Mailchimp?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">Mailchimp is built for marketing teams who have time to log in, build segments, write copy, and set up campaigns. This is built for owners who want to send a targeted campaign from their phone in under 60 seconds — while also notifying suppliers in the same action.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner reveal">
+      <div class="cta-eyebrow">Build This for Your Business</div>
+      <h2 class="cta-title">Want this running for<br><span>your business?</span></h2>
+      <p class="cta-sub">We'll walk through your campaign workflow and show you exactly how the Telegram AI system would fit in — free, no pressure.</p>
+      <div class="cta-actions">
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="btn-primary">Book a Free Audit →</a>
+        <a href="index.html#case-studies" class="btn-ghost">See More Case Studies</a>
+      </div>
+      <p class="cta-note">30-minute call · No sales pressure · Real answers</p>
+    </div>
+  </section>
 
+  <script src="index.js"></script>
+  <script>
+    const revealEls = document.querySelectorAll('.reveal,.reveal-left');
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const siblings = [...e.target.parentElement.querySelectorAll('.reveal:not(.visible),.reveal-left:not(.visible)')];
+        const idx = siblings.indexOf(e.target);
+        setTimeout(() => e.target.classList.add('visible'), Math.max(0, idx) * 90);
+        revealIO.unobserve(e.target);
+      });
+    }, { threshold: .1 });
+    revealEls.forEach(el => revealIO.observe(el));
 
-<!-- ═══════════ CTA ═══════════ -->
-<section class="cta-cs-section">
-  <div class="cta-cs-text">Need this adapted for your business?</div>
-  <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="cta-cs-btn">Book a Free Audit →</a>
-</section>
+    function toggleFaq(row) {
+      const item = row.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
 
-  <script src="index.js">
-    /* ── HAMBURGER MENU ── */
+    function closeDrawer() {
+      document.getElementById('navDrawer').classList.remove('open');
+      document.getElementById('navHamburger').classList.remove('open');
+      document.getElementById('navHamburger').setAttribute('aria-expanded', false);
+    }
     const _ham = document.getElementById('navHamburger');
     const _drawer = document.getElementById('navDrawer');
     if (_ham && _drawer) {
