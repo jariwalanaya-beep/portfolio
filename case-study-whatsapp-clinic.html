@@ -360,7 +360,6 @@
     <ul class="nav-links">
       <li><a href="#stats">Results</a></li>
       <li><a href="#how">How It Works</a></li>
-      <li><a href="#ba">Before &amp; After</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="index.html#case-studies" class="nav-back">← Back</a>
@@ -371,7 +370,6 @@
   <nav class="nav-mobile-drawer" id="navDrawer" aria-label="Mobile navigation">
     <a href="#stats" onclick="closeDrawer()">Results</a>
     <a href="#how" onclick="closeDrawer()">How It Works</a>
-    <a href="#ba" onclick="closeDrawer()">Before &amp; After</a>
     <a href="#faq" onclick="closeDrawer()">FAQ</a>
     <a href="index.html#case-studies" onclick="closeDrawer()">← Back to Portfolio</a>
   </nav>
@@ -517,141 +515,6 @@
 
 
 
-  <!-- BEFORE & AFTER -->
-  <section class="ba-section" id="ba">
-    <div class="ba-header reveal">
-      <div class="sec-tag">Transformation</div>
-      <h2 class="sec-h2">Before &amp; After</h2>
-      <p class="ba-sub">Same clinic. Completely different results. From missed calls and chaos to simple, automated bookings on WhatsApp.</p>
-    </div>
-    <div class="ba-grid">
-      <div class="ba-col reveal">
-        <div class="ba-col-label"><span></span> Before: Manual Booking</div>
-        <ul class="ba-list">
-          <li>Patients can only book during working hours, so missed calls become lost revenue</li>
-          <li>Staff checks the calendar and calls back manually, which is slow and inefficient</li>
-          <li>Rescheduling means more calls and more back-and-forth</li>
-          <li>No reminders means more no-shows</li>
-          <li>Booking details are scattered, creating confusion and mistakes</li>
-        </ul>
-      </div>
-      <div class="ba-col after reveal">
-        <div class="ba-col-label"><span></span> After: WhatsApp AI Booking</div>
-        <ul class="ba-list">
-          <li>Patients can book anytime, including late nights and weekends</li>
-          <li>Instant confirmation in chat with no waiting</li>
-          <li>Reschedule or cancel in one message with no calls needed</li>
-          <li>Automatic reminders reduce no-shows</li>
-          <li>All bookings stay in one system, clear and organized</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPARISON TABLE -->
-  <style>
-    .compare-section { padding: 100px 72px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
-    .compare-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 400px; background: radial-gradient(ellipse at center, rgba(31,125,83,0.07) 0%, transparent 65%); pointer-events: none; }
-    .compare-head { margin-bottom: 52px; }
-    .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 20px; border: 1px solid var(--border); background: rgba(6,10,16,0.7); backdrop-filter: blur(10px); }
-    .compare-table { width: 100%; border-collapse: collapse; min-width: 680px; }
-    .compare-table thead tr { background: rgba(255,255,255,0.025); border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .compare-table th { padding: 16px 20px; text-align: left; font-family: "Space Grotesk", sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-    .compare-table th:first-child { color: rgba(255,255,255,0.5); }
-    .compare-table th.col-ai { color: var(--p2); }
-    .compare-table td { padding: 15px 20px; font-size: .88rem; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.45; transition: background .2s; }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table tbody tr:hover td { background: rgba(31,125,83,0.04); }
-    .compare-table td:first-child { color: #c8d8ea; font-weight: 600; font-size: .85rem; }
-    .compare-table td.val-bad { color: #6b7f96; }
-    .compare-table td.val-mid { color: #8fa8c0; }
-    .compare-table td.val-good { color: #4ade80; font-weight: 600; }
-    .compare-table th.col-ai, .compare-table td.col-ai { background: rgba(31,125,83,0.06); border-left: 1px solid rgba(31,125,83,0.15); border-right: 1px solid rgba(31,125,83,0.15); }
-    .compare-table thead th.col-ai { border-top: 2px solid var(--p1); }
-    @media(max-width:640px) { .compare-section { padding: 56px 20px; } }
-  </style>
-
-  <section class="compare-section" id="compare">
-    <div class="compare-head reveal">
-      <div class="sec-tag">Why This System</div>
-      <h2 class="sec-h2">How it stacks up</h2>
-    </div>
-    <div class="compare-wrap reveal">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Manual</th>
-            <th>Normal Booking App</th>
-            <th class="col-ai">WhatsApp AI System</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>How patients book</td>
-            <td class="val-bad">Call the clinic</td>
-            <td class="val-mid">Use app or website</td>
-            <td class="val-good col-ai">Send a WhatsApp message</td>
-          </tr>
-          <tr>
-            <td>Available anytime</td>
-            <td class="val-bad">No (only office hours)</td>
-            <td class="val-mid">Yes</td>
-            <td class="val-good col-ai">Yes, 24/7</td>
-          </tr>
-          <tr>
-            <td>Easy to use</td>
-            <td class="val-bad">Depends on staff</td>
-            <td class="val-mid">Can be confusing</td>
-            <td class="val-good col-ai">Very simple chat</td>
-          </tr>
-          <tr>
-            <td>Checking availability</td>
-            <td class="val-bad">Staff checks manually</td>
-            <td class="val-mid">System checks</td>
-            <td class="val-good col-ai">Instant check</td>
-          </tr>
-          <tr>
-            <td>Double booking</td>
-            <td class="val-bad">Can happen</td>
-            <td class="val-mid">Sometimes</td>
-            <td class="val-good col-ai">No, always accurate</td>
-          </tr>
-          <tr>
-            <td>Booking confirmation</td>
-            <td class="val-bad">Given by staff</td>
-            <td class="val-mid">App notification</td>
-            <td class="val-good col-ai">Instant on WhatsApp</td>
-          </tr>
-          <tr>
-            <td>Reschedule / Cancel</td>
-            <td class="val-bad">Need to call again</td>
-            <td class="val-mid">Limited options</td>
-            <td class="val-good col-ai">Done on WhatsApp</td>
-          </tr>
-          <tr>
-            <td>Reminders</td>
-            <td class="val-bad">Staff may forget</td>
-            <td class="val-mid">Email only</td>
-            <td class="val-good col-ai">WhatsApp reminders</td>
-          </tr>
-          <tr>
-            <td>Staff workload</td>
-            <td class="val-bad">High</td>
-            <td class="val-mid">Medium</td>
-            <td class="val-good col-ai">Very low</td>
-          </tr>
-          <tr>
-            <td>Patient experience</td>
-            <td class="val-bad">Slow</td>
-            <td class="val-mid">Average</td>
-            <td class="val-good col-ai">Fast and easy</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
   <!-- PRICING -->
   <style>
     .pricing-section { padding: 100px 72px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
@@ -766,6 +629,157 @@
         <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="how-section" id="how">
+    <div class="how-head reveal">
+      <div class="sec-tag">The System</div>
+      <h2 class="sec-h2">How It Works</h2>
+      <p class="how-desc">Six automated steps. No human required from patient message to confirmed booking. It is specifically designed for clinics and handles everything automatically.</p>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step reveal">
+        <div class="step-bubble">01</div>
+        <div class="step-icon-wrap">⚡️</div>
+        <div class="step-title">Instant Response</div>
+        <p class="step-desc"><strong>Immediate Engagement:</strong><br>The moment a patient texts, the AI responds in under 3 seconds to capture their intent and start the booking flow.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">02</div>
+        <div class="step-icon-wrap">🧠</div>
+        <div class="step-title">Intelligent Triage</div>
+        <p class="step-desc"><strong>Doctor Routing:</strong><br>The agent asks for the patient's concern or preferred doctor, matching them with the right department or specialist.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">03</div>
+        <div class="step-icon-wrap">🔄</div>
+        <div class="step-title">Live Availability</div>
+        <p class="step-desc"><strong>Calendar Sync:</strong><br>Your agent "knows" your schedule. It checks your Google Calendar in real-time to offer only open, valid time slots.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">04</div>
+        <div class="step-icon-wrap">🤖</div>
+        <div class="step-title">Seamless Booking</div>
+        <p class="step-desc"><strong>Frictionless Confirmation:</strong><br>The patient selects a slot right in WhatsApp. The AI instantly locks it in your calendar and sends a branded confirmation.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">05</div>
+        <div class="step-icon-wrap">🔔</div>
+        <div class="step-title">Smart Reminders</div>
+        <p class="step-desc"><strong>Eliminate No-Shows:</strong><br>Automated WhatsApp nudges are sent 24 hours and 1 hour prior to the visit, requesting confirmation from the patient.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-bubble">06</div>
+        <div class="step-icon-wrap">🛡️</div>
+        <div class="step-title">Automatic Escalation</div>
+        <p class="step-desc"><strong>Human Backup:</strong><br>If a patient has a complex medical query or an emergency, the AI flags the chat for reception staff to take over instantly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <style>
+    .compare-section { padding: 100px 72px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+    .compare-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 400px; background: radial-gradient(ellipse at center, rgba(31,125,83,0.07) 0%, transparent 65%); pointer-events: none; }
+    .compare-head { margin-bottom: 52px; }
+    .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 20px; border: 1px solid var(--border); background: rgba(6,10,16,0.7); backdrop-filter: blur(10px); }
+    .compare-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .compare-table thead tr { background: rgba(255,255,255,0.025); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .compare-table th { padding: 16px 20px; text-align: left; font-family: "Space Grotesk", sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .compare-table th:first-child { color: rgba(255,255,255,0.5); }
+    .compare-table th.col-ai { color: var(--p2); }
+    .compare-table td { padding: 15px 20px; font-size: .88rem; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.45; transition: background .2s; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tbody tr:hover td { background: rgba(31,125,83,0.04); }
+    .compare-table td:first-child { color: #c8d8ea; font-weight: 600; font-size: .85rem; }
+    .compare-table td.val-bad { color: #6b7f96; }
+    .compare-table td.val-mid { color: #8fa8c0; }
+    .compare-table td.val-good { color: #4ade80; font-weight: 600; }
+    .compare-table th.col-ai, .compare-table td.col-ai { background: rgba(31,125,83,0.06); border-left: 1px solid rgba(31,125,83,0.15); border-right: 1px solid rgba(31,125,83,0.15); }
+    .compare-table thead th.col-ai { border-top: 2px solid var(--p1); }
+    @media(max-width:640px) { .compare-section { padding: 56px 20px; } }
+  </style>
+
+  <section class="compare-section" id="compare">
+    <div class="compare-head reveal">
+      <div class="sec-tag">Why This System</div>
+      <h2 class="sec-h2">How it stacks up</h2>
+    </div>
+    <div class="compare-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Manual</th>
+            <th>Normal Booking App</th>
+            <th class="col-ai">WhatsApp AI System</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>How patients book</td>
+            <td class="val-bad">Call the clinic</td>
+            <td class="val-mid">Use app or website</td>
+            <td class="val-good col-ai">Send a WhatsApp message</td>
+          </tr>
+          <tr>
+            <td>Available anytime</td>
+            <td class="val-bad">No (only office hours)</td>
+            <td class="val-mid">Yes</td>
+            <td class="val-good col-ai">Yes, 24/7</td>
+          </tr>
+          <tr>
+            <td>Easy to use</td>
+            <td class="val-bad">Depends on staff</td>
+            <td class="val-mid">Can be confusing</td>
+            <td class="val-good col-ai">Very simple chat</td>
+          </tr>
+          <tr>
+            <td>Checking availability</td>
+            <td class="val-bad">Staff checks manually</td>
+            <td class="val-mid">System checks</td>
+            <td class="val-good col-ai">Instant check</td>
+          </tr>
+          <tr>
+            <td>Double booking</td>
+            <td class="val-bad">Can happen</td>
+            <td class="val-mid">Sometimes</td>
+            <td class="val-good col-ai">No, always accurate</td>
+          </tr>
+          <tr>
+            <td>Booking confirmation</td>
+            <td class="val-bad">Given by staff</td>
+            <td class="val-mid">App notification</td>
+            <td class="val-good col-ai">Instant on WhatsApp</td>
+          </tr>
+          <tr>
+            <td>Reschedule / Cancel</td>
+            <td class="val-bad">Need to call again</td>
+            <td class="val-mid">Limited options</td>
+            <td class="val-good col-ai">Done on WhatsApp</td>
+          </tr>
+          <tr>
+            <td>Reminders</td>
+            <td class="val-bad">Staff may forget</td>
+            <td class="val-mid">Email only</td>
+            <td class="val-good col-ai">WhatsApp reminders</td>
+          </tr>
+          <tr>
+            <td>Staff workload</td>
+            <td class="val-bad">High</td>
+            <td class="val-mid">Medium</td>
+            <td class="val-good col-ai">Very low</td>
+          </tr>
+          <tr>
+            <td>Patient experience</td>
+            <td class="val-bad">Slow</td>
+            <td class="val-mid">Average</td>
+            <td class="val-good col-ai">Fast and easy</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
