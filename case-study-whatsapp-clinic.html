@@ -188,7 +188,7 @@
     .stats-section { display: grid; grid-template-columns: 1fr 1.15fr; gap: 72px; padding: 100px 80px; min-height: 620px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; align-items: center; }
     .stats-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; height: 500px; background: radial-gradient(ellipse at center, rgba(31,125,83,0.09) 0%, transparent 65%); pointer-events: none; }
     .stats-video-panel { display: flex; align-items: center; justify-content: center; position: relative; }
-    .stats-widget-card { width: 100%; max-width: 320px; background: rgba(8,14,24,0.78); border: 1px solid rgba(31,125,83,0.22); border-radius: 20px; backdrop-filter: blur(20px); box-shadow: 0 0 0 1px rgba(31,125,83,0.07), 0 32px 72px rgba(0,0,0,0.55), 0 0 60px rgba(31,125,83,0.09); overflow: hidden; animation: statsFloat 4s ease-in-out infinite; }
+    .stats-widget-card { width: 100%; max-width: 260px; background: rgba(8,14,24,0.78); border: 1px solid rgba(31,125,83,0.22); border-radius: 20px; backdrop-filter: blur(20px); box-shadow: 0 0 0 1px rgba(31,125,83,0.07), 0 32px 72px rgba(0,0,0,0.55), 0 0 60px rgba(31,125,83,0.09); overflow: hidden; animation: statsFloat 4s ease-in-out infinite; }
     @keyframes statsFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
     .stats-widget-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; background: rgba(255,255,255,0.025); border-bottom: 1px solid rgba(255,255,255,0.06); }
     .stats-widget-dots { display: flex; gap: 6px; }
@@ -415,18 +415,20 @@
       <h1 class="hero-title">
         WhatsApp Clinic <span class="hl">Booking Agent</span>
       </h1>
+      <p class="hero-desc">
+        Stop Losing Patients on <span class="green-hl">WhatsApp</span><br>
+        Automate bookings, replies, and reminders — <span class="green-hl">so no inquiry gets missed and no slot stays empty.</span>
+      </p>
       <p class="hero-desc" style="margin-top:-8px;margin-bottom:16px;">Built for clinics in Malaysia, Singapore, Hong Kong and beyond.</p>
       <ul class="hero-list">
-        <li><span class="li-icon">📅</span> Books, reschedules &amp; cancels appointments in real time</li>
-        <li><span class="li-icon">⚡</span> Replies in under 3 seconds, any time of day or night</li>
-        <li><span class="li-icon">🔔</span> Sends WhatsApp reminders 24 h &amp; 1 h before each slot</li>
-        <li><span class="li-icon">🗂️</span> Syncs every booking into Google Sheets instantly</li>
+        <li><span class="li-icon">⚡</span> Patients get instant replies (24/7)</li>
+        <li><span class="li-icon">🗂️</span> No more manual booking work</li>
+        <li><span class="li-icon">🔔</span> Fewer missed appointments</li>
+        <li><span class="li-icon">📅</span> More confirmed visits</li>
       </ul>
-      <p class="hero-desc">
-        Patients simply send a message. The system <span class="green-hl">checks availability</span>, books the slot, and sends confirmation instantly<span class="green-hl">, even after hours</span>.
-      </p>
+
       <div class="hero-actions">
-        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="btn-primary">Build This for My Clinic →</a>
+        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="btn-primary">👉 Automate My Clinic</a>
         <a href="#how" class="btn-ghost">See how it works ↓</a>
       </div>
     </div>
@@ -460,6 +462,13 @@
 
   <!-- STATS SECTION -->
   <div class="stats-section" id="stats">
+    
+    <!-- Top Header (spans full width) -->
+    <div class="reveal-left" style="grid-column: 1 / -1; text-align: left; margin-bottom: -16px; max-width: 800px;">
+      <h2 class="sec-h2" style="font-size: clamp(2rem, 3.5vw, 2.8rem); letter-spacing: -1.2px; line-height: 1.1;">See How Clinics Handle Bookings on WhatsApp</h2>
+      <p style="font-size: 1.25rem; color: #b8cde0; line-height: 1.65; margin-top: 18px;">Patients simply send a message. The system handles everything — instantly.</p>
+    </div>
+
     <!-- Left: floating widget with video -->
     <div class="stats-video-panel">
       <div class="stats-widget-card reveal-left">
@@ -485,43 +494,37 @@
 
     <!-- Right: 2×3 stat cards -->
     <div class="stats-grid">
-      <div class="stat-cell reveal">
-        <div class="stat-icon">⚡</div>
-        <span class="stat-num">&lt;3s</span>
-        <div class="stat-label">Reply Speed</div>
-        <div class="stat-desc"><strong>Instant Response:</strong> Every patient message gets a reply in under 3 seconds  even at 2 AM on a Sunday.</div>
+        <div class="stat-cell reveal">
+          <div class="stat-icon" style="font-size: 1.4rem; width: 46px; height: 46px; box-shadow: 0 4px 20px rgba(31,125,83,0.3); border-color: rgba(31,125,83,0.4);">⚡</div>
+          <div class="stat-label" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: -0.5px;">Instant Replies (24/7)</div>
+          <div class="stat-desc" style="font-size: .95rem; color: #b8cde0; line-height: 1.65;">Every patient message gets an instant response — even after clinic hours.</div>
+        </div>
+        <div class="stat-cell reveal">
+          <div class="stat-icon" style="font-size: 1.4rem; width: 46px; height: 46px; box-shadow: 0 4px 20px rgba(31,125,83,0.3); border-color: rgba(31,125,83,0.4);">📅</div>
+          <div class="stat-label" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: -0.5px;">Automated Booking</div>
+          <div class="stat-desc" style="font-size: .95rem; color: #b8cde0; line-height: 1.65;">Patients can book, reschedule, or cancel appointments without staff involvement.</div>
+        </div>
+        <div class="stat-cell reveal">
+          <div class="stat-icon" style="font-size: 1.4rem; width: 46px; height: 46px; box-shadow: 0 4px 20px rgba(31,125,83,0.3); border-color: rgba(31,125,83,0.4);">🔔</div>
+          <div class="stat-label" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: -0.5px;">Smart Reminders</div>
+          <div class="stat-desc" style="font-size: .95rem; color: #b8cde0; line-height: 1.65;">Automatic WhatsApp reminders reduce missed appointments and keep schedules full.</div>
+        </div>
+        <div class="stat-cell reveal">
+          <div class="stat-icon" style="font-size: 1.4rem; width: 46px; height: 46px; box-shadow: 0 4px 20px rgba(31,125,83,0.3); border-color: rgba(31,125,83,0.4);">👩‍⚕️</div>
+          <div class="stat-label" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: -0.5px;">Less Work for Staff</div>
+          <div class="stat-desc" style="font-size: .95rem; color: #b8cde0; line-height: 1.65;">Reception teams spend less time on calls and more time with patients.</div>
+        </div>
+        <div class="stat-cell reveal">
+          <div class="stat-icon" style="font-size: 1.4rem; width: 46px; height: 46px; box-shadow: 0 4px 20px rgba(31,125,83,0.3); border-color: rgba(31,125,83,0.4);">🌍</div>
+          <div class="stat-label" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: -0.5px;">Works in Multiple Languages</div>
+          <div class="stat-desc" style="font-size: .95rem; color: #b8cde0; line-height: 1.65;">Responds to patients in their preferred language — no extra setup needed.</div>
+        </div>
+        <div class="stat-cell reveal">
+          <div class="stat-icon" style="font-size: 1.4rem; width: 46px; height: 46px; box-shadow: 0 4px 20px rgba(31,125,83,0.3); border-color: rgba(31,125,83,0.4);">⏱</div>
+          <div class="stat-label" style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px; letter-spacing: -0.5px;">Saves Hours Every Week</div>
+          <div class="stat-desc" style="font-size: .95rem; color: #b8cde0; line-height: 1.65;">Clinics reduce manual booking work and free up staff time daily.</div>
+        </div>
       </div>
-      <div class="stat-cell reveal">
-        <div class="stat-icon">🛡️</div>
-        <span class="stat-num">24/7</span>
-        <div class="stat-label">Always On</div>
-        <div class="stat-desc"><strong>Failover Protection:</strong> Error-handling ensures patients always get a fallback response, even if a connected API is slow.</div>
-      </div>
-      <div class="stat-cell reveal">
-        <div class="stat-icon">🗓️</div>
-        <span class="stat-num">94%</span>
-        <div class="stat-label">WhatsApp Bookings</div>
-        <div class="stat-desc"><strong>Channel Shift:</strong> Patients strongly prefer messaging over calling  the AI handles all of them automatically.</div>
-      </div>
-      <div class="stat-cell reveal">
-        <div class="stat-icon">🔔</div>
-        <span class="stat-num">0</span>
-        <div class="stat-label">No-Shows</div>
-        <div class="stat-desc"><strong>Smart Reminders:</strong> Automated 24 h + 1 h WhatsApp reminders have eliminated no-shows virtually to zero.</div>
-      </div>
-      <div class="stat-cell reveal">
-        <div class="stat-icon">🌐</div>
-        <span class="stat-num">5+</span>
-        <div class="stat-label">Languages</div>
-        <div class="stat-desc"><strong>Language Fluidity:</strong> Detects and responds in the patient's language automatically - English, Malay, Mandarin, Tamil and more - with no extra setup.</div>
-      </div>
-      <div class="stat-cell reveal">
-        <div class="stat-icon">🕒</div>
-        <span class="stat-num">20 h</span>
-        <div class="stat-label">Saved per Week</div>
-        <div class="stat-desc"><strong>Staff Freedom:</strong> Reception staff reclaim hours previously spent routing booking calls  redirected to in-clinic care.</div>
-      </div>
-    </div>
   </div>
 
 
@@ -644,49 +647,46 @@
   </section>
 
   <!-- ═══ HOW IT WORKS ═══ -->
+  <style>
+    @media (min-width: 1001px) {
+      .four-step-grid { grid-template-columns: repeat(4, 1fr) !important; }
+      .four-step-grid::after { left: calc(12.5% + 10px) !important; right: calc(12.5% + 10px) !important; }
+    }
+  </style>
   <section class="how-section" id="how">
     <div class="how-head reveal">
       <div class="sec-tag">The System</div>
       <h2 class="sec-h2">How It Works</h2>
-      <p class="how-desc">Six automated steps. No human required from patient message to confirmed booking. It is specifically designed for clinics and handles everything automatically.</p>
+      <p class="how-desc">Patients message your clinic on WhatsApp — everything else happens automatically.</p>
     </div>
-    <div class="flow-steps">
+    <div class="flow-steps four-step-grid">
       <div class="flow-step reveal">
         <div class="step-bubble">01</div>
-        <div class="step-icon-wrap">⚡️</div>
-        <div class="step-title">Instant Response</div>
-        <p class="step-desc"><strong>Immediate Engagement:</strong><br>The moment a patient texts, the AI responds in under 3 seconds to capture their intent and start the booking flow.</p>
+        <div class="step-icon-wrap">📱</div>
+        <div class="step-title">Patient Messages You</div>
+        <p class="step-desc">A patient sends a message on your clinic’s WhatsApp.</p>
       </div>
       <div class="flow-step reveal">
         <div class="step-bubble">02</div>
-        <div class="step-icon-wrap">🧠</div>
-        <div class="step-title">Intelligent Triage</div>
-        <p class="step-desc"><strong>Doctor Routing:</strong><br>The agent asks for the patient's concern or preferred doctor, matching them with the right department or specialist.</p>
+        <div class="step-icon-wrap">⚡</div>
+        <div class="step-title">Instant Reply &amp; Options</div>
+        <p class="step-desc">They get an instant reply and can choose to book, reschedule, or ask questions.</p>
       </div>
       <div class="flow-step reveal">
         <div class="step-bubble">03</div>
-        <div class="step-icon-wrap">🔄</div>
-        <div class="step-title">Live Availability</div>
-        <p class="step-desc"><strong>Calendar Sync:</strong><br>Your agent "knows" your schedule. It checks your Google Calendar in real-time to offer only open, valid time slots.</p>
+        <div class="step-icon-wrap">📅</div>
+        <div class="step-title">Booking Happens Automatically</div>
+        <p class="step-desc">The system checks your availability and confirms the appointment instantly.</p>
       </div>
       <div class="flow-step reveal">
         <div class="step-bubble">04</div>
-        <div class="step-icon-wrap">🤖</div>
-        <div class="step-title">Seamless Booking</div>
-        <p class="step-desc"><strong>Frictionless Confirmation:</strong><br>The patient selects a slot right in WhatsApp. The AI instantly locks it in your calendar and sends a branded confirmation.</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="step-bubble">05</div>
         <div class="step-icon-wrap">🔔</div>
-        <div class="step-title">Smart Reminders</div>
-        <p class="step-desc"><strong>Eliminate No-Shows:</strong><br>Automated WhatsApp nudges are sent 24 hours and 1 hour prior to the visit, requesting confirmation from the patient.</p>
+        <div class="step-title">Reminders Are Sent</div>
+        <p class="step-desc">Patients receive automatic reminders, reducing missed appointments.</p>
       </div>
-      <div class="flow-step reveal">
-        <div class="step-bubble">06</div>
-        <div class="step-icon-wrap">🛡️</div>
-        <div class="step-title">Automatic Escalation</div>
-        <p class="step-desc"><strong>Human Backup:</strong><br>If a patient has a complex medical query or an emergency, the AI flags the chat for reception staff to take over instantly.</p>
-      </div>
+    </div>
+    <div class="reveal" style="text-align: center; margin-top: 48px;">
+      <p style="font-size: .88rem; color: var(--muted); background: rgba(255,255,255,0.03); display: inline-block; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.05);">If needed, your staff can jump into the conversation anytime.</p>
     </div>
   </section>
 
