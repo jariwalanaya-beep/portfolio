@@ -1811,6 +1811,10 @@
     .popular-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--grad); border-radius: 999px; padding: 4px 12px; font-size: .68rem; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; width: fit-content; box-shadow: 0 4px 16px rgba(31,125,83,0.4); }
     .plan-name { font-family: "Space Grotesk", sans-serif; font-size: 1rem; font-weight: 700; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
     .price-card.popular .plan-name { color: var(--p2); }
+    .price-setup { font-size: .92rem; color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .price-setup strong { color: #c8d8ea; }
+    .price-setup-fee { font-size: 1.05rem; font-weight: 600; color: #d3e0ee; margin-bottom: 10px; }
+    .price-setup-fee strong { font-size: 1.4em; font-weight: 800; color: #fff; line-height: 1; }
     .price-amount { display: flex; align-items: flex-end; gap: 4px; margin-bottom: 4px; }
     .price-dollar { font-family: "Space Grotesk", sans-serif; font-size: 1.9rem; font-weight: 700; line-height: 1; color: #fff; }
     .price-card.popular .price-dollar { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -1842,6 +1846,7 @@
       <!-- STARTER -->
       <div class="price-card reveal">
         <div class="plan-name">Starter</div>
+        <div class="price-setup price-setup-fee">Setup fee: <strong>$100</strong> one-time</div>
         <div class="price-amount">
           <span class="price-dollar">$49</span>
           <span class="price-period">/ month</span>
@@ -1863,6 +1868,7 @@
       <div class="price-card popular reveal">
         <div class="popular-badge">✦ Most Popular</div>
         <div class="plan-name">Standard</div>
+        <div class="price-setup price-setup-fee">Setup fee: <strong>$100</strong> one-time</div>
         <div class="price-amount">
           <span class="price-dollar">$99</span>
           <span class="price-period">/ month</span>
@@ -1883,6 +1889,7 @@
       <!-- PREMIUM -->
       <div class="price-card reveal">
         <div class="plan-name">Premium</div>
+        <div class="price-setup price-setup-fee">Setup fee: <strong>$100</strong> one-time</div>
         <div class="price-amount">
           <span class="price-dollar">$129</span>
           <span class="price-period">/ month</span>
