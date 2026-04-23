@@ -107,8 +107,8 @@
       overflow-x: hidden;
     }
 
-    /* ─── BACKGROUND CANVAS ─────────────────────────────────── */
-    #bg-canvas {
+    /* ─── 3D BACKGROUND CANVAS (THREE.JS) ──────────────────── */
+    #three-canvas {
       position: fixed;
       top: 0;
       left: 0;
@@ -116,7 +116,11 @@
       height: 100%;
       z-index: 0;
       pointer-events: none;
-      opacity: .55;
+    }
+
+    /* ─── LEGACY 2D CANVAS (hidden) ─────────────────────────── */
+    #bg-canvas {
+      display: none;
     }
 
     /* ─── GLOW ORBS ─────────────────────────────────────────── */
@@ -1652,9 +1656,13 @@
 
 <body>
 
-  <!-- BACKGROUND PARTICLE CANVAS -->
+  <!-- THREE.JS 3D BACKGROUND (dedicated canvas — no conflict with index.js) -->
+  <canvas id="three-canvas"
+    style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:1;"></canvas>
+  <!-- Original 2D canvas kept for index.js (hidden — replaced by 3D scene) -->
   <canvas id="bg-canvas"
-    style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.55;"></canvas>
+    style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:0;display:none;"></canvas>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <!-- GLOW ORBS -->
   <div class="orb orb-1"></div>
@@ -1703,7 +1711,7 @@
         <li><span class="li-icon">📊</span> Plugs into your existing sheet-based workflow</li>
       </ul>
       <div class="hero-actions">
-        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
+        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer"
           class="btn-primary">Book a Free Audit →</a>
         <a href="#how" class="btn-ghost">See how it works ↓</a>
       </div>
@@ -1862,7 +1870,7 @@
           <li>Multi-language support</li>
           <li>Email support</li>
         </ul>
-        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
+        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
       </div>
 
       <!-- STANDARD (POPULAR) -->
@@ -1884,7 +1892,7 @@
           <li>Priority WhatsApp support</li>
           <li>Monthly analytics report</li>
         </ul>
-        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
+        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
       </div>
 
       <!-- PREMIUM -->
@@ -1905,7 +1913,7 @@
           <li>Custom branding &amp; agent persona</li>
           <li>Dedicated support &amp; onboarding call</li>
         </ul>
-        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
+        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
       </div>
 
     </div>
@@ -1995,7 +2003,7 @@
         <div class="sec-tag">FAQ</div>
         <h2 class="faq-sticky-title">Common Questions</h2>
         <p class="faq-sticky-desc">Everything you need to know before deploying the agent for your shop.</p>
-        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
+        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer"
           class="faq-cta-mini">
           Still have questions? Book a call →
         </a>
@@ -2042,7 +2050,7 @@
       <h2 class="cta-title">Want this for<br><span>your business?</span></h2>
       <p class="cta-sub">We'll walk through your current workflow and show exactly how an AI WhatsApp agent would fit in, completely free.</p>
       <div class="cta-actions">
-        <a href="https://calendly.com/shivam-karlspace/30min" target="_blank" rel="noopener noreferrer"
+        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer"
           class="btn-primary">
           Book a Free Audit →
         </a>
@@ -2054,6 +2062,205 @@
 
   <script src="index.js"></script>
   <script>
+    /* ══════════════════════════════════════════════════════════════
+       3D PARTICLE NETWORK — Pure Canvas 2D with 3D math projection
+       No WebGL required. Brand: #1F7D53 / #14a86a / #255F38
+    ══════════════════════════════════════════════════════════════ */
+    (function () {
+      'use strict';
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const canvas = document.getElementById('three-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // ── Sizing ──────────────────────────────────────────────────
+      let W, H, cx, cy;
+      function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+        cx = W / 2; cy = H / 2;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      // ── Brand colour palette ─────────────────────────────────────
+      const COLORS = [
+        { r: 31,  g: 125, b: 83  },  // #1F7D53
+        { r: 20,  g: 168, b: 106 },  // #14a86a
+        { r: 37,  g: 95,  b: 56  },  // #255F38
+        { r: 13,  g: 92,  b: 58  },  // #0d5c3a
+        { r: 38,  g: 199, b: 127 },  // #26c77f
+      ];
+
+      // ── Nodes ────────────────────────────────────────────────────
+      const N = window.innerWidth < 768 ? 120 : 220;
+      const SPREAD = 320;
+      const FOV = 500;
+
+      const nodes = Array.from({ length: N }, () => {
+        const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+        return {
+          ox: (Math.random() - 0.5) * SPREAD,
+          oy: (Math.random() - 0.5) * SPREAD,
+          oz: (Math.random() - 0.5) * SPREAD,
+          x: 0, y: 0, z: 0,    // projected 2-D
+          r: c.r, g: c.g, b: c.b,
+          baseSize: 1.5 + Math.random() * 3,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.2 + Math.random() * 0.4,
+        };
+      });
+
+      // Pre-compute connection pairs (only close neighbours)
+      const MAX_DIST_SQ = 95 * 95;
+      const pairs = [];
+      for (let i = 0; i < N; i++) {
+        for (let j = i + 1; j < N; j++) {
+          const dx = nodes[i].ox - nodes[j].ox;
+          const dy = nodes[i].oy - nodes[j].oy;
+          const dz = nodes[i].oz - nodes[j].oz;
+          if (dx*dx + dy*dy + dz*dz < MAX_DIST_SQ) pairs.push([i, j]);
+        }
+      }
+
+      // ── Rotation state ───────────────────────────────────────────
+      let rotX = 0.3, rotY = 0;
+      const ROT_SPEED_X =  0.00045;
+      const ROT_SPEED_Y =  0.0009;
+
+      // ── Mouse parallax ───────────────────────────────────────────
+      let mx = 0, my = 0;
+      window.addEventListener('mousemove', e => {
+        mx = (e.clientX / window.innerWidth  - 0.5);
+        my = (e.clientY / window.innerHeight - 0.5);
+      }, { passive: true });
+
+      // ── 3-D rotation helpers ─────────────────────────────────────
+      function rotateXY(px, py, pz, ax, ay) {
+        // rotate around Y
+        const cosY = Math.cos(ay), sinY = Math.sin(ay);
+        let x1 = px * cosY - pz * sinY;
+        let z1 = px * sinY + pz * cosY;
+        // rotate around X
+        const cosX = Math.cos(ax), sinX = Math.sin(ax);
+        const y2 = py * cosX - z1 * sinX;
+        const z2 = py * sinX + z1 * cosX;
+        return [x1, y2, z2];
+      }
+
+      // ── Animation loop ───────────────────────────────────────────
+      let lastT = 0;
+      function frame(ts) {
+        requestAnimationFrame(frame);
+        const t = ts * 0.001;
+        const dt = Math.min(t - lastT, 0.05);
+        lastT = t;
+
+        rotX += ROT_SPEED_X + my * 0.0008;
+        rotY += ROT_SPEED_Y + mx * 0.0012;
+
+        ctx.clearRect(0, 0, W, H);
+
+        // ── Project all nodes ──
+        for (const nd of nodes) {
+          // gentle bob
+          const bx = nd.ox + Math.cos(t * nd.speed + nd.phase) * 6;
+          const by = nd.oy + Math.sin(t * nd.speed * 0.7 + nd.phase) * 6;
+          const bz = nd.oz;
+          const [rx, ry, rz] = rotateXY(bx, by, bz, rotX, rotY);
+          const depth = FOV + rz;
+          if (depth < 1) { nd.z = -9999; continue; }
+          const scale = FOV / depth;
+          nd.x = cx + rx * scale;
+          nd.y = cy + ry * scale;
+          nd.z = rz;          // used for depth fade
+          nd.sc = scale;
+        }
+
+        // ── Draw lines (depth-sorted by average z) ──
+        for (const [i, j] of pairs) {
+          const a = nodes[i], b = nodes[j];
+          if (a.z === -9999 || b.z === -9999) continue;
+          // depth alpha
+          const depthA = Math.max(0, Math.min(1, (a.z + SPREAD) / (SPREAD * 2)));
+          const depthB = Math.max(0, Math.min(1, (b.z + SPREAD) / (SPREAD * 2)));
+          const alpha  = ((depthA + depthB) * 0.5) * 0.22;
+          const cr = Math.round((a.r + b.r) / 2);
+          const cg = Math.round((a.g + b.g) / 2);
+          const cb = Math.round((a.b + b.b) / 2);
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(${cr},${cg},${cb},${alpha.toFixed(3)})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+
+        // ── Draw nodes ──
+        for (const nd of nodes) {
+          if (nd.z === -9999) continue;
+          const depth = Math.max(0, Math.min(1, (nd.z + SPREAD) / (SPREAD * 2)));
+          const alpha = 0.15 + depth * 0.75;
+          const size  = nd.baseSize * nd.sc * 0.9;
+          if (size < 0.3) continue;
+
+          // glow halo
+          const glow = ctx.createRadialGradient(nd.x, nd.y, 0, nd.x, nd.y, size * 3.5);
+          glow.addColorStop(0,   `rgba(${nd.r},${nd.g},${nd.b},${(alpha * 0.35).toFixed(3)})`);
+          glow.addColorStop(1,   `rgba(${nd.r},${nd.g},${nd.b},0)`);
+          ctx.beginPath();
+          ctx.arc(nd.x, nd.y, size * 3.5, 0, Math.PI * 2);
+          ctx.fillStyle = glow;
+          ctx.fill();
+
+          // solid core
+          ctx.beginPath();
+          ctx.arc(nd.x, nd.y, Math.max(0.5, size), 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${nd.r},${nd.g},${nd.b},${alpha.toFixed(3)})`;
+          ctx.fill();
+        }
+
+        // ── Subtle grid plane at bottom ──
+        const gridY = cy + FOV * 0.28;
+        const GCOLS = 10, GROW = 5;
+        const gw = Math.min(W * 0.85, 900);
+        const gx0 = cx - gw / 2;
+        const gh  = gw * 0.18;
+        ctx.save();
+        for (let c = 0; c <= GCOLS; c++) {
+          const lx = gx0 + (c / GCOLS) * gw;
+          const alpha = 0.025 + 0.02 * (1 - Math.abs(c / GCOLS - 0.5) * 2);
+          ctx.beginPath();
+          ctx.moveTo(lx, gridY);
+          ctx.lineTo(lx, gridY + gh);
+          ctx.strokeStyle = `rgba(31,125,83,${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+        for (let r = 0; r <= GROW; r++) {
+          const ly = gridY + (r / GROW) * gh;
+          const alpha = 0.025 + 0.015 * (1 - r / GROW);
+          ctx.beginPath();
+          ctx.moveTo(gx0, ly);
+          ctx.lineTo(gx0 + gw, ly);
+          ctx.strokeStyle = `rgba(31,125,83,${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      requestAnimationFrame(frame);
+
+      // Pause on hidden tab
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) requestAnimationFrame(frame);
+      });
+    })();
+
+
     /* ── SCROLL REVEAL ── */
     const revealEls = document.querySelectorAll('.reveal,.reveal-left');
     const revealIO = new IntersectionObserver((entries) => {
