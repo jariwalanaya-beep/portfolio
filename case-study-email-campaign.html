@@ -88,7 +88,7 @@
     .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
     .nav-mobile-drawer { display:none; position:fixed; top:62px; left:0; right:0; background:rgba(4,7,12,0.97); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); z-index:199; padding:20px 24px 28px; flex-direction:column; gap:6px; }
     .nav-mobile-drawer.open { display:flex; }
-    .nav-mobile-drawer a { text-decoration:none; font-size:.9rem; font-weight:500; color:var(--muted); padding:10px 14px; border-radius:10px; border:1px solid transparent; transition:color .18s,border-color .18s,background .18s; }
+    .nav-mobile-drawer a { text-decoration:none; font-size:.9rem; font-weight:500; color:var(--muted); padding:12px 14px; border-radius:10px; border:1px solid transparent; transition:color .18s,border-color .18s,background .18s; min-height:44px; display:flex; align-items:center; }
     .nav-mobile-drawer a:hover { color:var(--text); border-color:var(--border); background:rgba(255,255,255,0.03); }
 
     /* ─── HERO ──────────────────────────────────────────── */
@@ -288,24 +288,96 @@
     }
     /* Phone */
     @media(max-width:640px) {
-      .navbar{height:56px;padding:0 16px} .nav-back{display:none} .nav-mobile-drawer{top:56px}
+      .navbar{height:56px;padding:0 20px} .nav-logo{font-size:.95rem}
+      .nav-back{display:none} .nav-mobile-drawer{top:56px}
 
       /* Hero */
-      .hero-left{padding:40px 18px 36px} .hero-right{padding:28px 18px 36px}
-      .hero-title{font-size:2.2rem;letter-spacing:-1.8px;line-height:1.06}
-      .hero-desc{font-size:.9rem;margin-bottom:24px}
-      .hero-list{gap:10px;margin-bottom:28px} .hero-list li{font-size:.88rem}
+      .hero-left{padding:44px 20px 40px} .hero-right{padding:32px 20px 40px}
+      .hero-title{font-size:2.2rem;letter-spacing:-1.5px;line-height:1.05}
+      .hero-desc{font-size:.92rem;margin-bottom:28px}
+      .hero-desc br{display:none}
+      .hero-list{gap:10px;margin-bottom:32px} .hero-list li{font-size:.88rem}
       .hero-actions{flex-direction:column;gap:10px}
       .hero-actions .btn-primary,.hero-actions .btn-ghost{width:100%;justify-content:center}
-      .ba-header{padding:48px 20px 24px} .ba-grid{padding:0 20px 36px;gap:14px}
-      .compare-section{padding:56px 20px} .faq-section{padding:52px 20px}
-      .faq-sticky-title{font-size:1.6rem} .cta-section{padding:60px 20px}
+      .badge{font-size:.68rem}
+
+      /* Telegram widget */
+      .tg-widget{max-width:100%;border-radius:18px}
+      .tg-body{padding:12px 10px;gap:8px}
+      .tg-msg{font-size:.76rem;padding:8px 10px}
+      .tg-processing{font-size:.72rem;padding:8px 10px}
+      .tg-spin{width:14px;height:14px}
+      .ts-num{font-size:.9rem} .ts-label{font-size:.56rem}
+      .tg-stat{padding:10px 6px}
+
+      /* Stats section */
+      .stats-section{padding:52px 20px;gap:36px}
+      .stats-widget-card{max-width:100%}
+      .stats-grid{grid-template-columns:1fr 1fr;gap:12px}
+      .stat-cell{padding:20px 16px}
+      .stat-num{font-size:2rem;letter-spacing:-.8px}
+      .stat-label{font-size:.82rem}
+      .stat-desc{font-size:.72rem}
+      .stat-icon{width:34px;height:34px;font-size:1rem;margin-bottom:12px}
+
+      /* How it works */
+      .how-section{padding:52px 20px}
+      .how-head{margin-bottom:36px}
+      .flow-steps{grid-template-columns:1fr;gap:12px}
+      .flow-step{padding:20px 18px}
+      .step-title{font-size:.88rem} .step-desc{font-size:.76rem}
+      .step-bubble{width:32px;height:32px;font-size:.65rem;margin-bottom:14px}
+      .step-icon-wrap{width:42px;height:42px;font-size:1.3rem;margin-bottom:12px}
+
+      /* Before & After */
+      .ba-header{padding:48px 20px 24px}
+      .ba-grid{padding:0 20px 36px;gap:14px}
+      .ba-list{padding:18px;gap:12px} .ba-list li{font-size:.88rem}
+
+      /* Compare */
+      .compare-section{padding:52px 20px}
+      .compare-wrap{border-radius:14px}
+
+      /* FAQ */
+      .faq-section{padding:52px 20px}
+      .faq-sticky-title{font-size:1.6rem}
+      .faq-q{font-size:.88rem}
+      .faq-q-row{padding:16px 18px;gap:14px;min-height:52px}
+      .faq-a{padding:0 18px 16px;padding-top:14px;font-size:.84rem}
+
+      /* CTA */
+      .cta-section{padding:60px 20px}
       .cta-title{font-size:1.9rem;letter-spacing:-1px}
-      .cta-actions{flex-direction:column;width:100%}
+      .cta-sub{font-size:.9rem}
+      .cta-actions{flex-direction:column;width:100%;gap:10px}
       .cta-actions .btn-primary,.cta-actions .btn-ghost{width:100%;justify-content:center}
+
+      /* Globals */
       .sec-h2{font-size:1.7rem;letter-spacing:-.8px}
+      .sec-tag{font-size:.66rem;letter-spacing:2.5px}
+    }
+
+    /* Very small phones */
+    @media(max-width:380px) {
+      .hero-title{font-size:1.9rem;letter-spacing:-1px}
+      .stats-grid{grid-template-columns:1fr}
+      .stat-num{font-size:1.8rem}
+      .badge{font-size:.64rem}
+      .btn-primary,.btn-ghost{font-size:.84rem;padding:13px 18px}
     }
     @media(prefers-reduced-motion:reduce) { *,*::before,*::after{animation:none!important;transition:none!important} }
+
+    /* ─── MOBILE PERFORMANCE OPTIMIZATIONS ─────────────────── */
+    @media(max-width:768px) and (pointer:coarse) {
+      .navbar, .nav-mobile-drawer, .price-card, .stat-cell,
+      .flow-step, .faq-item, .ba-col, .compare-wrap,
+      .tg-widget, .stats-widget-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+      .tg-widget, .stats-widget-card { animation: none !important; }
+      body { background-attachment: scroll !important; }
+      .orb { filter: blur(60px) !important; opacity: .4 !important; }
+      .stat-cell:hover, .flow-step:hover, .price-card:hover,
+      .btn-primary:hover { transform: none !important; box-shadow: none !important; }
+    }
   </style>
 </head>
 <body>

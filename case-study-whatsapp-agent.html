@@ -107,16 +107,6 @@
       overflow-x: hidden;
     }
 
-    /* ─── 3D BACKGROUND CANVAS (THREE.JS) ──────────────────── */
-    #three-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
 
     /* ─── LEGACY 2D CANVAS (hidden) ─────────────────────────── */
     #bg-canvas {
@@ -1529,16 +1519,7 @@
       gap: 6px;
     }
     .nav-mobile-drawer.open { display: flex; }
-    .nav-mobile-drawer a {
-      text-decoration: none;
-      font-size: .9rem;
-      font-weight: 500;
-      color: var(--muted);
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: 1px solid transparent;
-      transition: color .18s, border-color .18s, background .18s;
-    }
+    .nav-mobile-drawer a { text-decoration:none; font-size:.9rem; font-weight:500; color:var(--muted); padding:12px 14px; border-radius:10px; border:1px solid transparent; transition:color .18s, border-color .18s, background .18s; min-height:44px; display:flex; align-items:center; }
     .nav-mobile-drawer a:hover {
       color: var(--text);
       border-color: var(--border);
@@ -1585,6 +1566,7 @@
       .hero-right { padding: 32px 20px 40px; }
       .hero-title { font-size: 2.2rem; letter-spacing: -1.5px; line-height: 1.05; }
       .hero-desc { font-size: .92rem; margin-bottom: 28px; }
+      .hero-desc br { display: none; }
       .hero-list { gap: 10px; margin-bottom: 32px; }
       .hero-list li { font-size: .88rem; }
       .hero-actions { flex-direction: column; gap: 10px; }
@@ -1625,7 +1607,7 @@
       .faq-section { padding: 52px 20px; }
       .faq-sticky-title { font-size: 1.6rem; }
       .faq-q { font-size: .88rem; }
-      .faq-q-row { padding: 16px 18px; }
+      .faq-q-row { padding: 16px 18px; min-height: 52px; }
       .faq-a { padding: 0 18px 16px; padding-top: 14px; font-size: .84rem; }
 
       /* CTA */
@@ -1638,6 +1620,8 @@
 
       /* Section headings */
       .sec-h2 { font-size: 1.7rem; letter-spacing: -.8px; }
+      .sec-tag { font-size: .66rem; letter-spacing: 2.5px; }
+      .badge { font-size: .68rem; }
     }
 
     @media(max-width:400px) {
@@ -1645,24 +1629,31 @@
       .stats-grid { grid-template-columns: 1fr; }
       .stat-num { font-size: 1.8rem; }
       .wa-widget { border-radius: 14px; }
-      .badge { font-size: .68rem; }
+      .badge { font-size: .64rem; }
+      .btn-primary, .btn-ghost { font-size: .84rem; padding: 13px 18px; }
     }
 
     @media(prefers-reduced-motion:reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ─── MOBILE PERFORMANCE OPTIMIZATIONS ─────────────────── */
+    @media(max-width:768px) and (pointer:coarse) {
+      .navbar, .nav-mobile-drawer, .price-card, .stat-cell,
+      .flow-step, .faq-item, .ba-col, .compare-wrap,
+      .wa-widget, .stats-widget-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+      .wa-widget, .stats-widget-card { animation: none !important; }
+      body { background-attachment: scroll !important; }
+      .orb { filter: blur(60px) !important; opacity: .4 !important; }
+      .stat-cell:hover, .flow-step:hover, .price-card:hover,
+      .btn-primary:hover { transform: none !important; box-shadow: none !important; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- THREE.JS 3D BACKGROUND (dedicated canvas — no conflict with index.js) -->
-  <canvas id="three-canvas"
-    style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:1;"></canvas>
-  <!-- Original 2D canvas kept for index.js (hidden — replaced by 3D scene) -->
-  <canvas id="bg-canvas"
-    style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:0;display:none;"></canvas>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <canvas id="bg-canvas"></canvas>
 
   <!-- GLOW ORBS -->
   <div class="orb orb-1"></div>
@@ -2062,205 +2053,6 @@
 
   <script src="index.js"></script>
   <script>
-    /* ══════════════════════════════════════════════════════════════
-       3D PARTICLE NETWORK — Pure Canvas 2D with 3D math projection
-       No WebGL required. Brand: #1F7D53 / #14a86a / #255F38
-    ══════════════════════════════════════════════════════════════ */
-    (function () {
-      'use strict';
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      const canvas = document.getElementById('three-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-
-      // ── Sizing ──────────────────────────────────────────────────
-      let W, H, cx, cy;
-      function resize() {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-        cx = W / 2; cy = H / 2;
-      }
-      resize();
-      window.addEventListener('resize', resize, { passive: true });
-
-      // ── Brand colour palette ─────────────────────────────────────
-      const COLORS = [
-        { r: 31,  g: 125, b: 83  },  // #1F7D53
-        { r: 20,  g: 168, b: 106 },  // #14a86a
-        { r: 37,  g: 95,  b: 56  },  // #255F38
-        { r: 13,  g: 92,  b: 58  },  // #0d5c3a
-        { r: 38,  g: 199, b: 127 },  // #26c77f
-      ];
-
-      // ── Nodes ────────────────────────────────────────────────────
-      const N = window.innerWidth < 768 ? 120 : 220;
-      const SPREAD = 320;
-      const FOV = 500;
-
-      const nodes = Array.from({ length: N }, () => {
-        const c = COLORS[Math.floor(Math.random() * COLORS.length)];
-        return {
-          ox: (Math.random() - 0.5) * SPREAD,
-          oy: (Math.random() - 0.5) * SPREAD,
-          oz: (Math.random() - 0.5) * SPREAD,
-          x: 0, y: 0, z: 0,    // projected 2-D
-          r: c.r, g: c.g, b: c.b,
-          baseSize: 1.5 + Math.random() * 3,
-          phase: Math.random() * Math.PI * 2,
-          speed: 0.2 + Math.random() * 0.4,
-        };
-      });
-
-      // Pre-compute connection pairs (only close neighbours)
-      const MAX_DIST_SQ = 95 * 95;
-      const pairs = [];
-      for (let i = 0; i < N; i++) {
-        for (let j = i + 1; j < N; j++) {
-          const dx = nodes[i].ox - nodes[j].ox;
-          const dy = nodes[i].oy - nodes[j].oy;
-          const dz = nodes[i].oz - nodes[j].oz;
-          if (dx*dx + dy*dy + dz*dz < MAX_DIST_SQ) pairs.push([i, j]);
-        }
-      }
-
-      // ── Rotation state ───────────────────────────────────────────
-      let rotX = 0.3, rotY = 0;
-      const ROT_SPEED_X =  0.00045;
-      const ROT_SPEED_Y =  0.0009;
-
-      // ── Mouse parallax ───────────────────────────────────────────
-      let mx = 0, my = 0;
-      window.addEventListener('mousemove', e => {
-        mx = (e.clientX / window.innerWidth  - 0.5);
-        my = (e.clientY / window.innerHeight - 0.5);
-      }, { passive: true });
-
-      // ── 3-D rotation helpers ─────────────────────────────────────
-      function rotateXY(px, py, pz, ax, ay) {
-        // rotate around Y
-        const cosY = Math.cos(ay), sinY = Math.sin(ay);
-        let x1 = px * cosY - pz * sinY;
-        let z1 = px * sinY + pz * cosY;
-        // rotate around X
-        const cosX = Math.cos(ax), sinX = Math.sin(ax);
-        const y2 = py * cosX - z1 * sinX;
-        const z2 = py * sinX + z1 * cosX;
-        return [x1, y2, z2];
-      }
-
-      // ── Animation loop ───────────────────────────────────────────
-      let lastT = 0;
-      function frame(ts) {
-        requestAnimationFrame(frame);
-        const t = ts * 0.001;
-        const dt = Math.min(t - lastT, 0.05);
-        lastT = t;
-
-        rotX += ROT_SPEED_X + my * 0.0008;
-        rotY += ROT_SPEED_Y + mx * 0.0012;
-
-        ctx.clearRect(0, 0, W, H);
-
-        // ── Project all nodes ──
-        for (const nd of nodes) {
-          // gentle bob
-          const bx = nd.ox + Math.cos(t * nd.speed + nd.phase) * 6;
-          const by = nd.oy + Math.sin(t * nd.speed * 0.7 + nd.phase) * 6;
-          const bz = nd.oz;
-          const [rx, ry, rz] = rotateXY(bx, by, bz, rotX, rotY);
-          const depth = FOV + rz;
-          if (depth < 1) { nd.z = -9999; continue; }
-          const scale = FOV / depth;
-          nd.x = cx + rx * scale;
-          nd.y = cy + ry * scale;
-          nd.z = rz;          // used for depth fade
-          nd.sc = scale;
-        }
-
-        // ── Draw lines (depth-sorted by average z) ──
-        for (const [i, j] of pairs) {
-          const a = nodes[i], b = nodes[j];
-          if (a.z === -9999 || b.z === -9999) continue;
-          // depth alpha
-          const depthA = Math.max(0, Math.min(1, (a.z + SPREAD) / (SPREAD * 2)));
-          const depthB = Math.max(0, Math.min(1, (b.z + SPREAD) / (SPREAD * 2)));
-          const alpha  = ((depthA + depthB) * 0.5) * 0.22;
-          const cr = Math.round((a.r + b.r) / 2);
-          const cg = Math.round((a.g + b.g) / 2);
-          const cb = Math.round((a.b + b.b) / 2);
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(${cr},${cg},${cb},${alpha.toFixed(3)})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-
-        // ── Draw nodes ──
-        for (const nd of nodes) {
-          if (nd.z === -9999) continue;
-          const depth = Math.max(0, Math.min(1, (nd.z + SPREAD) / (SPREAD * 2)));
-          const alpha = 0.15 + depth * 0.75;
-          const size  = nd.baseSize * nd.sc * 0.9;
-          if (size < 0.3) continue;
-
-          // glow halo
-          const glow = ctx.createRadialGradient(nd.x, nd.y, 0, nd.x, nd.y, size * 3.5);
-          glow.addColorStop(0,   `rgba(${nd.r},${nd.g},${nd.b},${(alpha * 0.35).toFixed(3)})`);
-          glow.addColorStop(1,   `rgba(${nd.r},${nd.g},${nd.b},0)`);
-          ctx.beginPath();
-          ctx.arc(nd.x, nd.y, size * 3.5, 0, Math.PI * 2);
-          ctx.fillStyle = glow;
-          ctx.fill();
-
-          // solid core
-          ctx.beginPath();
-          ctx.arc(nd.x, nd.y, Math.max(0.5, size), 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${nd.r},${nd.g},${nd.b},${alpha.toFixed(3)})`;
-          ctx.fill();
-        }
-
-        // ── Subtle grid plane at bottom ──
-        const gridY = cy + FOV * 0.28;
-        const GCOLS = 10, GROW = 5;
-        const gw = Math.min(W * 0.85, 900);
-        const gx0 = cx - gw / 2;
-        const gh  = gw * 0.18;
-        ctx.save();
-        for (let c = 0; c <= GCOLS; c++) {
-          const lx = gx0 + (c / GCOLS) * gw;
-          const alpha = 0.025 + 0.02 * (1 - Math.abs(c / GCOLS - 0.5) * 2);
-          ctx.beginPath();
-          ctx.moveTo(lx, gridY);
-          ctx.lineTo(lx, gridY + gh);
-          ctx.strokeStyle = `rgba(31,125,83,${alpha})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
-        for (let r = 0; r <= GROW; r++) {
-          const ly = gridY + (r / GROW) * gh;
-          const alpha = 0.025 + 0.015 * (1 - r / GROW);
-          ctx.beginPath();
-          ctx.moveTo(gx0, ly);
-          ctx.lineTo(gx0 + gw, ly);
-          ctx.strokeStyle = `rgba(31,125,83,${alpha})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
-        ctx.restore();
-      }
-
-      requestAnimationFrame(frame);
-
-      // Pause on hidden tab
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) requestAnimationFrame(frame);
-      });
-    })();
-
-
     /* ── SCROLL REVEAL ── */
     const revealEls = document.querySelectorAll('.reveal,.reveal-left');
     const revealIO = new IntersectionObserver((entries) => {
@@ -2278,7 +2070,6 @@
     (function () {
       const container = document.getElementById('waChartBars');
       if (!container) return;
-      // heights: [lo%, hi%] for each bar creates a realistic usage curve
       const barData = [
         [15, 35], [20, 45], [30, 60], [50, 80], [65, 90], [55, 75], [40, 65],
         [30, 55], [45, 70], [60, 85], [70, 95], [55, 80], [40, 60], [25, 50],
@@ -2301,45 +2092,26 @@
       if (!body || !chart) return;
 
       const conversations = [
-        // Series 1: GPU Stock & Same-Day Delivery
         [
           { type: 'user', text: 'RTX 4060 available? Need today delivery.' },
-          { type: 'bot', text: 'Yes, 20 units in stock at ₹29,999. Same-day dispatch possible! ✅' },
+          { type: 'bot',  text: 'Yes, 20 units in stock at ₹29,999. Same-day dispatch possible! ✅' },
           { type: 'user', text: 'Mumbai delivery?' },
-          { type: 'bot', text: 'Done! Packed & out for delivery. ETA today by 6 PM. Track #GH2482 📦' },
+          { type: 'bot',  text: 'Done! Packed & out for delivery. ETA today by 6 PM. Track #GH2482 📦' },
           { type: 'chip', label: 'Series 1 · GPU Stock', detail: 'Same-day dispatch confirmed · Reply: 1.2s' }
         ],
-        // Series 2: Order Tracking
         [
           { type: 'user', text: 'Track my order ORD-1005' },
-          { type: 'bot', text: 'Order ORD-1005 is Shipped 🚚 Gaming Chair + RTX 4060 + 27" 165Hz Monitor. Total ₹61,997.' },
+          { type: 'bot',  text: 'Order ORD-1005 is Shipped 🚚 Gaming Chair + RTX 4060 + 27" 165Hz Monitor. Total ₹61,997.' },
           { type: 'user', text: 'When will it reach?' },
-          { type: 'bot', text: 'ETA tomorrow by 3 PM. Tracking link sent on WhatsApp already. 📍' },
+          { type: 'bot',  text: 'ETA tomorrow by 3 PM. Tracking link sent on WhatsApp already. 📍' },
           { type: 'chip', label: 'Series 2 · Order Tracking', detail: 'Intent: tracking · Reply: 1.1s' }
         ],
-        // Series 3: Product Recommendation (1080p Gaming)
         [
           { type: 'user', text: 'Best GPU for 1080p gaming under 35k?' },
-          { type: 'bot', text: 'RTX 4060 (P020) is the best value at ₹29,999. Perfect for 1080p with DLSS 3. 🎮' },
+          { type: 'bot',  text: 'RTX 4060 (P020) is the best value at ₹29,999. Perfect for 1080p with DLSS 3. 🎮' },
           { type: 'user', text: 'Any bundle with monitor?' },
-          { type: 'bot', text: 'Yes! Pair it with 27" 165Hz LG Monitor (₹18,999) and save ₹2,000 on bundle. 💡' },
+          { type: 'bot',  text: 'Yes! Pair it with 27" 165Hz LG Monitor (₹18,999) and save ₹2,000 on bundle. 💡' },
           { type: 'chip', label: 'Series 3 · Recommendation', detail: 'Bundle upsell triggered · Reply: 1.4s' }
-        ],
-        // Series 4: Shipping & Payment
-        [
-          { type: 'user', text: 'How long does shipping take?' },
-          { type: 'bot', text: 'Standard shipping 3–5 business days. Express (1–2 days) available for +₹199. 🚀' },
-          { type: 'user', text: 'COD available?' },
-          { type: 'bot', text: 'Yes! COD up to ₹30,000. Above that please pay via UPI/card. 💳' },
-          { type: 'chip', label: 'Series 4 · Shipping & Payment', detail: 'COD policy shared · Reply: 1.0s' }
-        ],
-        // Series 5: Monitor Query + Compatibility
-        [
-          { type: 'user', text: 'Good 165Hz monitor in stock?' },
-          { type: 'bot', text: 'Yes! 27" QHD 165Hz LG Monitor (P006) at ₹18,999, 18 units left. 🖥️' },
-          { type: 'user', text: 'Will it work with Ryzen 7 7800X3D?' },
-          { type: 'bot', text: 'Perfect match! Works with B650 motherboard (P012). Want me to build a full quote? ⚡' },
-          { type: 'chip', label: 'Series 5 · Compatibility', detail: 'Full quote offered · Reply: 1.3s' }
         ]
       ];
 
@@ -2352,9 +2124,7 @@
       function makeTyping() {
         const row = document.createElement('div');
         row.className = 'wa-row bot wa-typing-row';
-        row.innerHTML = `<div class="wa-bubble wa-typing">
-          <span></span><span></span><span></span>
-        </div>`;
+        row.innerHTML = `<div class="wa-bubble wa-typing"><span></span><span></span><span></span></div>`;
         return row;
       }
 
@@ -2372,10 +2142,8 @@
       }
 
       async function runConversation(msgs) {
-        // clear existing messages (keep chart)
         const children = [...body.children];
         children.forEach(c => { if (!c.classList.contains('wa-chart')) body.removeChild(c); });
-
         for (const msg of msgs) {
           if (msg.type === 'bot') {
             const typing = makeTyping();
@@ -2389,7 +2157,6 @@
           }
           const el = makeBubble(msg);
           body.insertBefore(el, chart);
-          // tick counter
           msgCount++;
           if (countEl) countEl.textContent = `${msgCount} msgs today`;
           await sleep(msg.type === 'chip' ? 1000 : 800);
@@ -2400,10 +2167,9 @@
         while (true) {
           await runConversation(conversations[convIndex % conversations.length]);
           convIndex++;
-          await sleep(5000); // 5-second pause before next series
+          await sleep(5000);
         }
       }
-
       loop();
     })();
 
@@ -2424,11 +2190,8 @@
         drawer.classList.toggle('open', isOpen);
         navHamburgerBtn.setAttribute('aria-expanded', isOpen);
       });
-      // Close on outside click
       document.addEventListener('click', (e) => {
-        if (!navHamburgerBtn.contains(e.target) && !drawer.contains(e.target)) {
-          closeDrawer();
-        }
+        if (!navHamburgerBtn.contains(e.target) && !drawer.contains(e.target)) closeDrawer();
       });
     }
     function closeDrawer() {

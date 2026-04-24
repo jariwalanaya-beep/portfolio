@@ -1,3 +1,11 @@
+// ---- Mobile detection ----
+// A device is treated as "mobile" if it's a touch device with a small viewport.
+// We check both to avoid false-positives from desktop touch-screens.
+const isMobileDevice = (
+    ('ontouchstart' in window || navigator.maxTouchPoints > 0) &&
+    window.matchMedia('(max-width: 768px)').matches
+);
+
 // ---- NAV scroll effect ----
 const navbar = document.getElementById('navbar');
 let ticking = false;
@@ -150,7 +158,10 @@ if (taskCounter) {
 
 // ---- Particle Void Background ----
 const bgCanvas = document.getElementById('bg-canvas');
-if (bgCanvas) {
+// Disable on mobile – this is the #1 source of GPU heat on phones.
+if (bgCanvas && isMobileDevice) {
+    bgCanvas.style.display = 'none';
+} else if (bgCanvas) {
     const ctx = bgCanvas.getContext('2d', { alpha: true });
     let stars = [];
     // Optimize particle count for background
@@ -239,7 +250,12 @@ const mascotSearchBtn = document.getElementById('mascot-search-btn');
 const pupilLeft = document.getElementById('pupil-left');
 const pupilRight = document.getElementById('pupil-right');
 
-if (mascot && mascotSpeech) {
+// Hide mascot on mobile – constant rAF roaming loop drains battery.
+if (mascot && isMobileDevice) {
+    mascot.style.display = 'none';
+}
+
+if (mascot && mascotSpeech && !isMobileDevice) {
   // Start bottom-right
   const startX = window.innerWidth - 100;
   const startY = window.innerHeight - 100;
@@ -693,7 +709,10 @@ if (mascot && mascotSpeech) {
 
 // ==== MOBIUS STRIP ANIMATION ====
 const mobiusCanvas = document.getElementById('mobius-canvas');
-if (mobiusCanvas) {
+// Disable Möbius on mobile – heavy 3D math at 60fps causes overheating.
+if (mobiusCanvas && isMobileDevice) {
+    mobiusCanvas.style.display = 'none';
+} else if (mobiusCanvas) {
         const mCtx = mobiusCanvas.getContext('2d', { alpha: true });
         let width = 700;
         let height = 700;
