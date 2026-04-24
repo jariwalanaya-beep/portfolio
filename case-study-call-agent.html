@@ -2047,10 +2047,11 @@
       <p class="cta-sub">We'll walk through your current booking process and show you exactly how an AI voice agent
         would fit in - free.</p>
       <div class="cta-actions">
-        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer"
-          class="btn-primary">
+        <button onclick="Calendly.initPopupWidget({url:'https://calendly.com/karlspace3/30min'});return false;"
+          style="background: linear-gradient(135deg,#1f7d53,#2C8B5F); border: none; color: #fff; font-weight: 600; padding: 12px 28px; border-radius: 50px; font-size: 0.95rem; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 20px rgba(31,125,83,0.35); display: inline-flex; align-items: center; gap: 8px; margin: 0 auto;"
+          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(31,125,83,0.5)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 20px rgba(31,125,83,0.35)';">
           Book a Free Audit →
-        </a>
+        </button>
         <a href="/#case-studies" class="btn-ghost">See More Case Studies</a>
       </div>
       <p class="cta-note">30-minute call · No sales pressure · Real answers</p>
@@ -2133,6 +2134,9 @@
       });
     }
   </script>
+    <!-- Calendly popup widget -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 
 </html>
