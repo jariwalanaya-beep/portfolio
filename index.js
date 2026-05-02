@@ -1,10 +1,14 @@
-// ---- Mobile detection ----
-// A device is treated as "mobile" if it's a touch device with a small viewport.
-// We check both to avoid false-positives from desktop touch-screens.
-const isMobileDevice = (
-    ('ontouchstart' in window || navigator.maxTouchPoints > 0) &&
-    window.matchMedia('(max-width: 768px)').matches
-);
+// ---- Low-power detection ----
+// Treat smaller touch devices or reduced-motion users as low-power to reduce heat.
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isSmallViewport = window.matchMedia('(max-width: 1024px)').matches;
+const isShortViewport = window.matchMedia('(max-height: 820px)').matches;
+const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+const isLowPowerDevice = prefersReducedMotion || (isCoarsePointer && (isSmallViewport || isShortViewport));
+
+if (isLowPowerDevice) {
+    document.documentElement.classList.add('reduced-motion');
+}
 
 // ---- NAV scroll effect ----
 const navbar = document.getElementById('navbar');
@@ -66,32 +70,46 @@ function animateCounter(el) {
 // ---- Intersection Observer ----
 const observerConfig = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
 
-const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.dataset.animated) {
-            entry.target.dataset.animated = 'true';
-            entry.target.querySelectorAll('.metric-number, .hero-stat-n[data-target]').forEach(animateCounter);
-        }
+if (isLowPowerDevice) {
+    document.querySelectorAll('.metric-number, .hero-stat-n[data-target]').forEach((el) => {
+        const target = parseInt(el.dataset.target ?? '0', 10);
+        const prefix = el.dataset.prefix ?? '';
+        const suffix = el.dataset.suffix ?? '';
+        if (!Number.isFinite(target)) return;
+        el.textContent = `${prefix}${target.toLocaleString()}${suffix}`;
     });
-}, observerConfig);
-const metricsSection = document.querySelector('.metrics');
-if (metricsSection) counterObserver.observe(metricsSection);
-const heroStatsSection = document.querySelector('.hero-stats-wrapper');
-if (heroStatsSection) counterObserver.observe(heroStatsSection);
 
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            revealObserver.unobserve(entry.target);
-        }
+    document.querySelectorAll('.service-card, .testimonial-card, .workflow-step, .metric-card, .dashboard-mock').forEach((el) => {
+        el.classList.add('revealed');
     });
-}, observerConfig);
-document.querySelectorAll('.service-card, .testimonial-card, .workflow-step, .metric-card, .dashboard-mock').forEach((el, i) => {
-    el.classList.add('reveal-item');
-    el.style.transitionDelay = (i * 0.04) + 's';
-    revealObserver.observe(el);
-});
+} else {
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.animated) {
+                entry.target.dataset.animated = 'true';
+                entry.target.querySelectorAll('.metric-number, .hero-stat-n[data-target]').forEach(animateCounter);
+            }
+        });
+    }, observerConfig);
+    const metricsSection = document.querySelector('.metrics');
+    if (metricsSection) counterObserver.observe(metricsSection);
+    const heroStatsSection = document.querySelector('.hero-stats-wrapper');
+    if (heroStatsSection) counterObserver.observe(heroStatsSection);
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, observerConfig);
+    document.querySelectorAll('.service-card, .testimonial-card, .workflow-step, .metric-card, .dashboard-mock').forEach((el, i) => {
+        el.classList.add('reveal-item');
+        el.style.transitionDelay = (i * 0.04) + 's';
+        revealObserver.observe(el);
+    });
+}
 
 // ---- CTA form ----
 const ctaSubmit = document.getElementById('cta-submit');
@@ -148,7 +166,7 @@ document.querySelectorAll('video').forEach((video) => {
 
 // ---- Live dashboard counter ----
 const taskCounter = document.querySelector('.dm-stat-n');
-if (taskCounter) {
+if (taskCounter && !isLowPowerDevice) {
     let count = 1247;
     setInterval(() => {
         const add = Math.floor(Math.random() * 3);
@@ -158,8 +176,8 @@ if (taskCounter) {
 
 // ---- Particle Void Background ----
 const bgCanvas = document.getElementById('bg-canvas');
-// Disable on mobile – this is the #1 source of GPU heat on phones.
-if (bgCanvas && isMobileDevice) {
+// Disable on low-power devices – this is the #1 source of GPU heat.
+if (bgCanvas && isLowPowerDevice) {
     bgCanvas.style.display = 'none';
 } else if (bgCanvas) {
     const ctx = bgCanvas.getContext('2d', { alpha: true });
@@ -250,12 +268,12 @@ const mascotSearchBtn = document.getElementById('mascot-search-btn');
 const pupilLeft = document.getElementById('pupil-left');
 const pupilRight = document.getElementById('pupil-right');
 
-// Hide mascot on mobile – constant rAF roaming loop drains battery.
-if (mascot && isMobileDevice) {
+// Hide mascot on low-power devices – constant rAF roaming loop drains battery.
+if (mascot && isLowPowerDevice) {
     mascot.style.display = 'none';
 }
 
-if (mascot && mascotSpeech && !isMobileDevice) {
+if (mascot && mascotSpeech && !isLowPowerDevice) {
   // Start bottom-right
   const startX = window.innerWidth - 100;
   const startY = window.innerHeight - 100;

@@ -82,6 +82,45 @@ body {
     overflow-x: hidden;
 }
 
+/* Reduce motion and GPU load on small screens and low-power devices */
+@media (max-width: 1024px), (max-height: 820px) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    #bg-canvas {
+        display: none !important;
+    }
+
+    .orb {
+        filter: blur(60px) !important;
+        opacity: 0.35 !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+.reduced-motion #bg-canvas {
+    display: none !important;
+}
+
+.reduced-motion .orb {
+    filter: blur(60px) !important;
+    opacity: 0.35 !important;
+}
+
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
 img {
     max-width: 100%;
     display: block;
