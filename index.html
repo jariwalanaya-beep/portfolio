@@ -144,6 +144,7 @@
     <div class="nav-inner container">
       <a href="#" class="logo">Karl<span>space</span></a>
       <ul class="nav-links">
+        <li><a href="#case-studies">Systems</a></li>
         <li><a href="#workflow">Process</a></li>
         <li><a href="#testimonials">Clients</a></li>
         <li><a href="#contact" class="btn btn-sm">Let's Talk →</a></li>
@@ -523,572 +524,143 @@
     });
   </script>
 
-
-
-
-
-
-
   <!-- CASE STUDIES -->
   <style>
-    /* ── Project Showcase Cards ── */
     .proj-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
       margin-top: 48px;
     }
-
-    @media (max-width: 1024px) {
-      .proj-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .proj-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Bottom row: center the last 2 cards */
-    .proj-grid-bottom {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 24px;
-      max-width: calc(66.66% - 8px);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @media (max-width: 1024px) {
-      .proj-grid-bottom {
-        max-width: 100%;
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .proj-grid-bottom {
-        grid-template-columns: 1fr;
-        max-width: 100%;
-      }
-    }
-
+    @media (max-width: 1024px) { .proj-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .proj-grid { grid-template-columns: 1fr; } }
     .proj-card {
-      position: relative;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 20px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
+      padding: 32px;
+      transition: 0.3s;
       text-decoration: none;
-    }
-
-    .proj-card:hover {
-      border-color: rgba(31, 125, 83, 0.5);
-      transform: translateY(-6px);
-      box-shadow: 0 24px 60px rgba(31, 125, 83, 0.12), 0 0 0 1px rgba(31, 125, 83, 0.2);
-    }
-
-    /* Top preview strip - faux browser chrome */
-    .proj-preview {
-      position: relative;
-      width: 100%;
-      height: 160px;
-      background: rgba(10, 20, 15, 0.8);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .proj-card--wide .proj-preview {
-      height: 220px;
-    }
-
-    /* Fake browser bar */
-    .proj-browser-bar {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 16px;
-      background: rgba(255, 255, 255, 0.04);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .proj-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
-
-    .proj-dot:nth-child(1) {
-      background: #ff5f57;
-    }
-
-    .proj-dot:nth-child(2) {
-      background: #ffbd2e;
-    }
-
-    .proj-dot:nth-child(3) {
-      background: #28c840;
-    }
-
-    .proj-url-bar {
-      flex: 1;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 4px;
-      margin-left: 8px;
-    }
-
-    /* Icon glyph inside preview */
-    .proj-icon-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: calc(100% - 41px);
-      /* subtract browser bar */
-      position: relative;
-    }
-
-    .proj-icon-bg {
-      width: 72px;
-      height: 72px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      background: rgba(31, 125, 83, 0.12);
-      border: 1px solid rgba(31, 125, 83, 0.2);
-      box-shadow: 0 0 40px rgba(31, 125, 83, 0.15);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .proj-card:hover .proj-icon-bg {
-      transform: scale(1.1);
-      box-shadow: 0 0 60px rgba(31, 125, 83, 0.3);
-    }
-
-    /* Subtle grid lines inside preview */
-    .proj-preview::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 32px 32px;
-      pointer-events: none;
-    }
-
-    /* Card body */
-    .proj-body {
-      padding: 24px 28px 28px;
       display: flex;
       flex-direction: column;
-      flex: 1;
     }
-
-    /* Number + tags row */
-    .proj-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-
-    .proj-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: rgba(31, 125, 83, 0.7);
-    }
-
-    .proj-tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .proj-tag {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: rgba(255, 255, 255, 0.5);
-    }
-
-    /* Title */
-    .proj-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #f1f5f9;
-      line-height: 1.35;
-      margin: 0 0 10px;
-      transition: color 0.2s;
-    }
-
-    .proj-card:hover .proj-title {
-      color: #fff;
-    }
-
-    /* Description */
-    .proj-desc {
-      font-size: 0.88rem;
-      color: rgba(255, 255, 255, 0.45);
-      line-height: 1.65;
-      flex: 1;
-      margin-bottom: 20px;
-    }
-
-    /* CTA row */
-    .proj-cta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .proj-cta-text {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: rgba(31, 125, 83, 0.9);
-      transition: color 0.2s;
-    }
-
-    .proj-card:hover .proj-cta-text {
-      color: #2C8B5F;
-    }
-
-    .proj-arrow {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(31, 125, 83, 0.1);
-      border: 1px solid rgba(31, 125, 83, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.25s, transform 0.25s;
-    }
-
-    .proj-card:hover .proj-arrow {
-      background: rgba(31, 125, 83, 0.25);
-      transform: translate(3px, -3px);
-    }
-
-    .proj-arrow svg {
-      stroke: #2C8B5F;
-    }
-
-    /* Divider line */
-    .proj-divider {
-      width: 100%;
-      height: 1px;
-      background: rgba(255, 255, 255, 0.06);
-      margin-bottom: 20px;
-    }
+    .proj-card:hover { border-color: #2C8B5F; transform: translateY(-5px); }
+    .proj-icon { font-size: 2.5rem; margin-bottom: 20px; }
+    .proj-title { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .proj-desc { font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); line-height: 1.6; }
   </style>
 
   <section class="case-studies" id="case-studies">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">SYSTEMS BUILT</div>
-        <h2 class="section-title">Case Studies &amp; <span class="gradient-text">Live Demos</span></h2>
-        <p class="section-sub">Actual systems deployed. Not hypothetical concepts.</p>
+        <div class="section-tag">SYSTEMS WE BUILD</div>
+        <h2 class="section-title">Systems <span class="gradient-text">We Build</span></h2>
+        <p class="section-sub">Pick a system. See how it works. Get a custom quote.</p>
       </div>
-
       <div class="proj-grid">
 
-        <!-- 01: AI Voice Call Agent -->
-        <a href="case-study-call-agent.html" class="proj-card" id="proj-call-agent">
-          <div class="proj-preview">
-            <div class="proj-browser-bar">
-              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
-              <div class="proj-url-bar"></div>
-            </div>
-            <div class="proj-icon-wrap">
-              <div class="proj-icon-bg">📞</div>
-            </div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-meta">
-              <span class="proj-num">PROJECT 01</span>
-              <div class="proj-tags">
-                <span class="proj-tag">Voice AI</span>
-                <span class="proj-tag">Clinics</span>
-              </div>
-            </div>
-            <h3 class="proj-title">AI Voice Call Agent for Clinics</h3>
-            <p class="proj-desc">Handles calls 24/7, books slots, manages cancellations &amp; updates your database - so
-              90% of routine calls never reach a human agent.</p>
-            <div class="proj-divider"></div>
-            <div class="proj-cta">
-              <span class="proj-cta-text">Read Full Case Study</span>
-              <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                  <line x1="5" y1="19" x2="19" y2="5" />
-                  <polyline points="5,5 19,5 19,19" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <!-- 02: AI WhatsApp Sales Agent -->
+        <!-- 01: WhatsApp Sales Agent -->
         <a href="case-study-whatsapp-agent.html" class="proj-card" id="proj-whatsapp">
-          <div class="proj-preview">
-            <div class="proj-browser-bar">
-              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
-              <div class="proj-url-bar"></div>
-            </div>
-            <div class="proj-icon-wrap">
-              <div class="proj-icon-bg">💬</div>
+          <div class="proj-icon">💬</div>
+          <div class="proj-meta" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <span class="proj-num" style="font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;color:rgba(31,125,83,.7);">PROJECT 01</span>
+            <div class="proj-tags" style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">WhatsApp</span>
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Retail</span>
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">24/7</span>
             </div>
           </div>
-          <div class="proj-body">
-            <div class="proj-meta">
-              <span class="proj-num">PROJECT 02</span>
-              <div class="proj-tags">
-                <span class="proj-tag">WhatsApp</span>
-                <span class="proj-tag">Sales</span>
-              </div>
-            </div>
-            <h3 class="proj-title">AI WhatsApp Sales Agent</h3>
-            <p class="proj-desc">Reads every message, pulls live inventory from Google Sheets and replies in under 2
-              seconds. 24/7. Zero staff needed.</p>
-            <div class="proj-divider"></div>
-            <div class="proj-cta">
-              <span class="proj-cta-text">Read Full Case Study</span>
-              <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                  <line x1="5" y1="19" x2="19" y2="5" />
-                  <polyline points="5,5 19,5 19,19" />
-                </svg>
-              </div>
-            </div>
+          <h3 class="proj-title">Customer Conversation Agent</h3>
+          <p class="proj-desc">Every customer chat, question, and follow-up handled instantly on WhatsApp — from product info to order updates. Zero staff needed.</p>
+          <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.85rem;font-weight:600;color:rgba(31,125,83,.9);">See how it works →</span>
           </div>
         </a>
 
-        <!-- 03: WhatsApp System for Clinic Appointment Booking -->
-        <a href="case-study-whatsapp-clinic.html" class="proj-card" id="proj-whatsapp-clinic">
-          <div class="proj-preview">
-            <div class="proj-browser-bar">
-              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
-              <div class="proj-url-bar"></div>
-            </div>
-            <div class="proj-icon-wrap">
-              <div class="proj-icon-bg">🏥</div>
+        <!-- 02: Booking Agent -->
+        <a href="case-study-booking-agent.html" class="proj-card" id="proj-booking">
+          <div class="proj-icon">📅</div>
+          <div class="proj-meta" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <span class="proj-num" style="font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;color:rgba(31,125,83,.7);">PROJECT 02</span>
+            <div class="proj-tags" style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">WhatsApp</span>
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Voice</span>
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Email</span>
             </div>
           </div>
-          <div class="proj-body">
-            <div class="proj-meta">
-              <span class="proj-num">PROJECT 03</span>
-              <div class="proj-tags">
-                <span class="proj-tag">WhatsApp</span>
-                <span class="proj-tag">Clinics</span>
-              </div>
-            </div>
-            <h3 class="proj-title">WhatsApp System for Clinic Appointment Booking</h3>
-            <p class="proj-desc">Patients book, reschedule &amp; cancel appointments over WhatsApp 24/7. The AI collects details, checks availability and confirms slots - zero receptionist involvement.</p>
-            <div class="proj-divider"></div>
-            <div class="proj-cta">
-              <span class="proj-cta-text">Read Full Case Study</span>
-              <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                  <line x1="5" y1="19" x2="19" y2="5" />
-                  <polyline points="5,5 19,5 19,19" />
-                </svg>
-              </div>
-            </div>
+          <h3 class="proj-title">Booking Agent</h3>
+          <p class="proj-desc">Appointments booked 24/7 via WhatsApp, Voice, or Email. You choose the channels.</p>
+          <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.85rem;font-weight:600;color:rgba(31,125,83,.9);">See how it works →</span>
           </div>
         </a>
 
-        <!-- 04: AI Email Campaign via Telegram – wide -->
-        <a href="case-study-email-campaign.html" class="proj-card proj-card--wide" id="proj-email">
-          <div class="proj-preview">
-            <div class="proj-browser-bar">
-              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
-              <div class="proj-url-bar"></div>
-            </div>
-            <div class="proj-icon-wrap">
-              <div class="proj-icon-bg">✉️</div>
+        <!-- 03: Email via Telegram -->
+        <a href="case-study-email-campaign.html" class="proj-card" id="proj-email-campaign">
+          <div class="proj-icon">✈️</div>
+          <div class="proj-meta" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <span class="proj-num" style="font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;color:rgba(31,125,83,.7);">PROJECT 03</span>
+            <div class="proj-tags" style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Telegram</span>
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Gmail</span>
             </div>
           </div>
-          <div class="proj-body">
-            <div class="proj-meta">
-              <span class="proj-num">PROJECT 04</span>
-              <div class="proj-tags">
-                <span class="proj-tag">Telegram</span>
-                <span class="proj-tag">Email</span>
-                <span class="proj-tag">Automation</span>
-              </div>
-            </div>
-            <h3 class="proj-title">AI Email Campaign via Telegram</h3>
-            <p class="proj-desc">Type one message in Telegram. The AI identifies the right customers or suppliers from
-              your database, writes the email in the correct tone, and sends it automatically - no dashboard, no
-              templates, no manual work required.</p>
-            <div class="proj-divider"></div>
-            <div class="proj-cta">
-              <span class="proj-cta-text">Read Full Case Study</span>
-              <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                  <line x1="5" y1="19" x2="19" y2="5" />
-                  <polyline points="5,5 19,5 19,19" />
-                </svg>
-              </div>
-            </div>
+          <h3 class="proj-title">Email via Telegram</h3>
+          <p class="proj-desc">One Telegram message → AI picks contacts → writes email → sends from your Gmail. No dashboard needed.</p>
+          <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.85rem;font-weight:600;color:rgba(31,125,83,.9);">See how it works →</span>
           </div>
         </a>
 
-        <!-- 05: Google Sheets to Live Dashboard -->
+        <!-- 04: Outreach Engine -->
+        <a href="case-study-outreach.html" class="proj-card" id="proj-outreach">
+          <div class="proj-icon">🎯</div>
+          <div class="proj-meta" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <span class="proj-num" style="font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;color:rgba(31,125,83,.7);">PROJECT 04</span>
+            <div class="proj-tags" style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Gmail</span>
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">LinkedIn</span>
+            </div>
+          </div>
+          <h3 class="proj-title">Outreach Engine</h3>
+          <p class="proj-desc">Find leads, write personalised openers, follow up for 3 weeks — automatically from your Gmail.</p>
+          <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.85rem;font-weight:600;color:rgba(31,125,83,.9);">See how it works →</span>
+          </div>
+        </a>
+
+        <!-- 05: Sheets Dashboard -->
         <a href="case-study-dashboard.html" class="proj-card" id="proj-dashboard">
-          <div class="proj-preview">
-            <div class="proj-browser-bar">
-              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
-              <div class="proj-url-bar"></div>
-            </div>
-            <div class="proj-icon-wrap">
-              <div class="proj-icon-bg">📊</div>
+          <div class="proj-icon">📊</div>
+          <div class="proj-meta" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <span class="proj-num" style="font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;color:rgba(31,125,83,.7);">PROJECT 05</span>
+            <div class="proj-tags" style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Google Sheets</span>
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Live</span>
             </div>
           </div>
-          <div class="proj-body">
-            <div class="proj-meta">
-              <span class="proj-num">PROJECT 05</span>
-              <div class="proj-tags">
-                <span class="proj-tag">Dashboard</span>
-                <span class="proj-tag">Sheets</span>
-              </div>
-            </div>
-            <h3 class="proj-title">Google Sheets to Live Dashboard</h3>
-            <p class="proj-desc">Reads your Google Sheets live, visualises every metric instantly and updates in real
-              time - no Power BI, no data team, no setup headaches.</p>
-            <div class="proj-divider"></div>
-            <div class="proj-cta">
-              <span class="proj-cta-text">Read Full Case Study</span>
-              <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                  <line x1="5" y1="19" x2="19" y2="5" />
-                  <polyline points="5,5 19,5 19,19" />
-                </svg>
-              </div>
-            </div>
+          <h3 class="proj-title">Sheets Dashboard</h3>
+          <p class="proj-desc">Your Google Sheet becomes a live business dashboard in under 24 hours. No Power BI, no data team.</p>
+          <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.85rem;font-weight:600;color:rgba(31,125,83,.9);">See how it works →</span>
           </div>
         </a>
 
-        <!-- 06: AI Lead Generation – wide -->
-        <a href="case-study-outreach.html" class="proj-card proj-card--wide" id="proj-outreach">
-          <div class="proj-preview">
-            <div class="proj-browser-bar">
-              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
-              <div class="proj-url-bar"></div>
-            </div>
-            <div class="proj-icon-wrap">
-              <div class="proj-icon-bg">🎯</div>
-            </div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-meta">
-              <span class="proj-num">PROJECT 06</span>
-              <div class="proj-tags">
-                <span class="proj-tag">Lead Gen</span>
-                <span class="proj-tag">Outreach</span>
-                <span class="proj-tag">Email</span>
-              </div>
-            </div>
-            <h3 class="proj-title">AI Lead Generation &amp; Outreach Automation</h3>
-            <p class="proj-desc">Fill out one form. The AI scrapes LinkedIn, Instagram, Facebook, YouTube &amp; Google - writes a personalised opening line per prospect - then sends 6 follow-up emails over 3 weeks automatically. You wake up to replies, not tasks.</p>
-            <div class="proj-divider"></div>
-            <div class="proj-cta">
-              <span class="proj-cta-text">Read Full Case Study</span>
-              <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                  <line x1="5" y1="19" x2="19" y2="5" />
-                  <polyline points="5,5 19,5 19,19" />
-                </svg>
-              </div>
+        <!-- 06: Telegram RAG -->
+        <a href="case-study-telegram-knowledge.html" class="proj-card" id="proj-telegram-rag">
+          <div class="proj-icon">🤖</div>
+          <div class="proj-meta" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <span class="proj-num" style="font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;color:rgba(31,125,83,.7);">PROJECT 06</span>
+            <div class="proj-tags" style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Telegram</span>
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Pinecone</span>
+              <span class="proj-tag" style="font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.5);">Vision</span>
             </div>
           </div>
-        </a>
-
-        <!-- 07: Email AI Appointment System -->
-        <a href="case-study-email-appointment.html" class="proj-card" id="proj-email-appointment">
-          <div class="proj-preview">
-            <div class="proj-browser-bar">
-              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
-              <div class="proj-url-bar"></div>
-            </div>
-            <div class="proj-icon-wrap">
-              <div class="proj-icon-bg">📧</div>
-            </div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-meta">
-              <span class="proj-num">PROJECT 07</span>
-              <div class="proj-tags">
-                <span class="proj-tag">Email AI</span>
-                <span class="proj-tag">Dental</span>
-                <span class="proj-tag">PostgreSQL</span>
-              </div>
-            </div>
-            <h3 class="proj-title">Email AI Appointment System – Smith Dental Clinic</h3>
-            <p class="proj-desc">Patients email → AI reads, classifies, books, and confirms appointments 24/7. Gmail → AI → PostgreSQL. Zero manual work, zero missed inquiries, zero double bookings.</p>
-            <div class="proj-divider"></div>
-            <div class="proj-cta">
-              <span class="proj-cta-text">Read Full Case Study</span>
-              <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                  <line x1="5" y1="19" x2="19" y2="5" />
-                  <polyline points="5,5 19,5 19,19" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <!-- 08: Multi-Modal Telegram AI Assistant -->
-        <a href="case-study-telegram-knowledge.html" class="proj-card" id="proj-telegram-knowledge">
-          <div class="proj-preview">
-            <div class="proj-browser-bar">
-              <span class="proj-dot"></span><span class="proj-dot"></span><span class="proj-dot"></span>
-              <div class="proj-url-bar"></div>
-            </div>
-            <div class="proj-icon-wrap">
-              <div class="proj-icon-bg" style="background: rgba(2, 132, 199, 0.12); border-color: rgba(2, 132, 199, 0.2); box-shadow: 0 0 40px rgba(2, 132, 199, 0.15);">🤖</div>
-            </div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-meta">
-              <span class="proj-num">PROJECT 08</span>
-              <div class="proj-tags">
-                <span class="proj-tag">Telegram</span>
-                <span class="proj-tag">RAG + Vision</span>
-              </div>
-            </div>
-            <h3 class="proj-title">Multi-Modal Telegram AI Assistant</h3>
-            <p class="proj-desc">Send text, photos, PDFs, Excel sheets, Word docs — anything. AI instantly extracts content, stores it in Pinecone, and answers from your private knowledge base using RAG.</p>
-            <div class="proj-divider"></div>
-            <div class="proj-cta">
-              <span class="proj-cta-text">Read Full Case Study</span>
-              <div class="proj-arrow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
-                  <line x1="5" y1="19" x2="19" y2="5" />
-                  <polyline points="5,5 19,5 19,19" />
-                </svg>
-              </div>
-            </div>
+          <h3 class="proj-title">Telegram RAG</h3>
+          <p class="proj-desc">Upload documents or images. Ask anything. Get perfect answers from your private knowledge base instantly.</p>
+          <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.85rem;font-weight:600;color:rgba(31,125,83,.9);">See how it works →</span>
           </div>
         </a>
 

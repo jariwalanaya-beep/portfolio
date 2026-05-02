@@ -4,22 +4,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI WhatsApp Sales Agent for PC Hardware Shops | 24/7 Instant Replies | Karlspace</title>
+  <title>WhatsApp Service Agent | 24/7 Coverage | Karlspace</title>
   <meta name="description"
-    content="Deploy an AI WhatsApp Sales Agent for your PC hardware shop. Get instant stock replies, live order tracking, COD handling, multilingual support, and 24/7 automated customer service. No missed messages." />
+    content="WhatsApp service agent for retail teams. Handles stock, pricing, order updates, and complaints with 24/7 coverage and fast replies. No missed chats." />
   <meta name="keywords"
-    content="AI WhatsApp Sales Agent, PC Hardware WhatsApp Bot, WhatsApp AI for PC Shops, Automated WhatsApp Support, WhatsApp Order Tracking Bot, COD WhatsApp Bot, GPU Stock Bot, WhatsApp AI Agent India, 24/7 WhatsApp Support, AI Customer Service PC Hardware, Karlspace, WhatsApp Automation for Electronics" />
+    content="WhatsApp service agent, WhatsApp automation, automated WhatsApp support, WhatsApp order tracking, customer service automation, 24/7 WhatsApp support, retail customer service, Karlspace" />
   <link rel="canonical" href="https://karlspace.ai/case-study-whatsapp-agent" />
-  <meta property="og:title" content="AI WhatsApp Sales Agent for PC Hardware Shops | 24/7 Instant Replies | Karlspace" />
+  <meta property="og:title"
+    content="WhatsApp Service Agent | 24/7 Coverage | Karlspace" />
   <meta property="og:description"
-    content="Deploy an AI WhatsApp Sales Agent for your PC hardware shop. Instant stock replies, live order tracking, COD handling, multilingual support, and 24/7 automated customer service." />
+    content="WhatsApp service agent for retail teams. Handles stock, pricing, order updates, and complaints with 24/7 coverage." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://karlspace.ai/case-study-whatsapp-agent" />
   <meta property="og:image" content="https://karlspace.ai/whatsapp-hero.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI WhatsApp Sales Agent for PC Hardware Shops | 24/7 Instant Replies | Karlspace" />
+  <meta name="twitter:title"
+    content="WhatsApp Service Agent | 24/7 Coverage | Karlspace" />
   <meta name="twitter:description"
-    content="Deploy an AI WhatsApp Sales Agent for your PC hardware shop. Instant stock replies, live order tracking, COD handling, multilingual support, and 24/7 automated customer service." />
+    content="WhatsApp service agent for retail teams. Handles stock, pricing, order updates, and complaints with 24/7 coverage." />
   <meta name="twitter:image" content="https://karlspace.ai/whatsapp-hero.png" />
   <meta property="og:site_name" content="Karlspace" />
   <meta name="robots" content="index, follow" />
@@ -34,9 +36,9 @@
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      "name": "AI WhatsApp Sales Agent for PC Hardware Shops",
-      "serviceType": "AI WhatsApp Sales Automation",
-      "description": "Deploy an AI WhatsApp Sales Agent for your PC hardware shop. Get instant stock replies, live order tracking, COD handling, multilingual support, and 24/7 automated customer service with zero missed messages.",
+      "name": "WhatsApp Service Agent",
+      "serviceType": "WhatsApp Service Automation",
+      "description": "WhatsApp service agent for retail teams. Handles stock, pricing, order tracking, and complaints with 24/7 coverage and no missed chats.",
       "url": "https://karlspace.ai/case-study-whatsapp-agent",
       "provider": {
         "@type": "Person",
@@ -66,7 +68,7 @@
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karlspace.ai/" },
-      { "@type": "ListItem", "position": 2, "name": "AI WhatsApp Sales Agent for PC Hardware Shops", "item": "https://karlspace.ai/case-study-whatsapp-agent" }
+      { "@type": "ListItem", "position": 2, "name": "WhatsApp Service Agent", "item": "https://karlspace.ai/case-study-whatsapp-agent" }
     ]
   }
   </script>
@@ -105,37 +107,6 @@
       color: var(--text);
       background: var(--bg);
       overflow-x: hidden;
-    }
-
-
-    /* ─── LEGACY 2D CANVAS (hidden) ─────────────────────────── */
-    #bg-canvas {
-      display: none;
-    }
-
-    /* ─── GLOW ORBS ─────────────────────────────────────────── */
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .orb-1 {
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(31, 125, 83, 0.18) 0%, transparent 70%);
-      top: -200px;
-      left: -150px;
-    }
-
-    .orb-2 {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(20, 168, 106, 0.1) 0%, transparent 70%);
-      bottom: 10%;
-      right: -100px;
     }
 
     /* ─── NAVBAR ─────────────────────────────────────────────── */
@@ -190,6 +161,16 @@
       border-color: var(--border);
     }
 
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+    }
+
     .nav-back {
       text-decoration: none;
       font-size: .82rem;
@@ -210,21 +191,21 @@
 
     /* ─── HERO ───────────────────────────────────────────────── */
     .hero {
-      min-height: 100vh;
+      min-height: calc(100vh - 62px);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding-top: 62px;
+      align-items: start;
+      padding-top: 0;
       border-bottom: 1px solid var(--border);
       position: relative;
       z-index: 1;
     }
 
     .hero-left {
-      padding: 72px 56px 72px 60px;
+      padding: 40px 56px 72px 60px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       border-right: 1px solid var(--border);
       height: 100%;
     }
@@ -394,9 +375,9 @@
 
     /* ─── HERO RIGHT – WHATSAPP WIDGET ──────────────────────── */
     .hero-right {
-      padding: 56px 48px;
+      padding: 40px 48px 72px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       height: 100%;
       background: radial-gradient(ellipse 80% 80% at 60% 50%, rgba(31, 125, 83, 0.07), transparent 70%);
@@ -983,6 +964,124 @@
       max-width: none;
     }
 
+    /* ─── CHANNELS ─────────────────────────────────────────── */
+    .channels-section {
+      padding: 92px 72px 60px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .channels-head {
+      margin-bottom: 36px;
+    }
+
+    .channels-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 60ch;
+      margin-top: 12px;
+    }
+
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 26px 24px;
+      margin-top: 26px;
+    }
+
+    .channel-card {
+      background: transparent;
+      padding: 6px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .channel-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .channel-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .channel-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .channel-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 62ch;
+    }
+
+    .channel-pill {
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.28);
+      color: var(--p2);
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .channel-addon {
+      margin-top: 30px;
+      padding: 10px 0 0;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .channel-addon-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .channel-addon-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .channel-addon-desc {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
     /* ─── HOW IT WORKS ───────────────────────────────────────── */
     .how-section {
       padding: 100px 72px;
@@ -1005,83 +1104,27 @@
 
     .flow-steps {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 12px;
-      position: relative;
-    }
-
-    .flow-steps::after {
-      content: "";
-      position: absolute;
-      top: 40px;
-      left: calc(8.33% + 10px);
-      right: calc(8.33% + 10px);
-      height: 1px;
-      background: linear-gradient(90deg,
-          transparent 0%, rgba(31, 125, 83, 0.3) 8%,
-          rgba(20, 168, 106, 0.6) 50%, rgba(31, 125, 83, 0.3) 92%, transparent 100%);
-      pointer-events: none;
-      z-index: 0;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 26px 22px;
+      margin-top: 26px;
     }
 
     .flow-step {
-      background: rgba(8, 13, 22, 0.6);
-      border: 1px solid rgba(31, 125, 83, 0.1);
-      border-radius: 16px;
-      padding: 24px 16px 24px;
+      padding: 6px 0;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      position: relative;
-      z-index: 1;
-      overflow: hidden;
-      backdrop-filter: blur(10px);
-      transition: border-color .3s, transform .3s, box-shadow .3s, background .3s;
+      gap: 12px;
     }
 
-    .flow-step:hover {
-      border-color: rgba(31, 125, 83, 0.3);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 48px rgba(31, 125, 83, 0.1), 0 0 0 1px rgba(31, 125, 83, 0.15);
-      background: rgba(10, 18, 30, 0.75);
-    }
-
-    .flow-step::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--grad);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .4s ease;
-      border-radius: 20px 20px 0 0;
-    }
-
-    .flow-step:hover::before {
-      transform: scaleX(1);
-    }
-
-    .flow-step::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 30% 0%, rgba(31, 125, 83, 0.08) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity .4s;
-      pointer-events: none;
-      border-radius: 20px;
-    }
-
-    .flow-step:hover::after {
-      opacity: 1;
+    .step-marker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .step-bubble {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: var(--grad);
       display: flex;
@@ -1091,11 +1134,8 @@
       font-size: .65rem;
       font-weight: 800;
       color: #fff;
-      margin-bottom: 16px;
-      box-shadow: 0 0 24px rgba(31, 125, 83, 0.5);
+      box-shadow: 0 0 16px rgba(31, 125, 83, 0.35);
       flex-shrink: 0;
-      position: relative;
-      z-index: 2;
     }
 
     .step-icon-wrap {
@@ -1107,37 +1147,29 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.35rem;
-      margin-bottom: 16px;
-      transition: background .25s, border-color .25s, transform .25s;
-      position: relative;
-      z-index: 2;
+      font-size: 1.1rem;
+      flex-shrink: 0;
     }
 
-    .flow-step:hover .step-icon-wrap {
-      background: rgba(31, 125, 83, 0.18);
-      border-color: rgba(31, 125, 83, 0.4);
-      transform: scale(1.05);
+    .step-content {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
     .step-title {
       font-family: "Space Grotesk", sans-serif;
-      font-size: .95rem;
+      font-size: .98rem;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 8px;
       line-height: 1.25;
-      position: relative;
-      z-index: 2;
     }
 
     .step-desc {
-      font-size: .78rem;
+      font-size: .84rem;
       color: var(--muted);
       line-height: 1.6;
-      max-width: 22ch;
-      position: relative;
-      z-index: 2;
+      max-width: 70ch;
     }
 
     /* ─── BEFORE & AFTER ─────────────────────────────────────── */
@@ -1487,10 +1519,14 @@
       padding: 6px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      background: rgba(255,255,255,0.03);
+      background: rgba(255, 255, 255, 0.03);
       transition: border-color .2s;
     }
-    .nav-hamburger:hover { border-color: var(--border2); }
+
+    .nav-hamburger:hover {
+      border-color: var(--border2);
+    }
+
     .nav-hamburger span {
       display: block;
       width: 20px;
@@ -1499,9 +1535,18 @@
       border-radius: 2px;
       transition: transform .25s, opacity .25s;
     }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
 
     /* Mobile nav drawer */
     .nav-mobile-drawer {
@@ -1510,7 +1555,7 @@
       top: 62px;
       left: 0;
       right: 0;
-      background: rgba(4,7,12,0.97);
+      background: rgba(4, 7, 12, 0.97);
       backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--border);
       z-index: 199;
@@ -1518,135 +1563,422 @@
       flex-direction: column;
       gap: 6px;
     }
-    .nav-mobile-drawer.open { display: flex; }
-    .nav-mobile-drawer a { text-decoration:none; font-size:.9rem; font-weight:500; color:var(--muted); padding:12px 14px; border-radius:10px; border:1px solid transparent; transition:color .18s, border-color .18s, background .18s; min-height:44px; display:flex; align-items:center; }
+
+    .nav-mobile-drawer.open {
+      display: flex;
+    }
+
+    .nav-mobile-drawer a {
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: color .18s, border-color .18s, background .18s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
     .nav-mobile-drawer a:hover {
       color: var(--text);
       border-color: var(--border);
-      background: rgba(255,255,255,0.03);
+      background: rgba(255, 255, 255, 0.03);
     }
 
     @media(max-width:1200px) {
-      .flow-steps::after { display: none; }
-      .navbar { padding: 0 36px; }
-      .hero-left { padding: 60px 44px; }
-      .hero-right { padding: 48px 36px; }
-      .how-section, .faq-section, .cta-section { padding-left: 40px; padding-right: 40px; }
-      .ba-header { padding: 60px 40px 32px; }
-      .ba-grid { padding: 0 40px 48px; }
+      .navbar {
+        padding: 0 36px;
+      }
+
+      .hero-left {
+        padding: 60px 44px;
+      }
+
+      .hero-right {
+        padding: 48px 36px;
+      }
+
+      .how-section,
+      .faq-section,
+      .cta-section {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+
+      .ba-header {
+        padding: 60px 40px 32px;
+      }
+
+      .ba-grid {
+        padding: 0 40px 48px;
+      }
     }
 
     @media(max-width:1000px) {
-      .stats-section { grid-template-columns: 1fr; gap: 48px; padding: 72px 40px; }
-      .flow-steps { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .faq-layout { grid-template-columns: 1fr; gap: 40px; }
-      .faq-sticky { position: static; }
+      .stats-section {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 72px 40px;
+      }
+
+      .channels-grid,
+      .flow-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .faq-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .faq-sticky {
+        position: static;
+      }
     }
 
     @media(max-width:900px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 60px 40px; }
-      .hero-right { padding: 48px 40px; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .ba-grid { grid-template-columns: 1fr; }
-      .navbar { padding: 0 24px; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-left {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 60px 40px;
+      }
+
+      .hero-right {
+        padding: 48px 40px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .channel-card,
+      .channel-addon {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .ba-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .navbar {
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
     }
 
     @media(max-width:640px) {
+
       /* Navbar */
-      .navbar { height: 56px; padding: 0 20px; }
-      .nav-logo { font-size: .95rem; }
-      .nav-back { display: none; }
-      .nav-mobile-drawer { top: 56px; }
+      .navbar {
+        height: 56px;
+        padding: 0 20px;
+      }
+
+      .nav-logo {
+        font-size: .95rem;
+      }
+
+      .nav-back {
+        display: none;
+      }
+
+      .nav-mobile-drawer {
+        top: 56px;
+      }
 
       /* Hero */
-      .hero-left { padding: 44px 20px 40px; }
-      .hero-right { padding: 32px 20px 40px; }
-      .hero-title { font-size: 2.2rem; letter-spacing: -1.5px; line-height: 1.05; }
-      .hero-desc { font-size: .92rem; margin-bottom: 28px; }
-      .hero-desc br { display: none; }
-      .hero-list { gap: 10px; margin-bottom: 32px; }
-      .hero-list li { font-size: .88rem; }
-      .hero-actions { flex-direction: column; gap: 10px; }
+      .hero-left {
+        padding: 44px 20px 40px;
+      }
+
+      .hero-right {
+        padding: 32px 20px 40px;
+      }
+
+      .hero-title {
+        font-size: 2.2rem;
+        letter-spacing: -1.5px;
+        line-height: 1.05;
+      }
+
+      .hero-desc {
+        font-size: .92rem;
+        margin-bottom: 28px;
+      }
+
+      .hero-desc br {
+        display: none;
+      }
+
+      .hero-list {
+        gap: 10px;
+        margin-bottom: 32px;
+      }
+
+      .hero-list li {
+        font-size: .88rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+
       .hero-actions .btn-primary,
-      .hero-actions .btn-ghost { width: 100%; justify-content: center; }
+      .hero-actions .btn-ghost {
+        width: 100%;
+        justify-content: center;
+      }
 
       /* WhatsApp widget */
-      .wa-widget { max-width: 100%; border-radius: 18px; }
-      .wa-bubble { font-size: .76rem; padding: 8px 10px; }
-      .wa-chip { font-size: .7rem; }
-      .wa-chart-value { font-size: .72rem; }
+      .wa-widget {
+        max-width: 100%;
+        border-radius: 18px;
+      }
+
+      .wa-bubble {
+        font-size: .76rem;
+        padding: 8px 10px;
+      }
+
+      .wa-chip {
+        font-size: .7rem;
+      }
+
+      .wa-chart-value {
+        font-size: .72rem;
+      }
 
       /* Stats section */
-      .stats-section { padding: 56px 20px; gap: 36px; }
-      .stats-widget-card { max-width: 100%; }
-      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-      .stat-cell { padding: 20px 16px; }
-      .stat-num { font-size: 2rem; }
-      .stat-label { font-size: .82rem; }
-      .stat-desc { font-size: .72rem; }
-      .stat-icon { width: 34px; height: 34px; font-size: 1rem; margin-bottom: 12px; }
+      .stats-section {
+        padding: 56px 20px;
+        gap: 36px;
+      }
+
+      .stats-widget-card {
+        max-width: 100%;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .stat-cell {
+        padding: 20px 16px;
+      }
+
+      .stat-num {
+        font-size: 2rem;
+      }
+
+      .stat-label {
+        font-size: .82rem;
+      }
+
+      .stat-desc {
+        font-size: .72rem;
+      }
+
+      .stat-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+        margin-bottom: 12px;
+      }
 
       /* How it works */
-      .how-section { padding: 52px 20px; }
-      .how-head { margin-bottom: 40px; }
-      .flow-steps { grid-template-columns: 1fr; gap: 14px; }
-      .flow-step { padding: 20px 16px; }
-      .step-title { font-size: .88rem; }
-      .step-desc { font-size: .75rem; }
+      .how-section {
+        padding: 52px 20px;
+      }
+
+      .how-head {
+        margin-bottom: 40px;
+      }
+
+      .channels-grid,
+      .flow-steps {
+        grid-template-columns: 1fr;
+      }
 
       /* Before & After */
-      .ba-header { padding: 48px 20px 24px; }
-      .ba-grid { padding: 0 20px 36px; gap: 14px; }
-      .ba-list { padding: 18px 18px; gap: 12px; }
-      .ba-list li { font-size: .88rem; }
+      .ba-header {
+        padding: 48px 20px 24px;
+      }
+
+      .ba-grid {
+        padding: 0 20px 36px;
+        gap: 14px;
+      }
+
+      .ba-list {
+        padding: 18px 18px;
+        gap: 12px;
+      }
+
+      .ba-list li {
+        font-size: .88rem;
+      }
 
       /* FAQ */
-      .faq-section { padding: 52px 20px; }
-      .faq-sticky-title { font-size: 1.6rem; }
-      .faq-q { font-size: .88rem; }
-      .faq-q-row { padding: 16px 18px; min-height: 52px; }
-      .faq-a { padding: 0 18px 16px; padding-top: 14px; font-size: .84rem; }
+      .faq-section {
+        padding: 52px 20px;
+      }
+
+      .faq-sticky-title {
+        font-size: 1.6rem;
+      }
+
+      .faq-q {
+        font-size: .88rem;
+      }
+
+      .faq-q-row {
+        padding: 16px 18px;
+        min-height: 52px;
+      }
+
+      .faq-a {
+        padding: 0 18px 16px;
+        padding-top: 14px;
+        font-size: .84rem;
+      }
 
       /* CTA */
-      .cta-section { padding: 60px 20px; }
-      .cta-title { font-size: 1.9rem; letter-spacing: -1px; }
-      .cta-sub { font-size: .9rem; }
-      .cta-actions { flex-direction: column; width: 100%; gap: 10px; }
+      .cta-section {
+        padding: 60px 20px;
+      }
+
+      .cta-title {
+        font-size: 1.9rem;
+        letter-spacing: -1px;
+      }
+
+      .cta-sub {
+        font-size: .9rem;
+      }
+
+      .cta-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+
       .cta-actions .btn-primary,
-      .cta-actions .btn-ghost { width: 100%; justify-content: center; }
+      .cta-actions .btn-ghost {
+        width: 100%;
+        justify-content: center;
+      }
 
       /* Section headings */
-      .sec-h2 { font-size: 1.7rem; letter-spacing: -.8px; }
-      .sec-tag { font-size: .66rem; letter-spacing: 2.5px; }
-      .badge { font-size: .68rem; }
+      .sec-h2 {
+        font-size: 1.7rem;
+        letter-spacing: -.8px;
+      }
+
+      .sec-tag {
+        font-size: .66rem;
+        letter-spacing: 2.5px;
+      }
+
+      .badge {
+        font-size: .68rem;
+      }
     }
 
     @media(max-width:400px) {
-      .hero-title { font-size: 1.9rem; letter-spacing: -1px; }
-      .stats-grid { grid-template-columns: 1fr; }
-      .stat-num { font-size: 1.8rem; }
-      .wa-widget { border-radius: 14px; }
-      .badge { font-size: .64rem; }
-      .btn-primary, .btn-ghost { font-size: .84rem; padding: 13px 18px; }
+      .hero-title {
+        font-size: 1.9rem;
+        letter-spacing: -1px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-num {
+        font-size: 1.8rem;
+      }
+
+      .wa-widget {
+        border-radius: 14px;
+      }
+
+      .badge {
+        font-size: .64rem;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        font-size: .84rem;
+        padding: 13px 18px;
+      }
     }
 
     @media(prefers-reduced-motion:reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
 
     /* ─── MOBILE PERFORMANCE OPTIMIZATIONS ─────────────────── */
     @media(max-width:768px) and (pointer:coarse) {
-      .navbar, .nav-mobile-drawer, .price-card, .stat-cell,
-      .flow-step, .faq-item, .ba-col, .compare-wrap,
-      .wa-widget, .stats-widget-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-      .wa-widget, .stats-widget-card { animation: none !important; }
-      body { background-attachment: scroll !important; }
-      .orb { filter: blur(60px) !important; opacity: .4 !important; }
-      .stat-cell:hover, .flow-step:hover, .price-card:hover,
-      .btn-primary:hover { transform: none !important; box-shadow: none !important; }
+
+      .navbar,
+      .nav-mobile-drawer,
+      .price-card,
+      .stat-cell,
+      .flow-step,
+      .faq-item,
+      .ba-col,
+      .compare-wrap,
+      .wa-widget,
+      .stats-widget-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+
+      .wa-widget,
+      .stats-widget-card {
+        animation: none !important;
+      }
+
+      body {
+        background-attachment: scroll !important;
+      }
+
+      .orb {
+        filter: blur(60px) !important;
+        opacity: .4 !important;
+      }
+
+      .stat-cell:hover,
+      .flow-step:hover,
+      .price-card:hover,
+      .btn-primary:hover {
+        transform: none !important;
+        box-shadow: none !important;
+      }
     }
   </style>
 </head>
@@ -1688,22 +2020,22 @@
       <div class="tag">Case Study</div>
       <div class="badge"><span class="badge-dot"></span> Always On, 24/7</div>
       <h1 class="hero-title">
-        AI WhatsApp Agent<br>
-        for <span class="hl">PC Hardware</span>
+        WhatsApp Service Agent<br>
+        for <span class="hl">Retail Teams</span>
       </h1>
       <p class="hero-desc">
-        Every customer message (product queries, order tracking, complaints) gets an instant, intelligent reply. No
-        staff required.
+        Handles WhatsApp inquiries for stock, pricing, orders, and complaints. Replies in seconds, routes issues to the
+        right person, and keeps the shop responsive all day.
       </p>
       <ul class="hero-list">
-        <li><span class="li-icon">⚡</span> Replies in under 2 seconds, around the clock</li>
-        <li><span class="li-icon">⚙️</span> Auto-checks live stock, pricing & order status</li>
-        <li><span class="li-icon">🚩</span> Flags complaints for fast human follow-up</li>
-        <li><span class="li-icon">📊</span> Plugs into your existing sheet-based workflow</li>
+        <li><span class="li-icon">⚡</span> Replies within seconds, 24/7</li>
+        <li><span class="li-icon">⚙️</span> Checks stock, pricing, and order status</li>
+        <li><span class="li-icon">🚩</span> Escalates complaints for quick follow-up</li>
+        <li><span class="li-icon">📊</span> Uses your existing sheet-based workflow</li>
       </ul>
       <div class="hero-actions">
-        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer"
-          class="btn-primary">Book a Free Audit →</a>
+        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed."
+          target="_blank" rel="noopener noreferrer" class="btn-primary">Book a Free Audit →</a>
         <a href="#how" class="btn-ghost">See how it works ↓</a>
       </div>
     </div>
@@ -1715,16 +2047,16 @@
           <div class="wa-shop">GearHub Support</div>
           <div class="wa-live">Live AI</div>
         </div>
-        <div class="wa-body" id="waBody">
+        <div class="wa-body" data-wa-body>
           <!-- messages injected by JS -->
 
           <!-- Live chart -->
           <div class="wa-chart">
             <div class="wa-chart-header">
               <div class="wa-chart-label">Live Activity</div>
-              <div class="wa-chart-value" id="waMsgCount">247 msgs today</div>
+              <div class="wa-chart-value" data-wa-count>247 msgs today</div>
             </div>
-            <div class="wa-chart-bars" id="waChartBars"></div>
+            <div class="wa-chart-bars" data-wa-bars></div>
             <div class="wa-chart-axis">
               <span>09:00</span><span>11:00</span><span>13:00</span><span>15:00</span><span>Now</span>
             </div>
@@ -1757,232 +2089,1516 @@
         <div class="stat-icon">⚡</div>
         <span class="stat-num">&lt;1m</span>
         <div class="stat-label">Reply Speed</div>
-        <div class="stat-desc"><strong>Instant Response:</strong> Optimized workflow paths to bypass heavy AI for greetings and send instant replies.</div>
+        <div class="stat-desc">Short replies for common questions and status checks keep response times under a
+          minute.</div>
       </div>
       <div class="stat-cell reveal">
         <div class="stat-icon">🛡️</div>
         <span class="stat-num">24/7</span>
         <div class="stat-label">Always On</div>
-        <div class="stat-desc"><strong>Failover Protection:</strong> Error-handling logic ensures customers get a fallback response even if an API or Sheet fails.</div>
+        <div class="stat-desc">Fallback responses cover outages so customers still get a clear update.</div>
       </div>
       <div class="stat-cell reveal">
         <div class="stat-icon">👤</div>
         <span class="stat-num">0</span>
         <div class="stat-label">Missed Messages</div>
-        <div class="stat-desc"><strong>Human Escalation:</strong> Automatically assigns tickets in Wati and alerts your team if the AI detects frustration.</div>
+        <div class="stat-desc">Escalates to your team when a chat needs human attention.</div>
       </div>
       <div class="stat-cell reveal">
         <div class="stat-icon">🎯</div>
         <span class="stat-num">AI</span>
-        <div class="stat-label">Lead Scoring</div>
-        <div class="stat-desc"><strong>Conversion Focus:</strong> Analyzes intent to tag "Hot Leads" in your CRM based on high-value product interest.</div>
+        <div class="stat-label">Lead Sorting</div>
+        <div class="stat-desc">Tags high-intent requests so sales can follow up quickly.</div>
       </div>
       <div class="stat-cell reveal">
         <div class="stat-icon">🌐</div>
         <span class="stat-num">50+</span>
-        <div class="stat-label">Multilingual AI</div>
-        <div class="stat-desc"><strong>Language Fluidity:</strong> Detects and responds naturally in English, Malay, Mandarin, Tamil and more to match the customer's style.</div>
+        <div class="stat-label">Multilingual Support</div>
+        <div class="stat-desc">Responds in English, Malay, Mandarin, Tamil, and more as needed.</div>
       </div>
       <div class="stat-cell reveal">
         <div class="stat-icon">🔄</div>
         <span class="stat-num">24h</span>
-        <div class="stat-label">Proactive Recovery</div>
-        <div class="stat-desc"><strong>Smart Follow-ups:</strong> Automatically nudges customers 24 hours after a product inquiry if no purchase was made.</div>
+        <div class="stat-label">Follow-ups</div>
+        <div class="stat-desc">Sends a follow-up after an inquiry if no order is placed.</div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ PRICING ═══ -->
+  <!-- ═══ CHANNELS ═══ -->
+  <section class="channels-section" id="channels">
+    <div class="channels-head reveal">
+      <div class="sec-tag">Channels</div>
+      <h2 class="sec-h2">Choose your channels</h2>
+      <p class="channels-sub">Run WhatsApp only or add email and voice later. Modules are separate and priced by need.</p>
+    </div>
+    <div class="channels-grid">
+      <div class="channel-card reveal">
+        <div class="channel-icon">📞</div>
+        <div class="channel-body">
+          <div class="channel-title">Voice Call</div>
+          <div class="channel-desc">Handles inbound calls for product questions, order status, and complaints.</div>
+        </div>
+        <div class="channel-pill">Voice AI</div>
+      </div>
+      <div class="channel-card reveal">
+        <div class="channel-icon">✉️</div>
+        <div class="channel-body">
+          <div class="channel-title">Gmail / Email</div>
+          <div class="channel-desc">Reads incoming emails and replies with the right details. Optional open tracking.</div>
+        </div>
+        <div class="channel-pill">Gmail + pixel tracking</div>
+      </div>
+      <div class="channel-card reveal">
+        <div class="channel-icon">💬</div>
+        <div class="channel-body">
+          <div class="channel-title">WhatsApp</div>
+          <div class="channel-desc">Handles WhatsApp conversations via WATI with routing and handoff when needed.</div>
+        </div>
+        <div class="channel-pill">WATI + n8n</div>
+      </div>
+    </div>
+    <div class="channel-addon reveal">
+      <div class="channel-addon-icon">🌐</div>
+      <div class="channel-addon-body">
+        <div class="channel-addon-title">Website chatbot (add-on)</div>
+        <div class="channel-addon-desc">Use the same WhatsApp logic on your website as a simple chat widget.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BUILD YOURS ═══ -->
   <style>
-    .pricing-section { padding: 100px 72px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
-    .pricing-section::before { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 900px; height: 500px; background: radial-gradient(ellipse at center, rgba(31,125,83,0.09) 0%, transparent 65%); pointer-events: none; }
-    .pricing-head { margin-bottom: 16px; }
-    .pricing-sub { font-size: 1rem; color: var(--muted); line-height: 1.7; margin-top: 12px; max-width: 52ch; }
-    .pricing-free-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(90,228,154,0.1); border: 1px solid rgba(90,228,154,0.28); border-radius: 999px; padding: 6px 16px; font-size: .78rem; font-weight: 700; color: #5ae49a; letter-spacing: .5px; margin-top: 20px; margin-bottom: 56px; }
-    .pricing-free-badge::before { content: "🎁"; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
-    .price-card { background: rgba(8,13,22,0.6); border: 1px solid rgba(255,255,255,0.07); border-radius: 24px; padding: 36px 32px 32px; display: flex; flex-direction: column; backdrop-filter: blur(12px); transition: border-color .3s, transform .3s, box-shadow .3s; position: relative; overflow: hidden; }
-    .price-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.14); }
-    .price-card.popular { border-color: rgba(31,125,83,0.35); background: rgba(10,18,28,0.8); transform: translateY(-8px); box-shadow: 0 24px 64px rgba(31,125,83,0.15), 0 0 0 1px rgba(31,125,83,0.2); }
-    .price-card.popular:hover { transform: translateY(-14px); box-shadow: 0 32px 80px rgba(31,125,83,0.2), 0 0 0 1px rgba(31,125,83,0.3); }
-    .price-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--border); border-radius: 24px 24px 0 0; }
-    .price-card.popular::before { background: var(--grad); }
-    .popular-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--grad); border-radius: 999px; padding: 4px 12px; font-size: .68rem; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; width: fit-content; box-shadow: 0 4px 16px rgba(31,125,83,0.4); }
-    .plan-name { font-family: "Space Grotesk", sans-serif; font-size: 1rem; font-weight: 700; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
-    .price-card.popular .plan-name { color: var(--p2); }
-    .price-setup { font-size: .92rem; color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
-    .price-setup strong { color: #c8d8ea; }
-    .price-setup-fee { font-size: 1.05rem; font-weight: 600; color: #d3e0ee; margin-bottom: 10px; }
-    .price-setup-fee strong { font-size: 1.4em; font-weight: 800; color: #fff; line-height: 1; }
-    .price-amount { display: flex; align-items: flex-end; gap: 4px; margin-bottom: 4px; }
-    .price-dollar { font-family: "Space Grotesk", sans-serif; font-size: 1.9rem; font-weight: 700; line-height: 1; color: #fff; }
-    .price-card.popular .price-dollar { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .price-period { font-size: .72rem; color: var(--muted); padding-bottom: 4px; }
-    .price-msgs { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 600; color: #7ab8a0; background: rgba(31,125,83,0.1); border: 1px solid rgba(31,125,83,0.18); border-radius: 999px; padding: 4px 12px; margin: 16px 0 24px; }
-    .price-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
-    .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; flex: 1; margin-bottom: 32px; }
-    .price-features li { display: flex; align-items: flex-start; gap: 10px; font-size: .88rem; color: #b8cde0; line-height: 1.5; }
-    .price-features li::before { content: "✓"; color: var(--p2); font-weight: 700; font-size: .8rem; flex-shrink: 0; margin-top: 1px; }
-    .price-features li.feat-highlight { color: #d4eee0; font-weight: 500; }
-    .price-features li.feat-highlight::before { color: #5ae49a; }
-    .price-btn { display: block; text-align: center; text-decoration: none; font-family: "Space Grotesk", sans-serif; font-size: .9rem; font-weight: 700; border-radius: 999px; padding: 14px 24px; border: 1px solid rgba(31,125,83,0.3); color: var(--p2); background: rgba(31,125,83,0.08); transition: background .2s, border-color .2s, color .2s, box-shadow .2s; }
-    .price-btn:hover { background: rgba(31,125,83,0.16); border-color: rgba(31,125,83,0.5); color: #fff; }
-    .price-card.popular .price-btn { background: var(--grad); border-color: transparent; color: #fff; box-shadow: 0 6px 24px rgba(31,125,83,0.35); }
-    .price-card.popular .price-btn:hover { box-shadow: 0 10px 36px rgba(31,125,83,0.5); transform: translateY(-1px); }
-    @media(max-width:900px) { .pricing-grid { grid-template-columns: 1fr; } .price-card.popular { transform: none; } }
-    @media(max-width:640px) { .pricing-section { padding: 60px 20px; } .price-card { padding: 28px 22px 24px; } }
+    .config-section {
+      padding: 100px 72px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .config-section::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px;
+      height: 520px;
+      background: radial-gradient(ellipse at center, rgba(31, 125, 83, 0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .config-head {
+      margin-bottom: 52px;
+    }
+
+    .config-head p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 60ch;
+      margin-top: 16px;
+    }
+
+    .config-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .config-body {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .config-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .config-group-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .config-group-title span {
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.2);
+      color: var(--p2);
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    .config-card {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      background: rgba(8, 13, 22, 0.6);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .config-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .config-row:first-child {
+      border-top: none;
+    }
+
+    .config-row.selectable {
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+
+    .config-row.selectable:hover {
+      background: rgba(31, 125, 83, 0.04);
+    }
+
+    .config-row.is-selected {
+      background: rgba(31, 125, 83, 0.06);
+    }
+
+    .config-check {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.02);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      color: var(--p2);
+      margin-top: 2px;
+      transition: background .2s, border-color .2s;
+    }
+
+    .config-row.is-selected .config-check {
+      background: rgba(31, 125, 83, 0.2);
+      border-color: rgba(31, 125, 83, 0.5);
+    }
+
+    .config-row-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .config-row-title {
+      font-size: .88rem;
+      font-weight: 600;
+      color: #e6f0f8;
+    }
+
+    .config-row-desc {
+      font-size: .75rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .config-row-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .config-price {
+      font-size: .7rem;
+      font-weight: 700;
+      color: #e6f0f8;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 5px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .config-more-btn {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+      color: #d2e4f2;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: border-color .2s, color .2s, background .2s;
+      white-space: nowrap;
+    }
+
+    .config-more-btn:hover {
+      border-color: rgba(31, 125, 83, 0.45);
+      color: #e9f6ff;
+      background: rgba(31, 125, 83, 0.08);
+    }
+
+    .config-more-panel {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0 16px;
+      background: rgba(4, 10, 16, 0.6);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      transition: max-height .3s ease, opacity .2s ease, padding .3s ease;
+    }
+
+    .config-more-panel.is-open {
+      max-height: 420px;
+      opacity: 1;
+      padding: 14px 16px 18px;
+    }
+
+    .config-more-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      color: #e9f6ff;
+      margin-bottom: 8px;
+    }
+
+    .config-more-desc {
+      font-size: .8rem;
+      color: #c6d8e8;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .config-more-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .config-more-list li {
+      font-size: .78rem;
+      color: #b6c8d8;
+      display: flex;
+      gap: 8px;
+      line-height: 1.55;
+    }
+
+    .config-more-list li::before {
+      content: "•";
+      color: var(--p2);
+    }
+
+    .config-chip {
+      font-size: .62rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .config-chip.active {
+      color: var(--p2);
+      border-color: rgba(31, 125, 83, 0.28);
+      background: rgba(31, 125, 83, 0.12);
+    }
+
+    .config-range-card {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .range-main {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .range-input {
+      width: 100%;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+      border: none;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    .range-input::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--p2), var(--p1));
+      box-shadow: 0 0 0 4px rgba(31, 125, 83, 0.2), 0 2px 8px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      transition: box-shadow .2s ease, transform .15s ease;
+    }
+
+    .range-input::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 0 8px rgba(31, 125, 83, 0.18), 0 4px 14px rgba(0, 0, 0, 0.5);
+      transform: scale(1.12);
+    }
+
+    .range-input::-webkit-slider-thumb:active {
+      transform: scale(1.22);
+      box-shadow: 0 0 0 10px rgba(31, 125, 83, 0.22), 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .range-input::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--p2), var(--p1));
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      box-shadow: 0 0 0 4px rgba(31, 125, 83, 0.2);
+    }
+
+    .range-input::-moz-range-track {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .range-input:focus-visible {
+      outline: none;
+    }
+
+    .range-legend {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .range-pill {
+      font-size: .8rem;
+      color: #d9e6f2;
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.25);
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease, background .3s ease;
+    }
+
+    .range-price {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #e9f6ff;
+      transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), color .25s ease;
+    }
+
+    .range-pill.is-anim {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(31, 125, 83, 0.25);
+      background: rgba(31, 125, 83, 0.18);
+    }
+
+    .range-price.is-anim {
+      transform: translateY(-2px) scale(1.05);
+      color: #b6ffdd;
+    }
+
+    .config-summary {
+      position: sticky;
+      top: 82px;
+      background: rgba(8, 13, 22, 0.8);
+      border: 1px solid rgba(31, 125, 83, 0.18);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(16px);
+    }
+
+    .cs-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .cs-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 60px;
+      margin-bottom: 18px;
+    }
+
+    .cs-item {
+      font-size: .82rem;
+      color: #b0c8ba;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cs-item::before {
+      content: "✓";
+      color: var(--p2);
+      font-size: .75rem;
+    }
+
+    .cs-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.06);
+      margin-bottom: 18px;
+    }
+
+    .cs-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .cs-total-label {
+      font-size: .82rem;
+      color: var(--muted);
+    }
+
+    .cs-total-val {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .cs-cta {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--grad);
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      text-align: center;
+      text-decoration: none;
+      letter-spacing: .2px;
+      box-shadow: 0 6px 24px rgba(31, 125, 83, 0.3);
+      transition: box-shadow .2s, transform .2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cs-cta:hover {
+      box-shadow: 0 10px 36px rgba(31, 125, 83, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .cs-note {
+      font-size: .72rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .config-group.is-hidden {
+      display: none;
+    }
+
+    .apply-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 6, 10, 0.72);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+    }
+
+    .apply-modal.is-open {
+      display: flex;
+    }
+
+    .apply-card {
+      width: min(720px, 92vw);
+      max-height: 88vh;
+      overflow: auto;
+      background: rgba(7, 12, 20, 0.95);
+      border: 1px solid rgba(31, 125, 83, 0.25);
+      border-radius: 20px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      padding: 26px;
+      position: relative;
+    }
+
+    .apply-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .apply-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #eaf6ff;
+    }
+
+    .apply-sub {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 56ch;
+    }
+
+    .apply-close {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #dbe9f5;
+      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+
+    .apply-close:hover {
+      background: rgba(31, 125, 83, 0.15);
+      border-color: rgba(31, 125, 83, 0.4);
+    }
+
+    .apply-form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .apply-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .apply-field label {
+      font-size: .72rem;
+      font-weight: 700;
+      color: #cfe0ef;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+
+    .apply-field input,
+    .apply-field select,
+    .apply-field textarea {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 10px 12px;
+      color: #e8f2fb;
+      font-size: .88rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .apply-field input:focus,
+    .apply-field select:focus,
+    .apply-field textarea:focus {
+      border-color: rgba(31, 125, 83, 0.55);
+      box-shadow: 0 0 0 3px rgba(31, 125, 83, 0.2);
+    }
+
+    .apply-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .apply-summary {
+      grid-column: 1 / -1;
+      border: 1px solid rgba(31, 125, 83, 0.2);
+      background: rgba(31, 125, 83, 0.06);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .apply-summary-title {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      color: #cfe0ef;
+    }
+
+    .apply-summary-text {
+      font-size: .82rem;
+      color: #d7e6f4;
+      line-height: 1.6;
+    }
+
+    .apply-summary-totals {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .apply-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 6px;
+    }
+
+    .apply-submit {
+      background: var(--grad);
+      border: none;
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      padding: 12px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(31, 125, 83, 0.35);
+    }
+
+    .apply-helper {
+      font-size: .72rem;
+      color: var(--muted);
+      text-align: left;
+      flex: 1;
+    }
+
+    .extra-section {
+      padding: 96px 72px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .extra-head {
+      margin-bottom: 36px;
+    }
+
+    .extra-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 60ch;
+      margin-top: 12px;
+    }
+
+    .extra-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .extra-card {
+      background: rgba(8, 13, 22, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 170px;
+      backdrop-filter: blur(10px);
+      transition: transform .25s, box-shadow .25s, border-color .25s, background .25s;
+    }
+
+    .extra-card:hover {
+      background: rgba(10, 18, 30, 0.78);
+      border-color: rgba(31, 125, 83, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 44px rgba(31, 125, 83, 0.12);
+    }
+
+    .extra-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .extra-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .extra-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .extra-pill {
+      align-self: flex-start;
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(31, 125, 83, 0.12);
+      border: 1px solid rgba(31, 125, 83, 0.28);
+      color: var(--p2);
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+
+    @media(max-width:1000px) {
+      .extra-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:720px) {
+      .extra-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .extra-section {
+        padding: 60px 20px;
+      }
+    }
+
+    @media(max-width:720px) {
+      .apply-form {
+        grid-template-columns: 1fr;
+      }
+
+      .apply-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .apply-helper {
+        text-align: left;
+      }
+    }
+
+    @media(max-width:1000px) {
+      .config-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .config-summary {
+        position: static;
+      }
+    }
+
+    @media(max-width:640px) {
+      .config-section {
+        padding: 52px 20px;
+      }
+    }
   </style>
-
-  <section class="pricing-section" id="pricing">
-    <div class="pricing-head reveal">
-      <div class="sec-tag">Pricing</div>
-      <h2 class="sec-h2">Simple, honest plans</h2>
-      <p class="pricing-sub">One setup fee, then a flat monthly rate. No hidden costs, no per-message fees. Pick the plan that fits your shop and scale when you're ready.</p>
-      <div class="pricing-free-badge">First month completely free on any plan</div>
+  <section class="config-section" id="build">
+    <div class="config-head reveal">
+      <div class="sec-tag">Build Yours</div>
+      <h2 class="sec-h2">Configure your agent</h2>
+      <p>Start with the core. Add the channels and modules your business needs. One-time build, owned by you.</p>
     </div>
-    <div class="pricing-grid">
-
-      <!-- STARTER -->
-      <div class="price-card reveal">
-        <div class="plan-name">Starter</div>
-        <div class="price-setup price-setup-fee">Setup fee: <strong>$100</strong> one-time</div>
-        <div class="price-amount">
-          <span class="price-dollar">$59
-          </span>
-          <span class="price-period">/ month</span>
+    <div class="config-layout">
+      <div class="config-body">
+        <div class="config-group reveal">
+          <div class="config-group-title">Core — always included <span>Always On</span></div>
+          <div class="config-card">
+            <div class="config-row">
+              <div class="config-check">✓</div>
+              <div class="config-row-body">
+                <div class="config-row-title">24/7 message handling (your chosen channel)</div>
+              </div>
+            </div>
+            <div class="config-row">
+              <div class="config-check">✓</div>
+              <div class="config-row-body">
+                <div class="config-row-title">Customer memory &amp; purchase history</div>
+              </div>
+            </div>
+            <div class="config-row">
+              <div class="config-check">✓</div>
+              <div class="config-row-body">
+                <div class="config-row-title">Live stock &amp; order status lookups</div>
+              </div>
+            </div>
+            <div class="config-row">
+              <div class="config-check">✓</div>
+              <div class="config-row-body">
+                <div class="config-row-title">Works in multiple languages</div>
+                <div class="config-row-desc">Responds to customers in their preferred language with no extra setup.</div>
+              </div>
+            </div>
+            <div class="config-row">
+              <div class="config-check">✓</div>
+              <div class="config-row-body">
+                <div class="config-row-title">Human handoff for edge cases</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="price-msgs">💬 800 messages / month</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>WhatsApp AI agent setup</li>
-          <li>Live stock &amp; pricing lookups</li>
-          <li>Order tracking via chat</li>
-          <li>Google Sheets integration</li>
-          <li>Multi-language support</li>
-          <li>Automated FAQ &amp; knowledge base responses</li>
-        </ul>
-        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
-      </div>
-
-      <!-- STANDARD (POPULAR) -->
-      <div class="price-card popular reveal">
-        <div class="popular-badge">✦ Most Popular</div>
-        <div class="plan-name">Standard</div>
-        <div class="price-setup price-setup-fee">Setup fee: <strong>$100</strong> one-time</div>
-        <div class="price-amount">
-          <span class="price-dollar">$129</span>
-          <span class="price-period">/ month</span>
+        <div class="config-group reveal">
+          <div class="config-group-title">Channel <span>Pick one or more</span></div>
+          <div class="config-card">
+            <div class="config-row selectable is-selected" data-group="channels" data-key="whatsapp">
+              <div class="config-check">✓</div>
+              <div class="config-row-body">
+                <div class="config-row-title">WhatsApp</div>
+                <div class="config-row-desc">Via WATI — conversational AI on WhatsApp</div>
+              </div>
+              <div class="config-chip active">Add-on</div>
+            </div>
+            <div class="config-row selectable" data-group="channels" data-key="email">
+              <div class="config-check"></div>
+              <div class="config-row-body">
+                <div class="config-row-title">Gmail / Email</div>
+                <div class="config-row-desc">Reads &amp; replies to inbound emails</div>
+              </div>
+              <div class="config-chip">Add-on</div>
+            </div>
+            <div class="config-row selectable" data-group="channels" data-key="voice">
+              <div class="config-check"></div>
+              <div class="config-row-body">
+                <div class="config-row-title">Voice Call</div>
+                <div class="config-row-desc">AI handles inbound customer calls</div>
+              </div>
+              <div class="config-chip">Add-on</div>
+            </div>
+          </div>
         </div>
-        <div class="price-msgs">💬 1,500 messages / month</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>Everything in Starter</li>
-          <li class="feat-highlight">AI lead scoring &amp; hot-lead tagging</li>
-          <li>Complaint detection &amp; escalation</li>
-          <li>24 h proactive follow-up nudges</li>
-          <li>Priority WhatsApp support</li>
-          <li>Live cart &amp; active order management</li>
-        </ul>
-        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
-      </div>
-
-      <!-- PREMIUM -->
-      <div class="price-card reveal">
-        <div class="plan-name">Premium</div>
-        <div class="price-setup price-setup-fee">Setup fee: <strong>$100</strong> one-time</div>
-        <div class="price-amount">
-          <span class="price-dollar">$149</span>
-          <span class="price-period">/ month</span>
+        <div class="config-group reveal" id="wa-message-range">
+          <div class="config-group-title">Message range <span>Monthly</span></div>
+          <div class="config-card config-range-card">
+            <div class="range-main">
+              <div class="config-row-title">Choose your message volume</div>
+              <div class="config-row-desc">Slide to set messages and included user conversations. Pricing updates
+                instantly.</div>
+              <input class="range-input" id="wa-range" type="range" min="0" max="9" step="1" value="0"
+                aria-label="Message range" />
+              <div class="range-legend">
+                <div class="range-pill" id="wa-range-pill">100 messages · 5 user conversations</div>
+                <div class="range-price" id="wa-range-price">$9</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="price-msgs">💬 3,000+ messages / month</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>Everything in Standard</li>
-          <li class="feat-highlight">Have knowledge base of your company</li>
-          <li class="feat-highlight">Custom product recommendation logic</li>
-          <li>CRM sync &amp; customer history tracking</li>
-          <li>Custom branding &amp; agent persona</li>
-          <li>Multi-agent AI orchestration workflows</li>
-        </ul>
-        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer" class="price-btn">Get Started</a>
+        <div class="config-group reveal" id="wa-call-range-group">
+          <div class="config-group-title">Call range <span>Monthly</span></div>
+          <div class="config-card config-range-card">
+            <div class="range-main">
+              <div class="config-row-title">Choose your call minutes</div>
+              <div class="config-row-desc">Slide to set call minutes and estimated calls. Pricing updates instantly.
+              </div>
+              <input class="range-input" id="wa-call-range" type="range" min="0" max="7" step="1" value="0"
+                aria-label="Call range" />
+              <div class="range-legend">
+                <div class="range-pill" id="wa-call-pill">20 min · ~5–8 calls</div>
+                <div class="range-price" id="wa-call-price">$8</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="config-group reveal" id="wa-email-range-group">
+          <div class="config-group-title">Email range <span>Monthly</span></div>
+          <div class="config-card config-range-card">
+            <div class="range-main">
+              <div class="config-row-title">Choose your email volume</div>
+              <div class="config-row-desc">Slide to set email volume and estimated conversations. Pricing updates
+                instantly.</div>
+              <input class="range-input" id="wa-email-range" type="range" min="0" max="9" step="1" value="0"
+                aria-label="Email range" />
+              <div class="range-legend">
+                <div class="range-pill" id="wa-email-pill">150 emails · ~5–8 conversations</div>
+                <div class="range-price" id="wa-email-price">$9</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="config-group reveal">
+          <div class="config-group-title">Add-on modules <span>Optional</span></div>
+          <div class="config-card">
+            <div class="config-row selectable" data-group="addons" data-key="drip">
+              <div class="config-check"></div>
+              <div class="config-row-body">
+                <div class="config-row-title">Drip sequences</div>
+                <div class="config-row-desc">Multi-step automated follow-up campaigns with pixel tracking</div>
+              </div>
+              <div class="config-row-actions">
+                <div class="config-price">$39 one-time</div>
+                <button class="config-more-btn" type="button" data-more="drip">More Info</button>
+                <div class="config-chip">Add-on</div>
+              </div>
+            </div>
+            <div class="config-more-panel" data-panel="drip">
+              <div class="config-more-title">Drip sequences</div>
+              <p class="config-more-desc">Automate your follow-ups without lifting a finger. Drip sequences send a
+                series of timed messages to your leads, keeping them engaged until they're ready to buy. Whether it's
+                reminders, offers, or check-ins -- your AI stays consistent and never forgets.</p>
+              <ul class="config-more-list">
+                <li>Multi-step automated follow-up campaigns</li>
+                <li>Smart timing (hours, days, or custom intervals)</li>
+                <li>Personalized messages based on customer data</li>
+                <li>Built-in pixel tracking (see who opened &amp; engaged)</li>
+                <li>Works across WhatsApp &amp; Email</li>
+              </ul>
+            </div>
+            <div class="config-row selectable" data-group="addons" data-key="campaign">
+              <div class="config-check"></div>
+              <div class="config-row-body">
+                <div class="config-row-title">Campaign blasts</div>
+                <div class="config-row-desc">Event-triggered outreach — promotions, restocks, re-engagement</div>
+              </div>
+              <div class="config-row-actions">
+                <div class="config-price">$29 / month</div>
+                <button class="config-more-btn" type="button" data-more="campaign">More Info</button>
+                <div class="config-chip">Add-on</div>
+              </div>
+            </div>
+            <div class="config-more-panel" data-panel="campaign">
+              <div class="config-more-title">Campaign blasts</div>
+              <p class="config-more-desc">Send targeted messages to your entire audience or specific segments instantly.
+                Perfect for promotions, restocks, or announcements -- your AI ensures the right message reaches the
+                right customer at the right time.</p>
+              <ul class="config-more-list">
+                <li>Broadcast messages to selected customer groups</li>
+                <li>Trigger campaigns based on events (new stock, offers, etc.)</li>
+                <li>Re-engage inactive leads automatically</li>
+                <li>Track delivery, opens, and engagement</li>
+                <li>Ideal for sales pushes and seasonal campaigns</li>
+              </ul>
+            </div>
+            <div class="config-row selectable" data-group="addons" data-key="webchat">
+              <div class="config-check"></div>
+              <div class="config-row-body">
+                <div class="config-row-title">Website chatbot</div>
+                <div class="config-row-desc">Embed the agent as a floating widget on your site</div>
+              </div>
+              <div class="config-row-actions">
+                <div class="config-price">$49 / month</div>
+                <button class="config-more-btn" type="button" data-more="webchat">More Info</button>
+                <div class="config-chip">Add-on</div>
+              </div>
+            </div>
+            <div class="config-more-panel" data-panel="webchat">
+              <div class="config-more-title">Website chatbot</div>
+              <p class="config-more-desc">Turn your website into a 24/7 sales assistant. The chatbot engages visitors
+                instantly, answers questions, recommends products, and captures leads -- even when your team is offline.
+              </p>
+              <ul class="config-more-list">
+                <li>Floating chat widget for your website</li>
+                <li>Real-time product recommendations</li>
+                <li>Lead capture and qualification</li>
+                <li>Syncs with your CRM and conversation history</li>
+                <li>Seamless handoff to human when needed</li>
+              </ul>
+            </div>
+            <div class="config-row selectable" data-group="addons" data-key="dashboard">
+              <div class="config-check"></div>
+              <div class="config-row-body">
+                <div class="config-row-title">Sales dashboard</div>
+                <div class="config-row-desc">Outreach + message dashboard — volume, trends, response times</div>
+              </div>
+              <div class="config-row-actions">
+                <div class="config-price">$19 / month</div>
+                <button class="config-more-btn" type="button" data-more="dashboard">More Info</button>
+                <div class="config-chip">Add-on</div>
+              </div>
+            </div>
+            <div class="config-more-panel" data-panel="dashboard">
+              <div class="config-more-title">Sales dashboard</div>
+              <p class="config-more-desc">Get a clear view of your business performance in real time. The dashboard
+                tracks conversations, leads, and conversions -- helping you understand what's working and where to
+                improve.</p>
+              <ul class="config-more-list">
+                <li>Live tracking of message volume and response times</li>
+                <li>Lead and conversion insights</li>
+                <li>Follow-up performance analytics</li>
+                <li>Google Sheets-based dashboard (simple &amp; flexible)</li>
+                <li>No complex setup — updates automatically</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-
+      <div class="config-summary">
+        <div class="cs-title">Your Configuration</div>
+        <div class="cs-items" id="wa-cs-items">
+          <div class="cs-item">Core agent</div>
+          <div class="cs-item">WhatsApp</div>
+        </div>
+        <div class="cs-divider"></div>
+        <div class="cs-total-row">
+          <div class="cs-total-label" id="wa-cs-monthly-label">Monthly total</div>
+          <div class="cs-total-val" id="wa-cs-monthly">Contact for quote</div>
+        </div>
+        <div class="cs-total-row">
+          <div class="cs-total-label" id="wa-cs-onetime-label">One-time total</div>
+          <div class="cs-total-val" id="wa-cs-onetime">Contact for quote</div>
+        </div>
+        <button class="cs-cta" id="wa-cs-cta" type="button">Apply</button>
+        <div class="cs-note">One-time build · You own it · 30-min free call</div>
+      </div>
     </div>
   </section>
-
-  <!-- ═══ HOW IT WORKS ═══ -->
-  <section class="how-section" id="how">
-    <div class="how-head reveal">
-      <div class="sec-tag">The System</div>
-      <h2 class="sec-h2">How It Works</h2>
-      <p class="how-desc">Six automated steps. No human required from message received to reply sent. It is specifically designed for PC hardware and can be customized to meet your requirements.</p>
-    </div>
-    <div class="flow-steps">
-      <div class="flow-step reveal">
-        <div class="step-bubble">01</div>
-        <div class="step-icon-wrap">⚡️</div>
-        <div class="step-title">Instant Lead Capture</div>
-        <p class="step-desc"><strong>Never Miss a Sale:</strong><br>The moment a customer messages, the system captures the lead. No more lost opportunities due to slow human response times.</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="step-bubble">02</div>
-        <div class="step-icon-wrap">🧠</div>
-        <div class="step-title">Deep Customer Memory</div>
-        <p class="step-desc"><strong>Personalized Recognition:</strong><br>The agent instantly identifies returning customers by name and pulls their history from your CRM, making every chat feel personal and high-touch.</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="step-bubble">03</div>
-        <div class="step-icon-wrap">🔄</div>
-        <div class="step-title">Real-Time Inventory Sync</div>
-        <p class="step-desc"><strong>Live Catalog Access:</strong><br>Your agent "knows" your stock. It checks your live price sheets and product availability in a heartbeat so it never sells what you don't have.</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="step-bubble">04</div>
-        <div class="step-icon-wrap">🤖</div>
-        <div class="step-title">Intelligent Sales Logic</div>
-        <p class="step-desc"><strong>Human-Grade Thinking:</strong><br>The system doesn't just follow scripts; it understands intent. It uses your store's "brain" to recommend the right hardware for the customer's specific needs.</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="step-bubble">05</div>
-        <div class="step-icon-wrap">🤝</div>
-        <div class="step-title">Seamless Closing</div>
-        <p class="step-desc"><strong>Frictionless Response:</strong><br>By delivering the exact info needed instantly on WhatsApp, the agent moves customers from "just looking" to "ready to buy" without any technical hurdles.</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="step-bubble">06</div>
-        <div class="step-icon-wrap">🛡️</div>
-        <div class="step-title">Automatic Business Safety</div>
-        <p class="step-desc"><strong>Smart Escalation:</strong><br>The agent handles 90% of chats but knows when a human touch is needed. Complaints or high-value leads are automatically flagged and sent to your team immediately.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ═══ BEFORE & AFTER ═══ -->
   <section class="ba-section" id="ba">
     <div class="ba-header reveal">
       <div class="sec-tag">Transformation</div>
       <h2 class="sec-h2">Before & After</h2>
-      <p class="ba-sub">The same shop, completely different operation. Manual delays on the left, instant AI replies on
-        the right.</p>
+      <p class="ba-sub">Same shop, different operations. Manual queues on the left, fast responses on the right.</p>
     </div>
     <div class="ba-grid">
       <div class="ba-col reveal">
         <div class="ba-col-label"><span></span> Before: Manual</div>
         <ul class="ba-list">
           <li>Replies depend on staff availability</li>
-          <li>Stock and order checks are manual</li>
-          <li>Response quality varies by person</li>
-          <li>Complaint messages are easy to miss</li>
+          <li>Stock and order checks done by hand</li>
+          <li>Answers vary by person and shift</li>
+          <li>Complaints can be missed in busy hours</li>
         </ul>
       </div>
       <div class="ba-col after reveal">
-        <div class="ba-col-label"><span></span> After: AI Automated</div>
+        <div class="ba-col-label"><span></span> After: Automated</div>
         <ul class="ba-list">
-          <li>Every inbound chat gets an immediate response</li>
-          <li>AI checks stock and order data automatically</li>
-          <li>Replies stay consistent and sales-focused</li>
-          <li>Risky chats are flagged for fast follow-up</li>
+          <li>Every inbound chat gets a fast response</li>
+          <li>Stock and order data checked automatically</li>
+          <li>Replies are consistent and on-brand</li>
+          <li>Risky chats flagged for quick follow-up</li>
         </ul>
+      </div>
+    </div>
+  </section>
+  <div class="apply-modal" id="applyModal" aria-hidden="true">
+    <div class="apply-card" role="dialog" aria-modal="true" aria-labelledby="applyTitle">
+      <div class="apply-head">
+        <div>
+          <div class="apply-title" id="applyTitle">Apply for your WhatsApp agent</div>
+          <p class="apply-sub">Fill the form and we will review your configuration. You will receive a response at the
+            email you provide.</p>
+        </div>
+        <button class="apply-close" type="button" id="applyClose" aria-label="Close">×</button>
+      </div>
+      <form class="apply-form" id="applyForm" action="https://formspree.io/f/yourid" method="POST">
+        <div class="apply-field">
+          <label for="applyFirstName">First name</label>
+          <input id="applyFirstName" name="first_name" type="text" autocomplete="given-name" required />
+        </div>
+        <div class="apply-field">
+          <label for="applyLastName">Last name</label>
+          <input id="applyLastName" name="last_name" type="text" autocomplete="family-name" required />
+        </div>
+        <div class="apply-field">
+          <label for="applyEmail">Email</label>
+          <input id="applyEmail" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="apply-field">
+          <label for="applyCompany">Company</label>
+          <input id="applyCompany" name="company" type="text" autocomplete="organization" required />
+        </div>
+        <div class="apply-field">
+          <label for="applyExtraFeature">Any extra feature or information you want to share</label>
+          <textarea id="applyExtraFeature" name="extra_feature" rows="3"
+            placeholder="e.g. Custom integrations, additional languages, specific requirements, etc."></textarea>
+        </div>
+        <div class="apply-summary">
+          <div class="apply-summary-title">Selected configuration</div>
+          <div class="apply-summary-text" id="applySummaryText">Core agent</div>
+          <div class="apply-summary-totals">
+            <div id="applySummaryMonthly">Monthly total: $0.00</div>
+            <div id="applySummaryOnetime">One-time total: $0.00</div>
+          </div>
+        </div>
+        <input type="hidden" name="configuration" id="applyConfig" />
+        <input type="hidden" name="monthly_total" id="applyMonthlyTotal" />
+        <input type="hidden" name="onetime_total" id="applyOnetimeTotal" />
+        <div class="apply-actions">
+          <div class="apply-helper">Submissions go to jariwalanaya@gmail.com via Formspree. Update the form action with
+            your Formspree ID.</div>
+          <button class="apply-submit" type="submit">Submit application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    const waConfigState = {
+      channels: { whatsapp: true, email: false, voice: false },
+      addons: { drip: false, campaign: false, webchat: false, dashboard: false }
+    };
+    const waMessageTiers = [
+      { messages: 100, conversations: 5, price: 9 },
+      { messages: 200, conversations: 10, price: 19 },
+      { messages: 300, conversations: 15, price: 29 },
+      { messages: 400, conversations: 20, price: 39 },
+      { messages: 500, conversations: 25, price: 49 },
+      { messages: 700, conversations: 35, price: 59 },
+      { messages: 900, conversations: 45, price: 69 },
+      { messages: 1200, conversations: 55, price: 74 },
+      { messages: 1500, conversations: 65, price: 84 },
+      { messages: 2000, conversations: 75, price: 99 }
+    ];
+    const waCallTiers = [
+      { minutes: 20, calls: '~5–8 calls', price: 8 },
+      { minutes: 40, calls: '~10–15 calls', price: 16 },
+      { minutes: 60, calls: '~15–20 calls', price: 24 },
+      { minutes: 80, calls: '~20–25 calls', price: 32 },
+      { minutes: 100, calls: '~25–30 calls', price: 40 },
+      { minutes: 120, calls: '~30–35 calls', price: 48 },
+      { minutes: 150, calls: '~35–45 calls', price: 60 },
+      { minutes: 180, calls: '~45–55 calls', price: 72 }
+    ];
+    const waEmailTiers = [
+      { emails: 150, conversations: '~5–8 conversations', price: 9 },
+      { emails: 300, conversations: '~10–15 conversations', price: 19 },
+      { emails: 450, conversations: '~15–20 conversations', price: 29 },
+      { emails: 600, conversations: '~20–25 conversations', price: 39 },
+      { emails: 750, conversations: '~25–30 conversations', price: 49 },
+      { emails: 1000, conversations: '~35–40 conversations', price: 59 },
+      { emails: 1300, conversations: '~45–50 conversations', price: 69 },
+      { emails: 1700, conversations: '~55–60 conversations', price: 74 },
+      { emails: 2000, conversations: '~65–70 conversations', price: 84 },
+      { emails: 2500, conversations: '~75–85 conversations', price: 99 }
+    ];
+    const waConfigLabels = {
+      whatsapp: 'WhatsApp',
+      email: 'Gmail / Email',
+      voice: 'Voice Call',
+      drip: 'Drip sequences',
+      campaign: 'Campaign blasts',
+      webchat: 'Website chatbot',
+      dashboard: 'Outreach + message dashboard'
+    };
+    const waAddonPrices = {
+      drip: { price: 39, label: '$39 one-time', cadence: 'one-time' },
+      campaign: { price: 29, label: '$29 / month', cadence: 'monthly' },
+      webchat: { price: 49, label: '$49 / month', cadence: 'monthly' },
+      dashboard: { price: 19, label: '$19 / month', cadence: 'monthly' }
+    };
+    const waSetupFee = 49;
+    const waRangeInput = document.getElementById('wa-range');
+    const waRangePill = document.getElementById('wa-range-pill');
+    const waRangePrice = document.getElementById('wa-range-price');
+    const waCallRangeInput = document.getElementById('wa-call-range');
+    const waCallRangePill = document.getElementById('wa-call-pill');
+    const waCallRangePrice = document.getElementById('wa-call-price');
+    const waEmailRangeInput = document.getElementById('wa-email-range');
+    const waEmailRangePill = document.getElementById('wa-email-pill');
+    const waEmailRangePrice = document.getElementById('wa-email-price');
+    const waMessageRangeGroup = document.getElementById('wa-message-range');
+    const waCallRangeGroup = document.getElementById('wa-call-range-group');
+    const waEmailRangeGroup = document.getElementById('wa-email-range-group');
+    const waConfigRows = document.querySelectorAll('.config-row.selectable');
+    waConfigRows.forEach((row) => {
+      row.addEventListener('click', () => {
+        const group = row.dataset.group;
+        const key = row.dataset.key;
+        if (!group || !key) return;
+        waConfigState[group][key] = !waConfigState[group][key];
+        row.classList.toggle('is-selected', waConfigState[group][key]);
+        const check = row.querySelector('.config-check');
+        if (check) check.textContent = waConfigState[group][key] ? '✓' : '';
+        const chip = row.querySelector('.config-chip');
+        if (chip) chip.classList.toggle('active', waConfigState[group][key]);
+        waUpdateConfigSummary();
+      });
+    });
+    const waMoreButtons = document.querySelectorAll('.config-more-btn');
+    waMoreButtons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const key = button.dataset.more;
+        const panel = document.querySelector(`.config-more-panel[data-panel="${key}"]`);
+        if (!panel) return;
+        const isOpen = panel.classList.toggle('is-open');
+        button.textContent = isOpen ? 'Hide Info' : 'More Info';
+      });
+    });
+    function updateRangeFill(input) {
+      const min = Number(input.min) || 0;
+      const max = Number(input.max) || 1;
+      const val = Number(input.value);
+      const pct = ((val - min) / (max - min)) * 100;
+      input.style.background = `linear-gradient(to right, var(--p2) 0%, rgba(20,168,106,0.7) ${pct}%, rgba(255,255,255,0.08) ${pct}%, rgba(255,255,255,0.08) 100%)`;
+    }
+    function waUpdateMessageRange() {
+      if (!waRangeInput) return;
+      updateRangeFill(waRangeInput);
+      const tier = waMessageTiers[Number(waRangeInput.value)] || waMessageTiers[0];
+      waRangePill.textContent = `${tier.messages} messages · ${tier.conversations} user conversations`;
+      waRangePrice.textContent = `$${tier.price}`;
+      waRangePill.classList.add('is-anim');
+      waRangePrice.classList.add('is-anim');
+      clearTimeout(waUpdateMessageRange._t);
+      waUpdateMessageRange._t = setTimeout(() => {
+        waRangePill.classList.remove('is-anim');
+        waRangePrice.classList.remove('is-anim');
+      }, 220);
+      waUpdateConfigSummary();
+    }
+    if (waRangeInput) {
+      waRangeInput.addEventListener('input', waUpdateMessageRange);
+      waUpdateMessageRange();
+    }
+    function waUpdateCallRange() {
+      if (!waCallRangeInput) return;
+      updateRangeFill(waCallRangeInput);
+      const tier = waCallTiers[Number(waCallRangeInput.value)] || waCallTiers[0];
+      waCallRangePill.textContent = `${tier.minutes} min · ${tier.calls}`;
+      waCallRangePrice.textContent = `$${tier.price}`;
+      waCallRangePill.classList.add('is-anim');
+      waCallRangePrice.classList.add('is-anim');
+      clearTimeout(waUpdateCallRange._t);
+      waUpdateCallRange._t = setTimeout(() => {
+        waCallRangePill.classList.remove('is-anim');
+        waCallRangePrice.classList.remove('is-anim');
+      }, 220);
+      waUpdateConfigSummary();
+    }
+    if (waCallRangeInput) {
+      waCallRangeInput.addEventListener('input', waUpdateCallRange);
+      waUpdateCallRange();
+    }
+    function waUpdateEmailRange() {
+      if (!waEmailRangeInput) return;
+      updateRangeFill(waEmailRangeInput);
+      const tier = waEmailTiers[Number(waEmailRangeInput.value)] || waEmailTiers[0];
+      waEmailRangePill.textContent = `${tier.emails} emails · ${tier.conversations}`;
+      waEmailRangePrice.textContent = `$${tier.price}`;
+      waEmailRangePill.classList.add('is-anim');
+      waEmailRangePrice.classList.add('is-anim');
+      clearTimeout(waUpdateEmailRange._t);
+      waUpdateEmailRange._t = setTimeout(() => {
+        waEmailRangePill.classList.remove('is-anim');
+        waEmailRangePrice.classList.remove('is-anim');
+      }, 220);
+      waUpdateConfigSummary();
+    }
+    if (waEmailRangeInput) {
+      waEmailRangeInput.addEventListener('input', waUpdateEmailRange);
+      waUpdateEmailRange();
+    }
+    function waUpdateConfigSummary() {
+      const itemsEl = document.getElementById('wa-cs-items');
+      const ctaEl = document.getElementById('wa-cs-cta');
+      const monthlyTotalEl = document.getElementById('wa-cs-monthly');
+      const onetimeTotalEl = document.getElementById('wa-cs-onetime');
+      const monthlyLabelEl = document.getElementById('wa-cs-monthly-label');
+      const onetimeLabelEl = document.getElementById('wa-cs-onetime-label');
+      const selectedChannels = Object.entries(waConfigState.channels)
+        .filter(([, v]) => v)
+        .map(([k]) => waConfigLabels[k]);
+      const selectedAddons = Object.entries(waConfigState.addons)
+        .filter(([, v]) => v)
+        .map(([k]) => k);
+      const tier = waMessageTiers[Number(waRangeInput ? waRangeInput.value : 0)] || waMessageTiers[0];
+      const tierLabel = `${tier.messages} messages / ${tier.conversations} user conversations`;
+      const callTier = waCallTiers[Number(waCallRangeInput ? waCallRangeInput.value : 0)] || waCallTiers[0];
+      const callLabel = `${callTier.minutes} min / ${callTier.calls}`;
+      const emailTier = waEmailTiers[Number(waEmailRangeInput ? waEmailRangeInput.value : 0)] || waEmailTiers[0];
+      const emailLabel = `${emailTier.emails} emails / ${emailTier.conversations}`;
+      if (waMessageRangeGroup) {
+        waMessageRangeGroup.classList.toggle('is-hidden', !waConfigState.channels.whatsapp);
+      }
+      if (waCallRangeGroup) {
+        waCallRangeGroup.classList.toggle('is-hidden', !waConfigState.channels.voice);
+      }
+      if (waEmailRangeGroup) {
+        waEmailRangeGroup.classList.toggle('is-hidden', !waConfigState.channels.email);
+      }
+      let html = '<div class="cs-item">Core agent</div>';
+      html += `<div class="cs-item">Setup fee: $${waSetupFee} one-time</div>`;
+      if (waConfigState.channels.whatsapp) {
+        html += `<div class="cs-item">Message range: ${tierLabel}</div>`;
+      }
+      if (waConfigState.channels.voice) {
+        html += `<div class="cs-item">Call range: ${callLabel}</div>`;
+      }
+      if (waConfigState.channels.email) {
+        html += `<div class="cs-item">Email range: ${emailLabel}</div>`;
+      }
+      selectedChannels.forEach(label => { html += `<div class="cs-item">${label}</div>`; });
+      selectedAddons.forEach((key) => {
+        const addon = waAddonPrices[key];
+        const label = waConfigLabels[key];
+        html += `<div class="cs-item">${label} (${addon.label})</div>`;
+      });
+      const selectedCount = selectedChannels.length + selectedAddons.length;
+      const discountRate = selectedCount > 0 ? Math.min(selectedCount * 0.02, 0.20) : 0;
+      if (discountRate > 0) {
+        const discountLabel = `${Math.round(discountRate * 100)}% bundle discount`;
+        html += `<div class="cs-item">${discountLabel}</div>`;
+      }
+      itemsEl.innerHTML = html;
+      const body = ['Core agent']
+        .concat([`Setup fee: $${waSetupFee} one-time`])
+        .concat(waConfigState.channels.whatsapp ? [`Message range: ${tierLabel} ($${tier.price})`] : [])
+        .concat(waConfigState.channels.voice ? [`Call range: ${callLabel} ($${callTier.price})`] : [])
+        .concat(waConfigState.channels.email ? [`Email range: ${emailLabel} ($${emailTier.price})`] : [])
+        .concat(discountRate > 0 ? [`Discount: ${Math.round(discountRate * 100)}%`] : [])
+        .concat(selectedChannels)
+        .concat(selectedAddons.map((key) => `${waConfigLabels[key]} (${waAddonPrices[key].label})`))
+        .join(', ');
+      const addonMonthlyTotal = selectedAddons
+        .filter(key => waAddonPrices[key].cadence === 'monthly')
+        .reduce((sum, key) => sum + waAddonPrices[key].price, 0);
+      const addonOneTimeTotal = selectedAddons
+        .filter(key => waAddonPrices[key].cadence === 'one-time')
+        .reduce((sum, key) => sum + waAddonPrices[key].price, 0);
+      const monthlySubtotal =
+        (waConfigState.channels.whatsapp ? tier.price : 0) +
+        (waConfigState.channels.voice ? callTier.price : 0) +
+        (waConfigState.channels.email ? emailTier.price : 0) +
+        addonMonthlyTotal;
+      const onetimeSubtotal = waSetupFee + addonOneTimeTotal;
+      const monthlyTotal = monthlySubtotal * (1 - discountRate);
+      const onetimeTotal = onetimeSubtotal * (1 - discountRate);
+      if (monthlyTotalEl) monthlyTotalEl.textContent = `$${monthlyTotal.toFixed(2)}`;
+      if (onetimeTotalEl) onetimeTotalEl.textContent = `$${onetimeTotal.toFixed(2)}`;
+      const discountText = discountRate > 0 ? ` (${Math.round(discountRate * 100)}% off)` : '';
+      if (monthlyLabelEl) monthlyLabelEl.textContent = `Monthly total${discountText}`;
+      if (onetimeLabelEl) onetimeLabelEl.textContent = `One-time total${discountText}`;
+      const configInput = document.getElementById('applyConfig');
+      const monthlyInput = document.getElementById('applyMonthlyTotal');
+      const onetimeInput = document.getElementById('applyOnetimeTotal');
+      const summaryText = document.getElementById('applySummaryText');
+      const summaryMonthly = document.getElementById('applySummaryMonthly');
+      const summaryOnetime = document.getElementById('applySummaryOnetime');
+      if (configInput) configInput.value = body;
+      if (monthlyInput) monthlyInput.value = `$${monthlyTotal.toFixed(2)}`;
+      if (onetimeInput) onetimeInput.value = `$${onetimeTotal.toFixed(2)}`;
+      if (summaryText) summaryText.textContent = body;
+      if (summaryMonthly) summaryMonthly.textContent = `Monthly total: $${monthlyTotal.toFixed(2)}`;
+      if (summaryOnetime) summaryOnetime.textContent = `One-time total: $${onetimeTotal.toFixed(2)}`;
+    }
+    waUpdateMessageRange();
+    waUpdateCallRange();
+    waUpdateEmailRange();
+    waUpdateConfigSummary();
+  </script>
+  <script>
+    const applyModal = document.getElementById('applyModal');
+    const applyCta = document.getElementById('wa-cs-cta');
+    const applyClose = document.getElementById('applyClose');
+    function openApplyModal() {
+      if (!applyModal) return;
+      applyModal.classList.add('is-open');
+      applyModal.setAttribute('aria-hidden', 'false');
+    }
+    function closeApplyModal() {
+      if (!applyModal) return;
+      applyModal.classList.remove('is-open');
+      applyModal.setAttribute('aria-hidden', 'true');
+    }
+    if (applyCta) applyCta.addEventListener('click', openApplyModal);
+    if (applyClose) applyClose.addEventListener('click', closeApplyModal);
+    if (applyModal) {
+      applyModal.addEventListener('click', (e) => {
+        if (e.target === applyModal) closeApplyModal();
+      });
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeApplyModal();
+    });
+  </script>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="how-section" id="how">
+    <div class="how-head reveal">
+      <div class="sec-tag">The System</div>
+      <h2 class="sec-h2">How It Works</h2>
+      <p class="how-desc">Six steps from inbound message to resolution. Tuned to your catalog and workflow.</p>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step reveal">
+        <div class="step-marker">
+          <div class="step-bubble">01</div>
+          <div class="step-icon-wrap">⚡️</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Inbound capture</div>
+          <p class="step-desc">Captures every inbound message and tags the intent for routing.</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-marker">
+          <div class="step-bubble">02</div>
+          <div class="step-icon-wrap">🧠</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Customer context</div>
+          <p class="step-desc">Pulls customer history to keep the conversation accurate and consistent.</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-marker">
+          <div class="step-bubble">03</div>
+          <div class="step-icon-wrap">🔄</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Live inventory check</div>
+          <p class="step-desc">Checks live price sheets and availability before quoting.</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-marker">
+          <div class="step-bubble">04</div>
+          <div class="step-icon-wrap">🤖</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Product guidance</div>
+          <p class="step-desc">Recommends the right hardware based on the request and store rules.</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-marker">
+          <div class="step-bubble">05</div>
+          <div class="step-icon-wrap">🤝</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Order and tracking</div>
+          <p class="step-desc">Shares order links, confirms details, and provides tracking updates.</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-marker">
+          <div class="step-bubble">06</div>
+          <div class="step-icon-wrap">🛡️</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">Escalation</div>
+          <p class="step-desc">Flags complaints and high-value leads for immediate human follow-up.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1993,9 +3609,9 @@
       <div class="faq-sticky reveal-left">
         <div class="sec-tag">FAQ</div>
         <h2 class="faq-sticky-title">Common Questions</h2>
-        <p class="faq-sticky-desc">Everything you need to know before deploying the agent for your shop.</p>
-        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed." target="_blank" rel="noopener noreferrer"
-          class="faq-cta-mini">
+        <p class="faq-sticky-desc">Key details before deploying the agent in your shop.</p>
+        <a href="mailto:shivam@karlspace.in?subject=Book%20a%20Free%20Audit&body=I%20am%20interested%20in%20booking%20a%20free%20audit%20for%20my%20business.%0A%0APlease%20let%20me%20know%20how%20to%20proceed."
+          target="_blank" rel="noopener noreferrer" class="faq-cta-mini">
           Still have questions? Book a call →
         </a>
       </div>
@@ -2005,50 +3621,49 @@
             <div class="faq-q">Can it answer product availability questions?</div>
             <div class="faq-chevron">▼</div>
           </div>
-          <div class="faq-a">Yes. The bot checks live records and responds with current stock status and pricing, with no manual lookup needed.</div>
+            <div class="faq-a">Yes. It checks live records and returns current stock and pricing without manual lookups.</div>
         </div>
         <div class="faq-item reveal">
           <div class="faq-q-row" onclick="toggleFaq(this)">
             <div class="faq-q">What if a customer is angry or complaining?</div>
             <div class="faq-chevron">▼</div>
           </div>
-          <div class="faq-a">The system detects complaint-like sentiment and flags those chats for priority manual
-            follow-up, so no unhappy customer is missed.</div>
+            <div class="faq-a">It flags those chats for priority follow-up so your team can respond quickly.</div>
         </div>
         <div class="faq-item reveal">
           <div class="faq-q-row" onclick="toggleFaq(this)">
             <div class="faq-q">Does the customer need to type special commands?</div>
             <div class="faq-chevron">▼</div>
           </div>
-          <div class="faq-a">No. Customers type naturally and the bot understands regular conversation with no menus or keywords required.</div>
+            <div class="faq-a">No. Customers type normally. The agent handles standard conversation without menus.</div>
         </div>
         <div class="faq-item reveal">
           <div class="faq-q-row" onclick="toggleFaq(this)">
             <div class="faq-q">Can this work for other types of businesses?</div>
             <div class="faq-chevron">▼</div>
           </div>
-          <div class="faq-a">Yes. The flow adapts to any catalog-based business using WhatsApp for sales: electronics, fashion, auto parts, and more.</div>
+            <div class="faq-a">Yes. It fits most catalog-based businesses using WhatsApp for sales and support.</div>
         </div>
       </div>
     </div>
   </section>
 
-
   <!-- ═══ CTA ═══ -->
   <section class="cta-section">
     <div class="cta-inner reveal">
 
-      <h2 class="cta-title">Want this for<br><span>your business?</span></h2>
-      <p class="cta-sub">We'll walk through your current workflow and show exactly how an AI WhatsApp agent would fit in, completely free.</p>
+      <h2 class="cta-title">Ready for a<br><span>WhatsApp service workflow?</span></h2>
+      <p class="cta-sub">We will review your current workflow and outline where WhatsApp automation fits. No pressure.</p>
       <div class="cta-actions">
         <button onclick="Calendly.initPopupWidget({url:'https://calendly.com/karlspace3/30min'});return false;"
           style="background: linear-gradient(135deg,#1f7d53,#2C8B5F); border: none; color: #fff; font-weight: 600; padding: 12px 28px; border-radius: 50px; font-size: 0.95rem; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 20px rgba(31,125,83,0.35); display: inline-flex; align-items: center; gap: 8px; margin: 0 auto;"
-          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(31,125,83,0.5)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 20px rgba(31,125,83,0.35)';">
+          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(31,125,83,0.5)';"
+          onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 20px rgba(31,125,83,0.35)';">
           Book a Free Audit →
         </button>
         <a href="/#case-studies" class="btn-ghost">See More Case Studies</a>
       </div>
-      <p class="cta-note">30-minute call · No sales pressure · Real answers</p>
+      <p class="cta-note">30-minute call · No sales pressure · Clear next steps</p>
     </div>
   </section>
 
@@ -2069,55 +3684,58 @@
 
     /* ── LIVE CHART BARS ── */
     (function () {
-      const container = document.getElementById('waChartBars');
-      if (!container) return;
+      const containers = document.querySelectorAll('[data-wa-bars]');
+      if (!containers.length) return;
       const barData = [
         [15, 35], [20, 45], [30, 60], [50, 80], [65, 90], [55, 75], [40, 65],
         [30, 55], [45, 70], [60, 85], [70, 95], [55, 80], [40, 60], [25, 50],
         [35, 65], [50, 78], [68, 92], [75, 98], [60, 82], [45, 70], [30, 55]
       ];
-      barData.forEach(([lo, hi], i) => {
-        const b = document.createElement('div');
-        b.className = 'wa-bar';
-        const dur = (0.9 + Math.random() * 0.8).toFixed(2);
-        const del = (i * 0.06).toFixed(2);
-        b.style.cssText = `--lo:${lo}%;--hi:${hi}%;--dur:${dur}s;--del:${del}s;height:${lo}%`;
-        container.appendChild(b);
+      containers.forEach((container) => {
+        container.innerHTML = '';
+        barData.forEach(([lo, hi], i) => {
+          const b = document.createElement('div');
+          b.className = 'wa-bar';
+          const dur = (0.9 + Math.random() * 0.8).toFixed(2);
+          const del = (i * 0.06).toFixed(2);
+          b.style.cssText = `--lo:${lo}%;--hi:${hi}%;--dur:${dur}s;--del:${del}s;height:${lo}%`;
+          container.appendChild(b);
+        });
       });
     })();
 
     /* ── LIVE CHAT ANIMATION ── */
     (function () {
-      const body = document.getElementById('waBody');
+      const body = document.querySelector('[data-wa-body]');
       const chart = body ? body.querySelector('.wa-chart') : null;
       if (!body || !chart) return;
 
       const conversations = [
         [
           { type: 'user', text: 'RTX 4060 available? Need today delivery.' },
-          { type: 'bot',  text: 'Yes, 20 units in stock at ₹29,999. Same-day dispatch possible! ✅' },
+          { type: 'bot', text: 'Yes, 20 units in stock at ₹29,999. Same-day dispatch possible! ✅' },
           { type: 'user', text: 'Mumbai delivery?' },
-          { type: 'bot',  text: 'Done! Packed & out for delivery. ETA today by 6 PM. Track #GH2482 📦' },
+          { type: 'bot', text: 'Done! Packed & out for delivery. ETA today by 6 PM. Track #GH2482 📦' },
           { type: 'chip', label: 'Series 1 · GPU Stock', detail: 'Same-day dispatch confirmed · Reply: 1.2s' }
         ],
         [
           { type: 'user', text: 'Track my order ORD-1005' },
-          { type: 'bot',  text: 'Order ORD-1005 is Shipped 🚚 Gaming Chair + RTX 4060 + 27" 165Hz Monitor. Total ₹61,997.' },
+          { type: 'bot', text: 'Order ORD-1005 is Shipped 🚚 Gaming Chair + RTX 4060 + 27" 165Hz Monitor. Total ₹61,997.' },
           { type: 'user', text: 'When will it reach?' },
-          { type: 'bot',  text: 'ETA tomorrow by 3 PM. Tracking link sent on WhatsApp already. 📍' },
+          { type: 'bot', text: 'ETA tomorrow by 3 PM. Tracking link sent on WhatsApp already. 📍' },
           { type: 'chip', label: 'Series 2 · Order Tracking', detail: 'Intent: tracking · Reply: 1.1s' }
         ],
         [
           { type: 'user', text: 'Best GPU for 1080p gaming under 35k?' },
-          { type: 'bot',  text: 'RTX 4060 (P020) is the best value at ₹29,999. Perfect for 1080p with DLSS 3. 🎮' },
+          { type: 'bot', text: 'RTX 4060 (P020) is the best value at ₹29,999. Perfect for 1080p with DLSS 3. 🎮' },
           { type: 'user', text: 'Any bundle with monitor?' },
-          { type: 'bot',  text: 'Yes! Pair it with 27" 165Hz LG Monitor (₹18,999) and save ₹2,000 on bundle. 💡' },
+          { type: 'bot', text: 'Yes! Pair it with 27" 165Hz LG Monitor (₹18,999) and save ₹2,000 on bundle. 💡' },
           { type: 'chip', label: 'Series 3 · Recommendation', detail: 'Bundle upsell triggered · Reply: 1.4s' }
         ]
       ];
 
       let msgCount = 247;
-      const countEl = document.getElementById('waMsgCount');
+      const countEl = document.querySelector('[data-wa-count]');
       let convIndex = 0;
 
       function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -2200,9 +3818,9 @@
       if (drawer) drawer.classList.remove('open');
     }
   </script>
-    <!-- Calendly popup widget -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <!-- Calendly popup widget -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 
 </html>

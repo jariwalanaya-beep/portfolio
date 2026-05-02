@@ -741,6 +741,120 @@
     </div>
   </section>
 
+  <!-- BUILD YOURS -->
+  <style>
+    .config-section{padding:100px 72px;border-bottom:1px solid var(--border);position:relative;z-index:1;}
+    .config-section::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:500px;background:radial-gradient(ellipse at center,rgba(31,125,83,0.07) 0%,transparent 65%);pointer-events:none;}
+    .config-head{margin-bottom:52px;}
+    .config-head p{font-size:1rem;color:var(--muted);line-height:1.8;max-width:58ch;margin-top:16px;}
+    .config-layout{display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:start;}
+    .config-body{display:flex;flex-direction:column;gap:24px;}
+    .config-block-title{font-family:"Space Grotesk",sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+    .config-block-title span{font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:999px;background:rgba(31,125,83,0.1);border:1px solid rgba(31,125,83,0.2);color:var(--p2);letter-spacing:1px;text-transform:uppercase;}
+    .core-list{list-style:none;display:grid;gap:10px;}
+    .core-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid rgba(31,125,83,0.14);border-radius:12px;background:rgba(31,125,83,0.04);font-size:.88rem;color:#b0c8ba;}
+    .core-item::before{content:"✓";color:var(--p2);font-weight:700;flex-shrink:0;}
+    .addons-list{display:grid;gap:10px;}
+    .addon-card{border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:border-color .2s,background .2s;}
+    .addon-card:hover{border-color:rgba(31,125,83,0.25);background:rgba(31,125,83,0.03);}
+    .addon-card.dsel{border-color:rgba(31,125,83,0.4);background:rgba(31,125,83,0.06);}
+    .addon-cb{width:20px;height:20px;border-radius:6px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.03);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--p2);transition:background .2s,border-color .2s;}
+    .addon-card.dsel .addon-cb{background:rgba(31,125,83,0.2);border-color:rgba(31,125,83,0.5);}
+    .addon-info{flex:1;}
+    .addon-name{font-family:"Space Grotesk",sans-serif;font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:3px;}
+    .addon-desc{font-size:.75rem;color:var(--muted);line-height:1.5;}
+    .addon-price{font-family:"Space Grotesk",sans-serif;font-size:.85rem;font-weight:700;color:var(--p2);white-space:nowrap;}
+    .config-summary{position:sticky;top:82px;background:rgba(8,13,22,0.8);border:1px solid rgba(31,125,83,0.18);border-radius:20px;padding:28px;backdrop-filter:blur(16px);}
+    .cs-title{font-family:"Space Grotesk",sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:20px;}
+    .cs-items{display:flex;flex-direction:column;gap:8px;min-height:60px;margin-bottom:20px;}
+    .cs-item{font-size:.82rem;color:#b0c8ba;display:flex;align-items:center;gap:8px;}
+    .cs-item::before{content:"✓";color:var(--p2);font-size:.75rem;}
+    .cs-divider{height:1px;background:rgba(255,255,255,0.06);margin-bottom:20px;}
+    .cs-total-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+    .cs-total-label{font-size:.82rem;color:var(--muted);}
+    .cs-total-val{font-family:"Space Grotesk",sans-serif;font-size:1.1rem;font-weight:800;color:var(--text);}
+    .cs-cta{display:block;width:100%;padding:14px;border-radius:12px;background:var(--grad);color:#fff;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:.92rem;text-align:center;text-decoration:none;letter-spacing:.2px;box-shadow:0 6px 24px rgba(31,125,83,0.3);transition:box-shadow .2s,transform .2s;}
+    .cs-cta:hover{box-shadow:0 10px 36px rgba(31,125,83,0.5);transform:translateY(-1px);}
+    .cs-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5;}
+    @media(max-width:1000px){.config-layout{grid-template-columns:1fr;}.config-summary{position:static;}}
+    @media(max-width:640px){.config-section{padding:52px 20px;}}
+  </style>
+  <section class="config-section" id="build">
+    <div class="config-head reveal">
+      <div class="sec-tag">Build Yours</div>
+      <h2 class="sec-h2">Configure your Dashboard</h2>
+      <p>The core system connects to your Google Sheet and builds a live, real-time business dashboard. Add modules to make it smarter.</p>
+    </div>
+    <div class="config-layout">
+      <div class="config-body">
+        <div class="reveal">
+          <div class="config-block-title">Core — Included <span>Always On</span></div>
+          <ul class="core-list">
+            <li class="core-item">Live connection to your Google Sheet — no exports</li>
+            <li class="core-item">KPI tiles, trend charts, week-over-week comparison</li>
+            <li class="core-item">Anomaly alerts — stock, revenue, fulfilment thresholds</li>
+            <li class="core-item">Shareable read-only link for team &amp; investors</li>
+            <li class="core-item">Deployed and accessible on any device in under 24h</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="config-block-title">Add-ons <span>Optional</span></div>
+          <div class="addons-list">
+            <div class="addon-card" id="db-addon-broadcast" onclick="dbToggle('broadcast')">
+              <div class="addon-cb" id="db-cb-broadcast"></div>
+              <div class="addon-info">
+                <div class="addon-name">Automated Report Emails</div>
+                <div class="addon-desc">Weekly or daily dashboard snapshot sent to your inbox — no need to log in to stay informed. Auto-generated, auto-sent.</div>
+              </div>
+              <div class="addon-price">Add-on</div>
+            </div>
+            <div class="addon-card" id="db-addon-graph" onclick="dbToggle('graph')">
+              <div class="addon-cb" id="db-cb-graph"></div>
+              <div class="addon-info">
+                <div class="addon-name">Auto Graph Generation</div>
+                <div class="addon-desc">AI interprets your data and builds new chart types automatically when it detects patterns — Gantt, scatter, heatmap, cohort.</div>
+              </div>
+              <div class="addon-price">Add-on</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="config-summary">
+        <div class="cs-title">Your Configuration</div>
+        <div class="cs-items" id="db-cs-items">
+          <div class="cs-item">Sheets Dashboard (core)</div>
+        </div>
+        <div class="cs-divider"></div>
+        <div class="cs-total-row">
+          <div class="cs-total-label">Estimate</div>
+          <div class="cs-total-val">Contact for quote</div>
+        </div>
+        <a href="mailto:shivam@karlspace.in?subject=Dashboard%20Quote&body=Config%3A%20Sheets%20Dashboard%20(core)" class="cs-cta" id="db-cs-cta">Get a Quote →</a>
+        <div class="cs-note">One-time build · You own it · 30-min free call</div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const dbState = { broadcast: false, graph: false };
+    const dbLabels = { broadcast: 'Automated Report Emails', graph: 'Auto Graph Generation' };
+    function dbToggle(key) {
+      dbState[key] = !dbState[key];
+      document.getElementById('db-addon-'+key).classList.toggle('dsel', dbState[key]);
+      document.getElementById('db-cb-'+key).textContent = dbState[key] ? '✓' : '';
+      dbUpdateSummary();
+    }
+    function dbUpdateSummary() {
+      const selected = Object.entries(dbState).filter(([,v])=>v).map(([k])=>k);
+      const itemsEl = document.getElementById('db-cs-items');
+      const ctaEl = document.getElementById('db-cs-cta');
+      let html = '<div class="cs-item">Sheets Dashboard (core)</div>';
+      selected.forEach(k => { html += `<div class="cs-item">${dbLabels[k]}</div>`; });
+      itemsEl.innerHTML = html;
+      const body = 'Sheets Dashboard (core)' + (selected.length ? ', ' + selected.map(k=>dbLabels[k]).join(', ') : '');
+      ctaEl.href = `mailto:shivam@karlspace.in?subject=Dashboard%20Quote&body=Config%3A%20${encodeURIComponent(body)}`;
+    }
+  </script>
+
   <!-- CTA -->
   <section class="cta-section">
     <div class="cta-inner reveal">
