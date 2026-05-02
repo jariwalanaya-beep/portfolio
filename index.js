@@ -727,8 +727,10 @@ if (mascot && mascotSpeech && !isLowPowerDevice) {
 
 // ==== MOBIUS STRIP ANIMATION ====
 const mobiusCanvas = document.getElementById('mobius-canvas');
-// Disable Möbius on mobile – heavy 3D math at 60fps causes overheating.
-if (mobiusCanvas && isMobileDevice) {
+// Disable Möbius on mobile/tablet – heavy 3D math at 60fps causes overheating.
+// `isMobileDevice` was undefined – use the already-declared coarse-pointer + viewport check.
+const isMobileOrTablet = isCoarsePointer || window.innerWidth <= 900;
+if (mobiusCanvas && isMobileOrTablet) {
     mobiusCanvas.style.display = 'none';
 } else if (mobiusCanvas) {
         const mCtx = mobiusCanvas.getContext('2d', { alpha: true });

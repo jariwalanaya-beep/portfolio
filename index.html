@@ -431,7 +431,7 @@
     </div>
     <!-- Mobius Strip Animation Canvas -->
     <canvas id="mobius-canvas"
-      style="position: absolute; right: 0; top: -20px; width: 700px; height: 700px; z-index: 5; pointer-events: none; opacity: 1; mix-blend-mode: screen;"></canvas>
+      style="position: absolute; right: 0; top: -20px; z-index: 5; pointer-events: none; opacity: 1; mix-blend-mode: screen;"></canvas>
 
     <div class="container hero-content">
 
@@ -827,15 +827,15 @@
 
   <!-- CTA -->
   <section class="cta-section" id="contact"
-    style="padding: 120px 0; text-align: center; position: relative; z-index: 10;">
+    style="padding: clamp(60px,10vw,120px) 0; text-align: center; position: relative; z-index: 10;">
     <div class="container">
       <h2
-        style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-display); font-weight: 700; margin-bottom: 12px; color: #fff;">
+        style="font-size: clamp(1.8rem, 5vw, 3.5rem); font-family: var(--font-display); font-weight: 700; margin-bottom: 12px; color: #fff;">
         Need AI agents like this?</h2>
       <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px;">Reach me on LinkedIn to build your
         automation system</p>
 
-      <div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
+      <div class="cta-btn-group" style="display: flex; gap: 12px; justify-content: center; align-items: center; flex-wrap: wrap;">
         <a href="https://www.linkedin.com/in/karlspace/" target="_blank" class="btn-cs-gradient"
           style="padding: 12px 28px; font-size: 0.95rem; text-decoration: none;">
           DM on LinkedIn

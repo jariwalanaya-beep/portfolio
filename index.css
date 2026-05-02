@@ -103,6 +103,21 @@ body {
         animation: none !important;
         transition: none !important;
     }
+
+    /* CRITICAL: animate-in elements start at opacity:0 and rely on
+       animation to become visible. When animations are disabled on
+       mobile those elements stay invisible. Force their final state. */
+    .animate-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
+    /* reveal-item uses JS + transition; make items start visible
+       so they don't remain hidden if IntersectionObserver is slow. */
+    .reveal-item {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
 }
 
 .reduced-motion #bg-canvas {
@@ -401,6 +416,14 @@ ul {
     background: var(--text);
     border-radius: 2px;
     transition: all 0.3s;
+}
+
+/* ============================
+   MOBIUS CANVAS
+   ============================ */
+#mobius-canvas {
+    width: 700px;
+    height: 700px;
 }
 
 /* ============================
@@ -1601,7 +1624,7 @@ ul {
         margin-left: 0;
     }
 
-    /* Möbius canvas scale down on tab */
+    /* Möbius canvas: default size via CSS (inline attrs removed) */
     #mobius-canvas {
         width: 500px !important;
         height: 500px !important;
@@ -1930,6 +1953,23 @@ ul {
         font-size: 0.9rem !important;
         overflow-wrap: anywhere;
         text-align: center;
+    }
+
+    /* Stack all CTA buttons vertically on mobile */
+    .cta-btn-group {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+    }
+
+    .cta-btn-group a,
+    .cta-btn-group button {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center;
+        font-size: 0.9rem !important;
     }
 }
 
