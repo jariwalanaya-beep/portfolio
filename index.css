@@ -2368,3 +2368,41 @@ ul {
         display: none !important;
     }
 }
+
+/* ====================================================
+   MOBILE LAYOUT FIXES
+   Prevent half-blank columns and oversized hero gaps.
+   ==================================================== */
+@media (max-width: 900px) {
+    .hero {
+        min-height: auto !important;
+        align-items: flex-start;
+    }
+
+    .hero-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .hero-left,
+    .hero-right {
+        width: 100%;
+        border-right: none !important;
+    }
+
+    .config-layout,
+    .stats-section,
+    .faq-layout,
+    .ba-grid,
+    .extra-grid,
+    .channel-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .config-summary,
+    .faq-sticky {
+        position: static !important;
+        top: auto !important;
+        width: 100%;
+    }
+}
