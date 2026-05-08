@@ -756,6 +756,140 @@
 
 
 
+  <style>
+    /* ── GLOBAL RESPONSIVE ──────────────────────────── */
+
+    /* Tablet — ≤ 1024px */
+    @media(max-width:1024px) {
+      .section { padding:80px 28px; }
+      .hero-inner { padding:72px 28px; }
+      .hero-h1 { font-size:3.4rem; letter-spacing:-2px; }
+      .wf-node { width:86px; }
+      .wf-node-box { width:50px; height:50px; }
+      .sql-cols { grid-template-columns:repeat(2,1fr); }
+    }
+
+    /* Large mobile / small tablet — ≤ 768px */
+    @media(max-width:768px) {
+      .section { padding:64px 20px; }
+      .hero-inner { padding:64px 20px; }
+      .hero-h1 { font-size:2.8rem; letter-spacing:-1.8px; }
+      .hero-sub { font-size:0.95rem; max-width:40ch; }
+      .hero-stack { flex-wrap:wrap; justify-content:center; }
+
+      /* Problem */
+      .prob-bento { grid-template-columns:1fr; }
+      .callout-banner { flex-direction:column; gap:10px; }
+
+      /* Solution */
+      .sol-video-wrap video { max-height:360px; }
+      .wf-pipeline { padding:16px; gap:0; }
+      .wf-node { width:76px; }
+      .wf-node-box { width:44px; height:44px; font-size:0.9rem; }
+      .wf-node-label { font-size:0.55rem; }
+      .wf-node-tag { font-size:0.48rem; }
+      .wf-arrow { font-size:0.8rem; padding:0; margin-top:-14px; }
+
+      /* Automation */
+      .auto-two-grid { grid-template-columns:1fr; }
+      .sql-cols { grid-template-columns:1fr 1fr; }
+      .sql-card-header { flex-direction:column; align-items:flex-start; gap:10px; }
+
+      /* Logic */
+      .logic-two { grid-template-columns:1fr; }
+      .flow-row { gap:6px; padding:10px; }
+      .flow-item { font-size:0.6rem; }
+      .flow-icon { font-size:1rem; }
+      .code-block { font-size:0.68rem; }
+
+      /* Resources */
+      .res-dl-grid { grid-template-columns:1fr; }
+      .res-links { gap:8px; }
+      .res-link { padding:10px 14px; }
+    }
+
+    /* Mobile — ≤ 480px */
+    @media(max-width:480px) {
+      .section { padding:52px 16px; }
+      .hero-inner { padding:52px 16px; }
+      .hero-h1 { font-size:2.1rem; letter-spacing:-1.2px; }
+      .hero-sub { font-size:0.9rem; }
+      .hero-stats { flex-direction:column; }
+      .hero-stat { border-right:none; border-bottom:1px solid var(--border); }
+      .hero-stat:last-child { border-bottom:none; }
+      .hero-stat-n { font-size:1.4rem; }
+      .hero-actions { flex-direction:column; width:100%; }
+      .hero-actions .btn { justify-content:center; width:100%; }
+
+      /* Labels & headings */
+      .label { font-size:0.62rem; letter-spacing:2px; }
+      h2.heading { font-size:1.7rem; letter-spacing:-1px; }
+      .subtext { font-size:0.9rem; }
+
+      /* Bento */
+      .bento-card { padding:20px; }
+      .bento-title { font-size:0.95rem; }
+
+      /* Workflow — very small: show fewer labels */
+      .wf-card-header { flex-wrap:wrap; gap:6px; }
+      .wf-pipeline { padding:12px 10px; }
+      .wf-node { width:66px; }
+      .wf-node-box { width:40px; height:40px; border-radius:10px; }
+      .wf-node-label { font-size:0.5rem; }
+      .wf-node-tag { display:none; }
+      .wf-arrow { font-size:0.7rem; margin-top:-12px; }
+
+      /* Automation cards */
+      .acard { padding:18px; }
+      .step-item { padding:8px; }
+      .step-emoji { width:28px; height:28px; }
+      .step-label { font-size:0.78rem; }
+      .step-sub { font-size:0.7rem; }
+      .pixel-codeblock { font-size:0.64rem; padding:10px 12px; }
+
+      /* SQL */
+      .sql-cols { grid-template-columns:1fr; }
+      .sql-raw pre { font-size:0.63rem; }
+      .sql-card-title { font-size:0.85rem; }
+
+      /* Logic */
+      .lcard { padding:18px; }
+      .lcard-title { font-size:0.9rem; }
+      .lcard-text { font-size:0.82rem; }
+      .alert-box { padding:10px 12px; }
+      .result-strip { flex-direction:column; gap:12px; padding:18px; }
+      .code-card { padding:18px; }
+      .code-block { font-size:0.63rem; }
+
+      /* Resources */
+      .res-dl-card { flex-direction:column; gap:12px; padding:20px; }
+      .res-dl-icon { width:44px; height:44px; }
+      .res-dl-title { font-size:0.9rem; }
+      .res-dl-sub { font-size:0.75rem; }
+      .res-links { flex-direction:column; align-items:stretch; }
+      .res-link { justify-content:flex-start; }
+      .res-cta { padding:13px 24px; font-size:0.9rem; }
+
+      /* Callout banner */
+      .callout-banner { padding:16px; }
+      .footer-note { font-size:0.88rem; padding:14px; }
+    }
+
+    /* Prevent horizontal scroll on tiny screens */
+    @media(max-width:360px) {
+      body { overflow-x:hidden; }
+      .wf-pipeline { padding:10px 8px; }
+      .wf-node { width:58px; }
+      .hero-h1 { font-size:1.85rem; }
+    }
+
+    /* Reduced motion */
+    @media(prefers-reduced-motion:reduce) {
+      *, *::before, *::after { animation:none !important; transition:none !important; }
+      .reveal { opacity:1; transform:none; }
+    }
+  </style>
+
   <script>
     // Navbar hamburger
     const hamburger = document.getElementById('navHamburger');
@@ -774,3 +908,4 @@
   </script>
 </body>
 </html>
+
