@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How I Built a Custom Email Pixel Tracking System | Karlspace</title>
+  <meta name="description" content="A deep-dive case study: custom n8n automation + pixel tracking + bot filtering for outreach." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="1772001775286.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #0a0d14;
+      --bg2:     #0f1320;
+      --bg3:     #141929;
+      --card:    #161c2d;
+      --card2:   #1a2236;
+      --border:  rgba(255,255,255,0.07);
+      --border2: rgba(59,130,246,0.3);
+      --text:    #e2e8f0;
+      --text2:   #94a3b8;
+      --muted:   #4b5e72;
+      --blue:    #3b82f6;
+      --blue2:   #2563eb;
+      --blue3:   #60a5fa;
+      --green:   #22c55e;
+      --red:     #ef4444;
+      --orange:  #f97316;
+      --purple:  #a855f7;
+      --yellow:  #eab308;
+      --grad:    linear-gradient(135deg,#2563eb 0%,#3b82f6 50%,#60a5fa 100%);
+      --shadow:  0 4px 24px rgba(0,0,0,0.4);
+      --shadow-blue: 0 8px 32px rgba(59,130,246,0.25);
+      --r-sm: 8px; --r: 12px; --r-lg: 18px; --r-xl: 24px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.4); border-radius: 3px; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ANIMATIONS */
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+    /* TYPOGRAPHY */
+    .label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--blue3);
+      margin-bottom: 14px;
+    }
+    .label::before { content:''; width:24px; height:2px; background:var(--blue); border-radius:2px; display:inline-block; }
+    h2.heading {
+      font-family:'Space Grotesk',sans-serif;
+      font-size: clamp(1.9rem,3vw,2.8rem); font-weight:800;
+      line-height:1.1; letter-spacing:-1.5px; color:var(--text);
+    }
+    h2.heading .hl {
+      background: var(--grad); -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .subtext { font-size:1rem; color:var(--text2); line-height:1.75; margin-top:12px; max-width:56ch; }
+
+    /* BUTTONS */
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:'Space Grotesk',sans-serif; font-size:0.9rem; font-weight:700;
+      padding:12px 26px; border-radius:999px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary { background:var(--grad); color:#fff; box-shadow:var(--shadow-blue); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(59,130,246,0.4); }
+    .btn-ghost { background:rgba(255,255,255,0.05); color:var(--text2); border:1px solid var(--border); }
+    .btn-ghost:hover { background:rgba(255,255,255,0.09); color:var(--text); }
+
+    /* NAVBAR */
+    .navbar {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      height:60px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 48px;
+      background:rgba(10,13,20,0.85); backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:700; color:var(--text); }
+    .nav-logo span { color:var(--blue3); }
+    .nav-links { display:flex; gap:2px; }
+    .nav-links a { font-size:0.8rem; font-weight:500; color:var(--text2); padding:6px 14px; border-radius:999px; transition:color .15s, background .15s; }
+    .nav-links a:hover { color:var(--text); background:rgba(255,255,255,0.05); }
+    .nav-back { font-size:0.8rem; font-weight:600; color:var(--blue3); padding:7px 16px; border-radius:999px; border:1px solid rgba(59,130,246,0.25); transition:background .15s; }
+    .nav-back:hover { background:rgba(59,130,246,0.08); }
+    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; border:1px solid var(--border); border-radius:8px; background:var(--card); }
+    .nav-hamburger span { display:block; width:18px; height:2px; background:var(--text2); border-radius:2px; transition:transform .25s, opacity .25s; }
+    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity:0; }
+    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .nav-mobile-drawer { display:none; position:fixed; top:60px; left:0; right:0; background:rgba(10,13,20,0.97); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); z-index:199; padding:16px 20px 24px; flex-direction:column; gap:4px; }
+    .nav-mobile-drawer.open { display:flex; }
+    .nav-mobile-drawer a { font-size:0.9rem; font-weight:500; color:var(--text2); padding:12px 14px; border-radius:10px; min-height:44px; display:flex; align-items:center; }
+    .nav-mobile-drawer a:hover { color:var(--text); background:rgba(255,255,255,0.05); }
+    @media(max-width:768px) { .navbar{padding:0 20px;} .nav-links,.nav-back{display:none;} .nav-hamburger{display:flex;} }
+
+    /* SECTION WRAPPER */
+    .section { padding:96px 32px; max-width:1100px; margin:0 auto; }
+    @media(max-width:640px) { .section{padding:72px 20px;} }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">Karl<span>space</span></a>
+    <div class="nav-links">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#automation">How It Works</a>
+      <a href="#logic">Algorithm</a>
+      <a href="#resources">Resources</a>
+    </div>
+    <a href="case-study-outreach.html" class="nav-back">← Back</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <nav class="nav-mobile-drawer" id="navDrawer">
+    <a href="#problem" onclick="closeDrawer()">Problem</a>
+    <a href="#solution" onclick="closeDrawer()">Solution</a>
+    <a href="#automation" onclick="closeDrawer()">How It Works</a>
+    <a href="#logic" onclick="closeDrawer()">Algorithm</a>
+    <a href="#resources" onclick="closeDrawer()">Resources</a>
+    <a href="case-study-outreach.html" onclick="closeDrawer()">← Back</a>
+  </nav>
+
+  <!-- HERO -->
+  <style>
+    .hero {
+      min-height: 100vh; padding-top: 60px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; background: var(--bg);
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 50%, rgba(37,99,235,0.12) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 70% at 85% 40%, rgba(96,165,250,0.07) 0%, transparent 65%);
+    }
+    .hero-grid { position:absolute; inset:0; background-image:radial-gradient(rgba(59,130,246,0.1) 1px, transparent 1px); background-size:36px 36px; opacity:0.4; pointer-events:none; }
+    .hero-inner { position:relative; z-index:2; max-width:780px; margin:0 auto; padding:80px 32px; text-align:center; display:flex; flex-direction:column; align-items:center; }
+    .hero-tag { display:inline-flex; align-items:center; gap:8px; background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:999px; padding:6px 18px; font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue3); margin-bottom:28px; }
+    .hero-dot { width:7px; height:7px; border-radius:50%; background:var(--blue3); box-shadow:0 0 8px rgba(96,165,250,0.7); animation:pulse 1.8s ease-in-out infinite; }
+    .hero-h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.8rem,6vw,5rem); font-weight:800; line-height:1.0; letter-spacing:-3px; color:var(--text); margin-bottom:22px; }
+    .hero-h1 .hl { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-sub { font-size:clamp(1rem,1.5vw,1.1rem); color:var(--text2); line-height:1.8; max-width:50ch; margin-bottom:36px; }
+    .hero-stats { display:flex; gap:0; background:var(--card); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; margin-bottom:36px; box-shadow:var(--shadow); }
+    .hero-stat { padding:16px 28px; text-align:center; border-right:1px solid var(--border); flex:1; }
+    .hero-stat:last-child { border-right:none; }
+    .hero-stat-n { font-family:'Space Grotesk',sans-serif; font-size:1.7rem; font-weight:800; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; }
+    .hero-stat-l { font-size:0.7rem; color:var(--muted); margin-top:4px; letter-spacing:0.5px; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+    .hero-stack { display:flex; align-items:center; gap:8px; margin-top:40px; }
+    .hero-stack-label { font-size:0.7rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; }
+    .hero-stack-icons { display:flex; align-items:center; gap:6px; }
+    .hero-stack-icon { width:28px; height:28px; border-radius:7px; background:var(--card2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; }
+    @media(max-width:600px){ .hero-h1{font-size:2.4rem;letter-spacing:-2px;} .hero-inner{padding:60px 20px;} .hero-stats{flex-direction:column;} .hero-stat{border-right:none;border-bottom:1px solid var(--border);} .hero-stat:last-child{border-bottom:none;} }
+  </style>
+
+  <section class="hero" id="overview">
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-tag reveal"><span class="hero-dot"></span> Deep Dive · Internal Case Study</div>
+      <h1 class="hero-h1 reveal">
+        I stopped guessing<br><span class="hl">who opens my emails.</span>
+      </h1>
+      <p class="hero-sub reveal">
+        Gmail can't track opens. Mail tools can't send proper follow-ups. So I built my own system — n8n automation + pixel tracking + bot filtering.
+      </p>
+      <div class="hero-stats reveal">
+        <div class="hero-stat"><div class="hero-stat-n">5</div><div class="hero-stat-l">Step Sequence</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">30m</div><div class="hero-stat-l">Trigger Interval</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">2min</div><div class="hero-stat-l">Bot Filter Gap</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">1×1</div><div class="hero-stat-l">Pixel Size</div></div>
+      </div>
+      <div class="hero-actions reveal">
+        <a href="#solution" class="btn btn-primary">See How It Works →</a>
+        <a href="#resources" class="btn btn-ghost">↓ Download Files</a>
+      </div>
+      <div class="hero-stack reveal">
+        <span class="hero-stack-label">Built with</span>
+        <div class="hero-stack-icons">
+          <div class="hero-stack-icon"><img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:16px;height:16px;" /></div>
+          <div class="hero-stack-icon"><img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Gmail" style="width:16px;height:16px;" /></div>
+          <div class="hero-stack-icon"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="Postgres" style="width:16px;height:16px;" /></div>
+          <div class="hero-stack-icon" style="font-size:0.75rem;color:var(--text2);">JS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <style>
+    .prob-wrap { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .prob-head { margin-bottom:52px; }
+    .prob-bento { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media(max-width:700px){ .prob-bento{grid-template-columns:1fr;} }
+    .bento-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); padding:28px; transition:border-color .2s, transform .2s; }
+    .bento-card:hover { border-color:rgba(255,255,255,0.12); transform:translateY(-2px); }
+    .bento-card.full { grid-column:1/-1; }
+    .bento-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; margin-bottom:16px; }
+    .bento-title { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .bento-text { font-size:0.88rem; color:var(--text2); line-height:1.65; }
+    .bento-divider { height:1px; background:var(--border); margin:16px 0; }
+    .prob-list { display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+    .prob-item { display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:var(--text2); line-height:1.45; }
+    .prob-item-dot { width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.62rem; font-weight:800; flex-shrink:0; margin-top:1px; }
+    .dot-red { background:rgba(239,68,68,0.12); color:var(--red); border:1px solid rgba(239,68,68,0.2); }
+    .dot-green { background:rgba(34,197,94,0.1); color:var(--green); border:1px solid rgba(34,197,94,0.2); }
+    .tool-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px; }
+    .tool-chip { display:flex; align-items:center; gap:6px; background:var(--card2); border:1px solid var(--border); border-radius:8px; padding:6px 12px; font-size:0.78rem; font-weight:600; color:var(--text2); }
+    .callout-banner { grid-column:1/-1; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.18); border-radius:var(--r-xl); padding:22px 28px; display:flex; align-items:center; gap:16px; }
+    .callout-icon-box { width:40px; height:40px; border-radius:10px; background:rgba(59,130,246,0.12); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+    .callout-text { font-size:0.95rem; color:var(--text2); line-height:1.6; }
+    .callout-text strong { color:var(--blue3); }
+  </style>
+
+  <div class="prob-wrap">
+    <div class="section" id="problem">
+      <div class="prob-head reveal">
+        <div class="label">#1 The Problem</div>
+        <h2 class="heading">Two tools. <span class="hl">Neither enough.</span></h2>
+        <p class="subtext">Gmail gives deliverability. Mail tools give tracking. But not both at once — until I built a middle layer.</p>
+      </div>
+      <div class="prob-bento">
+        <div class="bento-card reveal">
+          <div class="bento-icon" style="background:rgba(234,67,53,0.1);">
+            <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Gmail" style="width:24px;height:24px;" />
+          </div>
+          <div class="bento-title">Gmail — Great deliverability, zero tracking</div>
+          <div class="bento-text">Sends from real inbox. Replies stay in thread. But absolutely no open tracking, no automation, no sequence control.</div>
+          <div class="bento-divider"></div>
+          <div class="prob-list">
+            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Real inbox deliverability</div>
+            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Proper thread replies (steps 2–5)</div>
+            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>No open tracking whatsoever</div>
+            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>No automation or scheduling</div>
+          </div>
+        </div>
+        <div class="bento-card reveal">
+          <div class="bento-icon" style="background:rgba(251,191,36,0.1);">📊</div>
+          <div class="bento-title">Mail tools — Great tracking, poor deliverability</div>
+          <div class="bento-text">Instantly, Lemlist etc. have tracking built-in, but emails land in Promotions or Spam. Replies break threads.</div>
+          <div class="bento-divider"></div>
+          <div class="prob-list">
+            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Open tracking out of the box</div>
+            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Sequence automation built-in</div>
+            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>Poor inbox placement</div>
+            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>Follow-ups don't stay in thread</div>
+          </div>
+        </div>
+        <div class="callout-banner reveal">
+          <div class="callout-icon-box">💡</div>
+          <div class="callout-text">
+            <strong>The solution:</strong> Send via Gmail API for deliverability, and inject a custom tracking pixel into the HTML body. Build a custom n8n automation layer on top to handle the full 5-step sequence.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLUTION -->
+  <style>
+    .sol-section { background:var(--bg); }
+    .sol-video-wrap { border-radius:var(--r-xl); overflow:hidden; background:#000; border:1px solid var(--border); box-shadow:0 24px 80px rgba(0,0,0,0.5); margin-bottom:48px; position:relative; }
+    .sol-video-bar { display:flex; align-items:center; gap:8px; padding:10px 16px; background:rgba(255,255,255,0.03); border-bottom:1px solid var(--border); }
+    .sol-dot { width:10px; height:10px; border-radius:50%; }
+    .sol-live { margin-left:auto; display:flex; align-items:center; gap:6px; font-size:0.68rem; font-weight:700; color:var(--red); letter-spacing:1px; text-transform:uppercase; }
+    .sol-live-dot { width:7px; height:7px; border-radius:50%; background:var(--red); animation:pulse 1.5s infinite; }
+    .sol-video-wrap video { width:100%; display:block; max-height:520px; object-fit:cover; }
+
+    /* HORIZONTAL WORKFLOW */
+    .wf-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); overflow:hidden; margin-bottom:16px; }
+    .wf-card-header { display:flex; align-items:center; gap:12px; padding:14px 20px; border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02); }
+    .wf-card-title { font-family:'Space Grotesk',sans-serif; font-size:0.85rem; font-weight:700; color:var(--text); }
+    .wf-card-sub { font-size:0.7rem; color:var(--muted); margin-left:auto; }
+    .wf-pipeline { display:flex; align-items:center; padding:20px; overflow-x:auto; gap:0; }
+    .wf-pipeline::-webkit-scrollbar { height:6px; }
+    .wf-pipeline::-webkit-scrollbar-track { background:rgba(255,255,255,0.03); border-radius:3px; }
+    .wf-pipeline::-webkit-scrollbar-thumb { background:rgba(59,130,246,0.4); border-radius:3px; }
+    .wf-pipeline::-webkit-scrollbar-thumb:hover { background:rgba(59,130,246,0.65); }
+    .wf-node { flex-shrink:0; width:100px; display:flex; flex-direction:column; align-items:center; gap:6px; cursor:default; }
+    .wf-node:hover .wf-node-box { border-color:rgba(255,255,255,0.18); transform:translateY(-3px); }
+    .wf-node-box { width:56px; height:56px; border-radius:14px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border); transition:border-color .2s, transform .2s; font-size:1.1rem; }
+    .wf-node-label { font-size:0.6rem; color:var(--text2); text-align:center; line-height:1.3; font-weight:500; }
+    .wf-node-tag { font-size:0.52rem; color:var(--muted); text-align:center; }
+    .wf-arrow { flex-shrink:0; color:rgba(59,130,246,0.4); font-size:1rem; padding:0 2px; margin-top:-16px; }
+    .nb-trigger { background:rgba(59,130,246,0.12); }
+    .nb-db { background:rgba(65,105,225,0.15); }
+    .nb-code { background:rgba(168,85,247,0.12); }
+    .nb-logic { background:rgba(234,179,8,0.12); }
+    .nb-gmail { background:rgba(234,67,53,0.1); }
+    .nb-result { background:rgba(34,197,94,0.1); }
+  </style>
+
+  <div class="sol-section">
+    <div class="section" id="solution">
+      <div class="reveal" style="margin-bottom:48px;">
+        <div class="label">#2 The Solution</div>
+        <h2 class="heading">Watch the system <span class="hl">in action.</span></h2>
+        <p class="subtext">A live walkthrough of the outreach automation — from contact intake to tracked open events.</p>
+      </div>
+
+      <div class="sol-video-wrap reveal">
+        <div class="sol-video-bar">
+          <div class="sol-dot" style="background:#ef4444;"></div>
+          <div class="sol-dot" style="background:#f59e0b;"></div>
+          <div class="sol-dot" style="background:#22c55e;"></div>
+          <span style="font-size:0.7rem;color:var(--muted);margin-left:8px;">ReachOhme · Outreach System Demo</span>
+          <div class="sol-live"><span class="sol-live-dot"></span>Live System</div>
+        </div>
+        <video controls preload="metadata" poster="">
+          <source src="Screencast from 2026-05-07 07-55-39.webm" type="video/webm" />
+        </video>
+      </div>
+
+      <!-- SEND PIPELINE -->
+      <div class="wf-card reveal">
+        <div class="wf-card-header">
+          <img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:16px;height:16px;" />
+          <div class="wf-card-title">📤 Email Send Pipeline</div>
+          <div class="wf-card-sub">scroll to explore →</div>
+        </div>
+        <div class="wf-pipeline">
+          <div class="wf-node"><div class="wf-node-box nb-trigger">🔗</div><div class="wf-node-label">Webhook POST</div><div class="wf-node-tag">intake</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Insert Postgres</div><div class="wf-node-tag">step=1</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-trigger">⏰</div><div class="wf-node-label">Schedule 30m</div><div class="wf-node-tag">trigger</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Parse Date</div><div class="wf-node-tag">ISO format</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">SQL Query</div><div class="wf-node-tag">fetch due</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-logic">🔁</div><div class="wf-node-label">Loop Items</div><div class="wf-node-tag">one by one</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-logic">⚡</div><div class="wf-node-label">If Step = 5</div><div class="wf-node-tag">stop check</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-logic">🔀</div><div class="wf-node-label">Switch 1–5</div><div class="wf-node-tag">route step</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Build HTML+Pixel</div><div class="wf-node-tag">inject pixel</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-gmail"><img src="https://cdn.simpleicons.org/gmail/EA4335" style="width:26px;height:26px;" /></div><div class="wf-node-label">Gmail Send</div><div class="wf-node-tag">step1 new</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Mark Sent</div><div class="wf-node-tag">step+1</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-gmail"><img src="https://cdn.simpleicons.org/gmail/EA4335" style="width:26px;height:26px;" /></div><div class="wf-node-label">Add Label</div><div class="wf-node-tag">Gmail tag</div></div>
+        </div>
+      </div>
+
+      <!-- TRACKING PIPELINE -->
+      <div class="wf-card reveal">
+        <div class="wf-card-header">
+          <img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:16px;height:16px;" />
+          <div class="wf-card-title">👁️ Pixel Tracking Pipeline</div>
+          <div class="wf-card-sub">fires on every real open →</div>
+        </div>
+        <div class="wf-pipeline">
+          <div class="wf-node"><div class="wf-node-box nb-trigger">📡</div><div class="wf-node-label">Webhook Catch Open</div><div class="wf-node-tag">pixel fires</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Select Row</div><div class="wf-node-tag">by eid</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Parse Event</div><div class="wf-node-tag">timestamp</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Select Again</div><div class="wf-node-tag">get sent_at</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-logic">🛡️</div><div class="wf-node-label">Time Gap Guard</div><div class="wf-node-tag">&lt;2min=bot</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Update → Open</div><div class="wf-node-tag">Postgres</div></div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-node"><div class="wf-node-box nb-result">🖼️</div><div class="wf-node-label">Return Pixel</div><div class="wf-node-tag">1×1 GIF</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTOMATION -->
+  <style>
+    .auto-section { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .auto-n8n-img { border-radius:var(--r-xl); overflow:hidden; background:#0d0f18; border:1px solid rgba(255,255,255,0.07); box-shadow:0 16px 56px rgba(0,0,0,0.45); margin-bottom:28px; }
+    .auto-n8n-img img { width:100%; display:block; }
+    .auto-two-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+    @media(max-width:740px){ .auto-two-grid{grid-template-columns:1fr;} }
+    .acard { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); padding:26px; }
+    .acard-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--text); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+    .step-list { display:flex; flex-direction:column; gap:10px; }
+    .step-item { display:flex; align-items:flex-start; gap:12px; padding:10px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); }
+    .step-emoji { width:32px; height:32px; border-radius:8px; background:rgba(59,130,246,0.1); display:flex; align-items:center; justify-content:center; font-size:0.85rem; flex-shrink:0; font-family:monospace; font-weight:700; color:#60a5fa; font-size:0.72rem; }
+    .step-label { font-size:0.82rem; font-weight:600; color:var(--text); margin-bottom:2px; }
+    .step-sub { font-size:0.74rem; color:var(--muted); line-height:1.45; }
+    .step-sub code { font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:#86efac; background:rgba(134,239,172,0.08); padding:1px 4px; border-radius:3px; }
+    .pixel-codeblock { background:#0d111a; border-radius:10px; padding:14px 16px; margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#a9b8c8; line-height:1.7; border:1px solid rgba(255,255,255,0.05); overflow-x:auto; }
+    .pixel-codeblock .k { color:#60a5fa; }
+    .pixel-codeblock .s { color:#86efac; }
+    .pixel-codeblock .v { color:#fbbf24; }
+    .pixel-codeblock .c { color:#4b5e72; font-style:italic; }
+    .why-box { margin-top:14px; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:12px 14px; }
+    .why-box-title { font-size:0.75rem; font-weight:700; color:var(--blue3); margin-bottom:4px; }
+    .why-box-text { font-size:0.75rem; color:var(--text2); line-height:1.5; }
+
+    /* SQL CARD */
+    .sql-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); overflow:hidden; }
+    .sql-card-header { display:flex; align-items:center; gap:14px; padding:18px 22px; border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02); }
+    .sql-card-icon { width:40px; height:40px; border-radius:10px; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.15); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+    .sql-card-title { font-family:'Space Grotesk',sans-serif; font-size:0.95rem; font-weight:700; color:var(--text); }
+    .sql-card-title code { font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:#4ade80; }
+    .sql-card-sub { font-size:0.76rem; color:var(--muted); margin-top:2px; }
+    .sql-cols { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,0.04); }
+    @media(max-width:700px){ .sql-cols{grid-template-columns:1fr 1fr;} }
+    .sql-col { background:var(--card); padding:13px 15px; }
+    .sql-col:hover { background:rgba(255,255,255,0.025); }
+    .sql-col-name { font-family:'JetBrains Mono',monospace; font-size:0.76rem; font-weight:600; color:#86efac; margin-bottom:2px; }
+    .sql-col-type { font-size:0.6rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+    .sql-col-desc { font-size:0.7rem; color:var(--muted); line-height:1.4; }
+    .sql-col.pk .sql-col-name { color:#fbbf24; }
+    .sql-badges { display:flex; gap:4px; flex-wrap:wrap; }
+    .sbadge { font-size:0.58rem; font-weight:700; padding:2px 7px; border-radius:20px; }
+    .sb-wait { background:rgba(234,179,8,0.1); color:#eab308; border:1px solid rgba(234,179,8,0.2); }
+    .sb-sent { background:rgba(59,130,246,0.1); color:#60a5fa; border:1px solid rgba(59,130,246,0.2); }
+    .sb-open { background:rgba(34,197,94,0.1); color:#4ade80; border:1px solid rgba(34,197,94,0.2); }
+    .sb-stop { background:rgba(239,68,68,0.1); color:#f87171; border:1px solid rgba(239,68,68,0.2); }
+    .sql-raw { background:#0d111a; padding:18px 22px; border-top:1px solid var(--border); }
+    .sql-raw-label { font-size:0.62rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(96,165,250,0.5); margin-bottom:10px; }
+    .sql-raw pre { font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#a9b8c8; line-height:1.75; white-space:pre; overflow-x:auto; margin:0; }
+    .sql-raw .cm { color:#4b5e72; font-style:italic; }
+  </style>
+
+  <div class="auto-section">
+    <div class="section" id="automation">
+      <div class="reveal" style="margin-bottom:36px;">
+        <div class="label">#3 How It Works</div>
+        <h2 class="heading">How emails are <span class="hl">generated &amp; sent.</span></h2>
+        <p class="subtext">Every email is built at runtime — HTML constructed, pixel injected, then sent via Gmail API.</p>
+      </div>
+
+      <div class="auto-n8n-img reveal">
+        <img src="Pasted image.png" alt="n8n pixel tracking workflow" />
+      </div>
+
+      <div class="auto-two-grid">
+        <div class="acard reveal">
+          <div class="acard-title">📋 Step-by-Step Flow</div>
+          <div class="step-list">
+            <div class="step-item"><div class="step-emoji">🗄️</div><div><div class="step-label">Postgres DB stores everything</div><div class="step-sub">Name, email, 5 messages, step number, thread ID, next send date</div></div></div>
+            <div class="step-item"><div class="step-emoji">⏰</div><div><div class="step-label">Schedule trigger every 30 min</div><div class="step-sub">Code node converts date → ISO string for exact SQL match</div></div></div>
+            <div class="step-item"><div class="step-emoji">🔀</div><div><div class="step-label">Switch node routes by step 1–5</div><div class="step-sub">Each step has its own code node reading the correct message field</div></div></div>
+            <div class="step-item"><div class="step-emoji">{ }</div><div><div class="step-label">Code node builds HTML email</div><div class="step-sub">Wraps text in &lt;p&gt; tags, appends invisible tracking pixel at bottom</div></div></div>
+            <div class="step-item"><div class="step-emoji">📧</div><div><div class="step-label">Gmail API sends or replies</div><div class="step-sub">Step 1 = new email. Steps 2–5 = reply using saved <code>thread_id</code></div></div></div>
+            <div class="step-item"><div class="step-emoji">✅</div><div><div class="step-label">DB updated after every send</div><div class="step-sub">status → sent, step+1, next date = +3 days, thread_id stored</div></div></div>
+          </div>
+        </div>
+
+        <div class="acard reveal">
+          <div class="acard-title">🔧 What the Code Node Does</div>
+          <div class="step-list">
+            <div class="step-item"><div class="step-emoji">📝</div><div><div class="step-label">Parses raw text → clean HTML</div><div class="step-sub">Splits on newlines, wraps each block in &lt;p&gt; tags for Gmail rendering</div></div></div>
+            <div class="step-item"><div class="step-emoji">🔗</div><div><div class="step-label">Builds unique pixel URL</div><div class="step-sub">Encodes <code>eid</code>, <code>to</code>, <code>c</code> (campaign) into GET params per email</div></div></div>
+            <div class="step-item"><div class="step-emoji">🕵️</div><div><div class="step-label">Injects 1×1 invisible pixel</div><div class="step-sub">Hidden &lt;img&gt; at bottom — loads silently when recipient opens</div></div></div>
+          </div>
+          <div class="pixel-codeblock">
+<span class="c">// Pixel injected at bottom of every email</span>
+<span class="k">&lt;img</span> src=<span class="s">"https://yoursite.com/track-open
+  ?eid=<span class="v">{{id}}</span>&amp;to=<span class="v">{{email}}</span>&amp;c=<span class="v">{{campaign}}</span>"</span>
+  width=<span class="s">"1"</span> height=<span class="s">"1"</span>
+  style=<span class="s">"display:none;"</span> <span class="k">/&gt;</span>
+          </div>
+          <div class="why-box">
+            <div class="why-box-title">💡 Why HTML — not plain text?</div>
+            <div class="why-box-text">Plain text emails can't embed an &lt;img&gt; tag — so no pixel, no webhook, no tracking. HTML is the foundation.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SQL SCHEMA -->
+      <div class="sql-card reveal">
+        <div class="sql-card-header">
+          <div class="sql-card-icon">🗄️</div>
+          <div>
+            <div class="sql-card-title">Postgres Table — <code>out_duplicate</code></div>
+            <div class="sql-card-sub">Every contact, step, message and thread is stored here. Automation reads and writes on every cycle.</div>
+          </div>
+        </div>
+        <div class="sql-cols">
+          <div class="sql-col pk"><div class="sql-col-name">id</div><div class="sql-col-type">text · PK</div><div class="sql-col-desc">Unique email record ID — embedded in pixel URL for tracking</div></div>
+          <div class="sql-col"><div class="sql-col-name">contact</div><div class="sql-col-type">text · unique</div><div class="sql-col-desc">Recipient email — primary key prevents duplicate campaigns</div></div>
+          <div class="sql-col"><div class="sql-col-name">threat_id</div><div class="sql-col-type">text</div><div class="sql-col-desc">Gmail thread ID — used to reply in same chain for steps 2–5</div></div>
+          <div class="sql-col"><div class="sql-col-name">message_1→5</div><div class="sql-col-type">text × 5</div><div class="sql-col-desc">Full 5-step sequence stored upfront, code node picks by step</div></div>
+          <div class="sql-col"><div class="sql-col-name">step</div><div class="sql-col-type">integer</div><div class="sql-col-desc">Current step (1–5) — incremented after every successful send</div></div>
+          <div class="sql-col"><div class="sql-col-name">date / time</div><div class="sql-col-type">date / text</div><div class="sql-col-desc">When to send next — schedule trigger matches this each cycle</div></div>
+          <div class="sql-col"><div class="sql-col-name">subject</div><div class="sql-col-type">text</div><div class="sql-col-desc">Email subject — only used for step 1 (new email threads)</div></div>
+          <div class="sql-col"><div class="sql-col-name">status</div><div class="sql-col-type">enum</div><div class="sql-col-desc"><div class="sql-badges"><span class="sbadge sb-wait">waiting</span><span class="sbadge sb-sent">sent</span><span class="sbadge sb-open">open</span><span class="sbadge sb-stop">stop</span></div></div></div>
+          <div class="sql-col"><div class="sql-col-name">created_at</div><div class="sql-col-type">timestamptz</div><div class="sql-col-desc">Auto-set on insert via <code style="font-family:monospace;font-size:0.62rem;">DEFAULT now()</code></div></div>
+        </div>
+        <div class="sql-raw">
+          <div class="sql-raw-label">📋 Raw Schema</div>
+          <pre>CREATE TABLE public.out_duplicate (
+  id         TEXT NOT NULL,
+  name       TEXT,
+  contact    TEXT NOT NULL,    <span class="cm">-- primary key · unique per prospect</span>
+  threat_id  TEXT,             <span class="cm">-- Gmail thread ID for reply chaining</span>
+  date       DATE,  time TEXT,
+  message_1  TEXT,  message_2 TEXT,  message_3 TEXT,
+  message_4  TEXT,  message_5 TEXT,  <span class="cm">-- 5-step sequence</span>
+  step       INTEGER,          <span class="cm">-- current step (1–5)</span>
+  subject    TEXT,
+  status     public.status_type DEFAULT 'waiting', <span class="cm">-- waiting|sent|open|stop</span>
+  created_at TIMESTAMPTZ DEFAULT now(),
+  CONSTRAINT out_duplicate_pkey PRIMARY KEY (contact)
+);</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIC / ALGORITHM -->
+  <style>
+    .logic-section { background:var(--bg); }
+    .logic-two { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+    @media(max-width:700px){ .logic-two{grid-template-columns:1fr;} }
+    .lcard { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); padding:26px; }
+    .lcard-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+    .lcard-text { font-size:0.88rem; color:var(--text2); line-height:1.65; margin-bottom:14px; }
+    .flow-row { display:flex; align-items:center; gap:8px; background:var(--bg2); border-radius:10px; padding:14px; flex-wrap:wrap; }
+    .flow-item { display:flex; flex-direction:column; align-items:center; gap:4px; font-size:0.62rem; color:var(--muted); text-align:center; }
+    .flow-icon { font-size:1.2rem; }
+    .flow-arr { color:rgba(59,130,246,0.3); font-size:0.9rem; }
+    .alert-box { border-radius:10px; padding:13px 15px; margin-top:12px; }
+    .alert-red { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.15); }
+    .alert-green { background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.15); }
+    .alert-title { font-size:0.75rem; font-weight:700; margin-bottom:3px; }
+    .alert-red .alert-title { color:var(--red); }
+    .alert-green .alert-title { color:var(--green); }
+    .alert-text { font-size:0.75rem; color:var(--text2); line-height:1.5; }
+    .code-card { background:#0d111a; border:1px solid rgba(255,255,255,0.06); border-radius:var(--r-xl); padding:26px; }
+    .code-card-title { font-family:'Space Grotesk',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue3); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+    .code-block { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#a9b8c8; line-height:1.75; }
+    .code-block .kw { color:#60a5fa; }
+    .code-block .vr { color:#86efac; }
+    .code-block .cm { color:#4b5e72; font-style:italic; }
+    .code-block .op { color:#fbbf24; }
+    .result-strip { background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.15); border-radius:var(--r-xl); padding:22px 28px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+    .result-icon { font-size:2rem; }
+    .result-items { display:flex; flex-direction:column; gap:7px; }
+    .result-item { display:flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--text2); font-weight:500; }
+    .result-item .ck { color:var(--green); font-weight:700; }
+    .footer-note { margin-top:40px; text-align:center; font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--text2); padding:18px; border-radius:var(--r-lg); background:rgba(59,130,246,0.05); border:1px solid rgba(59,130,246,0.1); }
+    .footer-note span { color:var(--blue3); }
+  </style>
+
+  <div class="logic-section">
+    <div class="section" id="logic">
+      <div class="reveal" style="margin-bottom:48px;">
+        <div class="label">#4 The Algorithm</div>
+        <h2 class="heading">Filtering real opens <span class="hl">from bots.</span></h2>
+        <p class="subtext">Email scanners load your pixel immediately after send. Without a filter, your metrics are junk.</p>
+      </div>
+
+      <div class="logic-two">
+        <div class="lcard reveal">
+          <div class="lcard-title" style="color:var(--red);">⚠️ The Hidden Problem</div>
+          <div class="lcard-text">Gmail and Apple Mail run security scanners that load the tracking pixel seconds after the email is delivered — before any human opens it.</div>
+          <div class="flow-row">
+            <div class="flow-item"><span class="flow-icon">📧</span>Email Sent</div>
+            <span class="flow-arr">→</span>
+            <div class="flow-item"><span class="flow-icon">🤖</span>Scanner</div>
+            <span class="flow-arr">→</span>
+            <div class="flow-item"><span class="flow-icon">🪝</span>Webhook</div>
+            <span class="flow-arr">→</span>
+            <div class="flow-item"><span class="flow-icon">❌</span>Fake Open</div>
+          </div>
+          <div class="alert-box alert-red">
+            <div class="alert-title">🚨 Impact without filtering</div>
+            <div class="alert-text">Broken follow-up sequences. Inflated open rates. Automation fires next email too early. Dirty analytics.</div>
+          </div>
+        </div>
+
+        <div class="lcard reveal">
+          <div class="lcard-title" style="color:var(--green);">✅ My Solution</div>
+          <div class="lcard-text"><strong style="color:var(--text);">Ignore any open that fires in under 2 minutes.</strong> Compare the webhook timestamp against the <code style="font-family:monospace;font-size:0.82em;color:#86efac;">sent_at</code> value stored in Postgres.</div>
+          <div class="flow-row">
+            <div class="flow-item"><span class="flow-icon">📡</span>Webhook</div>
+            <span class="flow-arr">→</span>
+            <div class="flow-item"><span class="flow-icon">🧮</span>Diff = open − sent</div>
+            <span class="flow-arr">→</span>
+            <div class="flow-item"><span class="flow-icon">🛡️</span>&lt;2 min?</div>
+            <span class="flow-arr">→</span>
+            <div class="flow-item"><span class="flow-icon">🚫</span>Ignore</div>
+          </div>
+          <div class="alert-box alert-green">
+            <div class="alert-title">⏱️ Why 2 minutes?</div>
+            <div class="alert-text">Safe buffer above scanner speed (&lt;30s) but below realistic human read-time. Keeps automation sequencing intact.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-card reveal" style="margin-bottom:16px;">
+        <div class="code-card-title">🛡️ Time Gap Guard — Code Node Logic</div>
+        <div class="code-block">
+<span class="kw">const</span> <span class="vr">sentAt</span>    = parseInt(query.st || <span class="op">'0'</span>);     <span class="cm">// stored in DB at send time</span>
+<span class="kw">const</span> <span class="vr">openedAt</span>  = $now.toMillis();               <span class="cm">// webhook fires NOW</span>
+<span class="kw">const</span> <span class="vr">diffMins</span>  = (openedAt - sentAt) / <span class="op">1000</span> / <span class="op">60</span>;
+
+<span class="kw">if</span> (sentAt > <span class="op">0</span> && diffMins < <span class="op">2</span>) {
+  <span class="kw">return</span> [];   <span class="cm">// 🤖 scanner fired too fast → discard</span>
+}
+
+<span class="cm">// ✅ real open — extract eid, recipient, campaign, IP, user-agent</span>
+<span class="cm">// → update Postgres status to "open"</span>
+        </div>
+      </div>
+
+      <div class="result-strip reveal" id="results">
+        <div class="result-icon">🎯</div>
+        <div class="result-items">
+          <div class="result-item"><span class="ck">✓</span> Only real human opens are counted</div>
+          <div class="result-item"><span class="ck">✓</span> Automation sequences run without conflicts</div>
+          <div class="result-item"><span class="ck">✓</span> Clean data = better follow-up timing = more replies</div>
+        </div>
+      </div>
+
+      <div class="footer-note reveal"><span>★</span> Clean signals matter more than more signals.</div>
+    </div>
+  </div>
+
+  <!-- RESOURCES -->
+  <style>
+    .res-section { background:var(--bg2); border-top:1px solid var(--border); }
+    .res-head { margin-bottom:52px; }
+    .res-dl-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:40px; }
+    @media(max-width:640px){ .res-dl-grid{grid-template-columns:1fr;} }
+    .res-dl-card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--r-xl); padding:26px;
+      display:flex; align-items:flex-start; gap:18px;
+      text-decoration:none; transition:border-color .2s, transform .2s;
+    }
+    .res-dl-card:hover { border-color:rgba(59,130,246,0.35); transform:translateY(-3px); }
+    .res-dl-icon { width:52px; height:52px; border-radius:14px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .res-dl-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--text); margin-bottom:5px; }
+    .res-dl-sub { font-size:0.78rem; color:var(--muted); line-height:1.55; margin-bottom:14px; }
+    .res-dl-btn { display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:700; color:var(--blue3); }
+    .res-dl-btn svg { width:14px; height:14px; }
+    .res-sep { border:none; border-top:1px solid var(--border); margin:0 0 40px; }
+    .res-connect-label { text-align:center; font-size:0.68rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:24px; }
+    .res-links { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-bottom:48px; }
+    .res-link {
+      display:flex; align-items:center; gap:10px;
+      background:var(--card); border:1px solid var(--border);
+      border-radius:12px; padding:11px 18px;
+      text-decoration:none; transition:border-color .2s, background .2s;
+    }
+    .res-link:hover { border-color:rgba(255,255,255,0.14); background:var(--card2); }
+    .res-link-icon { width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .res-link-label { font-size:0.6rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+    .res-link-value { font-size:0.8rem; font-weight:600; color:var(--text); }
+    .res-cta {
+      display:block; text-align:center; max-width:320px; margin:0 auto;
+      background:var(--grad); color:#fff;
+      font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700;
+      padding:15px 32px; border-radius:999px;
+      box-shadow:0 8px 32px rgba(59,130,246,0.3);
+      transition:transform .2s, box-shadow .2s;
+    }
+    .res-cta:hover { transform:translateY(-2px); box-shadow:0 14px 44px rgba(59,130,246,0.45); }
+  </style>
+
+  <div class="res-section">
+    <div class="section" id="resources">
+      <div class="res-head reveal">
+        <div class="label">📦 Resources</div>
+        <h2 class="heading">Get the <span class="hl">exact files</span> I used.</h2>
+        <p class="subtext">Download the n8n workflow JSON and Postgres SQL schema — drop them in and run the system yourself.</p>
+      </div>
+
+      <div class="res-dl-grid">
+        <a href="outreact 2.json" download="outreach-automation.json" class="res-dl-card reveal">
+          <div class="res-dl-icon" style="background:rgba(255,109,90,0.1);border:1px solid rgba(255,109,90,0.18);">
+            <img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:26px;height:26px;" />
+          </div>
+          <div>
+            <div class="res-dl-title">n8n Automation Workflow</div>
+            <div class="res-dl-sub">Full pipeline — webhook intake, schedule trigger, HTML builder, Gmail sender, pixel tracker, and bot filter. Import directly into n8n.</div>
+            <div class="res-dl-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Download outreach-automation.json
+            </div>
+          </div>
+        </a>
+
+        <a href="data:text/plain;charset=utf-8,CREATE TABLE public.out_duplicate (%0A  id text not null,%0A  name text null,%0A  contact text not null,%0A  threat_id text null,%0A  date date null,%0A  message_1 text null,%0A  message_2 text null,%0A  message_3 text null,%0A  message_4 text null,%0A  message_5 text null,%0A  step integer null,%0A  time text null,%0A  created_at timestamp with time zone null default now(),%0A  subject text null,%0A  status public.status_type null default 'waiting'::status_type,%0A  CONSTRAINT out_duplicate_pkey PRIMARY KEY (contact)%0A);" download="out_duplicate.sql" class="res-dl-card reveal">
+          <div class="res-dl-icon" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.15);font-size:1.4rem;">🗄️</div>
+          <div>
+            <div class="res-dl-title">Postgres SQL Schema</div>
+            <div class="res-dl-sub">The exact <code style="font-family:monospace;font-size:0.75rem;color:#4ade80;">out_duplicate</code> table — status enum, 5-message fields, thread ID. Paste into Supabase or any Postgres instance.</div>
+            <div class="res-dl-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Download out_duplicate.sql
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <hr class="res-sep" />
+      <div class="res-connect-label reveal">Connect or collaborate</div>
+
+      <div class="res-links reveal">
+        <a href="https://www.linkedin.com/in/karlspace/" target="_blank" class="res-link">
+          <div class="res-link-icon" style="background:rgba(10,102,194,0.12);">
+            <img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn" style="width:17px;height:17px;" />
+          </div>
+          <div><div class="res-link-label">LinkedIn</div><div class="res-link-value">in/karlspace</div></div>
+        </a>
+        <a href="https://karlspace.in/" target="_blank" class="res-link">
+          <div class="res-link-icon" style="background:rgba(59,130,246,0.1);font-size:1rem;">🌐</div>
+          <div><div class="res-link-label">Portfolio</div><div class="res-link-value">karlspace.in</div></div>
+        </a>
+        <a href="mailto:shivam@karlspace.in" class="res-link">
+          <div class="res-link-icon" style="background:rgba(234,67,53,0.1);">
+            <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Email" style="width:17px;height:17px;" />
+          </div>
+          <div><div class="res-link-label">Email</div><div class="res-link-value">shivam@karlspace.in</div></div>
+        </a>
+        <a href="https://calendly.com/karlspace3/30min" target="_blank" class="res-link">
+          <div class="res-link-icon" style="background:rgba(0,107,255,0.1);">
+            <img src="https://cdn.simpleicons.org/calendly/006BFF" alt="Calendly" style="width:17px;height:17px;" />
+          </div>
+          <div><div class="res-link-label">Book a Call</div><div class="res-link-value">Calendly · 30 min</div></div>
+        </a>
+      </div>
+
+      <a href="https://calendly.com/karlspace3/30min" target="_blank" class="res-cta reveal">
+        Book a Free Strategy Call →
+      </a>
+    </div>
+  </div>
+
+
+
+  <script>
+    // Navbar hamburger
+    const hamburger = document.getElementById('navHamburger');
+    const drawer = document.getElementById('navDrawer');
+    function closeDrawer() { hamburger.classList.remove('open'); drawer.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); }
+    hamburger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

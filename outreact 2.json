@@ -1,0 +1,2663 @@
+{
+  "name": "outreact 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "5eccc0fa-5dca-43e5-b561-e71f17452762",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        3696,
+        2400
+      ],
+      "id": "0c599cb1-ab5c-4d4a-9116-936b2f514323",
+      "name": "Webhook",
+      "webhookId": "5eccc0fa-5dca-43e5-b561-e71f17452762"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "out_duplicate",
+          "mode": "list",
+          "cachedResultName": "out_duplicate"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.headers['cf-ray'] }}",
+            "name": "={{ $json.body.name }}",
+            "contact": "={{ $json.body.contact }}",
+            "status": "waiting",
+            "date": "={{ $json.body.date }}",
+            "message_1": "={{ $json.body.messages[0] }}",
+            "message_2": "={{ $json.body.messages[1] }}",
+            "message_3": "={{ $json.body.messages[2] }}",
+            "message_4": "={{ $json.body.messages[3] }}",
+            "message_5": "={{ $json.body.messages[4] }}",
+            "step": 1,
+            "time": "={{ $json.body.time }}",
+            "subject": "={{ $json.body.subject }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "contact",
+              "displayName": "contact",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "threat_id",
+              "displayName": "threat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message_1",
+              "displayName": "message_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message_2",
+              "displayName": "message_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message_3",
+              "displayName": "message_3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message_4",
+              "displayName": "message_4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message_5",
+              "displayName": "message_5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "time",
+              "displayName": "time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "options",
+              "canBeUsedToMatch": true,
+              "options": [
+                {
+                  "name": "waiting",
+                  "value": "waiting"
+                },
+                {
+                  "name": "sent",
+                  "value": "sent"
+                },
+                {
+                  "name": "open",
+                  "value": "open"
+                },
+                {
+                  "name": "stop",
+                  "value": "stop"
+                }
+              ]
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        3920,
+        2400
+      ],
+      "id": "22c55819-984d-4651-bc37-9977c0223ec3",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "UvI6jYuZBbEIx1kn",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst webhookBase = 'https://oiukjhjiofgfgnbfg.app.n8n.cloud/webhook/track-open';\n\nconst emailId = String(item.id || '').trim();\nconst recipient = String(item.contact || '').trim();\nconst campaign = String(item.name || '').trim();\nconst subject = String(item.subject || 'Quick Idea For Your Store').trim();\nconst step = item.step;\nconst rawMessage = item[`message_${step}`] || '';\n\nconst chunks = rawMessage.split(/\\n\\n+/).map(p => p.trim()).filter(p => p.length > 0);\n\nconst merged = [];\nfor (const chunk of chunks) {\n  const singleLine = chunk.replace(/\\n/g, ' ');\n  const startsLower = /^[a-z]/.test(singleLine);\n  if (startsLower && merged.length > 0) {\n    merged[merged.length - 1] += ' ' + singleLine;\n  } else {\n    merged.push(singleLine);\n  }\n}\n\nconst paragraphs = merged\n  .map(p => {\n    if (p.startsWith('- ') || p.includes('\\n- ')) {\n      const parts = p.split(/- /).filter(i => i.trim());\n      const listItems = parts.map(i => `<li style=\"margin-bottom:6px;\">${i.trim()}</li>`).join('\\n');\n      return `<ul style=\"margin:0 0 14px 0; padding-left:20px;\">${listItems}</ul>`;\n    }\n    return `<p style=\"margin:0 0 14px 0;\">${p}</p>`;\n  })\n  .join('\\n');\n\nconst pixelUrl = `${webhookBase}?eid=${encodeURIComponent(emailId)}&to=${encodeURIComponent(recipient)}&c=${encodeURIComponent(campaign)}`;\n\nconst html = `<!DOCTYPE html>\\n<html>\\n<body style=\"font-family: Arial, sans-serif; font-size: 15px; color: #333; padding: 20px; line-height: 1.6;\">\\n${paragraphs}\\n<img src=\"${pixelUrl}\" width=\"1\" height=\"1\" style=\"display:block;\" alt=\"\" />\\n</body>\\n</html>`;\n\nreturn [{\n  json: {\n    ...item,\n    html_body: html,\n    pixel_subject: subject\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5040,
+        1040
+      ],
+      "id": "83cb2a0d-8cc7-4032-8ba7-f1968cd6d6af",
+      "name": "Build HTML + Pixel (Step 1)1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst webhookBase = 'https://oiukjhjiofgfgnbfg.app.n8n.cloud/webhook/track-open';\n\nconst emailId = String(item.id || '').trim();\nconst recipient = String(item.contact || '').trim();\nconst campaign = String(item.name || '').trim();\nconst step = item.step;\nconst rawMessage = item[`message_${step}`] || '';\n\nconst chunks = rawMessage.split(/\\n\\n+/).map(p => p.trim()).filter(p => p.length > 0);\nconst merged = [];\nfor (const chunk of chunks) {\n  const singleLine = chunk.replace(/\\n/g, ' ');\n  const startsLower = /^[a-z]/.test(singleLine);\n  if (startsLower && merged.length > 0) { merged[merged.length - 1] += ' ' + singleLine; } else { merged.push(singleLine); }\n}\nconst paragraphs = merged.map(p => {\n  if (p.startsWith('- ') || p.includes('\\n- ')) {\n    const parts = p.split(/- /).filter(i => i.trim());\n    const listItems = parts.map(i => `<li style=\"margin-bottom:6px;\">${i.trim()}</li>`).join('\\n');\n    return `<ul style=\"margin:0 0 14px 0; padding-left:20px;\">${listItems}</ul>`;\n  }\n  return `<p style=\"margin:0 0 14px 0;\">${p}</p>`;\n}).join('\\n');\n\nconst pixelUrl = `${webhookBase}?eid=${encodeURIComponent(emailId)}&to=${encodeURIComponent(recipient)}&c=${encodeURIComponent(campaign)}`;\nconst html = `<!DOCTYPE html>\\n<html>\\n<body style=\"font-family: Arial, sans-serif; font-size: 15px; color: #333; padding: 20px; line-height: 1.6;\">\\n${paragraphs}\\n<img src=\"${pixelUrl}\" width=\"1\" height=\"1\" style=\"display:block;\" alt=\"\" />\\n</body>\\n</html>`;\nreturn [{ json: { ...item, html_body: html } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5040,
+        1232
+      ],
+      "id": "35b073b7-e086-4f1f-b28a-5cc3f9d996fe",
+      "name": "Build HTML + Pixel (Step 2)1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst webhookBase = 'https://oiukjhjiofgfgnbfg.app.n8n.cloud/webhook/track-open';\n\nconst emailId = String(item.id || '').trim();\nconst recipient = String(item.contact || '').trim();\nconst campaign = String(item.name || '').trim();\nconst step = item.step;\nconst rawMessage = item[`message_${step}`] || '';\n\nconst chunks = rawMessage.split(/\\n\\n+/).map(p => p.trim()).filter(p => p.length > 0);\nconst merged = [];\nfor (const chunk of chunks) {\n  const singleLine = chunk.replace(/\\n/g, ' ');\n  const startsLower = /^[a-z]/.test(singleLine);\n  if (startsLower && merged.length > 0) { merged[merged.length - 1] += ' ' + singleLine; } else { merged.push(singleLine); }\n}\nconst paragraphs = merged.map(p => {\n  if (p.startsWith('- ') || p.includes('\\n- ')) {\n    const parts = p.split(/- /).filter(i => i.trim());\n    const listItems = parts.map(i => `<li style=\"margin-bottom:6px;\">${i.trim()}</li>`).join('\\n');\n    return `<ul style=\"margin:0 0 14px 0; padding-left:20px;\">${listItems}</ul>`;\n  }\n  return `<p style=\"margin:0 0 14px 0;\">${p}</p>`;\n}).join('\\n');\n\nconst pixelUrl = `${webhookBase}?eid=${encodeURIComponent(emailId)}&to=${encodeURIComponent(recipient)}&c=${encodeURIComponent(campaign)}`;\nconst html = `<!DOCTYPE html>\\n<html>\\n<body style=\"font-family: Arial, sans-serif; font-size: 15px; color: #333; padding: 20px; line-height: 1.6;\">\\n${paragraphs}\\n<img src=\"${pixelUrl}\" width=\"1\" height=\"1\" style=\"display:block;\" alt=\"\" />\\n</body>\\n</html>`;\nreturn [{ json: { ...item, html_body: html } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5264,
+        1456
+      ],
+      "id": "36cab158-2a37-4216-81af-7c2d1d328aa8",
+      "name": "Build HTML + Pixel (Step 3)1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst webhookBase = 'https://oiukjhjiofgfgnbfg.app.n8n.cloud/webhook/track-open';\n\nconst emailId = String(item.id || '').trim();\nconst recipient = String(item.contact || '').trim();\nconst campaign = String(item.name || '').trim();\nconst step = item.step;\nconst rawMessage = item[`message_${step}`] || '';\n\nconst chunks = rawMessage.split(/\\n\\n+/).map(p => p.trim()).filter(p => p.length > 0);\nconst merged = [];\nfor (const chunk of chunks) {\n  const singleLine = chunk.replace(/\\n/g, ' ');\n  const startsLower = /^[a-z]/.test(singleLine);\n  if (startsLower && merged.length > 0) { merged[merged.length - 1] += ' ' + singleLine; } else { merged.push(singleLine); }\n}\nconst paragraphs = merged.map(p => {\n  if (p.startsWith('- ') || p.includes('\\n- ')) {\n    const parts = p.split(/- /).filter(i => i.trim());\n    const listItems = parts.map(i => `<li style=\"margin-bottom:6px;\">${i.trim()}</li>`).join('\\n');\n    return `<ul style=\"margin:0 0 14px 0; padding-left:20px;\">${listItems}</ul>`;\n  }\n  return `<p style=\"margin:0 0 14px 0;\">${p}</p>`;\n}).join('\\n');\n\nconst pixelUrl = `${webhookBase}?eid=${encodeURIComponent(emailId)}&to=${encodeURIComponent(recipient)}&c=${encodeURIComponent(campaign)}`;\nconst html = `<!DOCTYPE html>\\n<html>\\n<body style=\"font-family: Arial, sans-serif; font-size: 15px; color: #333; padding: 20px; line-height: 1.6;\">\\n${paragraphs}\\n<img src=\"${pixelUrl}\" width=\"1\" height=\"1\" style=\"display:block;\" alt=\"\" />\\n</body>\\n</html>`;\nreturn [{ json: { ...item, html_body: html } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5040,
+        1648
+      ],
+      "id": "377de608-e49c-427e-88b6-c72d1c32d488",
+      "name": "Build HTML + Pixel (Step 4)1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst webhookBase = 'https://oiukjhjiofgfgnbfg.app.n8n.cloud/webhook/track-open';\n\nconst emailId = String(item.id || '').trim();\nconst recipient = String(item.contact || '').trim();\nconst campaign = String(item.name || '').trim();\nconst step = item.step;\nconst rawMessage = item[`message_${step}`] || '';\n\nconst chunks = rawMessage.split(/\\n\\n+/).map(p => p.trim()).filter(p => p.length > 0);\nconst merged = [];\nfor (const chunk of chunks) {\n  const singleLine = chunk.replace(/\\n/g, ' ');\n  const startsLower = /^[a-z]/.test(singleLine);\n  if (startsLower && merged.length > 0) { merged[merged.length - 1] += ' ' + singleLine; } else { merged.push(singleLine); }\n}\nconst paragraphs = merged.map(p => {\n  if (p.startsWith('- ') || p.includes('\\n- ')) {\n    const parts = p.split(/- /).filter(i => i.trim());\n    const listItems = parts.map(i => `<li style=\"margin-bottom:6px;\">${i.trim()}</li>`).join('\\n');\n    return `<ul style=\"margin:0 0 14px 0; padding-left:20px;\">${listItems}</ul>`;\n  }\n  return `<p style=\"margin:0 0 14px 0;\">${p}</p>`;\n}).join('\\n');\n\nconst pixelUrl = `${webhookBase}?eid=${encodeURIComponent(emailId)}&to=${encodeURIComponent(recipient)}&c=${encodeURIComponent(campaign)}`;\nconst html = `<!DOCTYPE html>\\n<html>\\n<body style=\"font-family: Arial, sans-serif; font-size: 15px; color: #333; padding: 20px; line-height: 1.6;\">\\n${paragraphs}\\n<img src=\"${pixelUrl}\" width=\"1\" height=\"1\" style=\"display:block;\" alt=\"\" />\\n</body>\\n</html>`;\nreturn [{ json: { ...item, html_body: html } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5040,
+        1840
+      ],
+      "id": "d91056de-8b2f-4985-afa7-7fa13d0f0166",
+      "name": "Build HTML + Pixel (Step 5)1"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        3456,
+        1520
+      ],
+      "id": "c0f50d94-c0d6-473b-b2b2-bbc05d415fe7",
+      "name": "Schedule Trigger2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const readableDate = $json[\"Readable date\"];\nconst cleaned = readableDate.replace(/(\\d+)(st|nd|rd|th)/, \"$1\");\nconst dateObj = new Date(cleaned);\nconst date = dateObj.toISOString().slice(0, 10);\nconst hour = dateObj.getHours();\nconst minutes = dateObj.getMinutes() < 30 ? \"00\" : \"30\";\nconst time = minutes === \"00\" ? `${hour}` : `${hour}:30`;\nreturn [{ json: { date, time } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3680,
+        1520
+      ],
+      "id": "d3ec3e7e-03d1-4936-990f-fd7300a6c8f6",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT *\nFROM public.out_duplicate\nWHERE date = '{{ $json.date }}'\n  AND time = '{{ $json.time }}'",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        3904,
+        1520
+      ],
+      "id": "cf1f00b9-b013-4be0-bc83-d3fec82076e9",
+      "name": "Execute a SQL query2",
+      "credentials": {
+        "postgres": {
+          "id": "UvI6jYuZBbEIx1kn",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        4352,
+        1520
+      ],
+      "id": "ba11b395-6ff0-4cf8-867e-95db78ca9de3",
+      "name": "Loop Over Items2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "54785c63-b5ac-4567-a356-7e243010d07c",
+              "leftValue": "={{ Number($json.Step) }}",
+              "rightValue": 5,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        4592,
+        1520
+      ],
+      "id": "a60ca572-8cfd-4a24-a523-819027ef0f5b",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.step }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "664730cc-ed5d-4376-a20e-e726895fc671"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "0ce35ed0-c58b-4019-b80a-c86045067a99",
+                    "leftValue": "={{ $json.step }}",
+                    "rightValue": 2,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "1bc28858-538a-4444-9cc4-a5d4dcf6007e",
+                    "leftValue": "={{ $json.step }}",
+                    "rightValue": 3,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "45bad387-7937-418d-a76d-75fa2bbe7b19",
+                    "leftValue": "={{ $json.step }}",
+                    "rightValue": 4,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f2bc4ddd-8b1c-489e-b6f2-a12b7a09a89e",
+                    "leftValue": "={{ $json.step }}",
+                    "rightValue": 5,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "9a59a8f7-12b6-41e7-a1d0-f8def6346814",
+                    "leftValue": "={{ $json.step }}",
+                    "rightValue": 6,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "1bcbc157-028b-4780-b4ad-d9214dd94d68",
+                    "leftValue": "={{ $json.step }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "number",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        4816,
+        1296
+      ],
+      "id": "619127a9-666f-4c74-95d1-0b32fd90c7d5",
+      "name": "Switch2"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.contact }}",
+        "subject": "={{ $json.subject }}",
+        "message": "={{ $json.html_body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        5264,
+        1040
+      ],
+      "id": "879061cf-88d9-4494-b4c6-1d6d7e03553b",
+      "name": "Send a message2",
+      "webhookId": "f56699b3-45e0-447a-a5c8-110be512c0d5",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "STw6b4zCJ6QPNcnl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        5488,
+        1040
+      ],
+      "id": "30e65b24-f547-4e8a-b21a-baf9dda99390",
+      "name": "Get a message2",
+      "webhookId": "c275350a-9446-48bf-89d7-f4503a4870e2",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "STw6b4zCJ6QPNcnl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "out_duplicate",
+          "mode": "list",
+          "cachedResultName": "out_duplicate"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "sent",
+            "threat_id": "={{ $json.threadId }}",
+            "id": "={{ $json.id }}",
+            "contact": "={{ $('Build HTML + Pixel (Step 1)1').item.json.contact }}",
+            "name": "={{ $('Build HTML + Pixel (Step 1)1').item.json.name }}",
+            "date": "={{ new Date(new Date($('Build HTML + Pixel (Step 1)1').item.json.date).getTime() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] }}",
+            "message_5": "={{ $('Build HTML + Pixel (Step 1)1').item.json.message_5 }}",
+            "message_4": "={{ $('Build HTML + Pixel (Step 1)1').item.json.message_4 }}",
+            "message_3": "={{ $('Build HTML + Pixel (Step 1)1').item.json.message_3 }}",
+            "message_2": "={{ $('Build HTML + Pixel (Step 1)1').item.json.message_2 }}",
+            "message_1": "={{ $('Build HTML + Pixel (Step 1)1').item.json.message_1 }}",
+            "time": "={{ $('Build HTML + Pixel (Step 1)1').item.json.time }}",
+            "step": "={{ $('Build HTML + Pixel (Step 1)1').item.json.step + 1 }}",
+            "subject": "={{ $('Build HTML + Pixel (Step 1)1').item.json.subject }}"
+          },
+          "matchingColumns": [
+            "contact"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "contact",
+              "displayName": "contact",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "threat_id",
+              "displayName": "threat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "message_1",
+              "displayName": "message_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "message_2",
+              "displayName": "message_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "message_3",
+              "displayName": "message_3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "message_4",
+              "displayName": "message_4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "message_5",
+              "displayName": "message_5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "time",
+              "displayName": "time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "options",
+              "canBeUsedToMatch": true,
+              "options": [
+                {
+                  "name": "waiting",
+                  "value": "waiting"
+                },
+                {
+                  "name": "sent",
+                  "value": "sent"
+                },
+                {
+                  "name": "open",
+                  "value": "open"
+                },
+                {
+                  "name": "stop",
+                  "value": "stop"
+                }
+              ]
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "e32aac1c-378e-43e6-9f48-71ba4d2bb696",
+      "name": "Mark as sent (step1)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        5712,
+        1040
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "UvI6jYuZBbEIx1kn",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "thread",
+        "operation": "addLabels",
+        "threadId": "={{ $json.threat_id }}",
+        "labelIds": [
+          "Label_4598361168914883079"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        5920,
+        1040
+      ],
+      "id": "9778d191-656c-470c-b906-097a8e43080f",
+      "name": "Add label to thread2",
+      "webhookId": "f33ca69b-4d9a-4400-ada5-b87c63d44182",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "STw6b4zCJ6QPNcnl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $json.threat_id }}",
+        "message": "={{ $json.html_body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        5264,
+        1232
+      ],
+      "id": "7786580d-d14e-4e73-ae66-02767c79b8ff",
+      "name": "Reply to a message1",
+      "webhookId": "556532f3-4f6c-4cc7-8141-502c33073805",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "STw6b4zCJ6QPNcnl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "out_duplicate",
+          "mode": "list",
+          "cachedResultName": "out_duplicate"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contact": "={{ $('Execute a SQL query2').item.json.contact }}",
+            "id": "={{ $json.id }}",
+            "name": "={{ $('Execute a SQL query2').item.json.name }}",
+            "threat_id": "={{ $json.threadId }}",
+            "status": "sent",
+            "date": "={{ new Date(new Date($('Build HTML + Pixel (Step 2)1').item.json.date).getTime() + 4 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] }}",
+            "message_1": "={{ $('Execute a SQL query2').item.json.message_1 }}",
+            "message_2": "={{ $('Execute a SQL query2').item.json.message_2 }}",
+            "message_3": "={{ $('Execute a SQL query2').item.json.message_3 }}",
+            "message_4": "={{ $('Execute a SQL query2').item.json.message_4 }}",
+            "step": "={{ $('Execute a SQL query2').item.json.step + 1 }}",
+            "time": "={{ $('Execute a SQL query2').item.json.time }}",
+            "created_at": "={{ $('Execute a SQL query2').item.json.created_at }}",
+            "message_5": "={{ $('Execute a SQL query2').item.json.message_5 }}",
+            "subject": "={{ $('Switch2').item.json.subject }}"
+          },
+          "matchingColumns": [
+            "contact"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "contact",
+              "displayName": "contact",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "threat_id",
+              "displayName": "threat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_1",
+              "displayName": "message_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_2",
+              "displayName": "message_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_3",
+              "displayName": "message_3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_4",
+              "displayName": "message_4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_5",
+              "displayName": "message_5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "time",
+              "displayName": "time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "options",
+              "canBeUsedToMatch": false,
+              "options": [
+                {
+                  "name": "waiting",
+                  "value": "waiting"
+                },
+                {
+                  "name": "sent",
+                  "value": "sent"
+                },
+                {
+                  "name": "open",
+                  "value": "open"
+                },
+                {
+                  "name": "stop",
+                  "value": "stop"
+                }
+              ]
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        5488,
+        1232
+      ],
+      "id": "ea2bf7d0-949b-490f-8984-5358f3e385bb",
+      "name": "Insert or update rows in a table11",
+      "credentials": {
+        "postgres": {
+          "id": "UvI6jYuZBbEIx1kn",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $json.threat_id }}",
+        "message": "={{ $json.html_body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        5488,
+        1456
+      ],
+      "id": "13e0a9e6-2cdd-4d59-be7a-32066e98ebe5",
+      "name": "Reply to a message15",
+      "webhookId": "556532f3-4f6c-4cc7-8141-502c33073805",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "STw6b4zCJ6QPNcnl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "out_duplicate",
+          "mode": "list",
+          "cachedResultName": "out_duplicate"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contact": "={{ $('Execute a SQL query2').item.json.contact }}",
+            "id": "={{ $json.id }}",
+            "name": "={{ $('Execute a SQL query2').item.json.name }}",
+            "threat_id": "={{ $json.threadId }}",
+            "status": "sent",
+            "date": "={{ new Date(new Date($('Build HTML + Pixel (Step 3)1').item.json.date).getTime() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] }}",
+            "message_1": "={{ $('Execute a SQL query2').item.json.message_1 }}",
+            "message_2": "={{ $('Execute a SQL query2').item.json.message_2 }}",
+            "message_3": "={{ $('Execute a SQL query2').item.json.message_3 }}",
+            "message_4": "={{ $('Execute a SQL query2').item.json.message_4 }}",
+            "step": "={{ $('Execute a SQL query2').item.json.step + 1 }}",
+            "time": "={{ $('Execute a SQL query2').item.json.time }}",
+            "created_at": "={{ $('Execute a SQL query2').item.json.created_at }}",
+            "message_5": "={{ $('Execute a SQL query2').item.json.message_5 }}",
+            "subject": "={{ $('Switch2').item.json.subject }}"
+          },
+          "matchingColumns": [
+            "contact"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "contact",
+              "displayName": "contact",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "threat_id",
+              "displayName": "threat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_1",
+              "displayName": "message_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_2",
+              "displayName": "message_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_3",
+              "displayName": "message_3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_4",
+              "displayName": "message_4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_5",
+              "displayName": "message_5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "time",
+              "displayName": "time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "options",
+              "canBeUsedToMatch": false,
+              "options": [
+                {
+                  "name": "waiting",
+                  "value": "waiting"
+                },
+                {
+                  "name": "sent",
+                  "value": "sent"
+                },
+                {
+                  "name": "open",
+                  "value": "open"
+                },
+                {
+                  "name": "stop",
+                  "value": "stop"
+                }
+              ]
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        5712,
+        1456
+      ],
+      "id": "16999337-f0b9-40c5-ab71-0ce4aa3bcfe0",
+      "name": "Insert or update rows in a table12",
+      "credentials": {
+        "postgres": {
+          "id": "UvI6jYuZBbEIx1kn",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $json.threat_id }}",
+        "message": "={{ $json.html_body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        5264,
+        1648
+      ],
+      "id": "ff5555f9-4532-4bde-b5f6-25ff67501c51",
+      "name": "Reply to a message16",
+      "webhookId": "556532f3-4f6c-4cc7-8141-502c33073805",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "STw6b4zCJ6QPNcnl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "out_duplicate",
+          "mode": "list",
+          "cachedResultName": "out_duplicate"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contact": "={{ $('Execute a SQL query2').item.json.contact }}",
+            "id": "={{ $json.id }}",
+            "name": "={{ $('Execute a SQL query2').item.json.name }}",
+            "threat_id": "={{ $json.threadId }}",
+            "status": "sent",
+            "date": "={{ new Date(new Date($('Build HTML + Pixel (Step 4)1').item.json.date).getTime() + 6 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] }}",
+            "message_1": "={{ $('Execute a SQL query2').item.json.message_1 }}",
+            "message_2": "={{ $('Execute a SQL query2').item.json.message_2 }}",
+            "message_3": "={{ $('Execute a SQL query2').item.json.message_3 }}",
+            "message_4": "={{ $('Execute a SQL query2').item.json.message_4 }}",
+            "step": "={{ $('Execute a SQL query2').item.json.step + 1 }}",
+            "time": "={{ $('Execute a SQL query2').item.json.time }}",
+            "created_at": "={{ $('Execute a SQL query2').item.json.created_at }}",
+            "message_5": "={{ $('Execute a SQL query2').item.json.message_5 }}",
+            "subject": "={{ $('Switch2').item.json.subject }}"
+          },
+          "matchingColumns": [
+            "contact"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "contact",
+              "displayName": "contact",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "threat_id",
+              "displayName": "threat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_1",
+              "displayName": "message_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_2",
+              "displayName": "message_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_3",
+              "displayName": "message_3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_4",
+              "displayName": "message_4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_5",
+              "displayName": "message_5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "time",
+              "displayName": "time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "options",
+              "canBeUsedToMatch": false,
+              "options": [
+                {
+                  "name": "waiting",
+                  "value": "waiting"
+                },
+                {
+                  "name": "sent",
+                  "value": "sent"
+                },
+                {
+                  "name": "open",
+                  "value": "open"
+                },
+                {
+                  "name": "stop",
+                  "value": "stop"
+                }
+              ]
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        5488,
+        1648
+      ],
+      "id": "deb846fc-56eb-4e3f-841e-acbc7795131d",
+      "name": "Insert or update rows in a table13",
+      "credentials": {
+        "postgres": {
+          "id": "UvI6jYuZBbEIx1kn",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $json.threat_id }}",
+        "message": "={{ $json.html_body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        5264,
+        1840
+      ],
+      "id": "23d5f28a-4115-482c-b171-378e12ba60d6",
+      "name": "Reply to a message17",
+      "webhookId": "556532f3-4f6c-4cc7-8141-502c33073805",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "STw6b4zCJ6QPNcnl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "out_duplicate",
+          "mode": "list",
+          "cachedResultName": "out_duplicate"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contact": "={{ $('Execute a SQL query2').item.json.contact }}",
+            "id": "={{ $json.id }}",
+            "name": "={{ $('Execute a SQL query2').item.json.name }}",
+            "threat_id": "={{ $json.threadId }}",
+            "status": "sent",
+            "date": "={{ new Date(new Date($('Build HTML + Pixel (Step 5)1').item.json.date).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] }}",
+            "message_1": "={{ $('Execute a SQL query2').item.json.message_1 }}",
+            "message_2": "={{ $('Execute a SQL query2').item.json.message_2 }}",
+            "message_3": "={{ $('Execute a SQL query2').item.json.message_3 }}",
+            "message_4": "={{ $('Execute a SQL query2').item.json.message_4 }}",
+            "step": "={{ $('Execute a SQL query2').item.json.step + 1 }}",
+            "time": "={{ $('Execute a SQL query2').item.json.time }}",
+            "created_at": "={{ $('Execute a SQL query2').item.json.created_at }}",
+            "message_5": "={{ $('Execute a SQL query2').item.json.message_5 }}",
+            "subject": "={{ $('Switch2').item.json.subject }}"
+          },
+          "matchingColumns": [
+            "contact"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "contact",
+              "displayName": "contact",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "threat_id",
+              "displayName": "threat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_1",
+              "displayName": "message_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_2",
+              "displayName": "message_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_3",
+              "displayName": "message_3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_4",
+              "displayName": "message_4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "message_5",
+              "displayName": "message_5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "time",
+              "displayName": "time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "options",
+              "canBeUsedToMatch": false,
+              "options": [
+                {
+                  "name": "waiting",
+                  "value": "waiting"
+                },
+                {
+                  "name": "sent",
+                  "value": "sent"
+                },
+                {
+                  "name": "open",
+                  "value": "open"
+                },
+                {
+                  "name": "stop",
+                  "value": "stop"
+                }
+              ]
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        5488,
+        1840
+      ],
+      "id": "603d74d6-f75b-4bd2-952d-beca27829124",
+      "name": "Insert or update rows in a table14",
+      "credentials": {
+        "postgres": {
+          "id": "UvI6jYuZBbEIx1kn",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "821c1de4-3518-4ddc-944a-af9cee55b4de",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "open",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        5040,
+        1456
+      ],
+      "id": "ec9c50a5-b6f8-4ed4-b41e-923e4bf9dfeb",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "path": "track-open",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "eaa9584e-0941-4524-961f-24a5d238fe20",
+      "name": "Webhook - Catch Open1",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        4032,
+        -688
+      ],
+      "webhookId": "1fb53590-efa0-433c-8076-c6bb461223b2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const webhookData = $('Webhook - Catch Open1').first().json;\nconst query = webhookData.query;\nconst headers = webhookData.headers;\nconst dbRow = $input.first().json;\n\nconst sentAt = parseInt(query.st || '0');   // unix ms from pixel URL\nconst openedAt = $now.toMillis();           // n8n built-in, correct timezone\nconst diffMinutes = (openedAt - sentAt) / 1000 / 60;\n\nif (sentAt > 0 && diffMinutes < 2) {\n  return [];  // scanner fired too fast\n}\n\nconst emailId = decodeURIComponent(query.eid || 'unknown');\nconst recipient = decodeURIComponent(query.to || 'unknown');\nconst campaign = decodeURIComponent(query.c || 'general');\nconst ip = headers['x-forwarded-for'] || headers['x-real-ip'] || 'unknown';\nconst userAgent = headers['user-agent'] || 'unknown';\n\nreturn [{\n  json: {\n    email_id: emailId,\n    recipient: recipient,\n    campaign: campaign,\n    event: 'opened',\n    date: $now.toISODate(),\n    time: $now.toFormat('HH:mm:ss'),\n    timestamp: $now.toISO(),\n    ip_address: ip,\n    user_agent: userAgent\n  }\n}];"
+      },
+      "id": "e4b3f227-96d5-4c4c-9267-39ae43638f49",
+      "name": "Parse Open Event1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4480,
+        -688
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "out_duplicate",
+          "mode": "list",
+          "cachedResultName": "out_duplicate"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "contact",
+              "value": "={{ $json.recipient }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "244c7c71-0b27-4177-8cda-413b5b636270",
+      "name": "Select rows from a table",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        4704,
+        -688
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "UvI6jYuZBbEIx1kn",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// ── GUARD 2: Ignore opens that arrive within 2 minutes of send ──────────────\n// Gmail's own scanner fires the pixel almost instantly after send.\n// Real human opens happen at least a couple of minutes later.\nconst item = $input.first().json;\n\nconst sentAt = new Date(item.created_at || item.date);\nconst openedAt = new Date(); // now\nconst diffMs = openedAt.getTime() - sentAt.getTime();\nconst twoMinutes = 2 * 60 * 1000;\n\nif (diffMs < twoMinutes) {\n  // Too fast — almost certainly a scanner. Drop silently.\n  return [];\n}\n\nreturn [{ json: item }];"
+      },
+      "id": "e13514c4-1f33-44cd-bfc0-5460d98ddd24",
+      "name": "Time Gap Guard",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4928,
+        -688
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "out_duplicate",
+          "mode": "list",
+          "cachedResultName": "out_duplicate"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "open",
+            "step": "={{ $json.step }}",
+            "contact": "={{ $json.contact }}",
+            "id": "={{ $json.id }}",
+            "name": "={{ $json.name }}",
+            "message_1": "={{ $json.message_1 }}",
+            "date": "={{ $json.date }}",
+            "threat_id": "={{ $json.threat_id }}",
+            "message_2": "={{ $json.message_2 }}",
+            "message_3": "={{ $json.message_3 }}",
+            "message_4": "={{ $json.message_4 }}",
+            "message_5": "={{ $json.message_5 }}",
+            "time": "={{ $json.time }}",
+            "created_at": "={{ $json.created_at }}",
+            "subject": "={{ $json.subject }}"
+          },
+          "matchingColumns": [
+            "contact"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": true,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "contact",
+              "displayName": "contact",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "threat_id",
+              "displayName": "threat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message_1",
+              "displayName": "message_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message_2",
+              "displayName": "message_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message_3",
+              "displayName": "message_3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message_4",
+              "displayName": "message_4",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message_5",
+              "displayName": "message_5",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "time",
+              "displayName": "time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "options",
+              "canBeUsedToMatch": true,
+              "options": [
+                {
+                  "name": "waiting",
+                  "value": "waiting"
+                },
+                {
+                  "name": "sent",
+                  "value": "sent"
+                },
+                {
+                  "name": "open",
+                  "value": "open"
+                },
+                {
+                  "name": "stop",
+                  "value": "stop"
+                }
+              ]
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "f9e6075f-ba5f-4d05-bfa0-7cc469f739bb",
+      "name": "Update Status to Open (Postgres)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        5152,
+        -688
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "UvI6jYuZBbEIx1kn",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "GIF89a\u0001\u0000\u0001\u0000\u0000ÿ\u0000,\u0000\u0000\u0000\u0000\u0001\u0000\u0001\u0000\u0000\u0002\u0000;",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "image/gif"
+              },
+              {
+                "name": "Cache-Control",
+                "value": "no-cache, no-store, must-revalidate"
+              }
+            ]
+          }
+        }
+      },
+      "id": "92498f47-2308-4206-8c8f-e998fad901da",
+      "name": "Return Pixel Image1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        5376,
+        -688
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "out_duplicate",
+          "mode": "list",
+          "cachedResultName": "out_duplicate"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "contact",
+              "value": "={{ $json.query.to }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        4256,
+        -688
+      ],
+      "id": "02e05c25-ea77-46c6-88ec-821c4e6f5189",
+      "name": "Select rows from a table1",
+      "credentials": {
+        "postgres": {
+          "id": "UvI6jYuZBbEIx1kn",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "step"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        4128,
+        1520
+      ],
+      "id": "454ba9d7-2e72-4972-a72c-e1cb8cb277ae",
+      "name": "Sort1"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "step"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        736,
+        0
+      ],
+      "id": "43fd439f-a98f-40e4-bf43-711af7e04819",
+      "name": "Sort"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build HTML + Pixel (Step 1)1": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build HTML + Pixel (Step 2)1": {
+      "main": [
+        [
+          {
+            "node": "Reply to a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build HTML + Pixel (Step 3)1": {
+      "main": [
+        [
+          {
+            "node": "Reply to a message15",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build HTML + Pixel (Step 4)1": {
+      "main": [
+        [
+          {
+            "node": "Reply to a message16",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build HTML + Pixel (Step 5)1": {
+      "main": [
+        [
+          {
+            "node": "Reply to a message17",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query2": {
+      "main": [
+        [
+          {
+            "node": "Sort1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items2": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch2": {
+      "main": [
+        [
+          {
+            "node": "Build HTML + Pixel (Step 1)1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build HTML + Pixel (Step 2)1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build HTML + Pixel (Step 4)1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build HTML + Pixel (Step 5)1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message2": {
+      "main": [
+        [
+          {
+            "node": "Get a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a message2": {
+      "main": [
+        [
+          {
+            "node": "Mark as sent (step1)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark as sent (step1)": {
+      "main": [
+        [
+          {
+            "node": "Add label to thread2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add label to thread2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply to a message1": {
+      "main": [
+        [
+          {
+            "node": "Insert or update rows in a table11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert or update rows in a table11": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply to a message15": {
+      "main": [
+        [
+          {
+            "node": "Insert or update rows in a table12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert or update rows in a table12": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply to a message16": {
+      "main": [
+        [
+          {
+            "node": "Insert or update rows in a table13",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert or update rows in a table13": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply to a message17": {
+      "main": [
+        [
+          {
+            "node": "Insert or update rows in a table14",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert or update rows in a table14": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Build HTML + Pixel (Step 3)1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Catch Open1": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Open Event1": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table": {
+      "main": [
+        [
+          {
+            "node": "Time Gap Guard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Time Gap Guard": {
+      "main": [
+        [
+          {
+            "node": "Update Status to Open (Postgres)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Status to Open (Postgres)": {
+      "main": [
+        [
+          {
+            "node": "Return Pixel Image1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table1": {
+      "main": [
+        [
+          {
+            "node": "Parse Open Event1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "70453632-eb52-47b2-a74a-6161c0848e66",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "02379fa0c850bcd5c90b59f0dc498c28863adbccaf6a1efe479fb61ca4ab4fa4"
+  },
+  "id": "Tuowzd9Tin4858pL",
+  "tags": []
+}
