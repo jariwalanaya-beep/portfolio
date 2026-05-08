@@ -495,7 +495,7 @@
       <div class="sql-card reveal">
         <div class="sql-card-header">
           <div class="sql-card-icon">🗄️</div>
-          <div>
+          <div class="res-copy">
             <div class="sql-card-title">Postgres Table   <code>out_duplicate</code></div>
             <div class="sql-card-sub">Stores each contact, step, message, and thread. Automation reads and writes every cycle.</div>
           </div>
@@ -645,20 +645,50 @@
   <!-- RESOURCES -->
   <style>
     .res-section { background:var(--bg2); border-top:1px solid var(--border); }
-    .res-head { margin-bottom:52px; }
-    .res-dl-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:40px; }
+    .res-section .section {
+      max-width:1440px;
+      margin:0 auto;
+      padding-left:clamp(16px,3vw,100px);
+      padding-right:clamp(16px,3vw,100px);
+    }
+    .res-section .heading { font-size:clamp(2.4rem,3.8vw,3.4rem); }
+    .res-section .subtext { font-size:1.15rem; }
+    .res-head { margin-bottom:40px; }
+    .res-hero {
+      display:grid; grid-template-columns:1.6fr 1.4fr; gap:46px;
+      align-items:center; justify-items:stretch;
+    }
+    .res-hero > div:first-child { justify-self:start; }
+    .res-hero > div:last-child { justify-self:end; width:100%; }
+    .res-copy { padding-top:6px; }
+    .res-hero > div:first-child { text-align:left; }
+    @media(max-width:1100px){ .res-hero{grid-template-columns:1fr;} }
+    .res-video {
+      border-radius:22px; overflow:hidden; background:#0b1220;
+      border:1px solid var(--border);
+      box-shadow:0 18px 64px rgba(15,23,42,0.14);
+      aspect-ratio:16/9; display:flex; align-items:center;
+    }
+    .res-video video { width:100%; height:100%; display:block; background:#0b1220; object-fit:cover; }
+    .res-video-label {
+      font-family:'Space Grotesk',sans-serif;
+      font-size:1.1rem; font-weight:700; color:var(--text);
+      margin-bottom:10px;
+    }
+    .res-dl-grid { display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-bottom:0; }
     @media(max-width:640px){ .res-dl-grid{grid-template-columns:1fr;} }
     .res-dl-card {
       background:var(--card); border:1px solid var(--border);
-      border-radius:var(--r-xl); padding:26px;
+      border-radius:var(--r-xl); padding:34px;
       display:flex; align-items:flex-start; gap:18px;
       text-decoration:none; transition:border-color .2s, transform .2s;
+      min-width:0;
     }
     .res-dl-card:hover { border-color:rgba(59,130,246,0.35); transform:translateY(-3px); }
     .res-dl-icon { width:52px; height:52px; border-radius:14px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
-    .res-dl-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--text); margin-bottom:5px; }
-    .res-dl-sub { font-size:0.78rem; color:var(--muted); line-height:1.55; margin-bottom:14px; }
-    .res-dl-btn { display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:700; color:var(--blue3); }
+    .res-dl-title { font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:700; color:var(--text); margin-bottom:6px; }
+    .res-dl-sub { font-size:0.98rem; color:var(--muted); line-height:1.6; margin-bottom:16px; }
+    .res-dl-btn { display:inline-flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:700; color:var(--blue3); }
     .res-dl-btn svg { width:14px; height:14px; }
     .res-sep { border:none; border-top:1px solid var(--border); margin:0 0 40px; }
     .res-connect-label { text-align:center; font-size:0.68rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:24px; }
@@ -673,26 +703,57 @@
     .res-link-icon { width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
     .res-link-label { font-size:0.6rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
     .res-link-value { font-size:0.8rem; font-weight:600; color:var(--text); }
-    .res-cta {
-      display:block; text-align:center; max-width:320px; margin:0 auto;
-      background:var(--grad); color:#fff;
-      font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700;
-      padding:15px 32px; border-radius:999px;
-      box-shadow:0 8px 32px rgba(59,130,246,0.3);
-      transition:transform .2s, box-shadow .2s;
+    .cta-panel {
+      margin:0 auto; max-width:860px;
+      background:linear-gradient(180deg, #ffffff 0%, #f6f8ff 100%);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:28px 32px;
+      display:flex; align-items:center; justify-content:space-between; gap:24px;
+      box-shadow:0 18px 60px rgba(15,23,42,0.08);
     }
-    .res-cta:hover { transform:translateY(-2px); box-shadow:0 14px 44px rgba(59,130,246,0.45); }
+    .cta-copy { flex:1; min-width:240px; }
+    .cta-kicker {
+      font-size:0.7rem; font-weight:800; letter-spacing:2px; text-transform:uppercase;
+      color:var(--blue3); margin-bottom:8px;
+    }
+    .cta-title {
+      font-family:'Space Grotesk',sans-serif;
+      font-size:1.5rem; font-weight:800; color:var(--text); line-height:1.2;
+      margin-bottom:8px;
+    }
+    .cta-sub { font-size:0.95rem; color:var(--text2); line-height:1.6; max-width:54ch; }
+    .cta-actions { display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end; }
+    .cta-btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:12px 22px; border-radius:999px;
+      font-family:'Space Grotesk',sans-serif; font-size:0.9rem; font-weight:700;
+      transition:transform .2s, box-shadow .2s, background .2s, color .2s;
+      border:1px solid transparent;
+      min-height:44px;
+    }
+    .cta-btn-primary {
+      background:var(--grad); color:#fff;
+      box-shadow:0 10px 28px rgba(37,99,235,0.25);
+    }
+    .cta-btn-primary:hover { transform:translateY(-2px); box-shadow:0 16px 40px rgba(37,99,235,0.35); }
+    .cta-btn-ghost {
+      background:#fff; color:var(--text);
+      border-color:rgba(15,23,42,0.1);
+      box-shadow:0 6px 20px rgba(15,23,42,0.06);
+    }
+    .cta-btn-ghost:hover { transform:translateY(-2px); box-shadow:0 10px 26px rgba(15,23,42,0.12); }
   </style>
 
   <div class="res-section">
     <div class="section" id="resources">
       <div class="res-head reveal">
-        <div class="label">📦 Resources</div>
-        <h2 class="heading">Get the <span class="hl">exact files</span>.</h2>
-        <p class="subtext">Download the n8n workflow JSON and Postgres SQL schema, then run the system yourself.</p>
-      </div>
-
-      <div class="res-dl-grid">
+        <div class="res-hero">
+          <div>
+            <div class="label">📦 Resources</div>
+            <h2 class="heading">Get the <span class="hl">exact files</span>.</h2>
+            <p class="subtext">Download the n8n workflow JSON and Postgres SQL schema, then run the system yourself.</p>
+            <div class="res-dl-grid">
         <a href="outreact 2.json" download="outreach-automation.json" class="res-dl-card reveal">
           <div class="res-dl-icon" style="background:rgba(255,109,90,0.1);border:1px solid rgba(255,109,90,0.18);">
             <img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:26px;height:26px;" />
@@ -718,6 +779,18 @@
             </div>
           </div>
         </a>
+            </div>
+          </div>
+          <div>
+            <div class="res-video-label">Watch the system in action.</div>
+            <div class="res-video">
+              <video controls preload="metadata" poster="">
+                <source src="Screencast%20from%202026-05-08%2011-24-04.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
 
       <hr class="res-sep" />
@@ -748,9 +821,17 @@
         </a>
       </div>
 
-      <a href="https://calendly.com/karlspace3/30min" target="_blank" class="res-cta reveal">
-        Book a free strategy call →
-      </a>
+      <div class="cta-panel reveal">
+        <div class="cta-copy">
+          <div class="cta-kicker">Automation audit</div>
+          <div class="cta-title">Turn repetitive work into a one-click workflow.</div>
+          <div class="cta-sub">If your team repeats the same steps each week, I can map it, automate it, and ship a working system.</div>
+        </div>
+        <div class="cta-actions">
+          <a href="https://calendly.com/karlspace3/30min" target="_blank" class="cta-btn cta-btn-primary">Book an audit →</a>
+          <a href="https://calendly.com/karlspace3/30min" target="_blank" class="cta-btn cta-btn-ghost">Open Calendly</a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -868,7 +949,9 @@
       .res-dl-sub { font-size:0.75rem; }
       .res-links { flex-direction:column; align-items:stretch; }
       .res-link { justify-content:flex-start; }
-      .res-cta { padding:13px 24px; font-size:0.9rem; }
+      .cta-panel { flex-direction:column; align-items:flex-start; padding:20px; }
+      .cta-actions { width:100%; justify-content:flex-start; }
+      .cta-btn { width:100%; justify-content:center; }
 
       /* Callout banner */
       .callout-banner { padding:16px; }
