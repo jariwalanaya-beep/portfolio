@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How I Built a Custom Email Pixel Tracking System | Karlspace</title>
-  <meta name="description" content="A deep-dive case study: custom n8n automation + pixel tracking + bot filtering for outreach." />
+  <title>Custom Email Open Tracking System | Karlspace</title>
+  <meta name="description" content="Case study: n8n workflow, tracking pixel, and bot filter for outreach." />
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/png" href="1772001775286.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,16 +12,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:      #0a0d14;
-      --bg2:     #0f1320;
-      --bg3:     #141929;
-      --card:    #161c2d;
-      --card2:   #1a2236;
-      --border:  rgba(255,255,255,0.07);
-      --border2: rgba(59,130,246,0.3);
-      --text:    #e2e8f0;
-      --text2:   #94a3b8;
-      --muted:   #4b5e72;
+      --bg:      #ffffff;
+      --bg2:     #f7f8fb;
+      --bg3:     #f0f3f8;
+      --card:    #ffffff;
+      --card2:   #f3f6fb;
+      --border:  rgba(15,23,42,0.08);
+      --border2: rgba(59,130,246,0.25);
+      --text:    #0f172a;
+      --text2:   #475569;
+      --muted:   #64748b;
       --blue:    #3b82f6;
       --blue2:   #2563eb;
       --blue3:   #60a5fa;
@@ -180,22 +180,22 @@
   <section class="hero" id="overview">
     <div class="hero-grid"></div>
     <div class="hero-inner">
-      <div class="hero-tag reveal"><span class="hero-dot"></span> Deep Dive · Internal Case Study</div>
+      <div class="hero-tag reveal"><span class="hero-dot"></span> Internal Case Study</div>
       <h1 class="hero-h1 reveal">
         I stopped guessing<br><span class="hl">who opens my emails.</span>
       </h1>
       <p class="hero-sub reveal">
-        Gmail can't track opens. Mail tools can't send proper follow-ups. So I built my own system   n8n automation + pixel tracking + bot filtering.
+        Gmail doesn't track opens. Mail tools hurt deliverability. I built a simple system: n8n + a pixel + a bot filter.
       </p>
       <div class="hero-stats reveal">
-        <div class="hero-stat"><div class="hero-stat-n">5</div><div class="hero-stat-l">Step Sequence</div></div>
-        <div class="hero-stat"><div class="hero-stat-n">30m</div><div class="hero-stat-l">Trigger Interval</div></div>
-        <div class="hero-stat"><div class="hero-stat-n">2min</div><div class="hero-stat-l">Bot Filter Gap</div></div>
-        <div class="hero-stat"><div class="hero-stat-n">1×1</div><div class="hero-stat-l">Pixel Size</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">5</div><div class="hero-stat-l">Steps</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">30m</div><div class="hero-stat-l">Trigger</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">2min</div><div class="hero-stat-l">Bot Gap</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">1×1</div><div class="hero-stat-l">Pixel</div></div>
       </div>
       <div class="hero-actions reveal">
-        <a href="#solution" class="btn btn-primary">See How It Works →</a>
-        <a href="#resources" class="btn btn-ghost">↓ Download Files</a>
+        <a href="#solution" class="btn btn-primary">See how it works →</a>
+        <a href="#resources" class="btn btn-ghost">↓ Download files</a>
       </div>
       <div class="hero-stack reveal">
         <span class="hero-stack-label">Built with</span>
@@ -239,40 +239,40 @@
     <div class="section" id="problem">
       <div class="prob-head reveal">
         <div class="label">#1 The Problem</div>
-        <h2 class="heading">Two tools. <span class="hl">Neither enough.</span></h2>
-        <p class="subtext">Gmail gives deliverability. Mail tools give tracking. But not both at once   until I built a middle layer.</p>
+        <h2 class="heading">Two tools. <span class="hl">Both incomplete.</span></h2>
+        <p class="subtext">Gmail delivers well. Mail tools track well. I needed both, so I built a bridge.</p>
       </div>
       <div class="prob-bento">
         <div class="bento-card reveal">
           <div class="bento-icon" style="background:rgba(234,67,53,0.1);">
             <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Gmail" style="width:24px;height:24px;" />
           </div>
-          <div class="bento-title">Gmail   Great deliverability, zero tracking</div>
-          <div class="bento-text">Sends from real inbox. Replies stay in thread. But absolutely no open tracking, no automation, no sequence control.</div>
+          <div class="bento-title">Gmail   Great deliverability, no tracking</div>
+          <div class="bento-text">Real inbox, replies stay in thread. No open tracking, no automation.</div>
           <div class="bento-divider"></div>
           <div class="prob-list">
-            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Real inbox deliverability</div>
-            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Proper thread replies (steps 2–5)</div>
-            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>No open tracking whatsoever</div>
-            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>No automation or scheduling</div>
+            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Inbox deliverability</div>
+            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Replies stay in thread</div>
+            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>No open tracking</div>
+            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>No automation</div>
           </div>
         </div>
         <div class="bento-card reveal">
           <div class="bento-icon" style="background:rgba(251,191,36,0.1);">📊</div>
-          <div class="bento-title">Mail tools   Great tracking, poor deliverability</div>
-          <div class="bento-text">Instantly, Lemlist etc. have tracking built-in, but emails land in Promotions or Spam. Replies break threads.</div>
+          <div class="bento-title">Mail tools   Tracking, weak deliverability</div>
+          <div class="bento-text">Built-in tracking, but emails land in Promotions or Spam. Replies break threads.</div>
           <div class="bento-divider"></div>
           <div class="prob-list">
             <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Open tracking out of the box</div>
-            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Sequence automation built-in</div>
+            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Sequence automation</div>
             <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>Poor inbox placement</div>
-            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>Follow-ups don't stay in thread</div>
+            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>Follow-ups break threads</div>
           </div>
         </div>
         <div class="callout-banner reveal">
           <div class="callout-icon-box">💡</div>
           <div class="callout-text">
-            <strong>The solution:</strong> Send via Gmail API for deliverability, and inject a custom tracking pixel into the HTML body. Build a custom n8n automation layer on top to handle the full 5-step sequence.
+            <strong>The solution:</strong> Send with the Gmail API, add a custom pixel, and run the 5-step sequence in n8n.
           </div>
         </div>
       </div>
@@ -318,7 +318,7 @@
       <div class="reveal" style="margin-bottom:48px;">
         <div class="label">#2 The Solution</div>
         <h2 class="heading">Watch the system <span class="hl">in action.</span></h2>
-        <p class="subtext">A live walkthrough of the outreach automation   from contact intake to tracked open events.</p>
+        <p class="subtext">A quick walkthrough: contact in, emails out, opens tracked.</p>
       </div>
 
       <div class="sol-video-wrap reveal">
@@ -326,7 +326,7 @@
           <div class="sol-dot" style="background:#ef4444;"></div>
           <div class="sol-dot" style="background:#f59e0b;"></div>
           <div class="sol-dot" style="background:#22c55e;"></div>
-          <span style="font-size:0.7rem;color:var(--muted);margin-left:8px;">ReachOhme · Outreach System Demo</span>
+          <span style="font-size:0.7rem;color:var(--muted);margin-left:8px;">ReachOhme · Outreach Demo</span>
           <div class="sol-live"><span class="sol-live-dot"></span>Live System</div>
         </div>
         <video controls preload="metadata" poster="">
@@ -339,32 +339,32 @@
         <div class="wf-card-header">
           <img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:16px;height:16px;" />
           <div class="wf-card-title">📤 Email Send Pipeline</div>
-          <div class="wf-card-sub">scroll to explore →</div>
+          <div class="wf-card-sub">scroll to see steps →</div>
         </div>
         <div class="wf-pipeline">
-          <div class="wf-node"><div class="wf-node-box nb-trigger">🔗</div><div class="wf-node-label">Webhook POST</div><div class="wf-node-tag">intake</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-trigger">🔗</div><div class="wf-node-label">Webhook</div><div class="wf-node-tag">intake</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Insert Postgres</div><div class="wf-node-tag">step=1</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Save to Postgres</div><div class="wf-node-tag">step 1</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-trigger">⏰</div><div class="wf-node-label">Schedule 30m</div><div class="wf-node-tag">trigger</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-trigger">⏰</div><div class="wf-node-label">Wait 30m</div><div class="wf-node-tag">trigger</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Parse Date</div><div class="wf-node-tag">ISO format</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Parse date</div><div class="wf-node-tag">ISO format</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">SQL Query</div><div class="wf-node-tag">fetch due</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Find due</div><div class="wf-node-tag">fetch due</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-logic">🔁</div><div class="wf-node-label">Loop Items</div><div class="wf-node-tag">one by one</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-logic">🔁</div><div class="wf-node-label">Loop</div><div class="wf-node-tag">one by one</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-logic">⚡</div><div class="wf-node-label">If Step = 5</div><div class="wf-node-tag">stop check</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-logic">⚡</div><div class="wf-node-label">Stop at 5</div><div class="wf-node-tag">stop check</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-logic">🔀</div><div class="wf-node-label">Switch 1–5</div><div class="wf-node-tag">route step</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-logic">🔀</div><div class="wf-node-label">Route 1–5</div><div class="wf-node-tag">route step</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Build HTML+Pixel</div><div class="wf-node-tag">inject pixel</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Build HTML + pixel</div><div class="wf-node-tag">inject pixel</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-gmail"><img src="https://cdn.simpleicons.org/gmail/EA4335" style="width:26px;height:26px;" /></div><div class="wf-node-label">Gmail Send</div><div class="wf-node-tag">step1 new</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-gmail"><img src="https://cdn.simpleicons.org/gmail/EA4335" style="width:26px;height:26px;" /></div><div class="wf-node-label">Send with Gmail</div><div class="wf-node-tag">step 1 new</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Mark Sent</div><div class="wf-node-tag">step+1</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Update status</div><div class="wf-node-tag">step + 1</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-gmail"><img src="https://cdn.simpleicons.org/gmail/EA4335" style="width:26px;height:26px;" /></div><div class="wf-node-label">Add Label</div><div class="wf-node-tag">Gmail tag</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-gmail"><img src="https://cdn.simpleicons.org/gmail/EA4335" style="width:26px;height:26px;" /></div><div class="wf-node-label">Add Gmail label</div><div class="wf-node-tag">Gmail tag</div></div>
         </div>
       </div>
 
@@ -373,22 +373,22 @@
         <div class="wf-card-header">
           <img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:16px;height:16px;" />
           <div class="wf-card-title">👁️ Pixel Tracking Pipeline</div>
-          <div class="wf-card-sub">fires on every real open →</div>
+          <div class="wf-card-sub">runs on real opens →</div>
         </div>
         <div class="wf-pipeline">
-          <div class="wf-node"><div class="wf-node-box nb-trigger">📡</div><div class="wf-node-label">Webhook Catch Open</div><div class="wf-node-tag">pixel fires</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-trigger">📡</div><div class="wf-node-label">Open webhook</div><div class="wf-node-tag">pixel hit</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Select Row</div><div class="wf-node-tag">by eid</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Find record</div><div class="wf-node-tag">by eid</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Parse Event</div><div class="wf-node-tag">timestamp</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Parse time</div><div class="wf-node-tag">timestamp</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Select Again</div><div class="wf-node-tag">get sent_at</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Get sent_at</div><div class="wf-node-tag">get sent_at</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-logic">🛡️</div><div class="wf-node-label">Time Gap Guard</div><div class="wf-node-tag">&lt;2min=bot</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-logic">🛡️</div><div class="wf-node-label">Time gap guard</div><div class="wf-node-tag">&lt;2min=bot</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Update → Open</div><div class="wf-node-tag">Postgres</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Mark open</div><div class="wf-node-tag">Postgres</div></div>
           <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-result">🖼️</div><div class="wf-node-label">Return Pixel</div><div class="wf-node-tag">1×1 GIF</div></div>
+          <div class="wf-node"><div class="wf-node-box nb-result">🖼️</div><div class="wf-node-label">Return 1×1 GIF</div><div class="wf-node-tag">pixel</div></div>
         </div>
       </div>
     </div>
@@ -449,8 +449,8 @@
     <div class="section" id="automation">
       <div class="reveal" style="margin-bottom:36px;">
         <div class="label">#3 How It Works</div>
-        <h2 class="heading">How emails are <span class="hl">generated &amp; sent.</span></h2>
-        <p class="subtext">Every email is built at runtime   HTML constructed, pixel injected, then sent via Gmail API.</p>
+        <h2 class="heading">How emails are <span class="hl">built &amp; sent.</span></h2>
+        <p class="subtext">Build HTML, add a pixel, then send with the Gmail API.</p>
       </div>
 
       <div class="auto-n8n-img reveal">
@@ -461,24 +461,24 @@
         <div class="acard reveal">
           <div class="acard-title">📋 Step-by-Step Flow</div>
           <div class="step-list">
-            <div class="step-item"><div class="step-emoji">🗄️</div><div><div class="step-label">Postgres DB stores everything</div><div class="step-sub">Name, email, 5 messages, step number, thread ID, next send date</div></div></div>
-            <div class="step-item"><div class="step-emoji">⏰</div><div><div class="step-label">Schedule trigger every 30 min</div><div class="step-sub">Code node converts date → ISO string for exact SQL match</div></div></div>
-            <div class="step-item"><div class="step-emoji">🔀</div><div><div class="step-label">Switch node routes by step 1–5</div><div class="step-sub">Each step has its own code node reading the correct message field</div></div></div>
-            <div class="step-item"><div class="step-emoji">{ }</div><div><div class="step-label">Code node builds HTML email</div><div class="step-sub">Wraps text in &lt;p&gt; tags, appends invisible tracking pixel at bottom</div></div></div>
-            <div class="step-item"><div class="step-emoji">📧</div><div><div class="step-label">Gmail API sends or replies</div><div class="step-sub">Step 1 = new email. Steps 2–5 = reply using saved <code>thread_id</code></div></div></div>
-            <div class="step-item"><div class="step-emoji">✅</div><div><div class="step-label">DB updated after every send</div><div class="step-sub">status → sent, step+1, next date = +3 days, thread_id stored</div></div></div>
+            <div class="step-item"><div class="step-emoji">🗄️</div><div><div class="step-label">Postgres stores everything</div><div class="step-sub">Name, email, 5 messages, step, thread ID, next send time</div></div></div>
+            <div class="step-item"><div class="step-emoji">⏰</div><div><div class="step-label">Runs every 30 minutes</div><div class="step-sub">Code node formats the date for SQL</div></div></div>
+            <div class="step-item"><div class="step-emoji">🔀</div><div><div class="step-label">Route by step (1–5)</div><div class="step-sub">Each step reads its message field</div></div></div>
+            <div class="step-item"><div class="step-emoji">{ }</div><div><div class="step-label">Build HTML email</div><div class="step-sub">Wrap text in &lt;p&gt; and add a hidden pixel</div></div></div>
+            <div class="step-item"><div class="step-emoji">📧</div><div><div class="step-label">Send with Gmail API</div><div class="step-sub">Step 1 starts a thread. Steps 2–5 reply with <code>thread_id</code></div></div></div>
+            <div class="step-item"><div class="step-emoji">✅</div><div><div class="step-label">Update DB after send</div><div class="step-sub">status = sent, step + 1, next date + 3 days, save thread_id</div></div></div>
           </div>
         </div>
 
         <div class="acard reveal">
           <div class="acard-title">🔧 What the Code Node Does</div>
           <div class="step-list">
-            <div class="step-item"><div class="step-emoji">📝</div><div><div class="step-label">Parses raw text → clean HTML</div><div class="step-sub">Splits on newlines, wraps each block in &lt;p&gt; tags for Gmail rendering</div></div></div>
-            <div class="step-item"><div class="step-emoji">🔗</div><div><div class="step-label">Builds unique pixel URL</div><div class="step-sub">Encodes <code>eid</code>, <code>to</code>, <code>c</code> (campaign) into GET params per email</div></div></div>
-            <div class="step-item"><div class="step-emoji">🕵️</div><div><div class="step-label">Injects 1×1 invisible pixel</div><div class="step-sub">Hidden &lt;img&gt; at bottom   loads silently when recipient opens</div></div></div>
+            <div class="step-item"><div class="step-emoji">📝</div><div><div class="step-label">Turn text into HTML</div><div class="step-sub">Split lines and wrap in &lt;p&gt; for Gmail</div></div></div>
+            <div class="step-item"><div class="step-emoji">🔗</div><div><div class="step-label">Create pixel URL</div><div class="step-sub">Add <code>eid</code>, <code>to</code>, <code>c</code> as query params</div></div></div>
+            <div class="step-item"><div class="step-emoji">🕵️</div><div><div class="step-label">Add a 1×1 hidden pixel</div><div class="step-sub">Hidden &lt;img&gt; loads when the email opens</div></div></div>
           </div>
           <div class="pixel-codeblock">
-<span class="c">// Pixel injected at bottom of every email</span>
+<span class="c">// Pixel added to every email</span>
 <span class="k">&lt;img</span> src=<span class="s">"https://yoursite.com/track-open
   ?eid=<span class="v">{{id}}</span>&amp;to=<span class="v">{{email}}</span>&amp;c=<span class="v">{{campaign}}</span>"</span>
   width=<span class="s">"1"</span> height=<span class="s">"1"</span>
@@ -486,7 +486,7 @@
           </div>
           <div class="why-box">
             <div class="why-box-title">💡 Why HTML   not plain text?</div>
-            <div class="why-box-text">Plain text emails can't embed an &lt;img&gt; tag   so no pixel, no webhook, no tracking. HTML is the foundation.</div>
+            <div class="why-box-text">Plain text can't load an &lt;img&gt; tag, so no pixel or webhook. HTML is required.</div>
           </div>
         </div>
       </div>
@@ -497,22 +497,22 @@
           <div class="sql-card-icon">🗄️</div>
           <div>
             <div class="sql-card-title">Postgres Table   <code>out_duplicate</code></div>
-            <div class="sql-card-sub">Every contact, step, message and thread is stored here. Automation reads and writes on every cycle.</div>
+            <div class="sql-card-sub">Stores each contact, step, message, and thread. Automation reads and writes every cycle.</div>
           </div>
         </div>
         <div class="sql-cols">
-          <div class="sql-col pk"><div class="sql-col-name">id</div><div class="sql-col-type">text · PK</div><div class="sql-col-desc">Unique email record ID   embedded in pixel URL for tracking</div></div>
-          <div class="sql-col"><div class="sql-col-name">contact</div><div class="sql-col-type">text · unique</div><div class="sql-col-desc">Recipient email   primary key prevents duplicate campaigns</div></div>
-          <div class="sql-col"><div class="sql-col-name">threat_id</div><div class="sql-col-type">text</div><div class="sql-col-desc">Gmail thread ID   used to reply in same chain for steps 2–5</div></div>
-          <div class="sql-col"><div class="sql-col-name">message_1→5</div><div class="sql-col-type">text × 5</div><div class="sql-col-desc">Full 5-step sequence stored upfront, code node picks by step</div></div>
-          <div class="sql-col"><div class="sql-col-name">step</div><div class="sql-col-type">integer</div><div class="sql-col-desc">Current step (1–5)   incremented after every successful send</div></div>
-          <div class="sql-col"><div class="sql-col-name">date / time</div><div class="sql-col-type">date / text</div><div class="sql-col-desc">When to send next   schedule trigger matches this each cycle</div></div>
-          <div class="sql-col"><div class="sql-col-name">subject</div><div class="sql-col-type">text</div><div class="sql-col-desc">Email subject   only used for step 1 (new email threads)</div></div>
+          <div class="sql-col pk"><div class="sql-col-name">id</div><div class="sql-col-type">text · PK</div><div class="sql-col-desc">Unique record ID used in the pixel URL</div></div>
+          <div class="sql-col"><div class="sql-col-name">contact</div><div class="sql-col-type">text · unique</div><div class="sql-col-desc">Recipient email   prevents duplicates</div></div>
+          <div class="sql-col"><div class="sql-col-name">threat_id</div><div class="sql-col-type">text</div><div class="sql-col-desc">Gmail thread ID for steps 2–5</div></div>
+          <div class="sql-col"><div class="sql-col-name">message_1→5</div><div class="sql-col-type">text × 5</div><div class="sql-col-desc">Five messages stored up front</div></div>
+          <div class="sql-col"><div class="sql-col-name">step</div><div class="sql-col-type">integer</div><div class="sql-col-desc">Current step (1–5)</div></div>
+          <div class="sql-col"><div class="sql-col-name">date / time</div><div class="sql-col-type">date / text</div><div class="sql-col-desc">Next send time</div></div>
+          <div class="sql-col"><div class="sql-col-name">subject</div><div class="sql-col-type">text</div><div class="sql-col-desc">Subject for step 1 only</div></div>
           <div class="sql-col"><div class="sql-col-name">status</div><div class="sql-col-type">enum</div><div class="sql-col-desc"><div class="sql-badges"><span class="sbadge sb-wait">waiting</span><span class="sbadge sb-sent">sent</span><span class="sbadge sb-open">open</span><span class="sbadge sb-stop">stop</span></div></div></div>
-          <div class="sql-col"><div class="sql-col-name">created_at</div><div class="sql-col-type">timestamptz</div><div class="sql-col-desc">Auto-set on insert via <code style="font-family:monospace;font-size:0.62rem;">DEFAULT now()</code></div></div>
+          <div class="sql-col"><div class="sql-col-name">created_at</div><div class="sql-col-type">timestamptz</div><div class="sql-col-desc">Auto set on insert with <code style="font-family:monospace;font-size:0.62rem;">DEFAULT now()</code></div></div>
         </div>
         <div class="sql-raw">
-          <div class="sql-raw-label">📋 Raw Schema</div>
+          <div class="sql-raw-label">📋 Raw SQL</div>
           <pre>CREATE TABLE public.out_duplicate (
   id         TEXT NOT NULL,
   name       TEXT,
@@ -571,14 +571,14 @@
     <div class="section" id="logic">
       <div class="reveal" style="margin-bottom:48px;">
         <div class="label">#4 The Algorithm</div>
-        <h2 class="heading">Filtering real opens <span class="hl">from bots.</span></h2>
-        <p class="subtext">Email scanners load your pixel immediately after send. Without a filter, your metrics are junk.</p>
+        <h2 class="heading">Filter real opens <span class="hl">from bots.</span></h2>
+        <p class="subtext">Email scanners load pixels right after send. Without a filter, metrics lie.</p>
       </div>
 
       <div class="logic-two">
         <div class="lcard reveal">
           <div class="lcard-title" style="color:var(--red);">⚠️ The Hidden Problem</div>
-          <div class="lcard-text">Gmail and Apple Mail run security scanners that load the tracking pixel seconds after the email is delivered   before any human opens it.</div>
+          <div class="lcard-text">Gmail and Apple Mail scanners load the pixel seconds after delivery   before any human opens it.</div>
           <div class="flow-row">
             <div class="flow-item"><span class="flow-icon">📧</span>Email Sent</div>
             <span class="flow-arr">→</span>
@@ -590,13 +590,13 @@
           </div>
           <div class="alert-box alert-red">
             <div class="alert-title">🚨 Impact without filtering</div>
-            <div class="alert-text">Broken follow-up sequences. Inflated open rates. Automation fires next email too early. Dirty analytics.</div>
+            <div class="alert-text">Broken follow-ups. Inflated opens. Next step fires too early. Messy data.</div>
           </div>
         </div>
 
         <div class="lcard reveal">
           <div class="lcard-title" style="color:var(--green);">✅ My Solution</div>
-          <div class="lcard-text"><strong style="color:var(--text);">Ignore any open that fires in under 2 minutes.</strong> Compare the webhook timestamp against the <code style="font-family:monospace;font-size:0.82em;color:#86efac;">sent_at</code> value stored in Postgres.</div>
+          <div class="lcard-text"><strong style="color:var(--text);">Ignore opens in the first 2 minutes.</strong> Compare the webhook time to the <code style="font-family:monospace;font-size:0.82em;color:#86efac;">sent_at</code> value in Postgres.</div>
           <div class="flow-row">
             <div class="flow-item"><span class="flow-icon">📡</span>Webhook</div>
             <span class="flow-arr">→</span>
@@ -608,7 +608,7 @@
           </div>
           <div class="alert-box alert-green">
             <div class="alert-title">⏱️ Why 2 minutes?</div>
-            <div class="alert-text">Safe buffer above scanner speed (&lt;30s) but below realistic human read-time. Keeps automation sequencing intact.</div>
+            <div class="alert-text">Above scanner speed (&lt;30s) and below normal read time. Keeps sequencing clean.</div>
           </div>
         </div>
       </div>
@@ -616,12 +616,12 @@
       <div class="code-card reveal" style="margin-bottom:16px;">
         <div class="code-card-title">🛡️ Time Gap Guard   Code Node Logic</div>
         <div class="code-block">
-<span class="kw">const</span> <span class="vr">sentAt</span>    = parseInt(query.st || <span class="op">'0'</span>);     <span class="cm">// stored in DB at send time</span>
-<span class="kw">const</span> <span class="vr">openedAt</span>  = $now.toMillis();               <span class="cm">// webhook fires NOW</span>
+<span class="kw">const</span> <span class="vr">sentAt</span>    = parseInt(query.st || <span class="op">'0'</span>);     <span class="cm">// saved at send time</span>
+<span class="kw">const</span> <span class="vr">openedAt</span>  = $now.toMillis();               <span class="cm">// webhook time</span>
 <span class="kw">const</span> <span class="vr">diffMins</span>  = (openedAt - sentAt) / <span class="op">1000</span> / <span class="op">60</span>;
 
 <span class="kw">if</span> (sentAt > <span class="op">0</span> && diffMins < <span class="op">2</span>) {
-  <span class="kw">return</span> [];   <span class="cm">// 🤖 scanner fired too fast → discard</span>
+  <span class="kw">return</span> [];   <span class="cm">// 🤖 bot open → drop</span>
 }
 
 <span class="cm">// ✅ real open   extract eid, recipient, campaign, IP, user-agent</span>
@@ -632,13 +632,13 @@
       <div class="result-strip reveal" id="results">
         <div class="result-icon">🎯</div>
         <div class="result-items">
-          <div class="result-item"><span class="ck">✓</span> Only real human opens are counted</div>
-          <div class="result-item"><span class="ck">✓</span> Automation sequences run without conflicts</div>
-          <div class="result-item"><span class="ck">✓</span> Clean data = better follow-up timing = more replies</div>
+          <div class="result-item"><span class="ck">✓</span> Only real opens count</div>
+          <div class="result-item"><span class="ck">✓</span> Sequences run smoothly</div>
+          <div class="result-item"><span class="ck">✓</span> Clean data = better timing = more replies</div>
         </div>
       </div>
 
-      <div class="footer-note reveal"><span>★</span> Clean signals matter more than more signals.</div>
+      <div class="footer-note reveal"><span>★</span> Clean signals beat more signals.</div>
     </div>
   </div>
 
@@ -688,8 +688,8 @@
     <div class="section" id="resources">
       <div class="res-head reveal">
         <div class="label">📦 Resources</div>
-        <h2 class="heading">Get the <span class="hl">exact files</span> I used.</h2>
-        <p class="subtext">Download the n8n workflow JSON and Postgres SQL schema   drop them in and run the system yourself.</p>
+        <h2 class="heading">Get the <span class="hl">exact files</span>.</h2>
+        <p class="subtext">Download the n8n workflow JSON and Postgres SQL schema, then run the system yourself.</p>
       </div>
 
       <div class="res-dl-grid">
@@ -699,7 +699,7 @@
           </div>
           <div>
             <div class="res-dl-title">n8n Automation Workflow</div>
-            <div class="res-dl-sub">Full pipeline   webhook intake, schedule trigger, HTML builder, Gmail sender, pixel tracker, and bot filter. Import directly into n8n.</div>
+            <div class="res-dl-sub">Full pipeline: webhook intake, schedule, HTML builder, Gmail sender, pixel tracker, bot filter. Import into n8n.</div>
             <div class="res-dl-btn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
               Download outreach-automation.json
@@ -711,7 +711,7 @@
           <div class="res-dl-icon" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.15);font-size:1.4rem;">🗄️</div>
           <div>
             <div class="res-dl-title">Postgres SQL Schema</div>
-            <div class="res-dl-sub">The exact <code style="font-family:monospace;font-size:0.75rem;color:#4ade80;">out_duplicate</code> table   status enum, 5-message fields, thread ID. Paste into Supabase or any Postgres instance.</div>
+            <div class="res-dl-sub">The <code style="font-family:monospace;font-size:0.75rem;color:#4ade80;">out_duplicate</code> table: status enum, 5 messages, thread ID. Paste into Supabase or Postgres.</div>
             <div class="res-dl-btn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
               Download out_duplicate.sql
@@ -721,7 +721,7 @@
       </div>
 
       <hr class="res-sep" />
-      <div class="res-connect-label reveal">Connect or collaborate</div>
+      <div class="res-connect-label reveal">Connect</div>
 
       <div class="res-links reveal">
         <a href="https://www.linkedin.com/in/karlspace/" target="_blank" class="res-link">
@@ -749,7 +749,7 @@
       </div>
 
       <a href="https://calendly.com/karlspace3/30min" target="_blank" class="res-cta reveal">
-        Book a Free Strategy Call →
+        Book a free strategy call →
       </a>
     </div>
   </div>
