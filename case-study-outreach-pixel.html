@@ -185,7 +185,7 @@
         I stopped guessing<br><span class="hl">who opens my emails.</span>
       </h1>
       <p class="hero-sub reveal">
-        Gmail can't track opens. Mail tools can't send proper follow-ups. So I built my own system — n8n automation + pixel tracking + bot filtering.
+        Gmail can't track opens. Mail tools can't send proper follow-ups. So I built my own system   n8n automation + pixel tracking + bot filtering.
       </p>
       <div class="hero-stats reveal">
         <div class="hero-stat"><div class="hero-stat-n">5</div><div class="hero-stat-l">Step Sequence</div></div>
@@ -240,14 +240,14 @@
       <div class="prob-head reveal">
         <div class="label">#1 The Problem</div>
         <h2 class="heading">Two tools. <span class="hl">Neither enough.</span></h2>
-        <p class="subtext">Gmail gives deliverability. Mail tools give tracking. But not both at once — until I built a middle layer.</p>
+        <p class="subtext">Gmail gives deliverability. Mail tools give tracking. But not both at once   until I built a middle layer.</p>
       </div>
       <div class="prob-bento">
         <div class="bento-card reveal">
           <div class="bento-icon" style="background:rgba(234,67,53,0.1);">
             <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Gmail" style="width:24px;height:24px;" />
           </div>
-          <div class="bento-title">Gmail — Great deliverability, zero tracking</div>
+          <div class="bento-title">Gmail   Great deliverability, zero tracking</div>
           <div class="bento-text">Sends from real inbox. Replies stay in thread. But absolutely no open tracking, no automation, no sequence control.</div>
           <div class="bento-divider"></div>
           <div class="prob-list">
@@ -259,7 +259,7 @@
         </div>
         <div class="bento-card reveal">
           <div class="bento-icon" style="background:rgba(251,191,36,0.1);">📊</div>
-          <div class="bento-title">Mail tools — Great tracking, poor deliverability</div>
+          <div class="bento-title">Mail tools   Great tracking, poor deliverability</div>
           <div class="bento-text">Instantly, Lemlist etc. have tracking built-in, but emails land in Promotions or Spam. Replies break threads.</div>
           <div class="bento-divider"></div>
           <div class="prob-list">
@@ -318,7 +318,7 @@
       <div class="reveal" style="margin-bottom:48px;">
         <div class="label">#2 The Solution</div>
         <h2 class="heading">Watch the system <span class="hl">in action.</span></h2>
-        <p class="subtext">A live walkthrough of the outreach automation — from contact intake to tracked open events.</p>
+        <p class="subtext">A live walkthrough of the outreach automation   from contact intake to tracked open events.</p>
       </div>
 
       <div class="sol-video-wrap reveal">
@@ -450,7 +450,7 @@
       <div class="reveal" style="margin-bottom:36px;">
         <div class="label">#3 How It Works</div>
         <h2 class="heading">How emails are <span class="hl">generated &amp; sent.</span></h2>
-        <p class="subtext">Every email is built at runtime — HTML constructed, pixel injected, then sent via Gmail API.</p>
+        <p class="subtext">Every email is built at runtime   HTML constructed, pixel injected, then sent via Gmail API.</p>
       </div>
 
       <div class="auto-n8n-img reveal">
@@ -475,7 +475,7 @@
           <div class="step-list">
             <div class="step-item"><div class="step-emoji">📝</div><div><div class="step-label">Parses raw text → clean HTML</div><div class="step-sub">Splits on newlines, wraps each block in &lt;p&gt; tags for Gmail rendering</div></div></div>
             <div class="step-item"><div class="step-emoji">🔗</div><div><div class="step-label">Builds unique pixel URL</div><div class="step-sub">Encodes <code>eid</code>, <code>to</code>, <code>c</code> (campaign) into GET params per email</div></div></div>
-            <div class="step-item"><div class="step-emoji">🕵️</div><div><div class="step-label">Injects 1×1 invisible pixel</div><div class="step-sub">Hidden &lt;img&gt; at bottom — loads silently when recipient opens</div></div></div>
+            <div class="step-item"><div class="step-emoji">🕵️</div><div><div class="step-label">Injects 1×1 invisible pixel</div><div class="step-sub">Hidden &lt;img&gt; at bottom   loads silently when recipient opens</div></div></div>
           </div>
           <div class="pixel-codeblock">
 <span class="c">// Pixel injected at bottom of every email</span>
@@ -485,8 +485,8 @@
   style=<span class="s">"display:none;"</span> <span class="k">/&gt;</span>
           </div>
           <div class="why-box">
-            <div class="why-box-title">💡 Why HTML — not plain text?</div>
-            <div class="why-box-text">Plain text emails can't embed an &lt;img&gt; tag — so no pixel, no webhook, no tracking. HTML is the foundation.</div>
+            <div class="why-box-title">💡 Why HTML   not plain text?</div>
+            <div class="why-box-text">Plain text emails can't embed an &lt;img&gt; tag   so no pixel, no webhook, no tracking. HTML is the foundation.</div>
           </div>
         </div>
       </div>
@@ -496,18 +496,18 @@
         <div class="sql-card-header">
           <div class="sql-card-icon">🗄️</div>
           <div>
-            <div class="sql-card-title">Postgres Table — <code>out_duplicate</code></div>
+            <div class="sql-card-title">Postgres Table   <code>out_duplicate</code></div>
             <div class="sql-card-sub">Every contact, step, message and thread is stored here. Automation reads and writes on every cycle.</div>
           </div>
         </div>
         <div class="sql-cols">
-          <div class="sql-col pk"><div class="sql-col-name">id</div><div class="sql-col-type">text · PK</div><div class="sql-col-desc">Unique email record ID — embedded in pixel URL for tracking</div></div>
-          <div class="sql-col"><div class="sql-col-name">contact</div><div class="sql-col-type">text · unique</div><div class="sql-col-desc">Recipient email — primary key prevents duplicate campaigns</div></div>
-          <div class="sql-col"><div class="sql-col-name">threat_id</div><div class="sql-col-type">text</div><div class="sql-col-desc">Gmail thread ID — used to reply in same chain for steps 2–5</div></div>
+          <div class="sql-col pk"><div class="sql-col-name">id</div><div class="sql-col-type">text · PK</div><div class="sql-col-desc">Unique email record ID   embedded in pixel URL for tracking</div></div>
+          <div class="sql-col"><div class="sql-col-name">contact</div><div class="sql-col-type">text · unique</div><div class="sql-col-desc">Recipient email   primary key prevents duplicate campaigns</div></div>
+          <div class="sql-col"><div class="sql-col-name">threat_id</div><div class="sql-col-type">text</div><div class="sql-col-desc">Gmail thread ID   used to reply in same chain for steps 2–5</div></div>
           <div class="sql-col"><div class="sql-col-name">message_1→5</div><div class="sql-col-type">text × 5</div><div class="sql-col-desc">Full 5-step sequence stored upfront, code node picks by step</div></div>
-          <div class="sql-col"><div class="sql-col-name">step</div><div class="sql-col-type">integer</div><div class="sql-col-desc">Current step (1–5) — incremented after every successful send</div></div>
-          <div class="sql-col"><div class="sql-col-name">date / time</div><div class="sql-col-type">date / text</div><div class="sql-col-desc">When to send next — schedule trigger matches this each cycle</div></div>
-          <div class="sql-col"><div class="sql-col-name">subject</div><div class="sql-col-type">text</div><div class="sql-col-desc">Email subject — only used for step 1 (new email threads)</div></div>
+          <div class="sql-col"><div class="sql-col-name">step</div><div class="sql-col-type">integer</div><div class="sql-col-desc">Current step (1–5)   incremented after every successful send</div></div>
+          <div class="sql-col"><div class="sql-col-name">date / time</div><div class="sql-col-type">date / text</div><div class="sql-col-desc">When to send next   schedule trigger matches this each cycle</div></div>
+          <div class="sql-col"><div class="sql-col-name">subject</div><div class="sql-col-type">text</div><div class="sql-col-desc">Email subject   only used for step 1 (new email threads)</div></div>
           <div class="sql-col"><div class="sql-col-name">status</div><div class="sql-col-type">enum</div><div class="sql-col-desc"><div class="sql-badges"><span class="sbadge sb-wait">waiting</span><span class="sbadge sb-sent">sent</span><span class="sbadge sb-open">open</span><span class="sbadge sb-stop">stop</span></div></div></div>
           <div class="sql-col"><div class="sql-col-name">created_at</div><div class="sql-col-type">timestamptz</div><div class="sql-col-desc">Auto-set on insert via <code style="font-family:monospace;font-size:0.62rem;">DEFAULT now()</code></div></div>
         </div>
@@ -578,7 +578,7 @@
       <div class="logic-two">
         <div class="lcard reveal">
           <div class="lcard-title" style="color:var(--red);">⚠️ The Hidden Problem</div>
-          <div class="lcard-text">Gmail and Apple Mail run security scanners that load the tracking pixel seconds after the email is delivered — before any human opens it.</div>
+          <div class="lcard-text">Gmail and Apple Mail run security scanners that load the tracking pixel seconds after the email is delivered   before any human opens it.</div>
           <div class="flow-row">
             <div class="flow-item"><span class="flow-icon">📧</span>Email Sent</div>
             <span class="flow-arr">→</span>
@@ -614,7 +614,7 @@
       </div>
 
       <div class="code-card reveal" style="margin-bottom:16px;">
-        <div class="code-card-title">🛡️ Time Gap Guard — Code Node Logic</div>
+        <div class="code-card-title">🛡️ Time Gap Guard   Code Node Logic</div>
         <div class="code-block">
 <span class="kw">const</span> <span class="vr">sentAt</span>    = parseInt(query.st || <span class="op">'0'</span>);     <span class="cm">// stored in DB at send time</span>
 <span class="kw">const</span> <span class="vr">openedAt</span>  = $now.toMillis();               <span class="cm">// webhook fires NOW</span>
@@ -624,7 +624,7 @@
   <span class="kw">return</span> [];   <span class="cm">// 🤖 scanner fired too fast → discard</span>
 }
 
-<span class="cm">// ✅ real open — extract eid, recipient, campaign, IP, user-agent</span>
+<span class="cm">// ✅ real open   extract eid, recipient, campaign, IP, user-agent</span>
 <span class="cm">// → update Postgres status to "open"</span>
         </div>
       </div>
@@ -689,7 +689,7 @@
       <div class="res-head reveal">
         <div class="label">📦 Resources</div>
         <h2 class="heading">Get the <span class="hl">exact files</span> I used.</h2>
-        <p class="subtext">Download the n8n workflow JSON and Postgres SQL schema — drop them in and run the system yourself.</p>
+        <p class="subtext">Download the n8n workflow JSON and Postgres SQL schema   drop them in and run the system yourself.</p>
       </div>
 
       <div class="res-dl-grid">
@@ -699,7 +699,7 @@
           </div>
           <div>
             <div class="res-dl-title">n8n Automation Workflow</div>
-            <div class="res-dl-sub">Full pipeline — webhook intake, schedule trigger, HTML builder, Gmail sender, pixel tracker, and bot filter. Import directly into n8n.</div>
+            <div class="res-dl-sub">Full pipeline   webhook intake, schedule trigger, HTML builder, Gmail sender, pixel tracker, and bot filter. Import directly into n8n.</div>
             <div class="res-dl-btn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
               Download outreach-automation.json
@@ -711,7 +711,7 @@
           <div class="res-dl-icon" style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.15);font-size:1.4rem;">🗄️</div>
           <div>
             <div class="res-dl-title">Postgres SQL Schema</div>
-            <div class="res-dl-sub">The exact <code style="font-family:monospace;font-size:0.75rem;color:#4ade80;">out_duplicate</code> table — status enum, 5-message fields, thread ID. Paste into Supabase or any Postgres instance.</div>
+            <div class="res-dl-sub">The exact <code style="font-family:monospace;font-size:0.75rem;color:#4ade80;">out_duplicate</code> table   status enum, 5-message fields, thread ID. Paste into Supabase or any Postgres instance.</div>
             <div class="res-dl-btn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
               Download out_duplicate.sql
@@ -759,7 +759,7 @@
   <style>
     /* ── GLOBAL RESPONSIVE ──────────────────────────── */
 
-    /* Tablet — ≤ 1024px */
+    /* Tablet   ≤ 1024px */
     @media(max-width:1024px) {
       .section { padding:80px 28px; }
       .hero-inner { padding:72px 28px; }
@@ -769,7 +769,7 @@
       .sql-cols { grid-template-columns:repeat(2,1fr); }
     }
 
-    /* Large mobile / small tablet — ≤ 768px */
+    /* Large mobile / small tablet   ≤ 768px */
     @media(max-width:768px) {
       .section { padding:64px 20px; }
       .hero-inner { padding:64px 20px; }
@@ -808,7 +808,7 @@
       .res-link { padding:10px 14px; }
     }
 
-    /* Mobile — ≤ 480px */
+    /* Mobile   ≤ 480px */
     @media(max-width:480px) {
       .section { padding:52px 16px; }
       .hero-inner { padding:52px 16px; }
@@ -830,7 +830,7 @@
       .bento-card { padding:20px; }
       .bento-title { font-size:0.95rem; }
 
-      /* Workflow — very small: show fewer labels */
+      /* Workflow   very small: show fewer labels */
       .wf-card-header { flex-wrap:wrap; gap:6px; }
       .wf-pipeline { padding:12px 10px; }
       .wf-node { width:66px; }
