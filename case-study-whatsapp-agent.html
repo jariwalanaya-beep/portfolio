@@ -13,7 +13,7 @@
   <meta property="og:title"
     content="Customer Inquiry Agent for Retail Teams | Karlspace" />
   <meta property="og:description"
-    content="Customer inquiry agent for retail teams. Handles stock, pricing, order updates, and complaints with 24/7 coverage." />
+    content="customer inquiry agent for retail teams. Handles stock, pricing, order updates, and complaints with 24/7 coverage." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://karlspace.in/case-study-whatsapp-agent" />
   <meta property="og:image" content="https://karlspace.in/1772001775286.png" />
@@ -21,7 +21,7 @@
   <meta name="twitter:title"
     content="Customer Inquiry Agent for Retail Teams | Karlspace" />
   <meta name="twitter:description"
-    content="Customer inquiry agent for retail teams. Handles stock, pricing, order updates, and complaints with 24/7 coverage." />
+    content="customer inquiry agent for retail teams. Handles stock, pricing, order updates, and complaints with 24/7 coverage." />
   <meta name="twitter:image" content="https://karlspace.in/1772001775286.png" />
   <meta property="og:site_name" content="Karlspace" />
   <meta name="robots" content="index, follow" />
@@ -40,6 +40,249 @@
       "serviceType": "Retail customer inquiry automation",
       "description": "Customer inquiry agent for retail teams. Handles stock, pricing, order tracking, and complaints with 24/7 coverage and no missed chats.",
       "url": "https://karlspace.in/case-study-whatsapp-agent",
+      "provider": {
+        "@type": "Person",
+        "name": "Shivam",
+        "url": "https://karlspace.in",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Karlspace",
+          "url": "https://karlspace.in"
+        }
+      },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI Agent Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WhatsApp Stock Query Automation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WhatsApp Order Tracking Bot" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Multilingual WhatsApp AI Support" } }
+        ]
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://karlspace.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Customer Inquiry Agent", "item": "https://karlspace.in/case-study-whatsapp-agent" }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --bg: #04070c;
+      --bg2: #060c12;
+      --border: rgba(255, 255, 255, 0.07);
+      --border2: rgba(31, 125, 83, 0.2);
+      --text: #e9f0f8;
+      --muted: #6b84a0;
+      --p1: #1F7D53;
+      --p2: #14a86a;
+      --p3: #255F38;
+      --grad: linear-gradient(110deg, #1F7D53 0%, #19b370 50%, #255F38 100%);
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass2: rgba(31, 125, 83, 0.06);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─────────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      height: 62px;
+      background: rgba(4, 7, 12, 0.82);
+      backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: .2px;
+    }
+
+    .nav-logo span {
+      color: var(--p1);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: color .18s, border-color .18s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+    }
+
+    .nav-back {
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text);
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      transition: border-color .18s, background .18s;
+      white-space: nowrap;
+    }
+
+    .nav-back:hover {
+      border-color: var(--border2);
+      background: rgba(31, 125, 83, 0.06);
+    }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-left {
+      padding: 40px 56px 72px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--border);
+      height: 100%;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--p2);
+      margin-bottom: 24px;
+    }
+
+    .tag::before {
+      content: "";
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--grad);
+      border-radius: 2px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(31, 125, 83, 0.1);
+      border: 1px solid rgba(31, 125, 83, 0.28);
+      border-radius: 999px;
+      padding: 5px 14px 5px 10px;
+      font-size: .73rem;
+      font-weight: 600;
+      color: #4ade80;
+      letter-spacing: .5px;
+      margin-bottom: 28px;
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: dotPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(1.5);
+      }
+    }
+
+    .hero-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3.2rem, 5vw, 5.8rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -3.5px;
+      margin-bottom: 28px;
+      color: #fff;
+    }
+
+    .hero-title .hl {
+      background: var(--grad);
+      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
