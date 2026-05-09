@@ -133,6 +133,28 @@
     .wa-bubble { max-width:78%; padding:9px 11px; border-radius:12px; font-size:.8rem; line-height:1.45; border:1px solid rgba(255,255,255,0.08); color:#d7e5f2; }
     .wa-row.bot .wa-bubble { background:rgba(31,125,83,0.12); border-color:rgba(31,125,83,0.25); color:#cce8d7; border-radius:4px 12px 12px 12px; }
     .wa-row.user .wa-bubble { background:rgba(255,255,255,0.04); border-radius:12px 4px 12px 12px; }
+    .wa-chip { margin-top:2px; border:1px solid rgba(31,125,83,0.24); background:rgba(31,125,83,0.08); border-radius:10px; padding:10px 12px; font-size:.74rem; color:#a8c3b2; line-height:1.4; }
+    .wa-chip strong { display:block; color:#59e097; font-size:.76rem; margin-bottom:2px; }
+
+    /* Live activity mini chart */
+    .wa-chart { margin:4px 0 0; border:1px solid rgba(31,125,83,0.2); background:rgba(4,9,14,0.75); border-radius:12px; padding:12px 14px 10px; overflow:hidden; }
+    .wa-chart-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+    .wa-chart-label { font-size:.68rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(90,228,154,0.7); display:flex; align-items:center; gap:5px; }
+    .wa-chart-label::before { content:""; width:5px; height:5px; border-radius:50%; background:#5ae49a; box-shadow:0 0 6px #5ae49a; animation:dotPulse 1.4s ease-in-out infinite; }
+    .wa-chart-value { font-family:"Space Grotesk",sans-serif; font-size:.8rem; font-weight:800; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .wa-chart-bars { display:flex; align-items:flex-end; gap:4px; height:48px; }
+    .wa-bar { flex:1; border-radius:3px 3px 0 0; background:linear-gradient(180deg,#19b370 0%,#1F7D53 100%); opacity:.85; animation:liveBar var(--dur,1.2s) ease-in-out var(--del,0s) infinite alternate; box-shadow:0 0 6px rgba(25,179,112,0.3); }
+    @keyframes liveBar { 0%{height:var(--lo,20%);opacity:.6} 100%{height:var(--hi,80%);opacity:1} }
+    .wa-chart-axis { display:flex; justify-content:space-between; margin-top:5px; font-size:.58rem; color:rgba(107,132,160,0.6); }
+
+    /* Chat animation helpers */
+    .wa-msg-new { animation:msgSlideIn .35s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes msgSlideIn { from{opacity:0;transform:translateY(10px) scale(.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+    .wa-typing { display:flex; align-items:center; gap:5px; padding:11px 14px !important; width:56px; }
+    .wa-typing span { width:7px; height:7px; border-radius:50%; background:rgba(90,228,154,0.7); display:inline-block; animation:typingBounce 1.1s ease-in-out infinite; }
+    .wa-typing span:nth-child(2) { animation-delay:.18s; }
+    .wa-typing span:nth-child(3) { animation-delay:.36s; }
+    @keyframes typingBounce { 0%,60%,100%{transform:translateY(0);opacity:.5} 30%{transform:translateY(-5px);opacity:1} }
     /* Voice panel */
     .voice-ring { display:flex; flex-direction:column; align-items:center; padding:20px 0 10px; gap:12px; }
     .voice-circle { width:80px; height:80px; border-radius:50%; background:rgba(31,125,83,0.15); border:2px solid rgba(31,125,83,0.4); display:flex; align-items:center; justify-content:center; font-size:2rem; box-shadow:0 0 0 12px rgba(31,125,83,0.06),0 0 0 24px rgba(31,125,83,0.03); animation:voicePulse 2s ease-in-out infinite; }
@@ -480,21 +502,17 @@
           <div class="bw-tab" onclick="switchTab('email')" id="tab-email">📧 Email</div>
         </div>
         <!-- WhatsApp Panel -->
-        <div class="bw-panel active" id="panel-wa">
-          <div class="wa-row bot">
-            <div class="wa-bubble">Hi! I'm the booking assistant for Serene Clinic. Would you like to book, reschedule, or cancel an appointment?</div>
-          </div>
-          <div class="wa-row user">
-            <div class="wa-bubble">Book for tomorrow 10am with Dr. Priya</div>
-          </div>
-          <div class="wa-row bot">
-            <div class="wa-bubble">Dr. Priya has 10:15 AM available tomorrow (Wed). Shall I confirm for <strong>Anjali Mehta</strong>?</div>
-          </div>
-          <div class="wa-row user">
-            <div class="wa-bubble">Yes please</div>
-          </div>
-          <div class="wa-row bot">
-            <div class="wa-bubble">✅ Confirmed! Appointment with Dr. Priya, Wed 29 Apr at 10:15 AM. You'll get a reminder 30 min before.</div>
+        <div class="bw-panel active" id="panel-wa" data-ba-body>
+          <!-- messages injected by JS -->
+          <div class="wa-chart">
+            <div class="wa-chart-header">
+              <div class="wa-chart-label">Live Booking Activity</div>
+              <div class="wa-chart-value" data-ba-count>32 bookings today</div>
+            </div>
+            <div class="wa-chart-bars" data-ba-bars></div>
+            <div class="wa-chart-axis">
+              <span>09:00</span><span>11:00</span><span>13:00</span><span>15:00</span><span>Now</span>
+            </div>
           </div>
         </div>
         <!-- Voice Panel -->
@@ -617,223 +635,6 @@
     </div>
   </section>
 
-  <!-- CONFIGURATOR -->
-  <section class="config-section" id="build">
-    <div class="config-head reveal">
-      <div class="config-head-meta">
-        <div class="sec-tag">Build Yours</div>
-        <div class="config-step-pill">⚡ One-time build</div>
-      </div>
-      <h2>Configure your <em>Booking Agent</em></h2>
-      <p>Start with the core. Add the channels and modules your business needs. One-time build — you own it.</p>
-    </div>
-
-    <div class="config-steps reveal">
-      <div class="config-step active"><div class="cs-num">1</div><div class="cs-step-label">Pick channels</div></div>
-      <div class="cs-step-line"></div>
-      <div class="config-step active"><div class="cs-num">2</div><div class="cs-step-label">Add modules</div></div>
-      <div class="cs-step-line"></div>
-      <div class="config-step"><div class="cs-num">3</div><div class="cs-step-label">Apply</div></div>
-    </div>
-
-    <div class="config-layout">
-      <div class="config-body">
-
-        <!-- Core — always included -->
-        <div class="config-group reveal">
-          <div class="config-group-title">Core — always included <span>Always On</span></div>
-          <div class="config-card">
-            <div class="config-row"><div class="config-check">✓</div><div class="config-row-body"><div class="config-row-title">24/7 booking handling (your chosen channel)</div></div></div>
-            <div class="config-row"><div class="config-check">✓</div><div class="config-row-body"><div class="config-row-title">Calendar sync &amp; real-time availability checks</div></div></div>
-            <div class="config-row"><div class="config-check">✓</div><div class="config-row-body"><div class="config-row-title">Automated booking confirmations</div></div></div>
-            <div class="config-row"><div class="config-check">✓</div><div class="config-row-body"><div class="config-row-title">Works in Multiple Languages</div><div class="config-row-desc">Responds to patients in their preferred language — no extra setup needed.</div></div></div>
-            <div class="config-row"><div class="config-check">✓</div><div class="config-row-body"><div class="config-row-title">Human handoff for complex cases</div></div></div>
-          </div>
-        </div>
-
-        <!-- Channel selector -->
-        <div class="config-group reveal">
-          <div class="config-group-title">Channel <span>Pick one or more</span></div>
-          <div class="config-card">
-            <div class="config-row selectable is-selected" data-group="channels" data-key="whatsapp">
-              <div class="config-check">✓</div>
-              <div class="config-row-body"><div class="config-row-title">WhatsApp</div><div class="config-row-desc">Via WATI — conversational booking on WhatsApp</div></div>
-              <div class="config-chip active">Add-on</div>
-            </div>
-            <div class="config-row selectable" data-group="channels" data-key="voice">
-              <div class="config-check"></div>
-              <div class="config-row-body"><div class="config-row-title">Voice / Phone</div><div class="config-row-desc">AI handles inbound calls — books, reschedules, cancels</div></div>
-              <div class="config-chip">Add-on</div>
-            </div>
-            <div class="config-row selectable" data-group="channels" data-key="email">
-              <div class="config-check"></div>
-              <div class="config-row-body"><div class="config-row-title">Email</div><div class="config-row-desc">Reads Gmail inbox, books and sends confirmation emails</div></div>
-              <div class="config-chip">Add-on</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Booking volume range -->
-        <div class="config-group reveal" id="ba-booking-range">
-          <div class="config-group-title">Booking volume <span>Monthly</span></div>
-          <div class="config-card config-range-card">
-            <div class="range-main">
-              <div class="config-row-title">Choose your booking volume</div>
-              <div class="config-row-desc">Slide to set monthly bookings. Pricing updates instantly.</div>
-              <input class="range-input" id="ba-range" type="range" min="0" max="9" step="1" value="0" aria-label="Booking range" />
-              <div class="range-legend">
-                <div class="range-pill" id="ba-range-pill">50 bookings / month</div>
-                <div class="range-price" id="ba-range-price">$9</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Call range -->
-        <div class="config-group reveal is-hidden" id="ba-call-range-group">
-          <div class="config-group-title">Call range <span>Monthly</span></div>
-          <div class="config-card config-range-card">
-            <div class="range-main">
-              <div class="config-row-title">Choose your call minutes</div>
-              <div class="config-row-desc">Slide to set call minutes and estimated calls. Pricing updates instantly.</div>
-              <input class="range-input" id="ba-call-range" type="range" min="0" max="7" step="1" value="0" aria-label="Call range" />
-              <div class="range-legend">
-                <div class="range-pill" id="ba-call-pill">20 min · ~5–8 calls</div>
-                <div class="range-price" id="ba-call-price">$8</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Email range -->
-        <div class="config-group reveal is-hidden" id="ba-email-range-group">
-          <div class="config-group-title">Email range <span>Monthly</span></div>
-          <div class="config-card config-range-card">
-            <div class="range-main">
-              <div class="config-row-title">Choose your email volume</div>
-              <div class="config-row-desc">Slide to set email volume and estimated conversations. Pricing updates instantly.</div>
-              <input class="range-input" id="ba-email-range" type="range" min="0" max="9" step="1" value="0" aria-label="Email range" />
-              <div class="range-legend">
-                <div class="range-pill" id="ba-email-pill">150 emails · ~5–8 conversations</div>
-                <div class="range-price" id="ba-email-price">$9</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Add-on modules -->
-        <div class="config-group reveal">
-          <div class="config-group-title">Add-on modules <span>Optional</span></div>
-          <div class="config-card">
-            <div class="config-row selectable" data-group="addons" data-key="reminder">
-              <div class="config-check"></div>
-              <div class="config-row-body"><div class="config-row-title">Appointment Reminders</div><div class="config-row-desc">Automated WhatsApp / SMS reminders 24h and 30 min before</div></div>
-              <div class="config-row-actions">
-                <div class="config-price">$19 / month</div>
-                <button class="config-more-btn" type="button" data-more="reminder">More Info</button>
-                <div class="config-chip">Add-on</div>
-              </div>
-            </div>
-            <div class="config-more-panel" data-panel="reminder">
-              <div class="config-more-title">Appointment Reminders</div>
-              <p class="config-more-desc">Reduce no-shows by up to 60% with automated reminders sent at the right times. Patients get a WhatsApp or SMS message 24 hours before and again 30 minutes before their appointment.</p>
-              <ul class="config-more-list">
-                <li>24h and 30-min automated reminders via WhatsApp or SMS</li>
-                <li>Customisable message templates with clinic/salon branding</li>
-                <li>One-tap confirm or reschedule from the reminder message</li>
-                <li>Cancellations trigger automatic waitlist re-marketing</li>
-              </ul>
-            </div>
-            <div class="config-row selectable" data-group="addons" data-key="followup">
-              <div class="config-check"></div>
-              <div class="config-row-body"><div class="config-row-title">Broadcast Follow-up</div><div class="config-row-desc">Post-appointment follow-up messages and re-booking nudges</div></div>
-              <div class="config-row-actions">
-                <div class="config-price">$29 / month</div>
-                <button class="config-more-btn" type="button" data-more="followup">More Info</button>
-                <div class="config-chip">Add-on</div>
-              </div>
-            </div>
-            <div class="config-more-panel" data-panel="followup">
-              <div class="config-more-title">Broadcast Follow-up</div>
-              <p class="config-more-desc">After an appointment, automatically send follow-up messages — a satisfaction check, a re-booking nudge, or a care tip. Keeps patients engaged and drives repeat bookings without any manual effort.</p>
-              <ul class="config-more-list">
-                <li>Post-appointment check-in messages</li>
-                <li>Automated re-booking nudges (e.g. "Time for your next visit?")</li>
-                <li>Segment broadcasts by appointment type or date range</li>
-                <li>Works across WhatsApp &amp; Email</li>
-              </ul>
-            </div>
-            <div class="config-row selectable" data-group="addons" data-key="website">
-              <div class="config-check"></div>
-              <div class="config-row-body"><div class="config-row-title">Booking Website</div><div class="config-row-desc">Clean branded booking page synced to the same database</div></div>
-              <div class="config-row-actions">
-                <div class="config-price">$49 one-time</div>
-                <button class="config-more-btn" type="button" data-more="website">More Info</button>
-                <div class="config-chip">Add-on</div>
-              </div>
-            </div>
-            <div class="config-more-panel" data-panel="website">
-              <div class="config-more-title">Booking Website</div>
-              <p class="config-more-desc">A clean, branded online booking page for customers who prefer the web. Synced to the same database as all other channels — no double bookings possible.</p>
-              <ul class="config-more-list">
-                <li>Custom-branded booking page with your logo and colours</li>
-                <li>Real-time slot availability from your shared calendar</li>
-                <li>Instant confirmation email on booking</li>
-                <li>Mobile-friendly and fast-loading</li>
-              </ul>
-            </div>
-            <div class="config-row selectable" data-group="addons" data-key="db">
-              <div class="config-check"></div>
-              <div class="config-row-body"><div class="config-row-title">PostgreSQL Backend</div><div class="config-row-desc">Full database backend — patient records, history, analytics</div></div>
-              <div class="config-row-actions">
-                <div class="config-price">$39 one-time</div>
-                <button class="config-more-btn" type="button" data-more="db">More Info</button>
-                <div class="config-chip">Add-on</div>
-              </div>
-            </div>
-            <div class="config-more-panel" data-panel="db">
-              <div class="config-more-title">PostgreSQL Backend</div>
-              <p class="config-more-desc">Upgrade from Google Sheets to a full relational database. Stores all patient records, appointment history, and analytics in one place — built for scale and reliability.</p>
-              <ul class="config-more-list">
-                <li>Full patient and appointment history in a structured database</li>
-                <li>Supports advanced analytics and reporting queries</li>
-                <li>Scales to thousands of records without slowdown</li>
-                <li>Shared across all channels — single source of truth</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Summary sidebar -->
-      <div class="config-summary">
-        <div class="cs-top-bar">
-          <div class="cs-title">Your Configuration</div>
-          <div class="cs-count-badge" id="ba-cs-count">0 selected</div>
-        </div>
-        <div class="cs-body">
-          <div class="cs-items" id="ba-cs-items">
-            <div class="cs-item">Core agent</div>
-            <div class="cs-item">WhatsApp</div>
-          </div>
-          <div class="cs-divider"></div>
-          <div class="cs-total-row">
-            <div class="cs-total-label" id="ba-cs-monthly-label">Monthly total</div>
-            <div class="cs-total-val" id="ba-cs-monthly">Contact for quote</div>
-          </div>
-          <div class="cs-total-row">
-            <div class="cs-total-label" id="ba-cs-onetime-label">One-time total</div>
-            <div class="cs-total-val" id="ba-cs-onetime">Contact for quote</div>
-          </div>
-          <button class="cs-cta" id="ba-cs-cta" type="button">Apply</button>
-          <div class="cs-note">One-time build · You own it · 30-min free call</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
   <!-- EXTRA FEATURES -->
   <section class="extra-section" id="extra-features">
     <div class="extra-head reveal">
@@ -880,56 +681,6 @@
       </div>
     </div>
   </section>
-
-  <!-- APPLY MODAL -->
-  <div class="apply-modal" id="baApplyModal" aria-hidden="true">
-    <div class="apply-card" role="dialog" aria-modal="true" aria-labelledby="baApplyTitle">
-      <div class="apply-head">
-        <div>
-          <div class="apply-title" id="baApplyTitle">Apply for your Booking Agent</div>
-          <p class="apply-sub">Fill the form and we will review your configuration. You will receive a response at the email you provide.</p>
-        </div>
-        <button class="apply-close" type="button" id="baApplyClose" aria-label="Close">×</button>
-      </div>
-      <form class="apply-form" id="baApplyForm" action="https://formspree.io/f/yourid" method="POST">
-        <div class="apply-field">
-          <label for="baApplyFirstName">First name</label>
-          <input id="baApplyFirstName" name="first_name" type="text" autocomplete="given-name" required />
-        </div>
-        <div class="apply-field">
-          <label for="baApplyLastName">Last name</label>
-          <input id="baApplyLastName" name="last_name" type="text" autocomplete="family-name" required />
-        </div>
-        <div class="apply-field">
-          <label for="baApplyEmail">Email</label>
-          <input id="baApplyEmail" name="email" type="email" autocomplete="email" required />
-        </div>
-        <div class="apply-field">
-          <label for="baApplyCompany">Business name</label>
-          <input id="baApplyCompany" name="company" type="text" autocomplete="organization" required />
-        </div>
-        <div class="apply-field full">
-          <label for="baApplyExtra">Any extra details or requirements</label>
-          <textarea id="baApplyExtra" name="extra_feature" rows="3" placeholder="e.g. Clinic type, number of staff, custom integrations, languages needed…"></textarea>
-        </div>
-        <div class="apply-summary">
-          <div class="apply-summary-title">Selected configuration</div>
-          <div class="apply-summary-text" id="baApplySummaryText">Core agent</div>
-          <div class="apply-summary-totals">
-            <div id="baApplySummaryMonthly">Monthly total: $0.00</div>
-            <div id="baApplySummaryOnetime">One-time total: $0.00</div>
-          </div>
-        </div>
-        <input type="hidden" name="configuration" id="baApplyConfig" />
-        <input type="hidden" name="monthly_total" id="baApplyMonthlyTotal" />
-        <input type="hidden" name="onetime_total" id="baApplyOnetimeTotal" />
-        <div class="apply-actions">
-          <div class="apply-helper">Submissions go to shivam@karlspace.in via Formspree.</div>
-          <button class="apply-submit" type="submit">Submit application</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- FAQ -->
   <section class="faq-section" id="faq">
@@ -1004,214 +755,107 @@
       });
     }
 
-    /* ── BOOKING AGENT PRICING CONFIGURATOR ── */
-    const baConfigState = {
-      channels: { whatsapp: true, voice: false, email: false },
-      addons: { reminder: false, followup: false, website: false, db: false }
-    };
-    const baBookingTiers = [
-      { bookings: 50,  price: 9  }, { bookings: 100, price: 19 },
-      { bookings: 150, price: 29 }, { bookings: 200, price: 39 },
-      { bookings: 300, price: 49 }, { bookings: 450, price: 59 },
-      { bookings: 600, price: 69 }, { bookings: 800, price: 79 },
-      { bookings: 1000,price: 89 }, { bookings: 1500,price: 99 }
-    ];
-    const baCallTiers = [
-      { minutes: 20, calls:'~5–8 calls',   price: 8  }, { minutes: 40,  calls:'~10–15 calls', price: 16 },
-      { minutes: 60, calls:'~15–20 calls', price: 24 }, { minutes: 80,  calls:'~20–25 calls', price: 32 },
-      { minutes: 100,calls:'~25–30 calls', price: 40 }, { minutes: 120, calls:'~30–35 calls', price: 48 },
-      { minutes: 150,calls:'~35–45 calls', price: 60 }, { minutes: 180, calls:'~45–55 calls', price: 72 }
-    ];
-    const baEmailTiers = [
-      { emails: 150, conv:'~5–8',   price: 9  }, { emails: 300,  conv:'~10–15', price: 19 },
-      { emails: 450, conv:'~15–20', price: 29 }, { emails: 600,  conv:'~20–25', price: 39 },
-      { emails: 750, conv:'~25–30', price: 49 }, { emails: 1000, conv:'~35–40', price: 59 },
-      { emails: 1300,conv:'~45–50', price: 69 }, { emails: 1700, conv:'~55–60', price: 74 },
-      { emails: 2000,conv:'~65–70', price: 84 }, { emails: 2500, conv:'~75–85', price: 99 }
-    ];
-    const baConfigLabels = {
-      whatsapp:'WhatsApp', voice:'Voice / Phone', email:'Email',
-      reminder:'Appointment Reminders', followup:'Broadcast Follow-up',
-      website:'Booking Website', db:'PostgreSQL Backend'
-    };
-    const baAddonPrices = {
-      reminder:{ price:19, label:'$19 / month',   cadence:'monthly'  },
-      followup:{ price:29, label:'$29 / month',   cadence:'monthly'  },
-      website: { price:49, label:'$49 one-time',  cadence:'one-time' },
-      db:      { price:39, label:'$39 one-time',  cadence:'one-time' }
-    };
-    const baSetupFee = 49;
+    /* ── LIVE BOOKING CHAT ── */
+    (function () {
+      const body = document.querySelector('[data-ba-body]');
+      const chart = body ? body.querySelector('.wa-chart') : null;
+      const bars = document.querySelector('[data-ba-bars]');
+      const countEl = document.querySelector('[data-ba-count]');
+      if (!body || !chart) return;
 
-    const baRangeInput     = document.getElementById('ba-range');
-    const baRangePill      = document.getElementById('ba-range-pill');
-    const baRangePrice     = document.getElementById('ba-range-price');
-    const baCallRangeInput = document.getElementById('ba-call-range');
-    const baCallPill       = document.getElementById('ba-call-pill');
-    const baCallPrice      = document.getElementById('ba-call-price');
-    const baEmailRangeInput= document.getElementById('ba-email-range');
-    const baEmailPill      = document.getElementById('ba-email-pill');
-    const baEmailPrice     = document.getElementById('ba-email-price');
-    const baBookingRangeGrp= document.getElementById('ba-booking-range');
-    const baCallRangeGrp   = document.getElementById('ba-call-range-group');
-    const baEmailRangeGrp  = document.getElementById('ba-email-range-group');
+      const barData = [
+        [12, 28], [18, 34], [26, 44], [20, 36], [32, 58], [28, 52], [22, 40],
+        [30, 60], [38, 68], [24, 42], [16, 30], [28, 54], [36, 70], [26, 46]
+      ];
+      if (bars) {
+        bars.innerHTML = '';
+        barData.forEach(([lo, hi], i) => {
+          const b = document.createElement('div');
+          const dur = (0.9 + Math.random() * 0.8).toFixed(2);
+          const del = (i * 0.06).toFixed(2);
+          b.className = 'wa-bar';
+          b.style.cssText = `--lo:${lo}%;--hi:${hi}%;--dur:${dur}s;--del:${del}s;height:${lo}%`;
+          bars.appendChild(b);
+        });
+      }
 
-    /* selectable rows */
-    document.querySelectorAll('.config-row.selectable').forEach(row => {
-      row.addEventListener('click', () => {
-        const group = row.dataset.group, key = row.dataset.key;
-        if (!group || !key) return;
-        baConfigState[group][key] = !baConfigState[group][key];
-        row.classList.toggle('is-selected', baConfigState[group][key]);
-        const check = row.querySelector('.config-check');
-        if (check) check.textContent = baConfigState[group][key] ? '✓' : '';
-        const chip = row.querySelector('.config-chip');
-        if (chip) chip.classList.toggle('active', baConfigState[group][key]);
-        baUpdateSummary();
-      });
-    });
+      const conversations = [
+        [
+          { type: 'user', text: 'Need a dentist slot for tomorrow afternoon.' },
+          { type: 'bot', text: 'Dr. Rao is free at 3:15 PM tomorrow. Should I lock it for you?' },
+          { type: 'user', text: 'Yes, please.' },
+          { type: 'bot', text: '✅ Booked! Dr. Rao · Tomorrow 3:15 PM. Reminder goes out 30 min before.' },
+          { type: 'chip', label: 'Series 1 · Booking', detail: 'Slot confirmed · Reply: 1.3s' }
+        ],
+        [
+          { type: 'user', text: 'Can I reschedule my 11am to evening?' },
+          { type: 'bot', text: 'I can move you to 6:30 PM today. Want me to confirm?' },
+          { type: 'user', text: 'Confirm.' },
+          { type: 'bot', text: '✅ Rescheduled to 6:30 PM. New confirmation sent.' },
+          { type: 'chip', label: 'Series 2 · Reschedule', detail: 'Slot updated · Reply: 1.1s' }
+        ],
+        [
+          { type: 'user', text: 'Book a follow-up next Monday with Dr. Priya.' },
+          { type: 'bot', text: 'Dr. Priya has 10:45 AM and 4:20 PM. Which works?' },
+          { type: 'user', text: '10:45 AM.' },
+          { type: 'bot', text: '✅ Confirmed for Monday 10:45 AM. See you then!' },
+          { type: 'chip', label: 'Series 3 · Follow-up', detail: 'Appointment locked · Reply: 1.2s' }
+        ]
+      ];
 
-    /* More Info panels */
-    document.querySelectorAll('.config-more-btn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const panel = document.querySelector(`.config-more-panel[data-panel="${btn.dataset.more}"]`);
-        if (!panel) return;
-        const open = panel.classList.toggle('is-open');
-        btn.textContent = open ? 'Hide Info' : 'More Info';
-      });
-    });
+      let bookingCount = 32;
+      let convIndex = 0;
 
-    function baFillRange(input) {
-      const pct = ((+input.value - +input.min) / (+input.max - +input.min)) * 100;
-      input.style.background = `linear-gradient(to right,var(--p2) 0%,rgba(20,168,106,0.7) ${pct}%,rgba(255,255,255,0.08) ${pct}%,rgba(255,255,255,0.08) 100%)`;
-    }
-    function baAnim(pill, price) {
-      [pill, price].forEach(el => el.classList.add('is-anim'));
-      clearTimeout(baAnim._t);
-      baAnim._t = setTimeout(() => [pill, price].forEach(el => el.classList.remove('is-anim')), 220);
-    }
+      function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-    function baUpdateBookingRange() {
-      if (!baRangeInput) return;
-      baFillRange(baRangeInput);
-      const t = baBookingTiers[+baRangeInput.value] || baBookingTiers[0];
-      baRangePill.textContent = `${t.bookings} bookings / month`;
-      baRangePrice.textContent = `$${t.price}`;
-      baAnim(baRangePill, baRangePrice);
-      baUpdateSummary();
-    }
-    function baUpdateCallRange() {
-      if (!baCallRangeInput) return;
-      baFillRange(baCallRangeInput);
-      const t = baCallTiers[+baCallRangeInput.value] || baCallTiers[0];
-      baCallPill.textContent = `${t.minutes} min · ${t.calls}`;
-      baCallPrice.textContent = `$${t.price}`;
-      baAnim(baCallPill, baCallPrice);
-      baUpdateSummary();
-    }
-    function baUpdateEmailRange() {
-      if (!baEmailRangeInput) return;
-      baFillRange(baEmailRangeInput);
-      const t = baEmailTiers[+baEmailRangeInput.value] || baEmailTiers[0];
-      baEmailPill.textContent = `${t.emails} emails · ${t.conv} conversations`;
-      baEmailPrice.textContent = `$${t.price}`;
-      baAnim(baEmailPill, baEmailPrice);
-      baUpdateSummary();
-    }
+      function makeTyping() {
+        const row = document.createElement('div');
+        row.className = 'wa-row bot wa-typing-row';
+        row.innerHTML = '<div class="wa-bubble wa-typing"><span></span><span></span><span></span></div>';
+        return row;
+      }
 
-    if (baRangeInput)     { baRangeInput.addEventListener('input', baUpdateBookingRange); baUpdateBookingRange(); }
-    if (baCallRangeInput) { baCallRangeInput.addEventListener('input', baUpdateCallRange); baUpdateCallRange(); }
-    if (baEmailRangeInput){ baEmailRangeInput.addEventListener('input', baUpdateEmailRange); baUpdateEmailRange(); }
+      function makeBubble(msg) {
+        if (msg.type === 'chip') {
+          const chip = document.createElement('div');
+          chip.className = 'wa-chip wa-msg-new';
+          chip.innerHTML = `<strong>${msg.label}</strong>${msg.detail}`;
+          return chip;
+        }
+        const row = document.createElement('div');
+        row.className = `wa-row ${msg.type} wa-msg-new`;
+        row.innerHTML = `<div class="wa-bubble">${msg.text}</div>`;
+        return row;
+      }
 
-    function baUpdateSummary() {
-      const itemsEl       = document.getElementById('ba-cs-items');
-      const monthlyEl     = document.getElementById('ba-cs-monthly');
-      const onetimeEl     = document.getElementById('ba-cs-onetime');
-      const monthlyLblEl  = document.getElementById('ba-cs-monthly-label');
-      const onetimeLblEl  = document.getElementById('ba-cs-onetime-label');
-      const countEl       = document.getElementById('ba-cs-count');
+      async function runConversation(msgs) {
+        const children = [...body.children];
+        children.forEach(c => { if (!c.classList.contains('wa-chart')) body.removeChild(c); });
+        for (const msg of msgs) {
+          if (msg.type === 'bot') {
+            const typing = makeTyping();
+            body.insertBefore(typing, chart);
+            await sleep(600);
+            body.removeChild(typing);
+          }
+          const bubble = makeBubble(msg);
+          body.insertBefore(bubble, chart);
+          await sleep(msg.type === 'chip' ? 900 : 850);
+        }
+      }
 
-      const selChannels = Object.entries(baConfigState.channels).filter(([,v])=>v).map(([k])=>k);
-      const selAddons   = Object.entries(baConfigState.addons).filter(([,v])=>v).map(([k])=>k);
+      async function loop() {
+        while (true) {
+          await runConversation(conversations[convIndex % conversations.length]);
+          convIndex += 1;
+          bookingCount += Math.floor(Math.random() * 3);
+          if (countEl) countEl.textContent = `${bookingCount} bookings today`;
+          await sleep(2000);
+        }
+      }
 
-      const bookingTier = baBookingTiers[+(baRangeInput?.value||0)] || baBookingTiers[0];
-      const callTier    = baCallTiers[+(baCallRangeInput?.value||0)] || baCallTiers[0];
-      const emailTier   = baEmailTiers[+(baEmailRangeInput?.value||0)] || baEmailTiers[0];
-
-      /* show/hide range groups */
-      if (baBookingRangeGrp) baBookingRangeGrp.classList.toggle('is-hidden', !baConfigState.channels.whatsapp);
-      if (baCallRangeGrp)    baCallRangeGrp.classList.toggle('is-hidden', !baConfigState.channels.voice);
-      if (baEmailRangeGrp)   baEmailRangeGrp.classList.toggle('is-hidden', !baConfigState.channels.email);
-
-      let html = '<div class="cs-item">Core agent</div>';
-      html += `<div class="cs-item">Setup fee: $${baSetupFee} one-time</div>`;
-      if (baConfigState.channels.whatsapp) html += `<div class="cs-item">Bookings: ${bookingTier.bookings}/mo</div>`;
-      if (baConfigState.channels.voice)    html += `<div class="cs-item">Calls: ${callTier.minutes} min</div>`;
-      if (baConfigState.channels.email)    html += `<div class="cs-item">Email: ${emailTier.emails}/mo</div>`;
-      selChannels.forEach(k => { html += `<div class="cs-item">${baConfigLabels[k]}</div>`; });
-      selAddons.forEach(k => { html += `<div class="cs-item">${baConfigLabels[k]} (${baAddonPrices[k].label})</div>`; });
-
-      const totalSel = selChannels.length + selAddons.length;
-      const discount = totalSel > 0 ? Math.min(totalSel * 0.02, 0.20) : 0;
-      if (discount > 0) html += `<div class="cs-item">${Math.round(discount*100)}% bundle discount</div>`;
-      if (itemsEl) itemsEl.innerHTML = html;
-      if (countEl) countEl.textContent = totalSel + ' selected';
-
-      const addonMonthly  = selAddons.filter(k=>baAddonPrices[k].cadence==='monthly').reduce((s,k)=>s+baAddonPrices[k].price,0);
-      const addonOnetime  = selAddons.filter(k=>baAddonPrices[k].cadence==='one-time').reduce((s,k)=>s+baAddonPrices[k].price,0);
-      const monthlySub    = (baConfigState.channels.whatsapp?bookingTier.price:0)+(baConfigState.channels.voice?callTier.price:0)+(baConfigState.channels.email?emailTier.price:0)+addonMonthly;
-      const onetimeSub    = baSetupFee + addonOnetime;
-      const monthly       = monthlySub * (1 - discount);
-      const onetime       = onetimeSub * (1 - discount);
-
-      if (monthlyEl) monthlyEl.textContent = `$${monthly.toFixed(2)}`;
-      if (onetimeEl) onetimeEl.textContent = `$${onetime.toFixed(2)}`;
-      const discLabel = discount > 0 ? ` (${Math.round(discount*100)}% off)` : '';
-      if (monthlyLblEl) monthlyLblEl.textContent = `Monthly total${discLabel}`;
-      if (onetimeLblEl) onetimeLblEl.textContent = `One-time total${discLabel}`;
-
-      /* Step 3 highlight */
-      const step3 = document.querySelectorAll('.config-step')[2];
-      if (step3) step3.classList.toggle('active', totalSel > 0);
-
-      /* Sync apply modal */
-      const bodyStr = ['Core agent',`Setup fee: $${baSetupFee}`]
-        .concat(baConfigState.channels.whatsapp?[`Bookings: ${bookingTier.bookings}/mo ($${bookingTier.price})`]:[])
-        .concat(baConfigState.channels.voice?[`Calls: ${callTier.minutes}min ($${callTier.price})`]:[])
-        .concat(baConfigState.channels.email?[`Email: ${emailTier.emails}/mo ($${emailTier.price})`]:[])
-        .concat(selChannels.map(k=>baConfigLabels[k]))
-        .concat(selAddons.map(k=>`${baConfigLabels[k]} (${baAddonPrices[k].label})`))
-        .join(', ');
-      const applyConfig   = document.getElementById('baApplyConfig');
-      const applyMonthly  = document.getElementById('baApplyMonthlyTotal');
-      const applyOnetime  = document.getElementById('baApplyOnetimeTotal');
-      const applySummary  = document.getElementById('baApplySummaryText');
-      const applySumMon   = document.getElementById('baApplySummaryMonthly');
-      const applySumOne   = document.getElementById('baApplySummaryOnetime');
-      if (applyConfig)  applyConfig.value  = bodyStr;
-      if (applyMonthly) applyMonthly.value = `$${monthly.toFixed(2)}`;
-      if (applyOnetime) applyOnetime.value = `$${onetime.toFixed(2)}`;
-      if (applySummary) applySummary.textContent = bodyStr;
-      if (applySumMon)  applySumMon.textContent  = `Monthly total: $${monthly.toFixed(2)}`;
-      if (applySumOne)  applySumOne.textContent  = `One-time total: $${onetime.toFixed(2)}`;
-    }
-
-    /* Apply modal */
-    const baModal    = document.getElementById('baApplyModal');
-    const baCta      = document.getElementById('ba-cs-cta');
-    const baClose    = document.getElementById('baApplyClose');
-    function baOpenModal()  { if (baModal) { baModal.classList.add('is-open'); baModal.setAttribute('aria-hidden','false'); } }
-    function baCloseModal() { if (baModal) { baModal.classList.remove('is-open'); baModal.setAttribute('aria-hidden','true'); } }
-    if (baCta)   baCta.addEventListener('click', baOpenModal);
-    if (baClose) baClose.addEventListener('click', baCloseModal);
-    if (baModal) baModal.addEventListener('click', e => { if (e.target===baModal) baCloseModal(); });
-    document.addEventListener('keydown', e => { if (e.key==='Escape') baCloseModal(); });
-
-    baUpdateBookingRange();
-    baUpdateCallRange();
-    baUpdateEmailRange();
-    baUpdateSummary();
-
+      loop();
+    })();
 
     /* ── SCROLL REVEAL ── */
     const revealEls = document.querySelectorAll('.reveal,.reveal-left');
