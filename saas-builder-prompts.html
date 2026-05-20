@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free SaaS Builder Prompts | Karlspace</title>
+  <meta name="description" content="Chain prompts to build 6 paid SaaS tools yourself. AI prompts for Email Sender, Page Builder, Social Scheduler, Meeting Notes, Invoicing, and SEO Writer." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="1772001775286.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #ffffff;
+      --bg2:     #f7f8fb;
+      --bg3:     #f0f3f8;
+      --card:    #ffffff;
+      --card2:   #f3f6fb;
+      --border:  rgba(15,23,42,0.08);
+      --border2: rgba(59,130,246,0.25);
+      --text:    #0f172a;
+      --text2:   #475569;
+      --muted:   #64748b;
+      --blue:    #3b82f6;
+      --blue2:   #2563eb;
+      --blue3:   #60a5fa;
+      --green:   #22c55e;
+      --red:     #ef4444;
+      --orange:  #f97316;
+      --purple:  #a855f7;
+      --yellow:  #eab308;
+      --grad:    linear-gradient(135deg,#2563eb 0%,#3b82f6 50%,#60a5fa 100%);
+      --shadow:  0 4px 24px rgba(0,0,0,0.4);
+      --shadow-blue: 0 8px 32px rgba(59,130,246,0.25);
+      --r-sm: 8px; --r: 12px; --r-lg: 18px; --r-xl: 24px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.4); border-radius: 3px; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+
+    .label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--blue3);
+      margin-bottom: 14px;
+    }
+    .label::before { content:''; width:24px; height:2px; background:var(--blue); border-radius:2px; display:inline-block; }
+    h2.heading {
+      font-family:'Space Grotesk',sans-serif;
+      font-size: clamp(1.9rem,3vw,2.8rem); font-weight:800;
+      line-height:1.1; letter-spacing:-1.5px; color:var(--text);
+    }
+    h2.heading .hl {
+      background: var(--grad); -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .subtext { font-size:1rem; color:var(--text2); line-height:1.75; margin-top:12px; max-width:56ch; }
+
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:'Space Grotesk',sans-serif; font-size:0.9rem; font-weight:700;
+      padding:12px 26px; border-radius:999px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary { background:var(--grad); color:#fff; box-shadow:var(--shadow-blue); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(59,130,246,0.4); }
+    .btn-ghost { background:rgba(255,255,255,0.05); color:var(--text2); border:1px solid var(--border); }
+    .btn-ghost:hover { background:rgba(255,255,255,0.09); color:var(--text); }
+
+    .navbar {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      height:60px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 48px;
+      background:rgba(10,13,20,0.85); backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:700; color:var(--text); }
+    .nav-logo span { color:var(--blue3); }
+    .nav-links { display:flex; gap:2px; }
+    .nav-links a { font-size:0.8rem; font-weight:500; color:var(--text2); padding:6px 14px; border-radius:999px; transition:color .15s, background .15s; }
+    .nav-links a:hover { color:var(--text); background:rgba(255,255,255,0.05); }
+    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; border:1px solid var(--border); border-radius:8px; background:var(--card); }
+    .nav-hamburger span { display:block; width:18px; height:2px; background:var(--text2); border-radius:2px; transition:transform .25s, opacity .25s; }
+    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity:0; }
+    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .nav-mobile-drawer { display:none; position:fixed; top:60px; left:0; right:0; background:rgba(10,13,20,0.97); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); z-index:199; padding:16px 20px 24px; flex-direction:column; gap:4px; }
+    .nav-mobile-drawer.open { display:flex; }
+    .nav-mobile-drawer a { font-size:0.9rem; font-weight:500; color:var(--text2); padding:12px 14px; border-radius:10px; min-height:44px; display:flex; align-items:center; }
+    .nav-mobile-drawer a:hover { color:var(--text); background:rgba(255,255,255,0.05); }
+    @media(max-width:768px) { .navbar{padding:0 20px;} .nav-links{display:none;} .nav-hamburger{display:flex;} }
+
+    .section { padding:96px 32px; max-width:1100px; margin:0 auto; }
+    @media(max-width:640px) { .section{padding:72px 20px;} }
+
+    .hero {
+      min-height: 100vh; padding-top: 60px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; background: var(--bg);
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 50%, rgba(37,99,235,0.12) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 70% at 85% 40%, rgba(96,165,250,0.07) 0%, transparent 65%);
+    }
+    .hero-grid { position:absolute; inset:0; background-image:radial-gradient(rgba(59,130,246,0.1) 1px, transparent 1px); background-size:36px 36px; opacity:0.4; pointer-events:none; }
+    .hero-inner { position:relative; z-index:2; max-width:780px; margin:0 auto; padding:80px 32px; text-align:center; display:flex; flex-direction:column; align-items:center; }
+    .hero-tag { display:inline-flex; align-items:center; gap:8px; background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:999px; padding:6px 18px; font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue3); margin-bottom:28px; }
+    .hero-dot { width:7px; height:7px; border-radius:50%; background:var(--blue3); box-shadow:0 0 8px rgba(96,165,250,0.7); animation:pulse 1.8s ease-in-out infinite; }
+    .hero-h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.8rem,6vw,5rem); font-weight:800; line-height:1.0; letter-spacing:-3px; color:var(--text); margin-bottom:22px; }
+    .hero-h1 .hl { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-sub { font-size:clamp(1rem,1.5vw,1.1rem); color:var(--text2); line-height:1.8; max-width:56ch; margin-bottom:36px; }
+    .hero-stats { display:flex; gap:0; background:var(--card); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; margin-bottom:36px; box-shadow:var(--shadow); }
+    .hero-stat { padding:16px 28px; text-align:center; border-right:1px solid var(--border); flex:1; }
+    .hero-stat:last-child { border-right:none; }
+    .hero-stat-n { font-family:'Space Grotesk',sans-serif; font-size:1.7rem; font-weight:800; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; }
+    .hero-stat-l { font-size:0.7rem; color:var(--muted); margin-top:4px; letter-spacing:0.5px; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+    @media(max-width:600px){ .hero-h1{font-size:2.4rem;letter-spacing:-2px;} .hero-inner{padding:60px 20px;} .hero-stats{flex-direction:column;} .hero-stat{border-right:none;border-bottom:1px solid var(--border);} .hero-stat:last-child{border-bottom:none;} }
+
+    .tool-section { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .tool-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:40px; }
+    @media(max-width:900px){ .tool-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:600px){ .tool-grid{grid-template-columns:1fr;} }
+    .tool-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); padding:28px; transition:border-color .2s, transform .2s; display:flex; flex-direction:column; }
+    .tool-card:hover { border-color:rgba(59,130,246,0.3); transform:translateY(-3px); }
+    .tool-card-header { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+    .tool-card-emoji { width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; }
+    .tool-card-name { font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--text); }
+    .tool-card-replaces { font-size:0.68rem; color:var(--muted); margin-top:2px; display:flex; align-items:center; gap:6px; }
+    .tool-card-replaces s { color:var(--text2); }
+    .tool-card-save { background:rgba(34,197,94,0.08); color:var(--green); font-weight:700; font-size:0.65rem; padding:2px 8px; border-radius:6px; border:1px solid rgba(34,197,94,0.15); }
+    .tool-card-body { flex:1; }
+    .tool-card-features { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
+    .tool-card-feat { display:flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--text2); }
+    .tool-card-feat::before { content:'✓'; color:var(--blue3); font-weight:700; }
+    .tool-card-footer { display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); padding-top:16px; margin-top:auto; }
+    .tool-card-prompts { font-size:0.72rem; color:var(--muted); font-weight:600; }
+    .tool-card-btn { font-size:0.78rem; font-weight:700; color:var(--blue3); display:flex; align-items:center; gap:4px; transition:gap .2s; }
+    .tool-card-btn:hover { gap:8px; }
+
+    .how-section { background:var(--bg); }
+    .how-steps { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:16px; margin-top:40px; counter-reset:step; }
+    @media(max-width:800px){ .how-steps{grid-template-columns:1fr 1fr;} }
+    @media(max-width:500px){ .how-steps{grid-template-columns:1fr;} }
+    .how-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); padding:28px; text-align:center; counter-increment:step; }
+    .how-num { width:44px; height:44px; border-radius:12px; background:var(--grad); color:#fff; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-family:'Space Grotesk',sans-serif; font-size:1.1rem; font-weight:800; }
+    .how-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .how-text { font-size:0.82rem; color:var(--text2); line-height:1.6; }
+
+    .savings-bar { background:var(--bg2); border-top:1px solid var(--border); text-align:center; padding:24px 32px; }
+    .savings-bar p { font-family:'Space Grotesk',sans-serif; font-size:1.1rem; font-weight:700; color:var(--text2); }
+    .savings-bar span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+    .faq-section { background:var(--bg2); border-top:1px solid var(--border); }
+    .faq-list { display:flex; flex-direction:column; gap:10px; margin-top:40px; max-width:780px; margin-left:auto; margin-right:auto; }
+    .faq-item { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); overflow:hidden; }
+    .faq-q { padding:18px 24px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; font-size:0.92rem; font-weight:600; color:var(--text); transition:color .2s; user-select:none; }
+    .faq-q:hover { color:var(--blue3); }
+    .faq-q-icon { font-size:0.7rem; color:var(--muted); transition:transform .25s; }
+    .faq-q.open .faq-q-icon { transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease, padding .35s ease; padding:0 24px; font-size:0.88rem; color:var(--text2); line-height:1.7; }
+    .faq-a.open { max-height:300px; padding:0 24px 18px; }
+
+    .cta-section { background:var(--bg); padding:64px 32px; text-align:center; }
+    .cta-section .btn { margin-top:24px; }
+
+    .prompt-section { background:var(--bg); border-top:1px solid var(--border); }
+    .prompt-tool { display:none; scroll-margin-top:80px; }
+    .prompt-tool.active { display:block; }
+    .prompt-tool-header { display:flex; align-items:center; gap:14px; margin-bottom:24px; }
+    .prompt-tool-header h3 { font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:700; }
+    .prompt-tool-header .close-prompts { margin-left:auto; font-size:0.8rem; color:var(--muted); cursor:pointer; padding:6px 14px; border-radius:999px; border:1px solid var(--border); transition:color .2s, border-color .2s; }
+    .prompt-tool-header .close-prompts:hover { color:var(--text); border-color:rgba(59,130,246,0.3); }
+    .prompt-list { display:flex; flex-direction:column; gap:12px; }
+    .prompt-item { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); overflow:hidden; }
+    .prompt-item-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; user-select:none; gap:12px; }
+    .prompt-item-header:hover { background:rgba(59,130,246,0.02); }
+    .prompt-item-label { display:flex; align-items:center; gap:10px; }
+    .prompt-item-num { width:28px; height:28px; border-radius:8px; background:var(--grad); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:800; flex-shrink:0; font-family:'Space Grotesk',sans-serif; }
+    .prompt-item-title { font-size:0.9rem; font-weight:600; color:var(--text); }
+    .prompt-item-toggle { font-size:0.65rem; color:var(--muted); transition:transform .25s; }
+    .prompt-item.open .prompt-item-toggle { transform:rotate(45deg); }
+    .prompt-item-body { max-height:0; overflow:hidden; transition:max-height .35s ease; border-top:1px solid transparent; }
+    .prompt-item.open .prompt-item-body { max-height:2000px; border-top-color:var(--border); }
+    .prompt-item-text { padding:16px 20px; font-size:0.85rem; color:var(--text2); line-height:1.7; white-space:pre-wrap; font-family:'JetBrains Mono',monospace; background:rgba(15,23,42,0.02); }
+    .prompt-item-actions { display:flex; gap:8px; padding:12px 20px; border-top:1px solid var(--border); }
+    .prompt-copy-btn { display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:700; padding:7px 16px; border-radius:8px; border:1px solid var(--border); background:var(--card); color:var(--text2); cursor:pointer; transition:color .2s, border-color .2s, background .2s; }
+    .prompt-copy-btn:hover { border-color:rgba(59,130,246,0.3); color:var(--blue3); background:rgba(59,130,246,0.04); }
+    .prompt-copy-btn.copied { border-color:var(--green); color:var(--green); background:rgba(34,197,94,0.06); }
+    .prompt-back { display:inline-flex; align-items:center; gap:6px; font-size:0.8rem; font-weight:600; color:var(--blue3); cursor:pointer; margin-bottom:20px; transition:gap .2s; }
+    .prompt-back:hover { gap:10px; }
+    .prompt-empty { text-align:center; padding:48px 20px; color:var(--muted); font-size:0.9rem; }
+
+    @media(max-width:1024px) {
+      .section { padding:80px 28px; }
+    }
+    @media(max-width:768px) {
+      .section { padding:64px 20px; }
+    }
+    @media(max-width:480px) {
+      .section { padding:52px 16px; }
+      .label { font-size:0.62rem; letter-spacing:2px; }
+      h2.heading { font-size:1.7rem; letter-spacing:-1px; }
+      .subtext { font-size:0.9rem; }
+      .tool-card { padding:20px; }
+      .faq-q { padding:14px 18px; font-size:0.85rem; }
+      .faq-a.open { padding:0 18px 14px; }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      *, *::before, *::after { animation:none !important; transition:none !important; }
+      .reveal { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">Karl<span>space</span></a>
+    <div class="nav-links">
+      <a href="#tools">Tools</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <nav class="nav-mobile-drawer" id="navDrawer">
+    <a href="#tools" onclick="closeDrawer()">Tools</a>
+    <a href="#how" onclick="closeDrawer()">How It Works</a>
+    <a href="#faq" onclick="closeDrawer()">FAQ</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-tag reveal"><span class="hero-dot"></span> Free Builder Toolkit</div>
+      <h1 class="hero-h1 reveal">
+        Build your own<br><span class="hl">SaaS empire</span>
+      </h1>
+      <p class="hero-sub reveal">
+        6 production-ready SaaS tools. Copy each prompt chain into Claude Code and ship — no boilerplate, no guesswork.
+      </p>
+      <div class="hero-stats reveal">
+        <div class="hero-stat"><div class="hero-stat-n">6</div><div class="hero-stat-l">SaaS Tools</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">$294</div><div class="hero-stat-l">Saved / mo</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">$3,528</div><div class="hero-stat-l">Saved / yr</div></div>
+        <div class="hero-stat"><div class="hero-stat-n">74</div><div class="hero-stat-l">Total Prompts</div></div>
+      </div>
+      <div class="hero-actions reveal">
+        <a href="#tools" class="btn btn-primary">Browse tools →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="tool-section" id="tools">
+    <div class="section">
+      <div class="reveal" style="text-align:center;margin-bottom:8px;">
+        <div class="label" style="justify-content:center;">Select a tool</div>
+        <h2 class="heading" style="text-align:center;">Pick a tool. <span class="hl">Ship it.</span></h2>
+        <p class="subtext" style="margin:12px auto 0;text-align:center;">Each tool replaces a $15–$99/month subscription. Run the prompts in Claude Code, Cursor, or ChatGPT.</p>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-card reveal">
+          <div class="tool-card-header">
+            <div class="tool-card-emoji" style="background:rgba(59,130,246,0.1);">📧</div>
+            <div>
+              <div class="tool-card-name">MailForge</div>
+              <div class="tool-card-replaces">Replaces <s>Instantly</s> <span class="tool-card-save">$97/mo FREE</span></div>
+            </div>
+          </div>
+          <div class="tool-card-body">
+            <div class="tool-card-features">
+              <div class="tool-card-feat">SMTP inbox rotation</div>
+              <div class="tool-card-feat">Automated warmup schedules</div>
+              <div class="tool-card-feat">Deliverability scoring</div>
+            </div>
+          </div>
+          <div class="tool-card-footer">
+            <span class="tool-card-prompts">14 prompts</span>
+            <a href="#prompts-mailforge" class="tool-card-btn">Get prompts →</a>
+          </div>
+        </div>
+
+        <div class="tool-card reveal">
+          <div class="tool-card-header">
+            <div class="tool-card-emoji" style="background:rgba(37,99,235,0.1);">🌐</div>
+            <div>
+              <div class="tool-card-name">PageCraft AI</div>
+              <div class="tool-card-replaces">Replaces <s>Unbounce</s> <span class="tool-card-save">$99/mo FREE</span></div>
+            </div>
+          </div>
+          <div class="tool-card-body">
+            <div class="tool-card-features">
+              <div class="tool-card-feat">AI page generation from prompts</div>
+              <div class="tool-card-feat">Drag-and-drop section editor</div>
+              <div class="tool-card-feat">A/B variant testing</div>
+            </div>
+          </div>
+          <div class="tool-card-footer">
+            <span class="tool-card-prompts">14 prompts</span>
+            <a href="#prompts-pagecraft" class="tool-card-btn">Get prompts →</a>
+          </div>
+        </div>
+
+        <div class="tool-card reveal">
+          <div class="tool-card-header">
+            <div class="tool-card-emoji" style="background:rgba(96,165,250,0.1);">📅</div>
+            <div>
+              <div class="tool-card-name">SocialFlow</div>
+              <div class="tool-card-replaces">Replaces <s>Buffer</s> <span class="tool-card-save">$15/mo FREE</span></div>
+            </div>
+          </div>
+          <div class="tool-card-body">
+            <div class="tool-card-features">
+              <div class="tool-card-feat">AI caption generation</div>
+              <div class="tool-card-feat">Twitter/Instagram/LinkedIn posting</div>
+              <div class="tool-card-feat">Calendar drag-and-drop</div>
+            </div>
+          </div>
+          <div class="tool-card-footer">
+            <span class="tool-card-prompts">14 prompts</span>
+            <a href="#prompts-socialflow" class="tool-card-btn">Get prompts →</a>
+          </div>
+        </div>
+
+        <div class="tool-card reveal">
+          <div class="tool-card-header">
+            <div class="tool-card-emoji" style="background:rgba(168,85,247,0.1);">🎙️</div>
+            <div>
+              <div class="tool-card-name">MeetNotes AI</div>
+              <div class="tool-card-replaces">Replaces <s>Otter.ai</s> <span class="tool-card-save">$17/mo FREE</span></div>
+            </div>
+          </div>
+          <div class="tool-card-body">
+            <div class="tool-card-features">
+              <div class="tool-card-feat">Whisper API transcription</div>
+              <div class="tool-card-feat">Speaker identification</div>
+              <div class="tool-card-feat">Action item extraction</div>
+            </div>
+          </div>
+          <div class="tool-card-footer">
+            <span class="tool-card-prompts">14 prompts</span>
+            <a href="#prompts-meetnotes" class="tool-card-btn">Get prompts →</a>
+          </div>
+        </div>
+
+        <div class="tool-card reveal">
+          <div class="tool-card-header">
+            <div class="tool-card-emoji" style="background:rgba(34,197,94,0.1);">💰</div>
+            <div>
+              <div class="tool-card-name">InvoiceForge</div>
+              <div class="tool-card-replaces">Replaces <s>FreshBooks</s> <span class="tool-card-save">$17/mo FREE</span></div>
+            </div>
+          </div>
+          <div class="tool-card-body">
+            <div class="tool-card-features">
+              <div class="tool-card-feat">OCR receipt scanning</div>
+              <div class="tool-card-feat">Auto expense categorization</div>
+              <div class="tool-card-feat">Invoice generation</div>
+            </div>
+          </div>
+          <div class="tool-card-footer">
+            <span class="tool-card-prompts">4 prompts</span>
+            <a href="#prompts-invoiceforge" class="tool-card-btn">Get prompts →</a>
+          </div>
+        </div>
+
+        <div class="tool-card reveal">
+          <div class="tool-card-header">
+            <div class="tool-card-emoji" style="background:rgba(251,191,36,0.1);">✍️</div>
+            <div>
+              <div class="tool-card-name">ContentForge</div>
+              <div class="tool-card-replaces">Replaces <s>Jasper</s> <span class="tool-card-save">$49/mo FREE</span></div>
+            </div>
+          </div>
+          <div class="tool-card-body">
+            <div class="tool-card-features">
+              <div class="tool-card-feat">Keyword research &amp; density</div>
+              <div class="tool-card-feat">Blog outline generation</div>
+              <div class="tool-card-feat">SEO scoring (15+ checks)</div>
+            </div>
+          </div>
+          <div class="tool-card-footer">
+            <span class="tool-card-prompts">14 prompts</span>
+            <a href="#prompts-contentforge" class="tool-card-btn">Get prompts →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="savings-bar reveal">
+    <p>Combined Savings: <span>$294/mo · $3,528/yr</span> — 6 tools, zero subscriptions.</p>
+  </div>
+
+  <div class="how-section" id="how">
+    <div class="section">
+      <div class="reveal" style="text-align:center;margin-bottom:8px;">
+        <div class="label" style="justify-content:center;">#2 How It Works</div>
+        <h2 class="heading" style="text-align:center;">Four steps to <span class="hl">ship your tool.</span></h2>
+        <p class="subtext" style="margin:12px auto 0;text-align:center;">Each prompt is self-contained but architecturally linked — run them in order for the best results.</p>
+      </div>
+      <div class="how-steps">
+        <div class="how-card reveal">
+          <div class="how-num">1</div>
+          <div class="how-title">Pick a SaaS tool</div>
+          <div class="how-text">Browse the 6 tools above and choose the one you want to build. Each replaces a subscription you're paying for.</div>
+        </div>
+        <div class="how-card reveal">
+          <div class="how-num">2</div>
+          <div class="how-title">Copy each prompt</div>
+          <div class="how-text">Copy the prompts in sequence — each generates a specific module that subsequent prompts build upon.</div>
+        </div>
+        <div class="how-card reveal">
+          <div class="how-num">3</div>
+          <div class="how-title">Paste into Claude Code</div>
+          <div class="how-text">Run each prompt in Claude Code, Cursor, or ChatGPT. No boilerplate, no guesswork.</div>
+        </div>
+        <div class="how-card reveal">
+          <div class="how-num">4</div>
+          <div class="how-title">Ship your app</div>
+          <div class="how-text">Deploy your production-ready SaaS tool. You own the code, data, and infrastructure.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-section" id="faq">
+    <div class="section">
+      <div class="reveal" style="text-align:center;margin-bottom:8px;">
+        <div class="label" style="justify-content:center;">FAQ</div>
+        <h2 class="heading" style="text-align:center;">Frequently asked <span class="hl">questions.</span></h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            What are SaaS Builder Prompts?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Chain-prompt workflows that generate complete SaaS applications. Each prompt builds a specific module of the tool. Run them in sequence in an AI coding assistant like Claude Code or ChatGPT.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            How much money can I save?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Combined savings of $294/month or $3,528/year. MailForge replaces Instantly ($97/mo), PageCraft AI replaces Unbounce ($99/mo), SocialFlow replaces Buffer ($15/mo), MeetNotes AI replaces Otter.ai ($17/mo), InvoiceForge replaces FreshBooks ($17/mo), and ContentForge replaces Jasper ($49/mo).</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Which AI tools work with these prompts?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Claude Code, Cursor, ChatGPT, or any AI coding assistant that can generate and modify files. The prompts are designed to be AI-agnostic.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            What tech stack do they use?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Next.js 14 (App Router), Supabase (PostgreSQL + Auth), Redis (Upstash), and Resend/SendGrid API. All modern, production-proven technologies.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Are the built tools production-ready?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Yes. Each prompt chain builds a fully functional SaaS tool with authentication, database, API routes, and UI. You may need to configure environment variables and deploy to your preferred platform.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            How long does it take to build one?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Run times vary by tool complexity. Simple tools like InvoiceForge (4 prompts) take ~30 minutes. Complex tools like MailForge (14 prompts) take 2–4 hours running prompts sequentially.</div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Do I need coding experience?
+            <span class="faq-q-icon">+</span>
+          </div>
+          <div class="faq-a">Basic familiarity with running terminal commands and deploying web apps is helpful, but the prompts handle all the code generation. The AI explains each step as it builds.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="reveal">
+      <div class="label" style="justify-content:center;">Get started</div>
+      <h2 class="heading" style="text-align:center;">Pick a tool. Copy the prompts.<br><span class="hl">Ship in hours.</span></h2>
+      <p class="subtext" style="margin:12px auto 0;text-align:center;">$3,528+ saved per year. No subscriptions. You own everything.</p>
+      <a href="#tools" class="btn btn-primary" style="margin-top:24px;">Browse all tools →</a>
+    </div>
+  </div>
+
+  <!-- PROMPTS SECTION -->
+  <div class="prompt-section" id="prompts">
+    <div class="section">
+
+      <div id="prompts-mailforge" class="prompt-tool" data-tool="mailforge">
+        <div class="prompt-back" onclick="showAllPrompts()">← Back to all tools</div>
+        <div class="prompt-tool-header">
+          <div class="tool-card-emoji" style="background:rgba(59,130,246,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">📧</div>
+          <h3>MailForge <span style="font-size:0.85rem;font-weight:400;color:var(--muted);">— 14 prompts</span></h3>
+          <span class="close-prompts" onclick="showAllPrompts()">✕ Close</span>
+        </div>
+        <div class="prompt-list" id="prompt-list-mailforge">
+          <div class="prompt-empty">Prompts will appear here as you provide them.</div>
+        </div>
+      </div>
+
+      <div id="prompts-pagecraft" class="prompt-tool" data-tool="pagecraft">
+        <div class="prompt-back" onclick="showAllPrompts()">← Back to all tools</div>
+        <div class="prompt-tool-header">
+          <div class="tool-card-emoji" style="background:rgba(37,99,235,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">🌐</div>
+          <h3>PageCraft AI <span style="font-size:0.85rem;font-weight:400;color:var(--muted);">— 14 prompts</span></h3>
+          <span class="close-prompts" onclick="showAllPrompts()">✕ Close</span>
+        </div>
+        <div class="prompt-list" id="prompt-list-pagecraft">
+          <div class="prompt-empty">Prompts will appear here as you provide them.</div>
+        </div>
+      </div>
+
+      <div id="prompts-socialflow" class="prompt-tool" data-tool="socialflow">
+        <div class="prompt-back" onclick="showAllPrompts()">← Back to all tools</div>
+        <div class="prompt-tool-header">
+          <div class="tool-card-emoji" style="background:rgba(96,165,250,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">📅</div>
+          <h3>SocialFlow <span style="font-size:0.85rem;font-weight:400;color:var(--muted);">— 14 prompts</span></h3>
+          <span class="close-prompts" onclick="showAllPrompts()">✕ Close</span>
+        </div>
+        <div class="prompt-list" id="prompt-list-socialflow">
+          <div class="prompt-empty">Prompts will appear here as you provide them.</div>
+        </div>
+      </div>
+
+      <div id="prompts-meetnotes" class="prompt-tool" data-tool="meetnotes">
+        <div class="prompt-back" onclick="showAllPrompts()">← Back to all tools</div>
+        <div class="prompt-tool-header">
+          <div class="tool-card-emoji" style="background:rgba(168,85,247,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">🎙️</div>
+          <h3>MeetNotes AI <span style="font-size:0.85rem;font-weight:400;color:var(--muted);">— 14 prompts</span></h3>
+          <span class="close-prompts" onclick="showAllPrompts()">✕ Close</span>
+        </div>
+        <div class="prompt-list" id="prompt-list-meetnotes">
+          <div class="prompt-empty">Prompts will appear here as you provide them.</div>
+        </div>
+      </div>
+
+      <div id="prompts-invoiceforge" class="prompt-tool" data-tool="invoiceforge">
+        <div class="prompt-back" onclick="showAllPrompts()">← Back to all tools</div>
+        <div class="prompt-tool-header">
+          <div class="tool-card-emoji" style="background:rgba(34,197,94,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">💰</div>
+          <h3>InvoiceForge <span style="font-size:0.85rem;font-weight:400;color:var(--muted);">— 4 prompts</span></h3>
+          <span class="close-prompts" onclick="showAllPrompts()">✕ Close</span>
+        </div>
+        <div class="prompt-list" id="prompt-list-invoiceforge">
+          <div class="prompt-empty">Prompts will appear here as you provide them.</div>
+        </div>
+      </div>
+
+      <div id="prompts-contentforge" class="prompt-tool" data-tool="contentforge">
+        <div class="prompt-back" onclick="showAllPrompts()">← Back to all tools</div>
+        <div class="prompt-tool-header">
+          <div class="tool-card-emoji" style="background:rgba(251,191,36,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">✍️</div>
+          <h3>ContentForge <span style="font-size:0.85rem;font-weight:400;color:var(--muted);">— 14 prompts</span></h3>
+          <span class="close-prompts" onclick="showAllPrompts()">✕ Close</span>
+        </div>
+        <div class="prompt-list" id="prompt-list-contentforge">
+          <div class="prompt-empty">Prompts will appear here as you provide them.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    .footer-bar { background:var(--bg2); border-top:1px solid var(--border); padding:24px 32px; text-align:center; }
+    .footer-bar p { font-size:0.8rem; color:var(--muted); }
+    .footer-bar a { color:var(--blue3); }
+  </style>
+  <div class="footer-bar">
+    <p>Built by <a href="https://karlspace.in" target="_blank">Karlspace</a>. Prompts from RubixScript.</p>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('navHamburger');
+    const drawer = document.getElementById('navDrawer');
+    function closeDrawer() { hamburger.classList.remove('open'); drawer.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); }
+    hamburger.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    function toggleFaq(el) {
+      el.classList.toggle('open');
+      const answer = el.nextElementSibling;
+      answer.classList.toggle('open');
+    }
+
+    function togglePrompt(el) {
+      el.classList.toggle('open');
+      const body = el.querySelector('.prompt-item-body');
+      if (body) body.classList.toggle('open');
+    }
+
+    function copyPrompt(btn, toolId, index) {
+      const list = document.getElementById('prompt-list-' + toolId);
+      const items = list.querySelectorAll('.prompt-item');
+      const item = items[index];
+      if (!item) return;
+      const textEl = item.querySelector('.prompt-item-text');
+      if (!textEl) return;
+      const text = textEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.classList.add('copied');
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '📋 Copy prompt'; }, 2000);
+      });
+    }
+
+    function showToolPrompts(toolId) {
+      const tools = document.querySelectorAll('.prompt-tool');
+      tools.forEach(t => t.classList.remove('active'));
+      const target = document.getElementById('prompts-' + toolId);
+      if (target) {
+        target.classList.add('active');
+        setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      }
+    }
+
+    function showAllPrompts() {
+      document.querySelectorAll('.prompt-tool').forEach(t => t.classList.remove('active'));
+      window.scrollTo({ top: document.getElementById('tools').offsetTop - 70, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#prompts-', '');
+      if (hash) showToolPrompts(hash);
+    });
+
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#prompts-', '');
+      if (hash) showToolPrompts(hash);
+    });
+
+    document.querySelectorAll('.tool-card-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const href = btn.getAttribute('href');
+        const match = href.match(/^#prompts-(.+)$/);
+        if (match) {
+          e.preventDefault();
+          showToolPrompts(match[1]);
+        }
+      });
+    });
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
