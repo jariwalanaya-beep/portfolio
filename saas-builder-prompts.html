@@ -12,27 +12,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:      #ffffff;
-      --bg2:     #f7f8fb;
-      --bg3:     #f0f3f8;
-      --card:    #ffffff;
-      --card2:   #f3f6fb;
-      --border:  rgba(15,23,42,0.08);
-      --border2: rgba(59,130,246,0.25);
-      --text:    #0f172a;
-      --text2:   #475569;
-      --muted:   #64748b;
-      --blue:    #3b82f6;
-      --blue2:   #2563eb;
-      --blue3:   #60a5fa;
-      --green:   #22c55e;
-      --red:     #ef4444;
-      --orange:  #f97316;
-      --purple:  #a855f7;
-      --yellow:  #eab308;
-      --grad:    linear-gradient(135deg,#2563eb 0%,#3b82f6 50%,#60a5fa 100%);
-      --shadow:  0 4px 24px rgba(0,0,0,0.4);
-      --shadow-blue: 0 8px 32px rgba(59,130,246,0.25);
+      --bg: #ffffff;
+      --bg2: #FBF5DD;
+      --bg3: #E7E1B1;
+      --card: #ffffff;
+      --card2: #FBF5DD;
+      --border: rgba(48, 109, 41, 0.12);
+      --border2: rgba(48, 109, 41, 0.25);
+      --text: #000000;
+      --text2: #306D29;
+      --muted: #556655;
+      --blue: #306D29;
+      --blue2: #0D530E;
+      --blue3: #306D29;
+      --green: #306D29;
+      --red: #ef4444;
+      --orange: #f97316;
+      --purple: #a855f7;
+      --yellow: #306D29;
+      --grad: linear-gradient(135deg, #0D530E 0%, #306D29 100%);
+      --shadow: 0 8px 32px rgba(48, 109, 41, 0.06);
+      --shadow-blue: 0 8px 32px rgba(48, 109, 41, 0.08);
       --r-sm: 8px; --r: 12px; --r-lg: 18px; --r-xl: 24px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,7 +43,7 @@
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg2); }
-    ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.4); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(48, 109, 41,0.4); border-radius: 3px; }
 
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
     .reveal.visible { opacity: 1; transform: none; }
@@ -77,8 +77,8 @@
       transition: transform .2s, box-shadow .2s;
     }
     .btn-primary { background:var(--grad); color:#fff; box-shadow:var(--shadow-blue); }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(59,130,246,0.4); }
-    .btn-ghost { background:rgba(255,255,255,0.05); color:var(--text2); border:1px solid var(--border); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(48, 109, 41,0.4); }
+    .btn-ghost { background:#ffffff; color:var(--text2); border:1px solid var(--border); }
     .btn-ghost:hover { background:rgba(255,255,255,0.09); color:var(--text); }
 
     .navbar {
@@ -92,7 +92,7 @@
     .nav-logo span { color:var(--blue3); }
     .nav-links { display:flex; gap:2px; }
     .nav-links a { font-size:0.8rem; font-weight:500; color:var(--text2); padding:6px 14px; border-radius:999px; transition:color .15s, background .15s; }
-    .nav-links a:hover { color:var(--text); background:rgba(255,255,255,0.05); }
+    .nav-links a:hover { color:var(--text); background:#ffffff; }
     .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; border:1px solid var(--border); border-radius:8px; background:var(--card); }
     .nav-hamburger span { display:block; width:18px; height:2px; background:var(--text2); border-radius:2px; transition:transform .25s, opacity .25s; }
     .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
@@ -101,7 +101,7 @@
     .nav-mobile-drawer { display:none; position:fixed; top:60px; left:0; right:0; background:rgba(10,13,20,0.97); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); z-index:199; padding:16px 20px 24px; flex-direction:column; gap:4px; }
     .nav-mobile-drawer.open { display:flex; }
     .nav-mobile-drawer a { font-size:0.9rem; font-weight:500; color:var(--text2); padding:12px 14px; border-radius:10px; min-height:44px; display:flex; align-items:center; }
-    .nav-mobile-drawer a:hover { color:var(--text); background:rgba(255,255,255,0.05); }
+    .nav-mobile-drawer a:hover { color:var(--text); background:#ffffff; }
     @media(max-width:768px) { .navbar{padding:0 20px;} .nav-links{display:none;} .nav-hamburger{display:flex;} }
 
     .section { padding:96px 32px; max-width:1100px; margin:0 auto; }
@@ -116,12 +116,12 @@
       content:''; position:absolute; inset:0; pointer-events:none;
       background:
         radial-gradient(ellipse 70% 60% at 15% 50%, rgba(37,99,235,0.12) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 70% at 85% 40%, rgba(96,165,250,0.07) 0%, transparent 65%);
+        radial-gradient(ellipse 50% 70% at 85% 40%, rgba(231, 225, 177,0.07) 0%, transparent 65%);
     }
-    .hero-grid { position:absolute; inset:0; background-image:radial-gradient(rgba(59,130,246,0.1) 1px, transparent 1px); background-size:36px 36px; opacity:0.4; pointer-events:none; }
+    .hero-grid { position:absolute; inset:0; background-image:radial-gradient(rgba(48, 109, 41,0.1) 1px, transparent 1px); background-size:36px 36px; opacity:0.4; pointer-events:none; }
     .hero-inner { position:relative; z-index:2; max-width:780px; margin:0 auto; padding:80px 32px; text-align:center; display:flex; flex-direction:column; align-items:center; }
-    .hero-tag { display:inline-flex; align-items:center; gap:8px; background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:999px; padding:6px 18px; font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue3); margin-bottom:28px; }
-    .hero-dot { width:7px; height:7px; border-radius:50%; background:var(--blue3); box-shadow:0 0 8px rgba(96,165,250,0.7); animation:pulse 1.8s ease-in-out infinite; }
+    .hero-tag { display:inline-flex; align-items:center; gap:8px; background:rgba(48, 109, 41,0.08); border:1px solid rgba(48, 109, 41,0.2); border-radius:999px; padding:6px 18px; font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue3); margin-bottom:28px; }
+    .hero-dot { width:7px; height:7px; border-radius:50%; background:var(--blue3); box-shadow:0 0 8px rgba(231, 225, 177,0.7); animation:pulse 1.8s ease-in-out infinite; }
     .hero-h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.8rem,6vw,5rem); font-weight:800; line-height:1.0; letter-spacing:-3px; color:var(--text); margin-bottom:22px; }
     .hero-h1 .hl { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
     .hero-sub { font-size:clamp(1rem,1.5vw,1.1rem); color:var(--text2); line-height:1.8; max-width:56ch; margin-bottom:36px; }
@@ -138,13 +138,13 @@
     @media(max-width:900px){ .tool-grid{grid-template-columns:1fr 1fr;} }
     @media(max-width:600px){ .tool-grid{grid-template-columns:1fr;} }
     .tool-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); padding:28px; transition:border-color .2s, transform .2s; display:flex; flex-direction:column; }
-    .tool-card:hover { border-color:rgba(59,130,246,0.3); transform:translateY(-3px); }
+    .tool-card:hover { border-color:rgba(48, 109, 41,0.3); transform:translateY(-3px); }
     .tool-card-header { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
     .tool-card-emoji { width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; }
     .tool-card-name { font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--text); }
     .tool-card-replaces { font-size:0.68rem; color:var(--muted); margin-top:2px; display:flex; align-items:center; gap:6px; }
     .tool-card-replaces s { color:var(--text2); }
-    .tool-card-save { background:rgba(34,197,94,0.08); color:var(--green); font-weight:700; font-size:0.65rem; padding:2px 8px; border-radius:6px; border:1px solid rgba(34,197,94,0.15); }
+    .tool-card-save { background:rgba(48, 109, 41,0.08); color:var(--green); font-weight:700; font-size:0.65rem; padding:2px 8px; border-radius:6px; border:1px solid rgba(48, 109, 41,0.15); }
     .tool-card-body { flex:1; }
     .tool-card-features { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
     .tool-card-feat { display:flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--text2); }
@@ -186,11 +186,11 @@
     .prompt-tool-header { display:flex; align-items:center; gap:14px; margin-bottom:24px; }
     .prompt-tool-header h3 { font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:700; }
     .prompt-tool-header .close-prompts { margin-left:auto; font-size:0.8rem; color:var(--muted); cursor:pointer; padding:6px 14px; border-radius:999px; border:1px solid var(--border); transition:color .2s, border-color .2s; }
-    .prompt-tool-header .close-prompts:hover { color:var(--text); border-color:rgba(59,130,246,0.3); }
+    .prompt-tool-header .close-prompts:hover { color:var(--text); border-color:rgba(48, 109, 41,0.3); }
     .prompt-list { display:flex; flex-direction:column; gap:12px; }
     .prompt-item { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); overflow:hidden; }
     .prompt-item-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; user-select:none; gap:12px; }
-    .prompt-item-header:hover { background:rgba(59,130,246,0.02); }
+    .prompt-item-header:hover { background:rgba(48, 109, 41,0.02); }
     .prompt-item-label { display:flex; align-items:center; gap:10px; }
     .prompt-item-num { width:28px; height:28px; border-radius:8px; background:var(--grad); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:800; flex-shrink:0; font-family:'Space Grotesk',sans-serif; }
     .prompt-item-title { font-size:0.9rem; font-weight:600; color:var(--text); }
@@ -201,8 +201,8 @@
     .prompt-item-text { padding:16px 20px; font-size:0.85rem; color:var(--text2); line-height:1.7; white-space:pre-wrap; font-family:'JetBrains Mono',monospace; background:rgba(15,23,42,0.02); }
     .prompt-item-actions { display:flex; gap:8px; padding:12px 20px; border-top:1px solid var(--border); }
     .prompt-copy-btn { display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:700; padding:7px 16px; border-radius:8px; border:1px solid var(--border); background:var(--card); color:var(--text2); cursor:pointer; transition:color .2s, border-color .2s, background .2s; }
-    .prompt-copy-btn:hover { border-color:rgba(59,130,246,0.3); color:var(--blue3); background:rgba(59,130,246,0.04); }
-    .prompt-copy-btn.copied { border-color:var(--green); color:var(--green); background:rgba(34,197,94,0.06); }
+    .prompt-copy-btn:hover { border-color:rgba(48, 109, 41,0.3); color:var(--blue3); background:rgba(48, 109, 41,0.04); }
+    .prompt-copy-btn.copied { border-color:var(--green); color:var(--green); background:rgba(48, 109, 41,0.06); }
     .prompt-back { display:inline-flex; align-items:center; gap:6px; font-size:0.8rem; font-weight:600; color:var(--blue3); cursor:pointer; margin-bottom:20px; transition:gap .2s; }
     .prompt-back:hover { gap:10px; }
     .prompt-empty { text-align:center; padding:48px 20px; color:var(--muted); font-size:0.9rem; }
@@ -279,7 +279,7 @@
       <div class="tool-grid">
         <div class="tool-card reveal">
           <div class="tool-card-header">
-            <div class="tool-card-emoji" style="background:rgba(59,130,246,0.1);">📧</div>
+            <div class="tool-card-emoji" style="background:rgba(48, 109, 41,0.1);">📧</div>
             <div>
               <div class="tool-card-name">MailForge</div>
               <div class="tool-card-replaces">Replaces <s>Instantly</s> <span class="tool-card-save">$97/mo FREE</span></div>
@@ -321,7 +321,7 @@
 
         <div class="tool-card reveal">
           <div class="tool-card-header">
-            <div class="tool-card-emoji" style="background:rgba(96,165,250,0.1);">📅</div>
+            <div class="tool-card-emoji" style="background:rgba(231, 225, 177,0.1);">📅</div>
             <div>
               <div class="tool-card-name">SocialFlow</div>
               <div class="tool-card-replaces">Replaces <s>Buffer</s> <span class="tool-card-save">$15/mo FREE</span></div>
@@ -363,7 +363,7 @@
 
         <div class="tool-card reveal">
           <div class="tool-card-header">
-            <div class="tool-card-emoji" style="background:rgba(34,197,94,0.1);">💰</div>
+            <div class="tool-card-emoji" style="background:rgba(48, 109, 41,0.1);">💰</div>
             <div>
               <div class="tool-card-name">InvoiceForge</div>
               <div class="tool-card-replaces">Replaces <s>FreshBooks</s> <span class="tool-card-save">$17/mo FREE</span></div>
@@ -518,7 +518,7 @@
       <div id="prompts-mailforge" class="prompt-tool" data-tool="mailforge">
         <div class="prompt-back" onclick="showAllPrompts()">← Back to all tools</div>
         <div class="prompt-tool-header">
-          <div class="tool-card-emoji" style="background:rgba(59,130,246,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">📧</div>
+          <div class="tool-card-emoji" style="background:rgba(48, 109, 41,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">📧</div>
           <h3>MailForge <span style="font-size:0.85rem;font-weight:400;color:var(--muted);">— 14 prompts</span></h3>
           <span class="close-prompts" onclick="showAllPrompts()">✕ Close</span>
         </div>
@@ -542,7 +542,7 @@
       <div id="prompts-socialflow" class="prompt-tool" data-tool="socialflow">
         <div class="prompt-back" onclick="showAllPrompts()">← Back to all tools</div>
         <div class="prompt-tool-header">
-          <div class="tool-card-emoji" style="background:rgba(96,165,250,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">📅</div>
+          <div class="tool-card-emoji" style="background:rgba(231, 225, 177,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">📅</div>
           <h3>SocialFlow <span style="font-size:0.85rem;font-weight:400;color:var(--muted);">— 14 prompts</span></h3>
           <span class="close-prompts" onclick="showAllPrompts()">✕ Close</span>
         </div>
@@ -566,7 +566,7 @@
       <div id="prompts-invoiceforge" class="prompt-tool" data-tool="invoiceforge">
         <div class="prompt-back" onclick="showAllPrompts()">← Back to all tools</div>
         <div class="prompt-tool-header">
-          <div class="tool-card-emoji" style="background:rgba(34,197,94,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">💰</div>
+          <div class="tool-card-emoji" style="background:rgba(48, 109, 41,0.1);width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">💰</div>
           <h3>InvoiceForge <span style="font-size:0.85rem;font-weight:400;color:var(--muted);">— 4 prompts</span></h3>
           <span class="close-prompts" onclick="showAllPrompts()">✕ Close</span>
         </div>

@@ -837,7 +837,7 @@ if (mobiusCanvas && isMobileOrTablet) {
 
             particles.sort((a, b) => a.scale - b.scale);
 
-            mCtx.globalCompositeOperation = 'lighter';
+            mCtx.globalCompositeOperation = 'source-over';
             for (let i = 0; i < particles.length; i++) {
                 const p = particles[i];
                 const s = Math.max(0.12, p.scale);
