@@ -1,5 +1,5 @@
 {
-  "buildCommand": "mkdir -p dist && cp *.html index.css index.js *.png *.mp4 dist/ 2>/dev/null || true && cp -r pokk dist/ 2>/dev/null || true && cp -r dashboard-assets dist/ 2>/dev/null || true && cp robots.txt sitemap.xml dist/ 2>/dev/null || true",
+  "buildCommand": "mkdir -p dist && cp *.html index.css index.js *.png *.ico *.mp4 dist/ 2>/dev/null || true && cp -r pokk dist/ 2>/dev/null || true && cp -r dashboard-assets dist/ 2>/dev/null || true && cp robots.txt sitemap.xml dist/ 2>/dev/null || true",
   "outputDirectory": "dist",
   "cleanUrls": true,
   "rewrites": [
