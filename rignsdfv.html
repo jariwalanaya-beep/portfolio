@@ -1,0 +1,705 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import mm
+from reportlab.lib import colors
+from reportlab.platypus import (
+SimpleDocTemplate, Paragraph, Spacer, HRFlowable,
+Table, TableStyle, KeepTogether, PageBreak
+)
+from reportlab.platypus.flowables import Flowable
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_JUSTIFY
+
+# Register fonts
+pdfmetrics.registerFont(TTFont('Playfair', '/home/claude/fonts/PlayfairDisplay.ttf'))
+pdfmetrics.registerFont(TTFont('SourceSerif', '/home/claude/fonts/SourceSerif4.ttf'))
+
+# Color palette (matching original dark-on-light aesthetic)
+C_BLACK = colors.HexColor('#1a1a1a')
+C_MID = colors.HexColor('#4a4a4a')
+C_LIGHT = colors.HexColor('#888888')
+C_BORDER = colors.HexColor('#d0d0d0')
+C_BG_LIGHT = colors.HexColor('#f7f7f5')
+C_BG_DANGER = colors.HexColor('#fff1f0')
+C_RED = colors.HexColor('#c0392b')
+C_BG_SUCCESS = colors.HexColor('#f0faf4')
+C_GREEN = colors.HexColor('#1d8348')
+C_BG_INFO = colors.HexColor('#eef4ff')
+C_BLUE = colors.HexColor('#1a4fa0')
+C_STAT_BG = colors.HexColor('#f2f2f0')
+
+PAGE_W, PAGE_H = A4
+L_MARGIN = 22*mm
+R_MARGIN = 22*mm
+T_MARGIN = 20*mm
+B_MARGIN = 20*mm
+CONTENT_W = PAGE_W - L_MARGIN - R_MARGIN
+
+# ── Styles ──────────────────────────────────────────────────────────────
+def s(name, **kw):
+return ParagraphStyle(name, **kw)
+
+LABEL = s('label',
+fontName='SourceSerif', fontSize=8, leading=12,
+textColor=C_LIGHT, spaceAfter=4, spaceBefore=0,
+wordSpacing=2, letterSpacing=1.5,
+)
+PAPER_TITLE = s('paper_title',
+fontName='Playfair', fontSize=24, leading=30,
+textColor=C_BLACK, spaceAfter=6, spaceBefore=0,
+)
+PAPER_SUBTITLE = s('paper_subtitle',
+fontName='Playfair', fontSize=13, leading=20,
+textColor=C_MID, spaceAfter=14, italics=True,
+)
+META_KEY = s('meta_key',
+fontName='SourceSerif', fontSize=8.5, leading=13,
+textColor=C_BLACK, spaceBefore=0, spaceAfter=0,
+)
+META_VAL = s('meta_val',
+fontName='SourceSerif', fontSize=8.5, leading=13,
+textColor=C_MID, spaceBefore=0, spaceAfter=0,
+)
+ABSTRACT_LABEL = s('abstract_label',
+fontName='SourceSerif', fontSize=8, leading=12,
+textColor=C_LIGHT, spaceAfter=5, letterSpacing=1.2,
+)
+ABSTRACT_TEXT = s('abstract_text',
+fontName='SourceSerif', fontSize=12, leading=19,
+textColor=C_MID, spaceAfter=0, italics=True,
+)
+SEC_LABEL = s('sec_label',
+fontName='SourceSerif', fontSize=8, leading=12,
+textColor=C_LIGHT, spaceAfter=3, spaceBefore=18,
+letterSpacing=1.5,
+)
+SEC_TITLE = s('sec_title',
+fontName='Playfair', fontSize=17, leading=24,
+textColor=C_BLACK, spaceAfter=8, spaceBefore=4,
+)
+SUB_TITLE = s('sub_title',
+fontName='SourceSerif', fontSize=11.5, leading=17,
+textColor=C_BLACK, spaceAfter=5, spaceBefore=12,
+)
+BODY = s('body',
+fontName='SourceSerif', fontSize=12, leading=20,
+textColor=C_BLACK, spaceAfter=8, spaceBefore=0,
+alignment=TA_JUSTIFY,
+)
+CALLOUT_LABEL = s('callout_label',
+fontName='SourceSerif', fontSize=8, leading=12,
+textColor=C_LIGHT, spaceAfter=5, letterSpacing=1.2,
+)
+CALLOUT_TEXT = s('callout_text',
+fontName='Playfair', fontSize=13.5, leading=22,
+textColor=C_BLACK, spaceAfter=0, italics=True,
+)
+NICHE_PITCH = s('niche_pitch',
+fontName='SourceSerif', fontSize=10.5, leading=16,
+textColor=C_RED, spaceAfter=0, italics=True,
+)
+NICHE_REALITY = s('niche_reality',
+fontName='SourceSerif', fontSize=11.5, leading=18,
+textColor=C_BLACK, spaceAfter=0,
+alignment=TA_JUSTIFY,
+)
+NICHE_FIX = s('niche_fix',
+fontName='SourceSerif', fontSize=11, leading=17,
+textColor=C_GREEN, spaceAfter=0,
+)
+COMP_HDR_RED = s('comp_hdr_red',
+fontName='SourceSerif', fontSize=9, leading=13,
+textColor=C_RED, spaceAfter=6, letterSpacing=0.8,
+)
+COMP_HDR_GRN = s('comp_hdr_grn',
+fontName='SourceSerif', fontSize=9, leading=13,
+textColor=C_GREEN, spaceAfter=6, letterSpacing=0.8,
+)
+COMP_ITEM = s('comp_item',
+fontName='SourceSerif', fontSize=11, leading=17,
+textColor=C_MID, spaceAfter=4,
+)
+STAT_NUM = s('stat_num',
+fontName='Playfair', fontSize=20, leading=24,
+textColor=C_BLACK, spaceAfter=3, alignment=TA_CENTER,
+)
+STAT_LBL = s('stat_lbl',
+fontName='SourceSerif', fontSize=9, leading=13,
+textColor=C_MID, spaceAfter=0, alignment=TA_CENTER,
+)
+CASE_HDR = s('case_hdr',
+fontName='SourceSerif', fontSize=9, leading=14,
+textColor=C_LIGHT, spaceAfter=0, letterSpacing=1.2,
+)
+SPIRAL_BODY = s('spiral_body',
+fontName='SourceSerif', fontSize=11.5, leading=18,
+textColor=C_BLACK, spaceAfter=0,
+)
+WIN_LABEL = s('win_label',
+fontName='SourceSerif', fontSize=8.5, leading=13,
+textColor=C_GREEN, spaceAfter=5, letterSpacing=0.8,
+)
+KEY_TERM = s('key_term',
+fontName='Playfair', fontSize=14, leading=22,
+textColor=C_BLACK, italics=True,
+)
+CONCLUSION_TEXT = s('conclusion_text',
+fontName='SourceSerif', fontSize=12, leading=20,
+textColor=C_BLACK, spaceAfter=8, alignment=TA_JUSTIFY,
+)
+FOOTNOTE = s('footnote',
+fontName='SourceSerif', fontSize=9, leading=14,
+textColor=C_LIGHT, spaceAfter=0, alignment=TA_JUSTIFY,
+)
+INSIGHT_LBL = s('insight_lbl',
+fontName='SourceSerif', fontSize=8.5, leading=13,
+textColor=C_BLUE, spaceAfter=3, letterSpacing=0.8,
+)
+FAILURE_LBL = s('failure_lbl',
+fontName='SourceSerif', fontSize=8.5, leading=13,
+textColor=C_RED, spaceAfter=3, letterSpacing=0.8,
+)
+
+# ── Custom Flowables ─────────────────────────────────────────────────────
+class BoxedBlock(Flowable):
+"""Renders a block with background color and optional left border."""
+def __init__(self, content_paras, bg, border_left_color=None, padding=(8,12,8,12), width=None):
+super().__init__()
+self.content_paras = content_paras # list of Paragraphs
+self.bg = bg
+self.border_left_color = border_left_color
+self.pad_top, self.pad_right, self.pad_bottom, self.pad_left = padding
+self._width = width
+self._heights = []
+
+def wrap(self, availWidth, availHeight):
+w = self._width or availWidth
+self.avail_w = w
+inner_w = w - self.pad_left - self.pad_right
+if self.border_left_color:
+inner_w -= 4 # border width
+total_h = self.pad_top + self.pad_bottom
+self._heights = []
+for p in self.content_paras:
+pw, ph = p.wrap(inner_w, availHeight)
+self._heights.append(ph)
+total_h += ph
+if len(self.content_paras) > 1:
+total_h += (len(self.content_paras) - 1) * 4
+self._h = total_h
+return w, total_h
+
+def draw(self):
+w = self.avail_w
+h = self._h
+c = self.canv
+# background
+c.setFillColor(self.bg)
+c.roundRect(0, 0, w, h, 4, fill=1, stroke=0)
+# left border
+if self.border_left_color:
+c.setFillColor(self.border_left_color)
+c.rect(0, 0, 3, h, fill=1, stroke=0)
+# draw content
+x = self.pad_left + (4 if self.border_left_color else 0)
+y = h - self.pad_top
+for i, p in enumerate(self.content_paras):
+ph = self._heights[i]
+y -= ph
+p.drawOn(c, x, y)
+if i < len(self.content_paras) - 1: y -=4 class
+    NicheBlock(Flowable): """Renders the red/white/green niche analysis block.""" def __init__(self, pitch_text,
+    reality_text, fix_text, width=None): super().__init__() self.pitch_p=Paragraph(pitch_text, NICHE_PITCH)
+    self.reality_p=Paragraph(reality_text, NICHE_REALITY) self.fix_p=Paragraph(fix_text, NICHE_FIX) self._width=width
+    def wrap(self, availWidth, availHeight): w=self._width or availWidth self.avail_w=w inner=w - 24 _,
+    ph=self.pitch_p.wrap(inner, availHeight) _, rh=self.reality_p.wrap(inner, availHeight) _, fh=self.fix_p.wrap(inner,
+    availHeight) self._ph=ph + 16 self._rh=rh + 16 self._fh=fh + 16 self._h=self._ph + self._rh + self._fh return w,
+    self._h def draw(self): c=self.canv w=self.avail_w h=self._h # pitch row (red bg) c.setFillColor(C_BG_DANGER)
+    c.roundRect(0, h - self._ph, w, self._ph, 4, fill=1, stroke=0) self.pitch_p.drawOn(c, 12, h - self._ph + 8) #
+    reality row (white) c.setFillColor(colors.white) c.rect(0, self._fh, w, self._rh, fill=1, stroke=0) # border between
+    c.setStrokeColor(C_BORDER) c.setLineWidth(0.5) c.line(0, h - self._ph, w, h - self._ph) c.line(0, self._fh, w,
+    self._fh) self.reality_p.drawOn(c, 12, self._fh + 8) # fix row (green bg) c.setFillColor(C_BG_SUCCESS)
+    c.roundRect(0, 0, w, self._fh, 4, fill=1, stroke=0) self.fix_p.drawOn(c, 12, 8) # outer border
+    c.setStrokeColor(C_BORDER) c.setLineWidth(0.5) c.roundRect(0, 0, w, h, 4, fill=0, stroke=1) class
+    StatRow(Flowable): """Renders a row of stat cards.""" def __init__(self, stats, width=None): super().__init__()
+    self.stats=stats # list of (number, label) self._width=width def wrap(self, availWidth, availHeight): w=self._width
+    or availWidth self.avail_w=w self._card_w=(w - (len(self.stats) - 1) * 8) / len(self.stats) self._h=68 return w,
+    self._h def draw(self): c=self.canv w=self.avail_w n=len(self.stats) cw=self._card_w for i, (num, lbl) in
+    enumerate(self.stats): x=i * (cw + 8) c.setFillColor(C_STAT_BG) c.roundRect(x, 0, cw, self._h, 4, fill=1, stroke=0)
+    # number np=Paragraph(num, STAT_NUM) nw, nh=np.wrap(cw - 12, 40) np.drawOn(c, x + 6, self._h - 8 - nh) # label
+    lp=Paragraph(lbl, STAT_LBL) lw, lh=lp.wrap(cw - 12, 40) lp.drawOn(c, x + 6, 6) class
+    SpiralStep(Flowable): """Renders a numbered spiral step.""" def __init__(self, num, bold_part, rest, width=None):
+    super().__init__() self.num=str(num) text=f'<b>{bold_part}</b> {rest}'
+    self.para = Paragraph(text, SPIRAL_BODY)
+    self._width = width
+
+    def wrap(self, availWidth, availHeight):
+    w = self._width or availWidth
+    self.avail_w = w
+    inner = w - 32
+    _, ph = self.para.wrap(inner, availHeight)
+    self._h = max(ph + 8, 24)
+    return w, self._h
+
+    def draw(self):
+    c = self.canv
+    # circle
+    c.setFillColor(C_BG_LIGHT)
+    c.setStrokeColor(C_BORDER)
+    c.setLineWidth(0.5)
+    c.circle(10, self._h - 10, 9, fill=1, stroke=1)
+    c.setFillColor(C_LIGHT)
+    c.setFont('SourceSerif', 8)
+    c.drawCentredString(10, self._h - 13, self.num)
+    # paragraph
+    self.para.drawOn(c, 26, self._h - self._h + 4)
+
+
+    def badge(text, style):
+    return Paragraph(text.upper(), style)
+
+
+    def hr(width=CONTENT_W, thickness=0.5, color=C_BORDER, spBefore=10, spAfter=10):
+    return HRFlowable(width=width, thickness=thickness, color=color,
+    spaceAfter=spAfter, spaceBefore=spBefore, hAlign='LEFT')
+
+
+    def thick_hr(width=CONTENT_W):
+    return HRFlowable(width=width, thickness=2, color=C_BLACK,
+    spaceAfter=12, spaceBefore=0, hAlign='LEFT')
+
+
+    # ── Page template with page numbers ──────────────────────────────────────
+    def add_page_num(canvas, doc):
+    canvas.saveState()
+    canvas.setFont('SourceSerif', 8)
+    canvas.setFillColor(C_LIGHT)
+    canvas.drawCentredString(PAGE_W / 2, 12*mm, str(doc.page))
+    canvas.restoreState()
+
+
+    # ── Build story ───────────────────────────────────────────────────────────
+    story = []
+
+    # ── HEADER ────────────────────────────────────────────────────────────────
+    story.append(thick_hr())
+    story.append(Paragraph('MARKET ANALYSIS · AI AUTOMATION AGENCIES · INDIA', LABEL))
+    story.append(Paragraph('Why B2B Automation Agencies Fail in India and the Blueprint that Actually Wins',
+    PAPER_TITLE))
+    story.append(Paragraph('A practitioner\'s analysis of positioning failures, cultural market realities, and the
+    infrastructure-first framework for high-ticket growth', PAPER_SUBTITLE))
+    story.append(hr())
+
+    # Meta row
+    meta_data = [
+    [Paragraph('<b>SEGMENT</b>', META_KEY), Paragraph('Indian B2B SaaS &amp; AAA Founders', META_VAL),
+    Paragraph('<b>FOCUS</b>', META_KEY), Paragraph('Positioning, Niche Selection, Revenue Architecture', META_VAL)],
+    [Paragraph('<b>FRAMEWORK</b>', META_KEY), Paragraph('Volume × Speed × Complexity Filter', META_VAL),
+    Paragraph('<b>PUBLISHED</b>', META_KEY), Paragraph('2025', META_VAL)],
+    ]
+    meta_tbl = Table(meta_data, colWidths=[28*mm, 65*mm, 22*mm, 65*mm])
+    meta_tbl.setStyle(TableStyle([
+    ('VALIGN', (0,0), (-1,-1), 'TOP'),
+    ('LEFTPADDING', (0,0), (-1,-1), 0),
+    ('RIGHTPADDING', (0,0), (-1,-1), 4),
+    ('TOPPADDING', (0,0), (-1,-1), 3),
+    ('BOTTOMPADDING', (0,0), (-1,-1), 3),
+    ]))
+    story.append(meta_tbl)
+    story.append(Spacer(1, 14))
+
+    # ── ABSTRACT ──────────────────────────────────────────────────────────────
+    story.append(BoxedBlock([
+    Paragraph('ABSTRACT', ABSTRACT_LABEL),
+    Paragraph(
+    'The global AI Automation Agency (AAA) playbook, built predominantly on Western market assumptions, consistently
+    fails when applied to the Indian B2B landscape. This paper identifies three structural market realities that
+    invalidate Western positioning, examines three high-profile niche failures with their root causes, and proposes a
+    replacement framework centered on algorithmic protection, backend infrastructure, and volume-driven targeting. The
+    core thesis: Indian businesses will not pay to save human time. They will pay to protect platform revenue from
+    humanly impossible bottlenecks.',
+    ABSTRACT_TEXT
+    ),
+    ], bg=C_BG_LIGHT, border_left_color=C_BLACK, padding=(14,16,14,18)))
+    story.append(Spacer(1, 18))
+
+    # ══ SECTION 1 ════════════════════════════════════════════════════════════
+    story.append(Paragraph('SECTION 1', SEC_LABEL))
+    story.append(Paragraph('The Foundational Problem: Misaligned Market Assumptions', SEC_TITLE))
+    story.append(hr())
+
+    story.append(Paragraph(
+    'Across the US and European markets, automation agencies sell a straightforward value proposition: pay for software
+    to replace manual labor hours. The implicit assumption is that labor is expensive and finite, making automation a
+    net-positive trade-off even at premium price points.',
+    BODY))
+    story.append(Paragraph(
+    'In India, that assumption collapses entirely. The Indian B2B market operates on fundamentally different economics,
+    behavioral norms, and infrastructure realities. Applying a Western playbook here is not merely suboptimal; it is a
+    reliable path to zero revenue and client churn.',
+    BODY))
+
+    # Callout
+    story.append(BoxedBlock([
+    Paragraph('CORE TENSION', CALLOUT_LABEL),
+    Paragraph(
+    '"You cannot out-price human labor in India. The moment your automation costs more than a B.Com graduate, the deal
+    is dead, and a B.Com graduate costs Rs.15,000 a month."',
+    CALLOUT_TEXT
+    ),
+    ], bg=colors.white, padding=(12,14,12,14)))
+    story.append(Spacer(1, 8))
+
+    # Barrier 1
+    story.append(Paragraph('BARRIER 1', FAILURE_LBL))
+    story.append(Paragraph('The Affordable Labor Wall', SUB_TITLE))
+    story.append(Paragraph(
+    'India produces an enormous surplus of educated, low-cost operational labor. A mid-market business owner can
+    reliably hire a full-time operations or accounts clerk for Rs.15,000 to Rs.20,000 per month. When your automation
+    setup costs lakhs, with ongoing maintenance, the arithmetic never works in your favor. The owner will choose
+    predictable, controllable human labor every time.',
+    BODY))
+    story.append(Paragraph(
+    'This is not a perception problem that better sales can overcome. It is a structural economic reality. The only way
+    to win is to stop competing on this axis entirely.',
+    BODY))
+
+    # Barrier 2
+    story.append(Paragraph('BARRIER 2', FAILURE_LBL))
+    story.append(Paragraph('The Low-Volume Irrelevance Trap', SUB_TITLE))
+    story.append(Paragraph(
+    'Many Indian micro-enterprises process 2 to 5 invoices, logistics updates, or data operations per day. At this
+    volume, there is no operational crisis to solve. A single clerk or the owner themselves handles it without friction.
+    Automation at this scale is a luxury expense with no ROI, and sophisticated Indian business owners recognize this
+    immediately.',
+    BODY))
+    story.append(Paragraph(
+    'The qualifier for any viable AAA client in India is not company size. It is operational volume and the speed at
+    which that volume must be processed.',
+    BODY))
+
+    # Barrier 3
+    story.append(Paragraph('BARRIER 3', FAILURE_LBL))
+    story.append(Paragraph('Front-End Automation Anxiety', SUB_TITLE))
+    story.append(Paragraph(
+    'Indian business owners are deeply control-oriented. When they see an AI bot clicking through screens, toggling
+    dashboards, or moving a mouse autonomously on a visible desktop, it triggers immediate anxiety. Employees are
+    distracted. The owner feels compelled to monitor it. Trust evaporates. Any automation that operates visibly on the
+    front end faces fundamental psychological resistance in this market.',
+    BODY))
+    story.append(Paragraph(
+    'The solution is not to educate the market out of this behavior. The solution is to build backend, headless systems
+    that run silently, invisible to the human eye and irrelevant to anyone\'s anxiety.',
+    BODY))
+
+    story.append(hr(spBefore=16))
+
+    # ══ SECTION 2 ════════════════════════════════════════════════════════════
+    story.append(Paragraph('SECTION 2', SEC_LABEL))
+    story.append(Paragraph('Three Western Niches that Crash in the Indian Market', SEC_TITLE))
+    story.append(hr())
+
+    story.append(Paragraph(
+    'Global AI agency gurus consistently recommend three "hot niches": AI voice agents for real estate, re-engagement
+    bots for e-commerce, and appointment-booking bots for medical clinics. In India, all three fail, not for lack of
+    execution, but because of deep structural and cultural mismatches that no amount of optimization can overcome.',
+    BODY))
+
+    # Niche 1
+    story.append(Paragraph('NICHE 1', FAILURE_LBL))
+    story.append(Paragraph('Real Estate AI Call Agents', SUB_TITLE))
+    story.append(NicheBlock(
+    pitch_text='Western pitch: "Build an AI voice agent to qualify property leads and schedule viewings
+    automatically."',
+    reality_text='Indian real estate operates entirely on relationship and emotional intelligence, what is locally
+    understood as conversational maneuvering and trust-building through dialogue. Buyers expect to haggle, probe
+    unwritten floor-rise timelines, negotiate payment structures, and build personal trust with a broker. A logically
+    structured AI call agent does not merely underperform here; it actively destroys sales momentum by removing the
+    relational texture buyers depend on to feel comfortable committing to a multi-lakh purchase.',
+    fix_text='Fix: Real estate needs internal lead aggregation, a backend system that consolidates leads from 50 brokers
+    and platforms into one CRM so a human closer can call within minutes, not hours.',
+    ))
+    story.append(Spacer(1, 12))
+
+    # Niche 2
+    story.append(Paragraph('NICHE 2', FAILURE_LBL))
+    story.append(Paragraph('E-commerce Re-engagement Bots', SUB_TITLE))
+    story.append(NicheBlock(
+    pitch_text='Western pitch: "Build a retention engine, if a customer doesn\'t repurchase in 30 days, trigger an
+    automated email or SMS sequence."',
+    reality_text='Over 80% of Indian e-commerce volume flows through Amazon, Flipkart, and Meesho. These platforms
+    deliberately obscure all customer identification, phone numbers, email addresses, and real names are hidden to
+    prevent seller poaching. You cannot build a retargeting pipeline when the marketplace has made you completely
+    data-blind. The audience you want to re-engage is not accessible to you, regardless of how sophisticated your
+    automation is.',
+    fix_text='Fix: Target independent D2C brands with their own checkout systems. Focus on RTO (Return to Origin)
+    discrepancy resolution and operational backend leaks, not marketing messages.',
+    ))
+    story.append(Spacer(1, 12))
+
+    # Niche 3
+    story.append(Paragraph('NICHE 3', FAILURE_LBL))
+    story.append(Paragraph('Medical Clinic Appointment Bots', SUB_TITLE))
+    story.append(NicheBlock(
+    pitch_text='Western pitch: "Build an AI receptionist to book dental or medical appointments via Google Maps or
+    WhatsApp."',
+    reality_text='Excluding high-end cosmetic and elective surgery practices, the overwhelming majority of Indian clinic
+    patients do not use digital scheduling systems. Walk-in culture is the default and the expectation, patients
+    physically arrive, queue, and book at the front desk. An appointment bot built for this context will sit idle,
+    generating zero usage and zero ROI while the owner wonders why they paid for it.',
+    fix_text='Fix: Clinics need post-visit automation, WhatsApp prescription reminders, follow-up scheduling triggered
+    after physical discharge, and silent record-update pipelines that require no patient behavior change.',
+    ))
+    story.append(Spacer(1, 4))
+
+    story.append(hr(spBefore=16))
+
+    # ══ SECTION 3 ════════════════════════════════════════════════════════════
+    story.append(Paragraph('SECTION 3', SEC_LABEL))
+    story.append(Paragraph('The Winning Framework: Algorithmic Protection', SEC_TITLE))
+    story.append(hr())
+
+    story.append(Paragraph(
+    'The pivot is not cosmetic. It requires completely abandoning the Western framing of automation as a tool for saving
+    human time, and replacing it with a new category:',
+    BODY))
+    story.append(Paragraph('Algorithm Insurance.', KEY_TERM))
+    story.append(Spacer(1, 6))
+    story.append(Paragraph(
+    'The qualifying filter for any target client is <b>Volume × Speed × Complexity</b>, businesses where data changes
+    faster than any human can process it in real time, and where failure to process that data instantly carries direct,
+    measurable financial consequences.',
+    BODY))
+
+    # Comparison grid
+    comp_data = [
+    [Paragraph('WHAT YOU STOP SELLING', COMP_HDR_RED), Paragraph('WHAT YOU START SELLING', COMP_HDR_GRN)],
+    [Paragraph('Saving human hours', COMP_ITEM), Paragraph('Recovering lost revenue', COMP_ITEM)],
+    [Paragraph('Reducing staff headcount', COMP_ITEM), Paragraph('Protecting platform rankings', COMP_ITEM)],
+    [Paragraph('Efficiency improvements', COMP_ITEM), Paragraph('Closing financial black holes', COMP_ITEM)],
+    [Paragraph('Replacing manual tasks', COMP_ITEM), Paragraph('Headless backend infrastructure', COMP_ITEM)],
+    [Paragraph('Visible AI automation', COMP_ITEM), Paragraph('Silent algorithmic protection', COMP_ITEM)],
+    ]
+    cw = (CONTENT_W - 1) / 2
+    comp_tbl = Table(comp_data, colWidths=[cw, cw])
+    comp_tbl.setStyle(TableStyle([
+    ('BACKGROUND', (0,0), (0,-1), colors.HexColor('#fff8f8')),
+    ('BACKGROUND', (1,0), (1,-1), colors.HexColor('#f5faf7')),
+    ('LINEAFTER', (0,0), (0,-1), 0.5, C_BORDER),
+    ('LINEBEFORE', (0,0), (0,-1), 0.5, C_BORDER),
+    ('LINEAFTER', (1,0), (1,-1), 0.5, C_BORDER),
+    ('BOX', (0,0), (-1,-1), 0.5, C_BORDER),
+    ('TOPPADDING', (0,0), (-1,-1), 7),
+    ('BOTTOMPADDING', (0,0), (-1,-1), 7),
+    ('LEFTPADDING', (0,0), (-1,-1), 12),
+    ('RIGHTPADDING', (0,0), (-1,-1), 12),
+    ('LINEBELOW', (0,0), (-1,0), 0.5, C_BORDER),
+    ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.white, C_BG_LIGHT]),
+    ]))
+    story.append(Spacer(1, 8))
+    story.append(comp_tbl)
+
+    story.append(hr(spBefore=18))
+
+    # ══ SECTION 4 ════════════════════════════════════════════════════════════
+    story.append(Paragraph('SECTION 4 — CASE STUDY', SEC_LABEL))
+    story.append(Paragraph('The Cloud Kitchen: A Working Model of the New Framework', SEC_TITLE))
+    story.append(hr())
+
+    story.append(Paragraph(
+    'Multi-brand cloud kitchens represent the clearest available example of the Volume × Speed × Complexity qualifier in
+    action. A single operator running 3 to 4 virtual brands (Biryani, Burger, Desserts) from one physical kitchen with 4
+    chefs handles 150+ orders daily across Swiggy and Zomato through aggregator middleware like Petpooja or
+    UrbanPiper.',
+    BODY))
+
+    story.append(StatRow([
+    ('150+', 'daily orders across platforms'),
+    ('4', 'chefs, no one watching dashboards'),
+    ('10-15 min', 'human detection lag'),
+    ('30-50%', 'revenue drop over 3 days post-penalty'),
+    ]))
+    story.append(Spacer(1, 14))
+
+    # Case study box
+    spiral_steps = [
+    ('1', 'Stock-out occurs.', 'During Sunday peak rush, chicken patties run out. Chefs are cooking. No one is watching
+    the laptop.'),
+    ('2', 'Human detection lag: 10 to 15 minutes.', 'Someone eventually notices. They now manually toggle 15+ menu items
+    across 4 platform dashboards, a task that takes further time under kitchen chaos.'),
+    ('3', '3 rejected orders slip through.', 'The kitchen is forced to click "Reject Order", a data signal that Swiggy
+    and Zomato\'s ranking algorithms actively track.'),
+    ('4', 'Platform penalty triggers.', 'If the kitchen\'s order reliability score drops below 95%, the listing is
+    buried to page 10 of search results. Impressions collapse immediately.'),
+    ('5', 'Revenue damage: 30 to 50% over 3 days.', 'The penalty is not just a one-night loss. Reduced algorithmic
+    visibility compounds into multi-day revenue destruction from a single 15-minute human delay.'),
+    ]
+
+    case_inner = []
+    case_inner.append(Paragraph('THE ALGORITHMIC DEATH SPIRAL — STEP BY STEP', CASE_HDR))
+    case_inner.append(Spacer(1, 8))
+    for num, bold, rest in spiral_steps:
+    case_inner.append(SpiralStep(num, bold, rest))
+    case_inner.append(Spacer(1, 6))
+
+    # Wrap in bordered box
+    case_tbl = Table([[p] for p in case_inner], colWidths=[CONTENT_W - 24])
+    case_tbl.setStyle(TableStyle([
+    ('BOX', (0,0), (-1,-1), 0.5, C_BORDER),
+    ('BACKGROUND', (0,0), (-1,0), C_BG_LIGHT),
+    ('BACKGROUND', (0,1), (-1,-1), colors.white),
+    ('LEFTPADDING', (0,0), (-1,-1), 16),
+    ('RIGHTPADDING', (0,0), (-1,-1), 16),
+    ('TOPPADDING', (0,0), (-1,-1), 4),
+    ('BOTTOMPADDING', (0,0), (-1,-1), 4),
+    ('ROUNDEDCORNERS', [4]),
+    ]))
+    story.append(case_tbl)
+    story.append(Spacer(1, 14))
+
+    story.append(Paragraph('THE AUTOMATION RESPONSE', WIN_LABEL))
+    story.append(Paragraph('Eliminating the Spiral Entirely', SUB_TITLE))
+    story.append(Paragraph(
+    'A headless background pipeline built on n8n and Supabase eliminates this spiral entirely. The moment raw inventory
+    hits zero on the kitchen POS, a webhook fires to the pipeline. The script maps the depleted ingredient to every
+    affected finished menu item in the database and immediately fires a direct API call to UrbanPiper, which deactivates
+    those items across both platforms simultaneously.',
+    BODY))
+    story.append(Paragraph(
+    'The entire sequence happens in under two seconds, completely in the background, with no screen takeover, no
+    employee distraction, and no front-end anxiety. Order rejections reach zero. Platform scores remain intact. Revenue
+    is protected independently of any human\'s speed or attention.',
+    BODY))
+    story.append(Paragraph(
+    'This is what the agency is actually selling: not software, not efficiency, not AI, but the mathematical guarantee
+    that a humanly impossible bottleneck has been permanently closed.',
+    BODY))
+
+    story.append(hr(spBefore=16))
+
+    # ══ SECTION 5 ════════════════════════════════════════════════════════════
+    story.append(Paragraph('SECTION 5', SEC_LABEL))
+    story.append(Paragraph('Target Verticals for the Indian AAA', SEC_TITLE))
+    story.append(hr())
+
+    story.append(Paragraph(
+    'The cloud kitchen case is illustrative, not exhaustive. The same Volume × Speed × Complexity filter applies across
+    several other modern, lean Indian business categories:',
+    BODY))
+
+    # Vertical 1
+    story.append(Paragraph('VERTICAL 1', INSIGHT_LBL))
+    story.append(Paragraph('Multi-Brand Cloud Kitchens', SUB_TITLE))
+    story.append(Paragraph(
+    'As described. High-frequency platform dependency, real-time inventory sensitivity, and severe algorithmic penalties
+    for human error make this the most immediately lucrative vertical for Indian AAA founders.',
+    BODY))
+
+    # Vertical 2
+    story.append(Paragraph('VERTICAL 2', INSIGHT_LBL))
+    story.append(Paragraph('Instagram and WhatsApp D2C Brands', SUB_TITLE))
+    story.append(Paragraph(
+    '<b>The hidden cost of social commerce scale:</b> Founders running 100 to 500 orders per day through Instagram and
+    WhatsApp are sitting on a financial leak they cannot see. Every unreconciled COD, every RTO that goes unlogged,
+    every delayed order status update is money that quietly disappears into the backend gap between social DMs and
+    logistics dashboards.',
+    BODY))
+    story.append(StatRow([
+    ('25-40%', 'of social commerce COD orders result in RTO, unrecovered by most founders'),
+    ('Rs.8-15K', 'lost per month in unreconciled shipping discrepancies at 200 orders/day'),
+    ('3-5 hrs', 'daily spent manually tracking orders across WhatsApp, sheet, and courier dashboards'),
+    ]))
+    story.append(Spacer(1, 10))
+    story.append(Paragraph(
+    'Unlike marketplace sellers, these founders own their customer data entirely, phone numbers, order history, purchase
+    behavior. That ownership makes backend automation not just viable but compounding: a single reconciliation pipeline
+    catches revenue bleeding in real time, while automated post-delivery nudges convert first-time buyers into repeat
+    customers without a single manual message. The system operates silently behind the founder\'s existing WhatsApp
+    workflow, requiring zero behavior change from customers or staff.',
+    BODY))
+
+    # Vertical 3
+    story.append(Paragraph('VERTICAL 3', INSIGHT_LBL))
+    story.append(Paragraph('Boutique Hospitality and Event Operations', SUB_TITLE))
+    story.append(Paragraph(
+    '<b>One pricing error, three days of damage:</b> Small hotel chains, serviced apartment networks, and event
+    management agencies operate at the intersection of the highest-stakes data in Indian SMB, live inventory, dynamic
+    pricing, and multi-platform synchronization that must all agree within seconds. They do not.',
+    BODY))
+    story.append(StatRow([
+    ('68%', 'of boutique hotels manage OTA pricing manually, across 3+ platforms'),
+    ('Rs.20-50K', 'average financial exposure per double-booking incident after refunds and OTA penalties'),
+    ('4-6 hrs', 'daily staff time spent on manual rate updates, availability syncing, and booking confirmation'),
+    ]))
+    story.append(Spacer(1, 10))
+    story.append(Paragraph(
+    'A single double-booking on MakeMyTrip while the same room is live on Booking.com cascades immediately: guest
+    complaint, OTA penalty, review damage, and a staff crisis, all from a 90-second synchronization gap. Backend
+    pipelines that connect property management systems directly to OTA APIs eliminate this class of error entirely.
+    Pricing changes propagate in under three seconds across every channel. Inventory closes the moment a booking
+    confirms. Event agencies gain the same protection across venue capacity, vendor availability, and client booking
+    windows. The infrastructure runs headless, no dashboards, no screen takeovers, no employee retraining required.',
+    BODY))
+
+    story.append(hr(spBefore=16))
+
+    # ══ CONCLUSION ════════════════════════════════════════════════════════════
+    story.append(Paragraph('CONCLUSION', SEC_LABEL))
+    story.append(Paragraph('The Principle that Unifies the Framework', SEC_TITLE))
+    story.append(thick_hr())
+
+    story.append(Paragraph(
+    'The Indian market will not pay for software that asks consumers or employees to change their behavior. It will not
+    pay to eliminate labor it can hire cheaply. It will not trust automation it can see running on its screens. And it
+    cannot be re-engaged through marketplace-locked customer data it does not own.',
+    CONCLUSION_TEXT))
+    story.append(Paragraph(
+    'But it will pay, at high ticket, without negotiation, for infrastructure that silently connects its existing
+    systems, closes financial black holes it did not know were open, and protects revenue from algorithmic penalties it
+    cannot fight with human speed alone.',
+    CONCLUSION_TEXT))
+
+    story.append(BoxedBlock([
+    Paragraph('THE FOUNDING PRINCIPLE', CALLOUT_LABEL),
+    Paragraph(
+    'Stop automating human conversations. Stop building what Western gurus sell. Find where data is already flowing in
+    massive, fast-moving volume, and build the invisible pipe that keeps that flow profitable.',
+    CALLOUT_TEXT
+    ),
+    ], bg=C_BG_LIGHT, padding=(14,16,14,16)))
+    story.append(Spacer(1, 10))
+
+    story.append(Paragraph(
+    'When you frame your agency as revenue protection infrastructure rather than a productivity tool, you stop being an
+    expense line. You become the system that stands between a client\'s platform ranking and a 30 to 50% revenue drop.
+    Price objections disappear. Contract conversations become different entirely.',
+    CONCLUSION_TEXT))
+    story.append(Paragraph(
+    'That is the only sustainable position for a B2B automation agency in India, and it requires no apology for being
+    expensive.',
+    CONCLUSION_TEXT))
+
+    story.append(Spacer(1, 20))
+    story.append(hr())
+    story.append(Paragraph(
+    'Research compiled from first-hand market experience in the Indian B2B automation sector. Data points on platform
+    penalty thresholds, labor costs, and marketplace data policies reflect prevailing conditions at time of writing.
+    Specific figures (Rs.15,000 to Rs.20,000 monthly labor rate, 95% platform reliability threshold, 30 to 50%
+    impression decline) are illustrative of documented market conditions and should be validated against current
+    platform policies before use in client proposals.',
+    FOOTNOTE))
+
+    # ── Build PDF ─────────────────────────────────────────────────────────────
+    doc = SimpleDocTemplate(
+    '/mnt/user-data/outputs/india_aaa_research_paper.pdf',
+    pagesize=A4,
+    leftMargin=L_MARGIN,
+    rightMargin=R_MARGIN,
+    topMargin=T_MARGIN,
+    bottomMargin=B_MARGIN,
+    title='Why B2B Automation Agencies Fail in India',
+    author='India AAA Research',
+    )
+    doc.build(story, onFirstPage=add_page_num, onLaterPages=add_page_num)
+    print('PDF generated successfully.')

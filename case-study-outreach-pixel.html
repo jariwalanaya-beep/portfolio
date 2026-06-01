@@ -3,994 +3,848 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Email Open Tracking System | Karlspace</title>
-  <meta name="description" content="Case study: n8n workflow, tracking pixel, and bot filter for outreach." />
-  <meta name="robots" content="noindex, nofollow" />
+  <title>Direct Inbox Outreach Tracker & Anti-Bot System | Karlspace</title>
+  <meta name="description" content="High-deliverability outreach system with zero monthly software costs and smart filters that block security scan false-positives." />
+  <meta name="keywords" content="email tracker, outreach tracker, cold email tracker, custom outreach system, Karlspace" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://karlspace.in/case-study-outreach-pixel" />
+  
+  <meta property="og:title" content="Direct Inbox Outreach Tracker & Anti-Bot System | Karlspace" />
+  <meta property="og:description" content="Stop guessing who opens your cold emails. Log real-time human opens with a custom outreach verification setup." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://karlspace.in/case-study-outreach-pixel" />
+  <meta property="og:image" content="https://karlspace.in/karlspace.png" />
+  
+  <link rel="stylesheet" href="index.css" />
   <link rel="icon" type="image/png" href="karlspace.png" />
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
   <style>
     :root {
       --bg: #ffffff;
       --bg2: #FBF5DD;
-      --bg3: #E7E1B1;
-      --card: #ffffff;
-      --card2: #FBF5DD;
       --border: rgba(48, 109, 41, 0.12);
       --border2: rgba(48, 109, 41, 0.25);
       --text: #000000;
-      --text2: #306D29;
       --muted: #8fad88;
-      --blue: #306D29;
-      --blue2: #0D530E;
-      --blue3: #306D29;
-      --green: #306D29;
-      --red: #ef4444;
-      --orange: #f97316;
-      --purple: #a855f7;
-      --yellow: #306D29;
-      --grad: linear-gradient(135deg, #0D530E 0%, #306D29 100%);
+      --p1: #306D29;
+      --p2: #7b6121;
+      --p3: #0D530E;
+      --grad: linear-gradient(110deg, #0D530E 0%, #306D29 50%, #306D29 100%);
+      --glass: rgba(48, 109, 41, 0.04);
+      --glass2: rgba(48, 109, 41, 0.08);
       --shadow: 0 8px 32px rgba(48, 109, 41, 0.06);
-      --shadow-blue: 0 8px 32px rgba(48, 109, 41, 0.08);
-      --r-sm: 8px; --r: 12px; --r-lg: 18px; --r-xl: 24px;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; }
-
-    /* SCROLLBAR */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg2); }
-    ::-webkit-scrollbar-thumb { background: rgba(48, 109, 41,0.4); border-radius: 3px; }
-
-    /* REVEAL */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ANIMATIONS */
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-    @keyframes shimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
-    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-
-    /* TYPOGRAPHY */
-    .label {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--blue3);
-      margin-bottom: 14px;
-    }
-    .label::before { content:''; width:24px; height:2px; background:var(--blue); border-radius:2px; display:inline-block; }
-    h2.heading {
-      font-family:'Space Grotesk',sans-serif;
-      font-size: clamp(1.9rem,3vw,2.8rem); font-weight:800;
-      line-height:1.1; letter-spacing:-1.5px; color:var(--text);
-    }
-    h2.heading .hl {
-      background: var(--grad); -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent; background-clip:text;
-    }
-    .subtext { font-size:1rem; color:var(--text2); line-height:1.75; margin-top:12px; max-width:56ch; }
-
-    /* BUTTONS */
-    .btn {
-      display:inline-flex; align-items:center; gap:8px;
-      font-family:'Space Grotesk',sans-serif; font-size:0.9rem; font-weight:700;
-      padding:12px 26px; border-radius:999px;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-primary { background:var(--grad); color:#fff; box-shadow:var(--shadow-blue); }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(48, 109, 41,0.4); }
-    .btn-ghost { background:#ffffff; color:var(--text2); border:1px solid var(--border); }
-    .btn-ghost:hover { background:rgba(255,255,255,0.09); color:var(--text); }
-
-    /* NAVBAR */
-    .navbar {
-      position:fixed; top:0; left:0; right:0; z-index:200;
-      height:60px; display:flex; align-items:center; justify-content:space-between;
-      padding:0 48px;
-      background:rgba(10,13,20,0.85); backdrop-filter:blur(20px);
-      border-bottom:1px solid var(--border);
-    }
-    .nav-logo { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:700; color:#ffffff; }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:Inter,system-ui,sans-serif; color:var(--text); background:var(--bg); overflow-x:hidden; }
+    
+    /* ─── NAVBAR ─────────────────────────────────────────────── */
+    .navbar { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:0 60px; height:62px; background:rgba(4,7,12,0.82); backdrop-filter:blur(20px) saturate(1.4); border-bottom:1px solid var(--border); }
+    .nav-logo { font-family:"Space Grotesk",sans-serif; font-size:1.05rem; font-weight:700; color:#ffffff; text-decoration:none; letter-spacing:.2px; }
     .nav-logo span { color:#E7E1B1; }
-    .nav-links { display:flex; gap:2px; }
-    .nav-links a { font-size:0.8rem; font-weight:500; color:rgba(255, 255, 255, 0.7); padding:6px 14px; border-radius:999px; transition:color .15s, background .15s; }
-    .nav-links a:hover { color:#ffffff; background:rgba(255, 255, 255, 0.1); }
-    .nav-back { font-size:0.8rem; font-weight:600; color:#ffffff; padding:7px 16px; border-radius:999px; border:1px solid rgba(255, 255, 255, 0.15); transition:background .15s; }
-    .nav-back:hover { background:rgba(255, 255, 255, 0.1); }
+    .nav-links { display:flex; gap:2px; list-style:none; }
+    .nav-links a { text-decoration:none; font-size:.82rem; font-weight:500; color:rgba(255, 255, 255, 0.7); padding:6px 14px; border-radius:999px; border:1px solid transparent; transition:color .18s,border-color .18s; }
+    .nav-links a:hover { color:#ffffff; border-color:rgba(255, 255, 255, 0.2); }
+    .nav-back { text-decoration:none; font-size:.82rem; font-weight:600; color:#ffffff; padding:7px 16px; border-radius:999px; border:1px solid rgba(255, 255, 255, 0.15); background:rgba(255, 255, 255, 0.05); transition:border-color .18s,background .18s; white-space:nowrap; }
+    .nav-back:hover { border-color:rgba(255, 255, 255, 0.3); background:rgba(255, 255, 255, 0.1); }
     .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; border:1px solid rgba(255, 255, 255, 0.15); border-radius:8px; background:rgba(255, 255, 255, 0.05); }
-    .nav-hamburger span { display:block; width:18px; height:2px; background:#ffffff; border-radius:2px; transition:transform .25s, opacity .25s; }
-    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity:0; }
-    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-    .nav-mobile-drawer { display:none; position:fixed; top:60px; left:0; right:0; background:rgba(10,13,20,0.97); backdrop-filter:blur(24px); border-bottom:1px solid rgba(255, 255, 255, 0.1); z-index:199; padding:16px 20px 24px; flex-direction:column; gap:4px; }
+    .nav-hamburger span { display:block; width:20px; height:2px; background:#ffffff; border-radius:2px; transition:transform .25s,opacity .25s; }
+    .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)} .nav-hamburger.open span:nth-child(2){opacity:0} .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .nav-mobile-drawer { display:none; position:fixed; top:62px; left:0; right:0; background:rgba(4,7,12,0.97); backdrop-filter:blur(24px); border-bottom:1px solid rgba(255, 255, 255, 0.1); z-index:199; padding:20px 24px 28px; flex-direction:column; gap:6px; }
     .nav-mobile-drawer.open { display:flex; }
-    .nav-mobile-drawer a { font-size:0.9rem; font-weight:500; color:rgba(255, 255, 255, 0.7); padding:12px 14px; border-radius:10px; min-height:44px; display:flex; align-items:center; }
-    .nav-mobile-drawer a:hover { color:#ffffff; background:rgba(255, 255, 255, 0.05); }
-    @media(max-width:768px) { .navbar{padding:0 20px;} .nav-links,.nav-back{display:none;} .nav-hamburger{display:flex;} }
+    .nav-mobile-drawer a { text-decoration:none; font-size:.9rem; font-weight:500; color:rgba(255, 255, 255, 0.7); padding:12px 14px; border-radius:10px; border:1px solid transparent; transition:color .18s,border-color .18s,background .18s; min-height:44px; display:flex; align-items:center; }
+    .nav-mobile-drawer a:hover { color:#ffffff; border-color:rgba(255, 255, 255, 0.15); background:rgba(255, 255, 255, 0.05); }
 
-    /* SECTION WRAPPER */
-    .section { padding:96px 32px; max-width:1100px; margin:0 auto; }
-    @media(max-width:640px) { .section{padding:72px 20px;} }
+    /* ─── HERO ─────────────────────────────────────────────── */
+    .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center; padding-top:62px; border-bottom:1px solid var(--border); position:relative; z-index:1; }
+    .hero-left { padding:72px 56px 72px 60px; display:flex; flex-direction:column; justify-content:center; border-right:1px solid var(--border); height:100%; }
+    .tag { display:inline-flex; align-items:center; gap:10px; font-size:.75rem; font-weight:700; letter-spacing:3.5px; text-transform:uppercase; color:var(--p2); margin-bottom:24px; }
+    .tag::before { content:""; display:inline-block; width:24px; height:2px; background:var(--grad); border-radius:2px; }
+    .badge { display:inline-flex; align-items:center; gap:8px; background:rgba(48, 109, 41, 0.08); border:1px solid rgba(48, 109, 41, 0.2); border-radius:999px; padding:5px 14px 5px 10px; font-size:.73rem; font-weight:600; color: var(--p2); letter-spacing:.5px; margin-bottom:28px; width:fit-content; }
+    .badge-dot { width:7px; height:7px; border-radius:50%; background:var(--p1); box-shadow:0 0 8px var(--p1); animation:dotPulse 1.8s ease-in-out infinite; }
+    @keyframes dotPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
+    .hero-title { font-family:"Space Grotesk",sans-serif; font-size:clamp(2.6rem,4.5vw,4.8rem); font-weight:800; line-height:.98; letter-spacing:-2.5px; margin-bottom:28px; color:var(--text); }
+    .hero-title .hl { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-desc { font-size:clamp(0.98rem,1.25vw,1.1rem); color:rgba(0, 0, 0, 0.75); line-height:1.7; margin-bottom:32px; max-width:50ch; }
+    .hero-list { list-style:none; display:grid; gap:13px; margin-bottom:36px; }
+    .hero-list li { display:flex; align-items:flex-start; gap:12px; font-size:.95rem; color:var(--text); line-height:1.5; }
+    .li-icon { flex-shrink:0; width:30px; height:30px; border-radius:8px; background:rgba(48,109,41,0.08); border:1px solid rgba(48,109,41,0.15); display:flex; align-items:center; justify-content:center; font-size:.85rem; margin-top:-1px; }
+    .hero-actions { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+    
+    .btn-primary { display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:#fff; font-weight:700; font-size:.92rem; border-radius:999px; padding:14px 28px; background:var(--grad); font-family:"Space Grotesk",sans-serif; box-shadow:0 6px 28px rgba(48, 109, 41, 0.3); transition:box-shadow .2s,transform .2s; letter-spacing:.2px; border:none; cursor:pointer; }
+    .btn-primary:hover { box-shadow:0 12px 40px rgba(48, 109, 41, 0.45); transform:translateY(-1px); }
+    .btn-ghost { display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--muted); font-weight:500; font-size:.88rem; border-radius:999px; padding:13px 24px; border:1px solid var(--border); transition:color .2s,border-color .2s; }
+    .btn-ghost:hover { color:var(--text); border-color:var(--border2); }
+
+    /* ─── HERO RIGHT – SIMULATOR ───────────────────────────── */
+    .hero-right { padding:56px 48px; display:flex; align-items:center; justify-content:center; height:100%; background:radial-gradient(ellipse 80% 80% at 60% 50%,rgba(48, 109, 41, 0.05),transparent 70%); }
+    .tracker-widget { width:100%; max-width:430px; background:rgba(7,12,19,0.92); border:1px solid rgba(48,109,41,0.22); border-radius:24px; backdrop-filter:blur(20px); box-shadow:0 24px 64px rgba(0,0,0,0.5),0 0 80px rgba(48,109,41,0.06); overflow:hidden; }
+    .tw-top { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-bottom:1px solid rgba(255,255,255,0.06); background:rgba(48,109,41,0.03); }
+    .tw-dots { display:flex; gap:6px; }
+    .tw-dots span { width:10px; height:10px; border-radius:50%; }
+    .tw-dots span:nth-child(1){background:#ff5f57} .tw-dots span:nth-child(2){background:#febc2e} .tw-dots span:nth-child(3){background:#28c840}
+    .tw-title { font-family:"Space Grotesk",sans-serif; font-size:.72rem; letter-spacing:1.5px; text-transform:uppercase; color:#8fad88; }
+    .tw-live { font-size:.68rem; color:#E7E1B1; font-weight:700; display:inline-flex; align-items:center; gap:5px; }
+    .tw-live::before { content:""; width:5px; height:5px; border-radius:50%; background:#E7E1B1; box-shadow:0 0 6px #E7E1B1; animation:dotPulse 1.4s ease-in-out infinite; }
+    
+    /* Simulator Styles */
+    .sim-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #8fad88;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.73rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: "Space Grotesk", sans-serif;
+    }
+    .sim-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .sim-btn.active {
+      background: var(--p1);
+      color: #fff;
+      border-color: var(--p2);
+      box-shadow: 0 0 10px rgba(48, 109, 41, 0.3);
+    }
+    .email-preview-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    .ep-row {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 6px;
+      display: flex;
+    }
+    .ep-row strong {
+      color: #e7e1b1;
+      width: 70px;
+      flex-shrink: 0;
+    }
+    .ep-status {
+      margin-left: auto;
+      font-size: 0.68rem;
+      color: #8fad88;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .ep-status::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #8fad88;
+      animation: dotPulse 1.5s infinite;
+    }
+    .feed-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 180px;
+    }
+    .feed-item { display:flex; align-items:flex-start; gap:10px; font-size:.75rem; line-height:1.45; animation:msgSlideIn .35s cubic-bezier(.22,1,.36,1) both; }
+    .feed-icon { flex-shrink:0; font-size:.9rem; width:22px; height:22px; display:flex; align-items:center; justify-content:center; }
+    .feed-body { flex:1; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:8px 11px; color:#d7e5f2; }
+    .feed-body strong { color:#e7e1b1; }
+    @keyframes msgSlideIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    
+    .slack-alert-popup {
+      background: #1a1d21;
+      border: 1px solid #306D29;
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin-top: 14px;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .slack-alert-popup.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .slack-logo-wrapper {
+      background: #e01e5a;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .slack-alert-content {
+      flex: 1;
+    }
+    .slack-alert-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .slack-alert-desc {
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .tw-stats { display:flex; border-top:1px solid rgba(255,255,255,0.05); }
+    .tw-stat { flex:1; padding:12px 8px; text-align:center; border-right:1px solid rgba(255,255,255,0.05); }
+    .tw-stat:last-child { border-right:none; }
+    .tws-num { font-family:"Space Grotesk",sans-serif; font-size:.95rem; font-weight:800; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .tws-label { font-size:.6rem; color:var(--muted); margin-top:2px; }
+
+    /* ─── SECTION HELPERS ────────────────────────────────────── */
+    .sec-tag { display:inline-flex; align-items:center; gap:9px; font-size:.72rem; font-weight:700; letter-spacing:3.5px; text-transform:uppercase; color:var(--p2); margin-bottom:14px; }
+    .sec-tag::before { content:""; display:inline-block; width:16px; height:2px; background:var(--grad); border-radius:2px; }
+    .sec-h2 { font-family:"Space Grotesk",sans-serif; font-size:clamp(1.9rem,3.2vw,3rem); font-weight:700; line-height:1.08; letter-spacing:-1.2px; color:var(--text); }
+    .sec-sub { font-size:0.98rem; color:var(--p1); line-height:1.7; margin-top:10px; max-width:60ch; }
+
+    /* ─── STATS SECTION (SINGLE COLUMN GRID Layout) ────────── */
+    .stats-section { padding:80px 60px; border-bottom:1px solid var(--border); position:relative; z-index:1; }
+    .stats-section::before { content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:400px; background:radial-gradient(ellipse at center,rgba(48, 109, 41, 0.03) 0%,transparent 65%); pointer-events:none; }
+    .stats-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; width:100%; }
+    .stat-cell { background:rgba(8,13,22,0.03); border:1px solid var(--border); border-radius:16px; padding:24px 22px; display:flex; flex-direction:column; transition:border-color .3s,background .3s,transform .3s,box-shadow .3s; position:relative; overflow:hidden; cursor:default; }
+    .stat-cell:hover { background:rgba(48, 109, 41, 0.03); border-color:var(--border2); transform:translateY(-4px); box-shadow:0 16px 48px rgba(48, 109, 41, 0.08); }
+    .stat-cell::before { content:""; position:absolute; top:0; left:0; right:0; height:2px; background:var(--grad); transform:scaleX(0); transform-origin:left; transition:transform .4s ease; border-radius:18px 18px 0 0; }
+    .stat-cell:hover::before { transform:scaleX(1); }
+    .stat-icon { font-size:1.1rem; width:38px; height:38px; border-radius:10px; background:rgba(48,109,41,0.08); border:1px solid rgba(48,109,41,0.15); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+    .stat-num { font-family:"Space Grotesk",sans-serif; font-size:clamp(1.9rem,3vw,2.5rem); font-weight:800; line-height:1; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; margin-bottom:8px; letter-spacing:-1px; }
+    .stat-label { font-size:.88rem; font-weight:700; color:#000000; line-height:1.3; margin-bottom:6px; }
+    .stat-desc { font-size:.78rem; color:rgba(0, 0, 0, 0.7); line-height:1.55; }
+
+    /* ─── BEFORE & AFTER ─────────────────────────────────────── */
+    .ba-section { border-bottom:1px solid var(--border); position:relative; z-index:1; }
+    .ba-header { padding:80px 60px 36px; }
+    .ba-sub { font-size:.96rem; color:var(--p1); line-height:1.7; max-width:60ch; margin-top:12px; }
+    .ba-grid { display:grid; grid-template-columns:1fr 1fr; padding:0 60px 60px; gap:24px; }
+    .ba-col { border:1px solid var(--border); border-radius:20px; overflow:hidden; transition:border-color .25s,box-shadow .25s; background:var(--glass); }
+    .ba-col:hover { border-color:var(--border2); box-shadow:0 8px 32px rgba(48, 109, 41, 0.05); }
+    .ba-col.after { border-color:rgba(48, 109, 41, 0.16); }
+    .ba-col.after:hover { border-color:rgba(48, 109, 41, 0.36); box-shadow:0 8px 40px rgba(48, 109, 41, 0.08); }
+    .ba-col-label { padding:13px 20px; border-bottom:1px solid var(--border); font-family:"Space Grotesk",sans-serif; font-size:.68rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:rgba(0, 0, 0, 0.6); background:rgba(48, 109, 41, 0.02); display:flex; align-items:center; gap:8px; }
+    .ba-col.after .ba-col-label { color:var(--p2); }
+    .ba-col-label span { width:6px; height:6px; border-radius:50%; background:currentColor; }
+    .ba-list { list-style:none; padding:24px 26px; display:grid; gap:14px; }
+    .ba-list li { display:flex; gap:12px; font-size:.92rem; color:var(--text); line-height:1.55; }
+    .ba-list li::before { content:"✕"; color:#e05555; flex-shrink:0; margin-top:2px; font-size:.8rem; font-weight:700; }
+    .ba-col.after .ba-list li::before { content:"✓"; color:var(--p1); }
+
+    /* ─── USE CASES BENTO GRID ──────────────────────────────── */
+    .uc-section { padding:96px 60px; border-bottom:1px solid var(--border); }
+    .uc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:32px; }
+    .uc-card { background:#ffffff; border:1px solid var(--border); border-radius:20px; padding:28px; transition:border-color .3s, transform .3s; }
+    .uc-card:hover { border-color:var(--border2); transform:translateY(-3px); }
+    .uc-icon { font-size:2rem; margin-bottom:16px; }
+    .uc-title { font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:10px; }
+    .uc-desc { font-size:0.88rem; color:rgba(0,0,0,0.75); line-height:1.65; }
+
+    /* ─── PIPELINE & HOW IT WORKS ────────────────────────────── */
+    .wf-section { padding:96px 60px; border-bottom:1px solid var(--border); }
+    .wf-container { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:32px; }
+    .wf-step-card { background:#ffffff; border:1px solid var(--border); border-radius:20px; padding:24px; text-align:center; position:relative; }
+    .wf-step-card::after { content:"→"; position:absolute; top:50%; right:-16px; transform:translateY(-50%); font-size:1.5rem; color:rgba(48,109,41,0.35); font-weight:bold; }
+    .wf-step-card:last-child::after { display:none; }
+    .wf-step-num { width:32px; height:32px; border-radius:50%; background:rgba(48,109,41,0.08); border:1px solid rgba(48,109,41,0.15); display:inline-flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:0.85rem; color:var(--p2); margin-bottom:16px; }
+    .wf-step-title { font-family:'Space Grotesk',sans-serif; font-size:0.95rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .wf-step-desc { font-size:0.8rem; color:rgba(0,0,0,0.7); line-height:1.5; }
+    @media(max-width:900px) {
+      .wf-container { grid-template-columns:1fr; }
+      .wf-step-card::after { content:"↓"; top:auto; bottom:-18px; right:50%; transform:translateX(50%); }
+    }
+
+    /* ─── DASHBOARD PREVIEW ROW ──────────────────────────────── */
+    .dashboard-preview { background:rgba(48,109,41,0.04); border:1px solid var(--border); border-radius:20px; padding:28px; margin-top:32px; display:grid; grid-template-columns:1.2fr 1fr; gap:32px; align-items:center; }
+    .dashboard-text h3 { font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:10px; }
+    .dashboard-text p { font-size:0.88rem; color:rgba(0,0,0,0.75); line-height:1.65; margin-bottom:16px; }
+    .sheet-view { background:#ffffff; border:1px solid var(--border2); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
+    .sheet-header { background:rgba(48,109,41,0.03); border-bottom:1px solid var(--border); padding:8px 12px; font-family:monospace; font-size:0.7rem; color:var(--muted); font-weight:bold; }
+    .sheet-row { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:6px; border-bottom:1px solid rgba(0,0,0,0.05); padding:8px 12px; font-size:0.73rem; }
+    .sheet-row:last-child { border-bottom:none; }
+    .sheet-col-email { font-weight:600; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .sheet-col-status { font-weight:700; font-size:0.65rem; padding:2px 6px; border-radius:10px; width:fit-content; }
+    .sh-open { background:rgba(48,109,41,0.08); color:var(--p3); }
+    .sh-sent { background:rgba(123, 97, 33, 0.08); color:var(--p2); }
+    .sh-block { background:rgba(239,68,68,0.08); color:#ef4444; }
+    @media(max-width:800px) {
+      .dashboard-preview { grid-template-columns:1fr; gap:20px; }
+    }
+
+    /* ─── FAQ ────────────────────────────────────────────────── */
+    .faq-section { padding:80px 60px; border-bottom:1px solid var(--border); position:relative; z-index:1; }
+    .faq-layout { display:grid; grid-template-columns:1fr 1.8fr; gap:80px; align-items:start; }
+    .faq-sticky { position:sticky; top:80px; }
+    .faq-sticky-title { font-family:"Space Grotesk",sans-serif; font-size:clamp(1.8rem,2.8vw,2.6rem); font-weight:700; line-height:1.1; letter-spacing:-1px; color:var(--text); margin-bottom:18px; }
+    .faq-sticky-desc { font-size:.92rem; color:var(--muted); line-height:1.8; margin-bottom:28px; }
+    .faq-cta-mini { display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--p2); font-size:.85rem; font-weight:600; border-bottom:1px solid rgba(48,109,41,0.3); padding-bottom:2px; transition:border-color .2s,color .2s; }
+    .faq-cta-mini:hover { color:var(--p1); border-color:var(--p1); }
+    
+    .faq-list { display:flex; flex-direction:column; gap:14px; }
+    .faq-item { border:1px solid var(--border); border-radius:16px; background:var(--glass); overflow:hidden; transition:border-color .2s; }
+    .faq-item:hover { border-color:var(--border2); }
+    .faq-q-row { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:20px 22px; cursor:pointer; user-select:none; }
+    .faq-q { font-family:"Space Grotesk",sans-serif; font-size:.96rem; font-weight:700; color:var(--text); line-height:1.4; }
+    .faq-chevron { width:28px; height:28px; border-radius:8px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.7rem; color:var(--muted); transition:transform .25s,border-color .25s,background .25s; }
+    .faq-item.open .faq-chevron { transform:rotate(180deg); border-color:var(--border2); background:rgba(48,109,41,0.06); color:var(--p2); }
+    .faq-a { padding:0 22px 20px; font-size:.88rem; color:rgba(0,0,0,0.8); line-height:1.78; display:none; border-top:1px solid rgba(0,0,0,0.04); padding-top:18px; }
+    .faq-item.open .faq-a { display:block; }
+
+    /* ─── CTA ────────────────────────────────────────────────── */
+    .cta-section { padding:90px 60px; position:relative; z-index:1; overflow:hidden; border-top:1px solid var(--border); }
+    .cta-section::before { content:""; position:absolute; inset:0; background:radial-gradient(ellipse 70% 120% at 50% 100%,rgba(48,109,41,0.05),transparent 60%); pointer-events:none; }
+    .cta-inner { max-width:760px; margin:0 auto; display:flex; flex-direction:column; align-items:center; text-align:center; position:relative; }
+    .cta-eyebrow { display:inline-flex; align-items:center; gap:8px; background:rgba(48,109,41,0.08); border:1px solid rgba(48,109,41,0.2); border-radius:999px; padding:5px 14px; font-size:.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--p2); margin-bottom:28px; }
+    .cta-title { font-family:"Space Grotesk",sans-serif; font-size:clamp(2rem,4vw,3.6rem); font-weight:800; line-height:1.05; letter-spacing:-1.5px; color:var(--text); margin-bottom:18px; }
+    .cta-title span { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .cta-sub { font-size:1.02rem; color:var(--muted); line-height:1.75; max-width:50ch; margin-bottom:36px; }
+    .cta-actions { display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:center; }
+    .cta-note { margin-top:20px; font-size:.76rem; color:var(--muted); }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────────── */
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-left { opacity:0; transform:translateX(-28px); transition:opacity .6s ease,transform .6s ease; }
+    .reveal-left.visible { opacity:1; transform:translateX(0); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media(max-width:1200px) { .navbar{padding:0 36px;} .hero-left{padding:60px 44px;} .hero-right{padding:48px 36px;} .stats-section{padding:72px 48px;gap:48px;} .uc-section{padding:72px 40px;} .faq-section,.cta-section{padding-left:40px;padding-right:40px;} .ba-header{padding:60px 40px 32px;} .ba-grid{padding:0 40px 48px;} }
+    @media(max-width:1000px) { .stats-grid{grid-template-columns:repeat(2, 1fr);gap:24px;} .faq-layout{grid-template-columns:1fr;gap:40px;} .faq-sticky{position:static;} }
+    @media(max-width:900px) { .hero{grid-template-columns:1fr;min-height:auto;} .hero-left{border-right:none;border-bottom:1px solid var(--border);padding:60px 40px;} .hero-right{padding:48px 40px;} .navbar{padding:0 24px;} .nav-links{display:none;} .nav-hamburger{display:flex;} .ba-grid{grid-template-columns:1fr;} .uc-grid{grid-template-columns:1fr;} }
+    @media(max-width:640px) { .navbar{height:56px;padding:0 20px;} .nav-back{display:none;} .nav-mobile-drawer{top:56px;} .hero-left{padding:44px 20px 40px;} .hero-right{padding:32px 20px 40px;} .hero-title{font-size:2.2rem;letter-spacing:-1.5px;} .stats-section{padding:56px 20px;} .stats-grid{grid-template-columns:1fr;gap:12px;} .ba-header{padding:48px 20px 24px;} .ba-grid{padding:0 20px 36px;} .uc-section{padding:52px 20px;} .faq-section{padding:52px 20px;} .cta-section{padding:60px 20px;} }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after{animation:none!important;transition:none!important;} }
   </style>
 </head>
 <body>
-
+  
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <a href="index.html" class="nav-logo">Karl<span>space</span></a>
-    <div class="nav-links">
-      <a href="#problem">Problem</a>
-      <a href="#solution">Solution</a>
-      <a href="#automation">How It Works</a>
-      <a href="#logic">Algorithm</a>
-      <a href="#resources">Resources</a>
-    </div>
-    <a href="case-study-outreach.html" class="nav-back">← Back</a>
+    <ul class="nav-links">
+      <li><a href="#stats">Results</a></li>
+      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#ba">Before &amp; After</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="index.html#case-studies" class="nav-back">← Back</a>
     <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
-  <nav class="nav-mobile-drawer" id="navDrawer">
-    <a href="#problem" onclick="closeDrawer()">Problem</a>
-    <a href="#solution" onclick="closeDrawer()">Solution</a>
-    <a href="#automation" onclick="closeDrawer()">How It Works</a>
-    <a href="#logic" onclick="closeDrawer()">Algorithm</a>
-    <a href="#resources" onclick="closeDrawer()">Resources</a>
-    <a href="case-study-outreach.html" onclick="closeDrawer()">← Back</a>
+  <nav class="nav-mobile-drawer" id="navDrawer" aria-label="Mobile navigation">
+    <a href="#stats" onclick="closeDrawer()">Results</a>
+    <a href="#solutions" onclick="closeDrawer()">Solutions</a>
+    <a href="#ba" onclick="closeDrawer()">Before &amp; After</a>
+    <a href="#how-it-works" onclick="closeDrawer()">How It Works</a>
+    <a href="#faq" onclick="closeDrawer()">FAQ</a>
+    <a href="index.html#case-studies" onclick="closeDrawer()">← Back to Portfolio</a>
   </nav>
 
   <!-- HERO -->
-  <style>
-    .hero {
-      min-height: 100vh; padding-top: 60px;
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden; background: var(--bg);
-    }
-    .hero::before {
-      content:''; position:absolute; inset:0; pointer-events:none;
-      background:
-        radial-gradient(ellipse 70% 60% at 15% 50%, rgba(37,99,235,0.12) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 70% at 85% 40%, rgba(231, 225, 177,0.07) 0%, transparent 65%);
-    }
-    .hero-grid { position:absolute; inset:0; background-image:radial-gradient(rgba(48, 109, 41,0.1) 1px, transparent 1px); background-size:36px 36px; opacity:0.4; pointer-events:none; }
-    .hero-inner { position:relative; z-index:2; max-width:780px; margin:0 auto; padding:80px 32px; text-align:center; display:flex; flex-direction:column; align-items:center; }
-    .hero-tag { display:inline-flex; align-items:center; gap:8px; background:rgba(48, 109, 41,0.08); border:1px solid rgba(48, 109, 41,0.2); border-radius:999px; padding:6px 18px; font-size:0.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue3); margin-bottom:28px; }
-    .hero-dot { width:7px; height:7px; border-radius:50%; background:var(--blue3); box-shadow:0 0 8px rgba(231, 225, 177,0.7); animation:pulse 1.8s ease-in-out infinite; }
-    .hero-h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.8rem,6vw,5rem); font-weight:800; line-height:1.0; letter-spacing:-3px; color:var(--text); margin-bottom:22px; }
-    .hero-h1 .hl { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .hero-sub { font-size:clamp(1rem,1.5vw,1.1rem); color:var(--text2); line-height:1.8; max-width:50ch; margin-bottom:36px; }
-    .hero-stats { display:flex; gap:0; background:var(--card); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; margin-bottom:36px; box-shadow:var(--shadow); }
-    .hero-stat { padding:16px 28px; text-align:center; border-right:1px solid var(--border); flex:1; }
-    .hero-stat:last-child { border-right:none; }
-    .hero-stat-n { font-family:'Space Grotesk',sans-serif; font-size:1.7rem; font-weight:800; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; }
-    .hero-stat-l { font-size:0.7rem; color:var(--muted); margin-top:4px; letter-spacing:0.5px; }
-    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
-    .hero-stack { display:flex; align-items:center; gap:8px; margin-top:40px; }
-    .hero-stack-label { font-size:0.7rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; }
-    .hero-stack-icons { display:flex; align-items:center; gap:6px; }
-    .hero-stack-icon { width:28px; height:28px; border-radius:7px; background:var(--card2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; }
-    @media(max-width:600px){ .hero-h1{font-size:2.4rem;letter-spacing:-2px;} .hero-inner{padding:60px 20px;} .hero-stats{flex-direction:column;} .hero-stat{border-right:none;border-bottom:1px solid var(--border);} .hero-stat:last-child{border-bottom:none;} }
-  </style>
-
   <section class="hero" id="overview">
-    <div class="hero-grid"></div>
-    <div class="hero-inner">
-      <div class="hero-tag reveal"><span class="hero-dot"></span> Internal Case Study</div>
-      <h1 class="hero-h1 reveal">
-        I stopped guessing<br><span class="hl">who opens my emails.</span>
+    <div class="hero-left">
+      <div class="tag">Outreach System</div>
+      <div class="badge"><span class="badge-dot"></span> Direct Inbox · Anti-Bot Filter · Real-Time alerts</div>
+      <h1 class="hero-title">
+        Outreach Pixel<br>
+        <span class="hl">Tracker</span>
       </h1>
-      <p class="hero-sub reveal">
-        Gmail doesn't track opens. Mail tools hurt deliverability. I built a simple system: n8n + a pixel + a bot filter.
+      <p class="hero-desc">
+        Send emails directly through your business workspace for maximum placement. Log legitimate human opens in real time and bypass automated filter scans.
       </p>
-      <div class="hero-stats reveal">
-        <div class="hero-stat"><div class="hero-stat-n">5</div><div class="hero-stat-l">Steps</div></div>
-        <div class="hero-stat"><div class="hero-stat-n">30m</div><div class="hero-stat-l">Trigger</div></div>
-        <div class="hero-stat"><div class="hero-stat-n">2min</div><div class="hero-stat-l">Bot Gap</div></div>
-        <div class="hero-stat"><div class="hero-stat-n">1×1</div><div class="hero-stat-l">Pixel</div></div>
+      <ul class="hero-list">
+        <li><span class="li-icon">📡</span> Verified Tracking: Discard security scanner preloads.</li>
+        <li><span class="li-icon">📧</span> Direct Sending: Land directly in the primary inbox.</li>
+        <li><span class="li-icon">🔔</span> Instant Notifications: Real-time alerts on Slack when prospects open.</li>
+      </ul>
+      <div class="hero-actions">
+        <a href="mailto:shivam@karlspace.in?subject=Outreach%20Pixel%20Build%20Request" class="btn-primary">Get a Quote →</a>
+        <a href="#ba" class="btn-ghost">See before &amp; after ↓</a>
       </div>
-      <div class="hero-actions reveal">
-        <a href="#solution" class="btn btn-primary">See how it works →</a>
-        <a href="#resources" class="btn btn-ghost">↓ Download files</a>
-      </div>
-      <div class="hero-stack reveal">
-        <span class="hero-stack-label">Built with</span>
-        <div class="hero-stack-icons">
-          <div class="hero-stack-icon"><img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:16px;height:16px;" /></div>
-          <div class="hero-stack-icon"><img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Gmail" style="width:16px;height:16px;" /></div>
-          <div class="hero-stack-icon"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="Postgres" style="width:16px;height:16px;" /></div>
-          <div class="hero-stack-icon" style="font-size:0.75rem;color:var(--text2);">JS</div>
+    </div>
+
+    <div class="hero-right">
+      <div class="tracker-widget">
+        <div class="tw-top">
+          <div class="tw-dots"><span></span><span></span><span></span></div>
+          <div class="tw-title">Outreach Monitor</div>
+          <div class="tw-live">Simulation Feed</div>
+        </div>
+        
+        <div style="padding: 16px;">
+          <!-- Industry Selectors -->
+          <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+            <button class="sim-btn active" onclick="changeIndustry('business')">💼 B2B Business</button>
+            <button class="sim-btn" onclick="changeIndustry('ecommerce')">🛒 E-commerce</button>
+            <button class="sim-btn" onclick="changeIndustry('influencer')">✨ Influencer</button>
+            <button class="sim-btn" onclick="changeIndustry('clinic')">🏥 Clinic</button>
+          </div>
+          
+          <!-- Mock Email Display -->
+          <div class="email-preview-card">
+            <div class="ep-row"><strong>To:</strong> <span id="sim-to">ceo@capitalventures.com</span></div>
+            <div class="ep-row"><strong>Subject:</strong> <span id="sim-subj">Partnership Proposal & Growth Strategy</span></div>
+            <div class="ep-row" style="margin-bottom: 0;"><strong>Tracker:</strong> <span class="ep-status">Active</span></div>
+          </div>
+          
+          <!-- Real-Time Simulator Log -->
+          <div class="feed-container" id="sim-feed">
+            <!-- Dynamically injected -->
+          </div>
+          
+          <!-- Mock Slack Message Box -->
+          <div class="slack-alert-popup" id="sim-slack">
+            <div class="slack-logo-wrapper">S</div>
+            <div class="slack-alert-content">
+              <div class="slack-alert-title">🔔 Outreach Alert · Slack Integration</div>
+              <div class="slack-alert-desc" id="sim-slack-msg">CEO of Capital Ventures just opened your Partnership Proposal email. (Sent 4 mins ago).</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tw-stats">
+          <div class="tw-stat"><div class="tws-num">100%</div><div class="tws-label">Deliverability</div></div>
+          <div class="tw-stat"><div class="tws-num">0%</div><div class="tws-label">Fake Opens</div></div>
+          <div class="tw-stat"><div class="tws-num">$0/mo</div><div class="tws-label">Software Cost</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROBLEM -->
-  <style>
-    .prob-wrap { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-    .prob-head { margin-bottom:52px; }
-    .prob-bento { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    @media(max-width:700px){ .prob-bento{grid-template-columns:1fr;} }
-    .bento-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); padding:28px; transition:border-color .2s, transform .2s; }
-    .bento-card:hover { border-color:rgba(255,255,255,0.12); transform:translateY(-2px); }
-    .bento-card.full { grid-column:1/-1; }
-    .bento-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; margin-bottom:16px; }
-    .bento-title { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:8px; }
-    .bento-text { font-size:0.88rem; color:var(--text2); line-height:1.65; }
-    .bento-divider { height:1px; background:var(--border); margin:16px 0; }
-    .prob-list { display:flex; flex-direction:column; gap:10px; margin-top:14px; }
-    .prob-item { display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:var(--text2); line-height:1.45; }
-    .prob-item-dot { width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.62rem; font-weight:800; flex-shrink:0; margin-top:1px; }
-    .dot-red { background:rgba(239,68,68,0.12); color:var(--red); border:1px solid rgba(239,68,68,0.2); }
-    .dot-green { background:rgba(48, 109, 41,0.1); color:var(--green); border:1px solid rgba(48, 109, 41,0.2); }
-    .tool-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px; }
-    .tool-chip { display:flex; align-items:center; gap:6px; background:var(--card2); border:1px solid var(--border); border-radius:8px; padding:6px 12px; font-size:0.78rem; font-weight:600; color:var(--text2); }
-    .callout-banner { grid-column:1/-1; background:rgba(48, 109, 41,0.06); border:1px solid rgba(48, 109, 41,0.18); border-radius:var(--r-xl); padding:22px 28px; display:flex; align-items:center; gap:16px; }
-    .callout-icon-box { width:40px; height:40px; border-radius:10px; background:rgba(48, 109, 41,0.12); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
-    .callout-text { font-size:0.95rem; color:var(--text2); line-height:1.6; }
-    .callout-text strong { color:var(--blue3); }
-  </style>
-
-  <div class="prob-wrap">
-    <div class="section" id="problem">
-      <div class="prob-head reveal">
-        <div class="label">#1 The Problem</div>
-        <h2 class="heading">Two tools. <span class="hl">Both incomplete.</span></h2>
-        <p class="subtext">Gmail delivers well. Mail tools track well. I needed both, so I built a bridge.</p>
+  <!-- STATS -->
+  <div class="stats-section" id="stats">
+    <div class="stats-grid">
+      <div class="stat-cell reveal">
+        <div class="stat-icon">📡</div>
+        <span class="stat-num">100%</span>
+        <div class="stat-label">Accurate Opens</div>
+        <div class="stat-desc">Time-gap filter discards automated checks, tracking only real human reads.</div>
       </div>
-      <div class="prob-bento">
-        <div class="bento-card reveal">
-          <div class="bento-icon" style="background:rgba(234,67,53,0.1);">
-            <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Gmail" style="width:24px;height:24px;" />
-          </div>
-          <div class="bento-title">Gmail   Great deliverability, no tracking</div>
-          <div class="bento-text">Real inbox, replies stay in thread. No open tracking, no automation.</div>
-          <div class="bento-divider"></div>
-          <div class="prob-list">
-            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Inbox deliverability</div>
-            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Replies stay in thread</div>
-            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>No open tracking</div>
-            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>No automation</div>
-          </div>
-        </div>
-        <div class="bento-card reveal">
-          <div class="bento-icon" style="background:rgba(251,191,36,0.1);">📊</div>
-          <div class="bento-title">Mail tools   Tracking, weak deliverability</div>
-          <div class="bento-text">Built-in tracking, but emails land in Promotions or Spam. Replies break threads.</div>
-          <div class="bento-divider"></div>
-          <div class="prob-list">
-            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Open tracking out of the box</div>
-            <div class="prob-item"><div class="prob-item-dot dot-green">✓</div>Sequence automation</div>
-            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>Poor inbox placement</div>
-            <div class="prob-item"><div class="prob-item-dot dot-red">✗</div>Follow-ups break threads</div>
-          </div>
-        </div>
-        <div class="callout-banner reveal">
-          <div class="callout-icon-box">💡</div>
-          <div class="callout-text">
-            <strong>The solution:</strong> Send with the Gmail API, add a custom pixel, and run the 5-step sequence in n8n.
-          </div>
-        </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">📧</div>
+        <span class="stat-num">100%</span>
+        <div class="stat-label">Thread Continuity</div>
+        <div class="stat-desc">Follow-up emails reply inside the original thread to keep conversations natural.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">⚡</div>
+        <span class="stat-num">30m</span>
+        <div class="stat-label">System Refresh</div>
+        <div class="stat-desc">Automatic pipeline checks update logs and dispatch campaigns every 30 minutes.</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-icon">💰</div>
+        <span class="stat-num">$0/mo</span>
+        <div class="stat-label">Zero Seat Fees</div>
+        <div class="stat-desc">Lifetime system ownership. Eliminate recurring software and seat costs.</div>
       </div>
     </div>
   </div>
 
-  <!-- SOLUTION -->
-  <style>
-    .sol-section { background:var(--bg); }
-    .sol-video-wrap { border-radius:var(--r-xl); overflow:hidden; background:#000; border:1px solid var(--border); box-shadow:0 24px 80px rgba(0,0,0,0.5); margin-bottom:48px; position:relative; }
-    .sol-video-bar { display:flex; align-items:center; gap:8px; padding:10px 16px; background:#ffffff; border-bottom:1px solid var(--border); }
-    .sol-dot { width:10px; height:10px; border-radius:50%; }
-    .sol-live { margin-left:auto; display:flex; align-items:center; gap:6px; font-size:0.68rem; font-weight:700; color:var(--red); letter-spacing:1px; text-transform:uppercase; }
-    .sol-live-dot { width:7px; height:7px; border-radius:50%; background:var(--red); animation:pulse 1.5s infinite; }
-    .sol-video-wrap video { width:100%; display:block; max-height:520px; object-fit:cover; }
-
-    /* HORIZONTAL WORKFLOW */
-    .wf-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); overflow:hidden; margin-bottom:16px; }
-    .wf-card-header { display:flex; align-items:center; gap:12px; padding:14px 20px; border-bottom:1px solid var(--border); background:rgba(48,109,41,0.03); }
-    .wf-card-title { font-family:'Space Grotesk',sans-serif; font-size:0.85rem; font-weight:700; color:var(--text); }
-    .wf-card-sub { font-size:0.7rem; color:var(--muted); margin-left:auto; }
-    .wf-pipeline { display:flex; align-items:center; padding:20px; overflow-x:auto; gap:0; }
-    .wf-pipeline::-webkit-scrollbar { height:6px; }
-    .wf-pipeline::-webkit-scrollbar-track { background:#ffffff; border-radius:3px; }
-    .wf-pipeline::-webkit-scrollbar-thumb { background:rgba(48, 109, 41,0.4); border-radius:3px; }
-    .wf-pipeline::-webkit-scrollbar-thumb:hover { background:rgba(48, 109, 41,0.65); }
-    .wf-node { flex-shrink:0; width:100px; display:flex; flex-direction:column; align-items:center; gap:6px; cursor:default; }
-    .wf-node:hover .wf-node-box { border-color:rgba(255,255,255,0.18); transform:translateY(-3px); }
-    .wf-node-box { width:56px; height:56px; border-radius:14px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border); transition:border-color .2s, transform .2s; font-size:1.1rem; }
-    .wf-node-label { font-size:0.6rem; color:var(--text2); text-align:center; line-height:1.3; font-weight:500; }
-    .wf-node-tag { font-size:0.52rem; color:var(--muted); text-align:center; }
-    .wf-arrow { flex-shrink:0; color:rgba(48, 109, 41,0.4); font-size:1rem; padding:0 2px; margin-top:-16px; }
-    .nb-trigger { background:rgba(48, 109, 41,0.12); }
-    .nb-db { background:rgba(65,105,225,0.15); }
-    .nb-code { background:rgba(168,85,247,0.12); }
-    .nb-logic { background:rgba(234,179,8,0.12); }
-    .nb-gmail { background:rgba(234,67,53,0.1); }
-    .nb-result { background:rgba(48, 109, 41,0.1); }
-  </style>
-
-  <div class="sol-section">
-    <div class="section" id="solution">
-      <div class="reveal" style="margin-bottom:48px;">
-        <div class="label">#2 The Solution</div>
-        <h2 class="heading">Watch the system <span class="hl">in action.</span></h2>
-        <p class="subtext">A quick walkthrough: contact in, emails out, opens tracked.</p>
+  <!-- USE CASES / TAILORED SOLUTIONS -->
+  <section class="uc-section" id="solutions">
+    <div class="reveal">
+      <div class="sec-tag">Solutions</div>
+      <h2 class="sec-h2">Built for Growth Across Industries</h2>
+      <p class="sec-sub">See how this direct inbox tracking setup drives performance.</p>
+    </div>
+    
+    <div class="uc-grid">
+      <div class="uc-card reveal">
+        <div class="uc-icon">💼</div>
+        <h3 class="uc-title">Business Owners &amp; Agencies</h3>
+        <p class="uc-desc">
+          Scale proposal follow-ups. Track actual prospect engagement and reply inside the initial email thread automatically.
+        </p>
+      </div>
+      
+      <div class="uc-card reveal">
+        <div class="uc-icon">🛒</div>
+        <h3 class="uc-title">E-commerce Brands</h3>
+        <p class="uc-desc">
+          Secure wholesale partnerships. High inbox placement ensures catalogs get viewed, alerting your sales reps live.
+        </p>
       </div>
 
-      <div class="sol-video-wrap reveal">
-        <div class="sol-video-bar">
-          <div class="sol-dot" style="background:#ef4444;"></div>
-          <div class="sol-dot" style="background:#f59e0b;"></div>
-          <div class="sol-dot" style="background:#306D29;"></div>
-          <span style="font-size:0.7rem;color:var(--muted);margin-left:8px;">ReachOhme · Outreach Demo</span>
-          <div class="sol-live"><span class="sol-live-dot"></span>Live System</div>
-        </div>
-        <video controls preload="metadata" poster="">
-          <source src="56.mp4" type="video/mp4" />
-        </video>
+      <div class="uc-card reveal">
+        <div class="uc-icon">✨</div>
+        <h3 class="uc-title">Influencers &amp; Creators</h3>
+        <p class="uc-desc">
+          Secure sponsorships. Know the exact moment brand managers open your pitch deck, so you follow up while top-of-mind.
+        </p>
       </div>
 
-      <!-- SEND PIPELINE -->
-      <div class="wf-card reveal">
-        <div class="wf-card-header">
-          <img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:16px;height:16px;" />
-          <div class="wf-card-title">📤 Email Send Pipeline</div>
-          <div class="wf-card-sub">scroll to see steps →</div>
-        </div>
-        <div class="wf-pipeline">
-          <div class="wf-node"><div class="wf-node-box nb-trigger">🔗</div><div class="wf-node-label">Webhook</div><div class="wf-node-tag">intake</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Save to Postgres</div><div class="wf-node-tag">step 1</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-trigger">⏰</div><div class="wf-node-label">Wait 30m</div><div class="wf-node-tag">trigger</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Parse date</div><div class="wf-node-tag">ISO format</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Find due</div><div class="wf-node-tag">fetch due</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-logic">🔁</div><div class="wf-node-label">Loop</div><div class="wf-node-tag">one by one</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-logic">⚡</div><div class="wf-node-label">Stop at 5</div><div class="wf-node-tag">stop check</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-logic">🔀</div><div class="wf-node-label">Route 1–5</div><div class="wf-node-tag">route step</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Build HTML + pixel</div><div class="wf-node-tag">inject pixel</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-gmail"><img src="https://cdn.simpleicons.org/gmail/EA4335" style="width:26px;height:26px;" /></div><div class="wf-node-label">Send with Gmail</div><div class="wf-node-tag">step 1 new</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Update status</div><div class="wf-node-tag">step + 1</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-gmail"><img src="https://cdn.simpleicons.org/gmail/EA4335" style="width:26px;height:26px;" /></div><div class="wf-node-label">Add Gmail label</div><div class="wf-node-tag">Gmail tag</div></div>
-        </div>
+      <div class="uc-card reveal">
+        <div class="uc-icon">🏥</div>
+        <h3 class="uc-title">Clinics &amp; Services</h3>
+        <p class="uc-desc">
+          Follow up with clients and patient referrals safely. Ensure critical care templates land in primary inboxes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE & AFTER -->
+  <section class="ba-section" id="ba">
+    <div class="ba-header reveal">
+      <div class="sec-tag">Transformation</div>
+      <h2 class="sec-h2">Before &amp; After</h2>
+      <p class="ba-sub">How moving your outreach from general marketing platforms to a direct system changes placement.</p>
+    </div>
+    
+    <div class="ba-grid">
+      <div class="ba-col reveal">
+        <div class="ba-col-label"><span></span> Before — Standard Marketing Tools</div>
+        <ul class="ba-list">
+          <li>Shared sending servers get flagged, pushing emails to Promotions or Spam.</li>
+          <li>Corporate scanner checks trigger fake clicks, causing 90%+ invalid opens.</li>
+          <li>Follow-ups arrive as separate threads, cluttering recipient inboxes.</li>
+          <li>Platform subscription fees increase per user seat.</li>
+          <li>No instant notification options to alert your team of interested leads.</li>
+        </ul>
+      </div>
+      
+      <div class="ba-col after reveal">
+        <div class="ba-col-label"><span></span> After — Direct Inbox Tracker</div>
+        <ul class="ba-list">
+          <li>Emails sent from your workspace, ensuring primary inbox delivery.</li>
+          <li>Intelligent 120-second gap check filters out automated preloads.</li>
+          <li>Follow-ups reply inside the original email thread automatically.</li>
+          <li>Lifetime system ownership with zero recurring software seat costs.</li>
+          <li>Live Slack notifications alert your reps on verified human opens.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIPELINES & WORKFLOWS -->
+  <section class="wf-section" id="how-it-works">
+    <div class="reveal">
+      <div class="sec-tag">How It Works</div>
+      <h2 class="sec-h2">The Step-by-Step Flow</h2>
+      <p class="sec-sub">A clean lifecycle that ensures high deliverability and verified view logs.</p>
+    </div>
+    
+    <div class="wf-container reveal">
+      <div class="wf-step-card">
+        <div class="wf-step-num">01</div>
+        <h3 class="wf-step-title">Workspace Send</h3>
+        <p class="wf-step-desc">Emails are dispatched directly from your business workspace account.</p>
       </div>
 
-      <!-- TRACKING PIPELINE -->
-      <div class="wf-card reveal">
-        <div class="wf-card-header">
-          <img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:16px;height:16px;" />
-          <div class="wf-card-title">👁️ Pixel Tracking Pipeline</div>
-          <div class="wf-card-sub">runs on real opens →</div>
+      <div class="wf-step-card">
+        <div class="wf-step-num">02</div>
+        <h3 class="wf-step-title">Tracker Embed</h3>
+        <p class="wf-step-desc">An invisible 1x1 image is placed at the footer of each outgoing email.</p>
+      </div>
+
+      <div class="wf-step-card">
+        <div class="wf-step-num">03</div>
+        <h3 class="wf-step-title">Bot Filter Check</h3>
+        <p class="wf-step-desc">The tracker ignores immediate scans (under 120s) to discard fake opens.</p>
+      </div>
+
+      <div class="wf-step-card">
+        <div class="wf-step-num">04</div>
+        <h3 class="wf-step-title">Real-Time Alerts</h3>
+        <p class="wf-step-desc">Verified human opens update your tracking sheet and alert your Slack channel.</p>
+      </div>
+    </div>
+
+    <!-- Dashboard Preview Bento -->
+    <div class="dashboard-preview reveal">
+      <div class="dashboard-text">
+        <h3>Simple Google Sheets Log</h3>
+        <p>No new software interface to learn. All campaigns, opens, and delivery logs sync automatically to a simple Google Sheets dashboard for your team to check easily.</p>
+        <div style="font-size:0.8rem;color:var(--p2);font-weight:700;">★ Real-time updates · Verified open flags · Clean log dashboard</div>
+      </div>
+      <div class="sheet-view">
+        <div class="sheet-header">Google Sheets · Outreach Log View</div>
+        <div class="sheet-row" style="background:rgba(0,0,0,0.02);font-weight:bold;">
+          <span>Prospect Email</span><span>Status</span><span>Verification</span>
         </div>
-        <div class="wf-pipeline">
-          <div class="wf-node"><div class="wf-node-box nb-trigger">📡</div><div class="wf-node-label">Open webhook</div><div class="wf-node-tag">pixel hit</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Find record</div><div class="wf-node-tag">by eid</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-code" style="font-family:monospace;font-size:0.7rem;font-weight:700;color:#c084fc;">{ }</div><div class="wf-node-label">Parse time</div><div class="wf-node-tag">timestamp</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Get sent_at</div><div class="wf-node-tag">get sent_at</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-logic">🛡️</div><div class="wf-node-label">Time gap guard</div><div class="wf-node-tag">&lt;2min=bot</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-db"><img src="https://cdn.simpleicons.org/postgresql/4169E1" style="width:26px;height:26px;" /></div><div class="wf-node-label">Mark open</div><div class="wf-node-tag">Postgres</div></div>
-          <div class="wf-arrow">→</div>
-          <div class="wf-node"><div class="wf-node-box nb-result">🖼️</div><div class="wf-node-label">Return 1×1 GIF</div><div class="wf-node-tag">pixel</div></div>
+        <div class="sheet-row">
+          <span class="sheet-col-email">ramesh.k@gmail.com</span>
+          <span class="sheet-col-status sh-open">Opened</span>
+          <span>Verified Human</span>
+        </div>
+        <div class="sheet-row">
+          <span class="sheet-col-email">sara.jones@outlook.com</span>
+          <span class="sheet-col-status sh-sent">Sent</span>
+          <span>Pending</span>
+        </div>
+        <div class="sheet-row">
+          <span class="sheet-col-email">filter@bot-scanner.net</span>
+          <span class="sheet-col-status sh-block">Ignored</span>
+          <span>Security Bot</span>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- AUTOMATION -->
-  <style>
-    .auto-section { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-    .auto-n8n-img { border-radius:var(--r-xl); overflow:hidden; background:#0d0f18; border:1px solid rgba(255,255,255,0.07); box-shadow:0 16px 56px rgba(0,0,0,0.45); margin-bottom:28px; }
-    .auto-n8n-img img { width:100%; display:block; }
-    .auto-two-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
-    @media(max-width:740px){ .auto-two-grid{grid-template-columns:1fr;} }
-    .acard { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); padding:26px; }
-    .acard-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--text); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
-    .step-list { display:flex; flex-direction:column; gap:10px; }
-    .step-item { display:flex; align-items:flex-start; gap:12px; padding:10px; border-radius:10px; background:rgba(48,109,41,0.03); border:1px solid rgba(255,255,255,0.04); }
-    .step-emoji { width:32px; height:32px; border-radius:8px; background:rgba(48, 109, 41,0.1); display:flex; align-items:center; justify-content:center; font-size:0.85rem; flex-shrink:0; font-family:monospace; font-weight:700; color: var(--p2); font-size:0.72rem; }
-    .step-label { font-size:0.82rem; font-weight:600; color:var(--text); margin-bottom:2px; }
-    .step-sub { font-size:0.74rem; color:var(--muted); line-height:1.45; }
-    .step-sub code { font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:#86efac; background:rgba(134,239,172,0.08); padding:1px 4px; border-radius:3px; }
-    .pixel-codeblock { background:#0d111a; border-radius:10px; padding:14px 16px; margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#a9b8c8; line-height:1.7; border:1px solid rgba(255,255,255,0.05); overflow-x:auto; }
-    .pixel-codeblock .k { color: var(--p2); }
-    .pixel-codeblock .s { color:#86efac; }
-    .pixel-codeblock .v { color:#fbbf24; }
-    .pixel-codeblock .c { color:#4b5e72; font-style:italic; }
-    .why-box { margin-top:14px; background:rgba(48, 109, 41,0.06); border:1px solid rgba(48, 109, 41,0.15); border-radius:10px; padding:12px 14px; }
-    .why-box-title { font-size:0.75rem; font-weight:700; color:var(--blue3); margin-bottom:4px; }
-    .why-box-text { font-size:0.75rem; color:var(--text2); line-height:1.5; }
-
-    /* SQL CARD */
-    .sql-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); overflow:hidden; }
-    .sql-card-header { display:flex; align-items:center; gap:14px; padding:18px 22px; border-bottom:1px solid var(--border); background:rgba(48,109,41,0.03); }
-    .sql-card-icon { width:40px; height:40px; border-radius:10px; background:rgba(48, 109, 41,0.1); border:1px solid rgba(48, 109, 41,0.15); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
-    .sql-card-title { font-family:'Space Grotesk',sans-serif; font-size:0.95rem; font-weight:700; color:var(--text); }
-    .sql-card-title code { font-family:'JetBrains Mono',monospace; font-size:0.82rem; color: var(--p2); }
-    .sql-card-sub { font-size:0.76rem; color:var(--muted); margin-top:2px; }
-    .sql-cols { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,0.04); }
-    @media(max-width:700px){ .sql-cols{grid-template-columns:1fr 1fr;} }
-    .sql-col { background:var(--card); padding:13px 15px; }
-    .sql-col:hover { background:rgba(255,255,255,0.025); }
-    .sql-col-name { font-family:'JetBrains Mono',monospace; font-size:0.76rem; font-weight:600; color:#86efac; margin-bottom:2px; }
-    .sql-col-type { font-size:0.6rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
-    .sql-col-desc { font-size:0.7rem; color:var(--muted); line-height:1.4; }
-    .sql-col.pk .sql-col-name { color:#fbbf24; }
-    .sql-badges { display:flex; gap:4px; flex-wrap:wrap; }
-    .sbadge { font-size:0.58rem; font-weight:700; padding:2px 7px; border-radius:20px; }
-    .sb-wait { background:rgba(234,179,8,0.1); color:#eab308; border:1px solid rgba(234,179,8,0.2); }
-    .sb-sent { background:rgba(48, 109, 41,0.1); color: var(--p2); border:1px solid rgba(48, 109, 41,0.2); }
-    .sb-open { background:rgba(48, 109, 41,0.1); color: var(--p2); border:1px solid rgba(48, 109, 41,0.2); }
-    .sb-stop { background:rgba(239,68,68,0.1); color:#f87171; border:1px solid rgba(239,68,68,0.2); }
-    .sql-raw { background:#0d111a; padding:18px 22px; border-top:1px solid var(--border); }
-    .sql-raw-label { font-size:0.62rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(231, 225, 177,0.5); margin-bottom:10px; }
-    .sql-raw pre { font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#a9b8c8; line-height:1.75; white-space:pre; overflow-x:auto; margin:0; }
-    .sql-raw .cm { color:#4b5e72; font-style:italic; }
-  </style>
-
-  <div class="auto-section">
-    <div class="section" id="automation">
-      <div class="reveal" style="margin-bottom:36px;">
-        <div class="label">#3 How It Works</div>
-        <h2 class="heading">How emails are <span class="hl">built &amp; sent.</span></h2>
-        <p class="subtext">Build HTML, add a pixel, then send with the Gmail API.</p>
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="faq-layout">
+      <div class="faq-sticky reveal-left">
+        <div class="sec-tag">FAQ</div>
+        <h2 class="faq-sticky-title">Common Questions</h2>
+        <p class="faq-sticky-desc">Everything you need to know about setting up a custom, self-hosted outreach tracking system.</p>
+        <a href="mailto:shivam@karlspace.in?subject=Outreach%20Pixel%20Question" class="faq-cta-mini">Still have questions? Let's connect →</a>
       </div>
-
-      <div class="auto-n8n-img reveal">
-        <img src="Pasted image.png" alt="n8n pixel tracking workflow" />
-      </div>
-
-      <div class="auto-two-grid">
-        <div class="acard reveal">
-          <div class="acard-title">📋 Step-by-Step Flow</div>
-          <div class="step-list">
-            <div class="step-item"><div class="step-emoji">🗄️</div><div><div class="step-label">Postgres stores everything</div><div class="step-sub">Name, email, 5 messages, step, thread ID, next send time</div></div></div>
-            <div class="step-item"><div class="step-emoji">⏰</div><div><div class="step-label">Runs every 30 minutes</div><div class="step-sub">Code node formats the date for SQL</div></div></div>
-            <div class="step-item"><div class="step-emoji">🔀</div><div><div class="step-label">Route by step (1–5)</div><div class="step-sub">Each step reads its message field</div></div></div>
-            <div class="step-item"><div class="step-emoji">{ }</div><div><div class="step-label">Build HTML email</div><div class="step-sub">Wrap text in &lt;p&gt; and add a hidden pixel</div></div></div>
-            <div class="step-item"><div class="step-emoji">📧</div><div><div class="step-label">Send with Gmail API</div><div class="step-sub">Step 1 starts a thread. Steps 2–5 reply with <code>thread_id</code></div></div></div>
-            <div class="step-item"><div class="step-emoji">✅</div><div><div class="step-label">Update DB after send</div><div class="step-sub">status = sent, step + 1, next date + 3 days, save thread_id</div></div></div>
+      
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">Why shouldn't I just use standard email software?</div>
+            <div class="faq-chevron">▼</div>
           </div>
+          <div class="faq-a">Standard platforms charge monthly fees per seat and route messages through shared servers, increasing spam risks. Our setup runs directly from your business domain, has $0/month seat costs, and delivers straight to the primary inbox.</div>
         </div>
-
-        <div class="acard reveal">
-          <div class="acard-title">🔧 What the Code Node Does</div>
-          <div class="step-list">
-            <div class="step-item"><div class="step-emoji">📝</div><div><div class="step-label">Turn text into HTML</div><div class="step-sub">Split lines and wrap in &lt;p&gt; for Gmail</div></div></div>
-            <div class="step-item"><div class="step-emoji">🔗</div><div><div class="step-label">Create pixel URL</div><div class="step-sub">Add <code>eid</code>, <code>to</code>, <code>c</code> as query params</div></div></div>
-            <div class="step-item"><div class="step-emoji">🕵️</div><div><div class="step-label">Add a 1×1 hidden pixel</div><div class="step-sub">Hidden &lt;img&gt; loads when the email opens</div></div></div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">How does the filter block automated bot opens?</div>
+            <div class="faq-chevron">▼</div>
           </div>
-          <div class="pixel-codeblock">
-<span class="c">// Pixel added to every email</span>
-<span class="k">&lt;img</span> src=<span class="s">"https://yoursite.com/track-open
-  ?eid=<span class="v">{{id}}</span>&amp;to=<span class="v">{{email}}</span>&amp;c=<span class="v">{{campaign}}</span>"</span>
-  width=<span class="s">"1"</span> height=<span class="s">"1"</span>
-  style=<span class="s">"display:none;"</span> <span class="k">/&gt;</span>
-          </div>
-          <div class="why-box">
-            <div class="why-box-title">💡 Why HTML   not plain text?</div>
-            <div class="why-box-text">Plain text can't load an &lt;img&gt; tag, so no pixel or webhook. HTML is required.</div>
-          </div>
+          <div class="faq-a">Spam filters load links instantly to check for malware. Our system checks the time gap between send and open; triggers under 2 minutes are identified as security checks and ignored, giving you clean data.</div>
         </div>
-      </div>
-
-      <!-- SQL SCHEMA -->
-      <div class="sql-card reveal">
-        <div class="sql-card-header">
-          <div class="sql-card-icon">🗄️</div>
-          <div class="res-copy">
-            <div class="sql-card-title">Postgres Table   <code>out_duplicate</code></div>
-            <div class="sql-card-sub">Stores each contact, step, message, and thread. Automation reads and writes every cycle.</div>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">Can I send follow-ups in the same email thread?</div>
+            <div class="faq-chevron">▼</div>
           </div>
+          <div class="faq-a">Yes. Subsequent steps link directly to the initial email thread ID. Follow-ups reply under your first message, creating a natural conversation layout.</div>
         </div>
-        <div class="sql-cols">
-          <div class="sql-col pk"><div class="sql-col-name">id</div><div class="sql-col-type">text · PK</div><div class="sql-col-desc">Unique record ID used in the pixel URL</div></div>
-          <div class="sql-col"><div class="sql-col-name">contact</div><div class="sql-col-type">text · unique</div><div class="sql-col-desc">Recipient email   prevents duplicates</div></div>
-          <div class="sql-col"><div class="sql-col-name">threat_id</div><div class="sql-col-type">text</div><div class="sql-col-desc">Gmail thread ID for steps 2–5</div></div>
-          <div class="sql-col"><div class="sql-col-name">message_1→5</div><div class="sql-col-type">text × 5</div><div class="sql-col-desc">Five messages stored up front</div></div>
-          <div class="sql-col"><div class="sql-col-name">step</div><div class="sql-col-type">integer</div><div class="sql-col-desc">Current step (1–5)</div></div>
-          <div class="sql-col"><div class="sql-col-name">date / time</div><div class="sql-col-type">date / text</div><div class="sql-col-desc">Next send time</div></div>
-          <div class="sql-col"><div class="sql-col-name">subject</div><div class="sql-col-type">text</div><div class="sql-col-desc">Subject for step 1 only</div></div>
-          <div class="sql-col"><div class="sql-col-name">status</div><div class="sql-col-type">enum</div><div class="sql-col-desc"><div class="sql-badges"><span class="sbadge sb-wait">waiting</span><span class="sbadge sb-sent">sent</span><span class="sbadge sb-open">open</span><span class="sbadge sb-stop">stop</span></div></div></div>
-          <div class="sql-col"><div class="sql-col-name">created_at</div><div class="sql-col-type">timestamptz</div><div class="sql-col-desc">Auto set on insert with <code style="font-family:monospace;font-size:0.62rem;">DEFAULT now()</code></div></div>
-        </div>
-        <div class="sql-raw">
-          <div class="sql-raw-label">📋 Raw SQL</div>
-          <pre>CREATE TABLE public.out_duplicate (
-  id         TEXT NOT NULL,
-  name       TEXT,
-  contact    TEXT NOT NULL,    <span class="cm">-- primary key · unique per prospect</span>
-  threat_id  TEXT,             <span class="cm">-- Gmail thread ID for reply chaining</span>
-  date       DATE,  time TEXT,
-  message_1  TEXT,  message_2 TEXT,  message_3 TEXT,
-  message_4  TEXT,  message_5 TEXT,  <span class="cm">-- 5-step sequence</span>
-  step       INTEGER,          <span class="cm">-- current step (1–5)</span>
-  subject    TEXT,
-  status     public.status_type DEFAULT 'waiting', <span class="cm">-- waiting|sent|open|stop</span>
-  created_at TIMESTAMPTZ DEFAULT now(),
-  CONSTRAINT out_duplicate_pkey PRIMARY KEY (contact)
-);</pre>
+        <div class="faq-item reveal">
+          <div class="faq-q-row" onclick="toggleFaq(this)">
+            <div class="faq-q">Do I need to manage servers or write code?</div>
+            <div class="faq-chevron">▼</div>
+          </div>
+          <div class="faq-a">No. We handle the entire custom build and integration. Once live, your team controls contacts and monitors campaigns directly inside a Google Sheet.</div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- LOGIC / ALGORITHM -->
-  <style>
-    .logic-section { background:var(--bg); }
-    .logic-two { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
-    @media(max-width:700px){ .logic-two{grid-template-columns:1fr;} }
-    .lcard { background:var(--card); border:1px solid var(--border); border-radius:var(--r-xl); padding:26px; }
-    .lcard-title { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-    .lcard-text { font-size:0.88rem; color:var(--text2); line-height:1.65; margin-bottom:14px; }
-    .flow-row { display:flex; align-items:center; gap:8px; background:var(--bg2); border-radius:10px; padding:14px; flex-wrap:wrap; }
-    .flow-item { display:flex; flex-direction:column; align-items:center; gap:4px; font-size:0.62rem; color:var(--muted); text-align:center; }
-    .flow-icon { font-size:1.2rem; }
-    .flow-arr { color:rgba(48, 109, 41,0.3); font-size:0.9rem; }
-    .alert-box { border-radius:10px; padding:13px 15px; margin-top:12px; }
-    .alert-red { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.15); }
-    .alert-green { background:rgba(48, 109, 41,0.06); border:1px solid rgba(48, 109, 41,0.15); }
-    .alert-title { font-size:0.75rem; font-weight:700; margin-bottom:3px; }
-    .alert-red .alert-title { color:var(--red); }
-    .alert-green .alert-title { color:var(--green); }
-    .alert-text { font-size:0.75rem; color:var(--text2); line-height:1.5; }
-    .code-card { background:#0d111a; border:1px solid rgba(255,255,255,0.06); border-radius:var(--r-xl); padding:26px; }
-    .code-card-title { font-family:'Space Grotesk',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue3); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
-    .code-block { font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#a9b8c8; line-height:1.75; }
-    .code-block .kw { color: var(--p2); }
-    .code-block .vr { color:#86efac; }
-    .code-block .cm { color:#4b5e72; font-style:italic; }
-    .code-block .op { color:#fbbf24; }
-    .result-strip { background:rgba(48, 109, 41,0.06); border:1px solid rgba(48, 109, 41,0.15); border-radius:var(--r-xl); padding:22px 28px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
-    .result-icon { font-size:2rem; }
-    .result-items { display:flex; flex-direction:column; gap:7px; }
-    .result-item { display:flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--text2); font-weight:500; }
-    .result-item .ck { color:var(--green); font-weight:700; }
-    .footer-note { margin-top:40px; text-align:center; font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--text2); padding:18px; border-radius:var(--r-lg); background:rgba(48, 109, 41,0.05); border:1px solid rgba(48, 109, 41,0.1); }
-    .footer-note span { color:var(--blue3); }
-  </style>
-
-  <div class="logic-section">
-    <div class="section" id="logic">
-      <div class="reveal" style="margin-bottom:48px;">
-        <div class="label">#4 The Algorithm</div>
-        <h2 class="heading">Filter real opens <span class="hl">from bots.</span></h2>
-        <p class="subtext">Email scanners load pixels right after send. Without a filter, metrics lie.</p>
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner reveal">
+      <div class="cta-eyebrow">✦ Ready to automate?</div>
+      <h2 class="cta-title">Want this tracking system<br><span>for your team?</span></h2>
+      <p class="cta-sub">Let's coordinate on an organic outreach architecture custom-mapped to your business, optimizing deliverability, tracking accuracy, and sales conversion.</p>
+      <div class="cta-actions">
+        <a href="mailto:shivam@karlspace.in?subject=Outreach%20Pixel%20Build%20Request" class="btn-primary">Get a Quote →</a>
+        <a href="index.html#case-studies" class="btn-ghost">Back to Portfolio</a>
       </div>
-
-      <div class="logic-two">
-        <div class="lcard reveal">
-          <div class="lcard-title" style="color:var(--red);">⚠️ The Hidden Problem</div>
-          <div class="lcard-text">Gmail and Apple Mail scanners load the pixel seconds after delivery   before any human opens it.</div>
-          <div class="flow-row">
-            <div class="flow-item"><span class="flow-icon">📧</span>Email Sent</div>
-            <span class="flow-arr">→</span>
-            <div class="flow-item"><span class="flow-icon">🤖</span>Scanner</div>
-            <span class="flow-arr">→</span>
-            <div class="flow-item"><span class="flow-icon">🪝</span>Webhook</div>
-            <span class="flow-arr">→</span>
-            <div class="flow-item"><span class="flow-icon">❌</span>Fake Open</div>
-          </div>
-          <div class="alert-box alert-red">
-            <div class="alert-title">🚨 Impact without filtering</div>
-            <div class="alert-text">Broken follow-ups. Inflated opens. Next step fires too early. Messy data.</div>
-          </div>
-        </div>
-
-        <div class="lcard reveal">
-          <div class="lcard-title" style="color:var(--green);">✅ My Solution</div>
-          <div class="lcard-text"><strong style="color:var(--text);">Ignore opens in the first 2 minutes.</strong> Compare the webhook time to the <code style="font-family:monospace;font-size:0.82em;color:#86efac;">sent_at</code> value in Postgres.</div>
-          <div class="flow-row">
-            <div class="flow-item"><span class="flow-icon">📡</span>Webhook</div>
-            <span class="flow-arr">→</span>
-            <div class="flow-item"><span class="flow-icon">🧮</span>Diff = open − sent</div>
-            <span class="flow-arr">→</span>
-            <div class="flow-item"><span class="flow-icon">🛡️</span>&lt;2 min?</div>
-            <span class="flow-arr">→</span>
-            <div class="flow-item"><span class="flow-icon">🚫</span>Ignore</div>
-          </div>
-          <div class="alert-box alert-green">
-            <div class="alert-title">⏱️ Why 2 minutes?</div>
-            <div class="alert-text">Above scanner speed (&lt;30s) and below normal read time. Keeps sequencing clean.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="code-card reveal" style="margin-bottom:16px;">
-        <div class="code-card-title">🛡️ Time Gap Guard   Code Node Logic</div>
-        <div class="code-block">
-<span class="kw">const</span> <span class="vr">sentAt</span>    = parseInt(query.st || <span class="op">'0'</span>);     <span class="cm">// saved at send time</span>
-<span class="kw">const</span> <span class="vr">openedAt</span>  = $now.toMillis();               <span class="cm">// webhook time</span>
-<span class="kw">const</span> <span class="vr">diffMins</span>  = (openedAt - sentAt) / <span class="op">1000</span> / <span class="op">60</span>;
-
-<span class="kw">if</span> (sentAt > <span class="op">0</span> && diffMins < <span class="op">2</span>) {
-  <span class="kw">return</span> [];   <span class="cm">// 🤖 bot open → drop</span>
-}
-
-<span class="cm">// ✅ real open   extract eid, recipient, campaign, IP, user-agent</span>
-<span class="cm">// → update Postgres status to "open"</span>
-        </div>
-      </div>
-
-      <div class="result-strip reveal" id="results">
-        <div class="result-icon">🎯</div>
-        <div class="result-items">
-          <div class="result-item"><span class="ck">✓</span> Only real opens count</div>
-          <div class="result-item"><span class="ck">✓</span> Sequences run smoothly</div>
-          <div class="result-item"><span class="ck">✓</span> Clean data = better timing = more replies</div>
-        </div>
-      </div>
-
-      <div class="footer-note reveal"><span>★</span> Clean signals beat more signals.</div>
+      <p class="cta-note">30-minute operational audit · No obligations · actionable answers</p>
     </div>
-  </div>
+  </section>
 
-  <!-- RESOURCES -->
-  <style>
-    .res-section { background:var(--bg2); border-top:1px solid var(--border); }
-    .res-section .section {
-      max-width:1440px;
-      margin:0 auto;
-      padding-left:clamp(16px,3vw,100px);
-      padding-right:clamp(16px,3vw,100px);
-    }
-    .res-section .heading { font-size:clamp(2.4rem,3.8vw,3.4rem); }
-    .res-section .subtext { font-size:1.15rem; }
-    .res-head { margin-bottom:40px; }
-    .res-hero {
-      display:grid; grid-template-columns:1.6fr 1.4fr; gap:46px;
-      align-items:center; justify-items:stretch;
-    }
-    .res-hero > div:first-child { justify-self:start; }
-    .res-hero > div:last-child { justify-self:end; width:100%; }
-    .res-copy { padding-top:6px; }
-    .res-hero > div:first-child { text-align:left; }
-    @media(max-width:1100px){ .res-hero{grid-template-columns:1fr;} }
-    .res-video {
-      border-radius:22px; overflow:hidden; background:#0b1220;
-      border:1px solid var(--border);
-      box-shadow:0 18px 64px rgba(15,23,42,0.14);
-      aspect-ratio:16/9; display:flex; align-items:center;
-    }
-    .res-video video { width:100%; height:100%; display:block; background:#0b1220; object-fit:cover; }
-    .res-video-label {
-      font-family:'Space Grotesk',sans-serif;
-      font-size:1.1rem; font-weight:700; color:var(--text);
-      margin-bottom:10px;
-    }
-    .res-dl-grid { display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-bottom:0; }
-    @media(max-width:640px){ .res-dl-grid{grid-template-columns:1fr;} }
-    .res-dl-card {
-      background:var(--card); border:1px solid var(--border);
-      border-radius:var(--r-xl); padding:34px;
-      display:flex; align-items:flex-start; gap:18px;
-      text-decoration:none; transition:border-color .2s, transform .2s;
-      min-width:0;
-    }
-    .res-dl-card:hover { border-color:rgba(48, 109, 41,0.35); transform:translateY(-3px); }
-    .res-dl-icon { width:52px; height:52px; border-radius:14px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
-    .res-dl-title { font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:700; color:var(--text); margin-bottom:6px; }
-    .res-dl-sub { font-size:0.98rem; color:var(--muted); line-height:1.6; margin-bottom:16px; }
-    .res-dl-btn { display:inline-flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:700; color:var(--blue3); }
-    .res-dl-btn svg { width:14px; height:14px; }
-    .res-sep { border:none; border-top:1px solid var(--border); margin:0 0 40px; }
-    .res-connect-label { text-align:center; font-size:0.68rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:24px; }
-    .res-links { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-bottom:48px; }
-    .res-link {
-      display:flex; align-items:center; gap:10px;
-      background:var(--card); border:1px solid var(--border);
-      border-radius:12px; padding:11px 18px;
-      text-decoration:none; transition:border-color .2s, background .2s;
-    }
-    .res-link:hover { border-color:rgba(255,255,255,0.14); background:var(--card2); }
-    .res-link-icon { width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    .res-link-label { font-size:0.6rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
-    .res-link-value { font-size:0.8rem; font-weight:600; color:var(--text); }
-    .cta-panel {
-      margin:0 auto; max-width:860px;
-      background:linear-gradient(180deg, #000000 0%, #f6f8ff 100%);
-      border:1px solid var(--border);
-      border-radius:24px;
-      padding:28px 32px;
-      display:flex; align-items:center; justify-content:space-between; gap:24px;
-      box-shadow:0 18px 60px rgba(15,23,42,0.08);
-    }
-    .cta-copy { flex:1; min-width:240px; }
-    .cta-kicker {
-      font-size:0.7rem; font-weight:800; letter-spacing:2px; text-transform:uppercase;
-      color:var(--blue3); margin-bottom:8px;
-    }
-    .cta-title {
-      font-family:'Space Grotesk',sans-serif;
-      font-size:1.5rem; font-weight:800; color:var(--text); line-height:1.2;
-      margin-bottom:8px;
-    }
-    .cta-sub { font-size:0.95rem; color:var(--text2); line-height:1.6; max-width:54ch; }
-    .cta-actions { display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end; }
-    .cta-btn {
-      display:inline-flex; align-items:center; gap:8px;
-      padding:12px 22px; border-radius:999px;
-      font-family:'Space Grotesk',sans-serif; font-size:0.9rem; font-weight:700;
-      transition:transform .2s, box-shadow .2s, background .2s, color .2s;
-      border:1px solid transparent;
-      min-height:44px;
-    }
-    .cta-btn-primary {
-      background:var(--grad); color:#fff;
-      box-shadow:0 10px 28px rgba(37,99,235,0.25);
-    }
-    .cta-btn-primary:hover { transform:translateY(-2px); box-shadow:0 16px 40px rgba(37,99,235,0.35); }
-    .cta-btn-ghost {
-      background:#fff; color:var(--text);
-      border-color:rgba(15,23,42,0.1);
-      box-shadow:0 6px 20px rgba(15,23,42,0.06);
-    }
-    .cta-btn-ghost:hover { transform:translateY(-2px); box-shadow:0 10px 26px rgba(15,23,42,0.12); }
-  </style>
-
-  <div class="res-section">
-    <div class="section" id="resources">
-      <div class="res-head reveal">
-        <div class="res-hero">
-          <div>
-            <div class="label">📦 Resources</div>
-            <h2 class="heading">Get the <span class="hl">exact files</span>.</h2>
-            <p class="subtext">Download the n8n workflow JSON and Postgres SQL schema, then run the system yourself.</p>
-            <div class="res-dl-grid">
-        <a href="outreact 2.json" download="outreach-automation.json" class="res-dl-card reveal">
-          <div class="res-dl-icon" style="background:rgba(255,109,90,0.1);border:1px solid rgba(255,109,90,0.18);">
-            <img src="https://cdn.simpleicons.org/n8n/FF6D5A" alt="n8n" style="width:26px;height:26px;" />
-          </div>
-          <div>
-            <div class="res-dl-title">n8n Automation Workflow</div>
-            <div class="res-dl-sub">Full pipeline: webhook intake, schedule, HTML builder, Gmail sender, pixel tracker, bot filter. Import into n8n.</div>
-            <div class="res-dl-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              Download outreach-automation.json
-            </div>
-          </div>
-        </a>
-
-        <a href="data:text/plain;charset=utf-8,CREATE TABLE public.out_duplicate (%0A  id text not null,%0A  name text null,%0A  contact text not null,%0A  threat_id text null,%0A  date date null,%0A  message_1 text null,%0A  message_2 text null,%0A  message_3 text null,%0A  message_4 text null,%0A  message_5 text null,%0A  step integer null,%0A  time text null,%0A  created_at timestamp with time zone null default now(),%0A  subject text null,%0A  status public.status_type null default 'waiting'::status_type,%0A  CONSTRAINT out_duplicate_pkey PRIMARY KEY (contact)%0A);" download="out_duplicate.sql" class="res-dl-card reveal">
-          <div class="res-dl-icon" style="background:rgba(48, 109, 41,0.1);border:1px solid rgba(48, 109, 41,0.15);font-size:1.4rem;">🗄️</div>
-          <div>
-            <div class="res-dl-title">Postgres SQL Schema</div>
-            <div class="res-dl-sub">The <code style="font-family:monospace;font-size:0.75rem;color: var(--p2);">out_duplicate</code> table: status enum, 5 messages, thread ID. Paste into Supabase or Postgres.</div>
-            <div class="res-dl-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              Download out_duplicate.sql
-            </div>
-          </div>
-        </a>
-            </div>
-          </div>
-          <div>
-            <div class="res-video-label">Watch the system in action.</div>
-            <div class="res-video">
-              <video controls preload="metadata" poster="">
-                <source src="56.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-
-      <hr class="res-sep" />
-      <div class="res-connect-label reveal">Connect</div>
-
-      <div class="res-links reveal">
-        <a href="https://www.linkedin.com/in/karlspace/" target="_blank" class="res-link">
-          <div class="res-link-icon" style="background:rgba(10,102,194,0.12);">
-            <img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn" style="width:17px;height:17px;" />
-          </div>
-          <div><div class="res-link-label">LinkedIn</div><div class="res-link-value">in/karlspace</div></div>
-        </a>
-        <a href="https://karlspace.in/" target="_blank" class="res-link">
-          <div class="res-link-icon" style="background:rgba(48, 109, 41,0.1);font-size:1rem;">🌐</div>
-          <div><div class="res-link-label">Portfolio</div><div class="res-link-value">karlspace.in</div></div>
-        </a>
-        <a href="mailto:shivam@karlspace.in" class="res-link">
-          <div class="res-link-icon" style="background:rgba(234,67,53,0.1);">
-            <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Email" style="width:17px;height:17px;" />
-          </div>
-          <div><div class="res-link-label">Email</div><div class="res-link-value">shivam@karlspace.in</div></div>
-        </a>
-        <a href="https://calendly.com/karlspace3/30min" target="_blank" class="res-link">
-          <div class="res-link-icon" style="background:rgba(0,107,255,0.1);">
-            <img src="https://cdn.simpleicons.org/calendly/006BFF" alt="Calendly" style="width:17px;height:17px;" />
-          </div>
-          <div><div class="res-link-label">Book a Call</div><div class="res-link-value">Calendly · 30 min</div></div>
-        </a>
-      </div>
-
-      <div class="cta-panel reveal">
-        <div class="cta-copy">
-          <div class="cta-kicker">Automation audit</div>
-          <div class="cta-title">Turn repetitive work into a one-click workflow.</div>
-          <div class="cta-sub">If your team repeats the same steps each week, I can map it, automate it, and ship a working system.</div>
-        </div>
-        <div class="cta-actions">
-          <a href="https://calendly.com/karlspace3/30min" target="_blank" class="cta-btn cta-btn-primary">Book an audit →</a>
-          <a href="https://calendly.com/karlspace3/30min" target="_blank" class="cta-btn cta-btn-ghost">Open Calendly</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <style>
-    /* ── GLOBAL RESPONSIVE ──────────────────────────── */
-
-    /* Tablet   ≤ 1024px */
-    @media(max-width:1024px) {
-      .section { padding:80px 28px; }
-      .hero-inner { padding:72px 28px; }
-      .hero-h1 { font-size:3.4rem; letter-spacing:-2px; }
-      .wf-node { width:86px; }
-      .wf-node-box { width:50px; height:50px; }
-      .sql-cols { grid-template-columns:repeat(2,1fr); }
-    }
-
-    /* Large mobile / small tablet   ≤ 768px */
-    @media(max-width:768px) {
-      .section { padding:64px 20px; }
-      .hero-inner { padding:64px 20px; }
-      .hero-h1 { font-size:2.8rem; letter-spacing:-1.8px; }
-      .hero-sub { font-size:0.95rem; max-width:40ch; }
-      .hero-stack { flex-wrap:wrap; justify-content:center; }
-
-      /* Problem */
-      .prob-bento { grid-template-columns:1fr; }
-      .callout-banner { flex-direction:column; gap:10px; }
-
-      /* Solution */
-      .sol-video-wrap video { max-height:360px; }
-      .wf-pipeline { padding:16px; gap:0; }
-      .wf-node { width:76px; }
-      .wf-node-box { width:44px; height:44px; font-size:0.9rem; }
-      .wf-node-label { font-size:0.55rem; }
-      .wf-node-tag { font-size:0.48rem; }
-      .wf-arrow { font-size:0.8rem; padding:0; margin-top:-14px; }
-
-      /* Automation */
-      .auto-two-grid { grid-template-columns:1fr; }
-      .sql-cols { grid-template-columns:1fr 1fr; }
-      .sql-card-header { flex-direction:column; align-items:flex-start; gap:10px; }
-
-      /* Logic */
-      .logic-two { grid-template-columns:1fr; }
-      .flow-row { gap:6px; padding:10px; }
-      .flow-item { font-size:0.6rem; }
-      .flow-icon { font-size:1rem; }
-      .code-block { font-size:0.68rem; }
-
-      /* Resources */
-      .res-dl-grid { grid-template-columns:1fr; }
-      .res-links { gap:8px; }
-      .res-link { padding:10px 14px; }
-    }
-
-    /* Mobile   ≤ 480px */
-    @media(max-width:480px) {
-      .section { padding:52px 16px; }
-      .hero-inner { padding:52px 16px; }
-      .hero-h1 { font-size:2.1rem; letter-spacing:-1.2px; }
-      .hero-sub { font-size:0.9rem; }
-      .hero-stats { flex-direction:column; }
-      .hero-stat { border-right:none; border-bottom:1px solid var(--border); }
-      .hero-stat:last-child { border-bottom:none; }
-      .hero-stat-n { font-size:1.4rem; }
-      .hero-actions { flex-direction:column; width:100%; }
-      .hero-actions .btn { justify-content:center; width:100%; }
-
-      /* Labels & headings */
-      .label { font-size:0.62rem; letter-spacing:2px; }
-      h2.heading { font-size:1.7rem; letter-spacing:-1px; }
-      .subtext { font-size:0.9rem; }
-
-      /* Bento */
-      .bento-card { padding:20px; }
-      .bento-title { font-size:0.95rem; }
-
-      /* Workflow   very small: show fewer labels */
-      .wf-card-header { flex-wrap:wrap; gap:6px; }
-      .wf-pipeline { padding:12px 10px; }
-      .wf-node { width:66px; }
-      .wf-node-box { width:40px; height:40px; border-radius:10px; }
-      .wf-node-label { font-size:0.5rem; }
-      .wf-node-tag { display:none; }
-      .wf-arrow { font-size:0.7rem; margin-top:-12px; }
-
-      /* Automation cards */
-      .acard { padding:18px; }
-      .step-item { padding:8px; }
-      .step-emoji { width:28px; height:28px; }
-      .step-label { font-size:0.78rem; }
-      .step-sub { font-size:0.7rem; }
-      .pixel-codeblock { font-size:0.64rem; padding:10px 12px; }
-
-      /* SQL */
-      .sql-cols { grid-template-columns:1fr; }
-      .sql-raw pre { font-size:0.63rem; }
-      .sql-card-title { font-size:0.85rem; }
-
-      /* Logic */
-      .lcard { padding:18px; }
-      .lcard-title { font-size:0.9rem; }
-      .lcard-text { font-size:0.82rem; }
-      .alert-box { padding:10px 12px; }
-      .result-strip { flex-direction:column; gap:12px; padding:18px; }
-      .code-card { padding:18px; }
-      .code-block { font-size:0.63rem; }
-
-      /* Resources */
-      .res-dl-card { flex-direction:column; gap:12px; padding:20px; }
-      .res-dl-icon { width:44px; height:44px; }
-      .res-dl-title { font-size:0.9rem; }
-      .res-dl-sub { font-size:0.75rem; }
-      .res-links { flex-direction:column; align-items:stretch; }
-      .res-link { justify-content:flex-start; }
-      .cta-panel { flex-direction:column; align-items:flex-start; padding:20px; }
-      .cta-actions { width:100%; justify-content:flex-start; }
-      .cta-btn { width:100%; justify-content:center; }
-
-      /* Callout banner */
-      .callout-banner { padding:16px; }
-      .footer-note { font-size:0.88rem; padding:14px; }
-    }
-
-    /* Prevent horizontal scroll on tiny screens */
-    @media(max-width:360px) {
-      body { overflow-x:hidden; }
-      .wf-pipeline { padding:10px 8px; }
-      .wf-node { width:58px; }
-      .hero-h1 { font-size:1.85rem; }
-    }
-
-    /* Reduced motion */
-    @media(prefers-reduced-motion:reduce) {
-      *, *::before, *::after { animation:none !important; transition:none !important; }
-      .reveal { opacity:1; transform:none; }
-    }
-  </style>
-
+  <script src="index.js"></script>
   <script>
-    // Navbar hamburger
-    const hamburger = document.getElementById('navHamburger');
-    const drawer = document.getElementById('navDrawer');
-    function closeDrawer() { hamburger.classList.remove('open'); drawer.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); }
-    hamburger.addEventListener('click', () => {
-      const isOpen = drawer.classList.toggle('open');
-      hamburger.classList.toggle('open', isOpen);
-      hamburger.setAttribute('aria-expanded', isOpen);
+    /* ── SIMULATOR LOGIC ── */
+    const simulatorData = {
+      business: {
+        to: "ceo@capitalventures.com",
+        subject: "Partnership Proposal & Growth Strategy",
+        events: [
+          { icon: "📤", label: "Email Dispatched", detail: "Sent directly through Google Workspace" },
+          { icon: "🛡️", label: "Scanner Preload Blocked", detail: "Blocked automated scan after 3 seconds (Ignored)" },
+          { icon: "🎯", label: "Verified Human Read", detail: "CEO opened email after 4 minutes (Logged to sheet!)" },
+          { icon: "🔔", label: "Slack Alert Triggered", detail: "'CEO opened proposal' notification sent" }
+        ],
+        slackMsg: "CEO of Capital Ventures just opened your Partnership Proposal email. (Sent 4 mins ago)."
+      },
+      ecommerce: {
+        to: "collabs@lifestylebrand.co",
+        subject: "Wholesale Inquiry - Autumn Catalog",
+        events: [
+          { icon: "📤", label: "Catalog Pitch Sent", detail: "Sent directly through brand inbox" },
+          { icon: "🛡️", label: "Apple Mail Preload Filtered", detail: "Blocked scan check after 4 seconds (Ignored)" },
+          { icon: "🎯", label: "Verified Human Read", detail: "Manager opened deck after 7 minutes (Logged to sheet!)" },
+          { icon: "🔔", label: "Slack Alert Triggered", detail: "'Manager opened catalog' notification sent" }
+        ],
+        slackMsg: "Wholesale Manager at Lifestyle Brand just opened your Wholesale Inquiry. (Sent 7 mins ago)."
+      },
+      influencer: {
+        to: "partnerships@nikesports.com",
+        subject: "Sponsorship Pitch - Media Kit & Rates",
+        events: [
+          { icon: "📤", label: "Pitch Sent", detail: "Sent directly to brand manager" },
+          { icon: "🛡️", label: "Outlook Scan Bypassed", detail: "Blocked automated scan after 2 seconds (Ignored)" },
+          { icon: "🎯", label: "Verified Human Read", detail: "Brand manager opened media kit after 9 minutes (Logged!)" },
+          { icon: "🔔", label: "Slack Alert Triggered", detail: "'Nike opened media kit' notification sent" }
+        ],
+        slackMsg: "Nike Partnerships Manager just opened your Media Kit & Rates pitch. (Sent 9 mins ago)."
+      },
+      clinic: {
+        to: "patient.records@metrohealth.org",
+        subject: "Referred Patient Care Package & Follow-up",
+        events: [
+          { icon: "📤", label: "Care Instructions Sent", detail: "Sent directly to patient email account" },
+          { icon: "🛡️", label: "Email Filter Preload Blocked", detail: "Blocked scanner preload in 5 seconds (Ignored)" },
+          { icon: "🎯", label: "Verified Human Read", detail: "Patient opened care package after 11 minutes (Logged!)" },
+          { icon: "🔔", label: "Slack Alert Triggered", detail: "'Patient opened care package' notification sent" }
+        ],
+        slackMsg: "Referred Patient just opened the Care Package email. (Sent 11 mins ago)."
+      }
+    };
+
+    let simTimeoutIds = [];
+    
+    window.changeIndustry = function(name) {
+      // Clear any running simulator timeouts
+      simTimeoutIds.forEach(id => clearTimeout(id));
+      simTimeoutIds = [];
+      
+      // Update button active state
+      document.querySelectorAll('.sim-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      const activeBtn = Array.from(document.querySelectorAll('.sim-btn')).find(b => b.getAttribute('onclick').includes(name));
+      if(activeBtn) activeBtn.classList.add('active');
+      
+      const data = simulatorData[name];
+      if(!data) return;
+      
+      // Set to/subject
+      document.getElementById('sim-to').textContent = data.to;
+      document.getElementById('sim-subj').textContent = data.subject;
+      
+      // Clear feed and hide Slack
+      const feed = document.getElementById('sim-feed');
+      feed.innerHTML = '';
+      const slack = document.getElementById('sim-slack');
+      slack.classList.remove('show');
+      
+      // Run animation
+      data.events.forEach((evt, idx) => {
+        const tId = setTimeout(() => {
+          const item = document.createElement('div');
+          item.className = 'feed-item';
+          item.innerHTML = `
+            <div class="feed-icon">${evt.icon}</div>
+            <div class="feed-body">
+              <strong>${evt.label}</strong>
+              <div>${evt.detail}</div>
+            </div>
+          `;
+          feed.appendChild(item);
+          
+          // If this is the last event, trigger Slack popup shortly after
+          if(idx === 3) {
+            const slackTId = setTimeout(() => {
+              document.getElementById('sim-slack-msg').textContent = data.slackMsg;
+              slack.classList.add('show');
+            }, 800);
+            simTimeoutIds.push(slackTId);
+          }
+        }, idx * 1000);
+        simTimeoutIds.push(tId);
+      });
+    };
+
+    /* ── FAQ TOGGLE ── */
+    window.toggleFaq = function(el) {
+      const item = el.parentElement;
+      const isOpen = item.classList.contains('open');
+      
+      // Close other FAQs
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      
+      // Toggle current FAQ
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    };
+
+    /* ── SCROLL REVEAL (WITH FAIL-SAFE FALLBACK) ── */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left');
+    
+    function revealElement(el) {
+      if (el.classList.contains('visible')) return;
+      
+      const parent = el.parentElement;
+      const siblings = [...parent.querySelectorAll('.reveal:not(.visible), .reveal-left:not(.visible)')];
+      const idx = siblings.indexOf(el);
+      
+      setTimeout(() => {
+        el.classList.add('visible');
+      }, Math.max(0, idx) * 80);
+    }
+    
+    // Intersection Observer
+    if (window.IntersectionObserver) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            revealElement(e.target);
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.01, rootMargin: '0px 0px 100px 0px' });
+      
+      revealEls.forEach(el => obs.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add('visible'));
+    }
+
+    // Fail-safe scroll/load checking
+    function fallbackRevealCheck() {
+      revealEls.forEach(el => {
+        if (el.classList.contains('visible')) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight + 150 && rect.bottom > -150) {
+          revealElement(el);
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', fallbackRevealCheck, { passive: true });
+    window.addEventListener('resize', fallbackRevealCheck, { passive: true });
+    document.addEventListener('DOMContentLoaded', () => {
+      fallbackRevealCheck();
+      setTimeout(() => {
+        changeIndustry('business');
+      }, 800);
     });
-    // Scroll reveal
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    window.addEventListener('load', fallbackRevealCheck);
+
+    /* ── NAVBAR HAMBURGER DRAWER ── */
+    const _hamburger = document.getElementById('navHamburger');
+    const _drawer = document.getElementById('navDrawer');
+    window.closeDrawer = function() { 
+      if(_hamburger) _hamburger.classList.remove('open'); 
+      if(_drawer) _drawer.classList.remove('open'); 
+      if(_hamburger) _hamburger.setAttribute('aria-expanded','false'); 
+    };
+    if(_hamburger && _drawer) {
+      _hamburger.addEventListener('click', () => {
+        const isOpen = _drawer.classList.toggle('open');
+        _hamburger.classList.toggle('open', isOpen);
+        _hamburger.setAttribute('aria-expanded', isOpen);
+      });
+    }
   </script>
 </body>
 </html>
-
