@@ -729,7 +729,7 @@ if (mascot && mascotSpeech && !isLowPowerDevice) {
 const mobiusCanvas = document.getElementById('mobius-canvas');
 // Disable Möbius on mobile/tablet – heavy 3D math at 60fps causes overheating.
 // `isMobileDevice` was undefined – use the already-declared coarse-pointer + viewport check.
-const isMobileOrTablet = isCoarsePointer || window.innerWidth <= 900;
+const isMobileOrTablet = window.innerWidth <= 640;
 if (mobiusCanvas && isMobileOrTablet) {
     mobiusCanvas.style.display = 'none';
 } else if (mobiusCanvas) {
@@ -752,10 +752,12 @@ if (mobiusCanvas && isMobileOrTablet) {
 
         function setupMobiusCanvas() {
             const isMobile = window.innerWidth <= 640;
-            width = isMobile ? 520 : 700;
-            height = isMobile ? 520 : 700;
-            radius = isMobile ? 162 : 220;
-            stripHalfWidth = isMobile ? 38 : 52;
+            const isNarrowTablet = !isMobile && window.innerWidth <= 900;
+            const isWideTablet = !isMobile && !isNarrowTablet && window.innerWidth <= 1024;
+            width = isMobile ? 520 : isNarrowTablet ? 320 : isWideTablet ? 420 : 700;
+            height = isMobile ? 520 : isNarrowTablet ? 320 : isWideTablet ? 420 : 700;
+            radius = isMobile ? 162 : isNarrowTablet ? 110 : isWideTablet ? 145 : 220;
+            stripHalfWidth = isMobile ? 38 : isNarrowTablet ? 28 : isWideTablet ? 36 : 52;
             dpr = Math.min(2, window.devicePixelRatio || 1);
 
             mobiusCanvas.width = Math.floor(width * dpr);

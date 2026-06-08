@@ -82,8 +82,8 @@ body {
     overflow-x: hidden;
 }
 
-/* Reduce motion and GPU load on small screens and low-power devices */
-@media (max-width: 1024px), (max-height: 820px) {
+/* Reduce motion and GPU load on PHONES only (≤640px) and reduced-motion users */
+@media (max-width: 640px), (max-height: 500px) {
     html {
         scroll-behavior: auto;
     }
@@ -114,6 +114,27 @@ body {
 
     /* reveal-item uses JS + transition; make items start visible
        so they don't remain hidden if IntersectionObserver is slow. */
+    .reveal-item {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+}
+
+/* On tablets (641–1024px), only hide bg-canvas (heavy GPU) but keep all transitions/animations */
+@media (min-width: 641px) and (max-width: 1024px) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    #bg-canvas {
+        display: none !important;
+    }
+
+    .animate-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
     .reveal-item {
         opacity: 1 !important;
         transform: translateY(0) !important;
@@ -1614,83 +1635,81 @@ ul {
    RESPONSIVE
    ============================ */
 
-/* ── Tablet (≤1024px) ── */
-@media (max-width: 1024px) {
+/* ── Tablet (641px – 1024px) ── */
+@media (min-width: 641px) and (max-width: 1024px) {
     .container {
-        padding: 0 20px;
+        padding: 0 28px;
     }
 
     .hero-content {
         margin-left: 0;
+        max-width: 55%;
     }
 
-    /* Möbius canvas: default size via CSS (inline attrs removed) */
+    /* Möbius canvas: right-aligned, scaled for tablet */
     #mobius-canvas {
-        width: 500px !important;
-        height: 500px !important;
-        opacity: 0.6 !important;
+        width: 420px !important;
+        height: 420px !important;
+        opacity: 0.75 !important;
     }
 
+    /* Hero: side-by-side — text left, canvas right */
+    .hero {
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 110px 0 60px !important;
+        min-height: 100vh;
+    }
+
+    /* Hero headline scale for tablet */
+    .hero-headline-v2 {
+        font-size: clamp(2rem, 4.5vw, 3rem) !important;
+    }
+
+    .hero-sub-v2 {
+        font-size: clamp(0.95rem, 1.6vw, 1.1rem) !important;
+        max-width: 420px;
+    }
+
+    /* Services: 2-col on tablet */
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* case-studies 2-col override already inline - handled below */
-}
-
-/* ── Medium screens (≤1200px) ── */
-@media (max-width: 1200px) {
-    .case-studies-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    /* Projects: 2-col on tablet */
+    .proj-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 
-    .hero-stats-wrapper {
-        margin-top: 72px !important;
-        max-width: 100% !important;
-        padding: 0 12px;
-    }
-}
-
-/* ── Small Tablet (≤900px) ── */
-@media (max-width: 900px) {
-
-    /* Hide Möbius canvas entirely - it overlaps content */
-    #mobius-canvas {
-        display: none !important;
-    }
-
-    .services-grid,
+    /* Testimonials: 2-col on tablet (not 3, not 1) */
     .testimonials-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Case-Studies 2-col override */
-    .case-studies-grid {
-        grid-template-columns: 1fr !important;
-    }
-
-    .workflow-steps {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .step-line {
-        display: none;
-    }
-
-    .workflow-step {
-        padding: 0;
-    }
-
-    .trust-inner {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
+    /* Metrics: 2x2 grid on tablet */
     .metrics-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Workflow: stays 3-col but tighter padding */
+    .workflow-step {
+        padding: 0 24px;
+    }
+
+    .workflow-step:first-child {
+        padding-left: 0;
+    }
+
+    .workflow-step:last-child {
+        padding-right: 0;
+    }
+
+    /* Section spacing */
+    .section-header {
+        margin-bottom: 44px;
+    }
+
+    /* Hamburger nav for tablets */
     .nav-links {
         display: none;
         position: absolute;
@@ -1700,7 +1719,7 @@ ul {
         flex-direction: column;
         gap: 4px;
         padding: 20px 16px;
-        background: rgba(5, 6, 8, 0.98);
+        background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--border);
     }
@@ -1729,45 +1748,127 @@ ul {
         display: flex;
     }
 
-    .cta-form {
-        flex-direction: column;
-        align-items: stretch;
+    /* Hero stats wrapper */
+    .hero-stats-wrapper {
+        margin-top: 48px !important;
+        max-width: 100% !important;
+        padding: 0 12px;
     }
 
-    .cta-input {
-        border-radius: 50px;
+    /* Trust inner 2-col */
+    .trust-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
     }
 
-    .cta-inner {
-        padding: 48px 24px;
+    /* case-studies 2-col */
+    .case-studies-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+/* ── Medium screens (≤1200px) ── */
+@media (max-width: 1200px) {
+    .case-studies-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
 
+    .hero-stats-wrapper {
+        margin-top: 72px !important;
+        max-width: 100% !important;
+        padding: 0 12px;
+    }
+}
+
+/* ── Narrow Tablet (641px – 900px) ── */
+@media (min-width: 641px) and (max-width: 900px) {
+
+    /* Canvas smaller at narrow tablet */
+    #mobius-canvas {
+        width: 320px !important;
+        height: 320px !important;
+        opacity: 0.6 !important;
+    }
+
+    /* Hero content takes majority of width */
+    .hero-content {
+        max-width: 60%;
+    }
+
+    /* Projects 2-col */
+    .proj-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Testimonials 2-col at narrow tablet */
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    /* Metrics 2x2 */
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Workflow steps: 1-col at narrow tablet */
+    .workflow-steps {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .step-line {
+        display: none;
+    }
+
+    .workflow-step {
+        padding: 0 !important;
+    }
+
+    /* Trust inner: 1-col at narrow tablet */
+    .trust-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    /* CTA buttons stay horizontal on narrow tablet */
+    .cta-btn-group {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Hero padding */
     .hero {
-        padding: 90px 0 48px;
+        padding: 100px 0 52px !important;
+    }
+
+    /* Hero stats wrapper */
+    .hero-stats-wrapper {
+        margin-top: 52px !important;
+        padding: 0 8px;
+    }
+
+    .hero-stat-div {
+        display: none;
     }
 
     .hero-line-mid br {
         display: none;
     }
 
-    .hero-stats-wrapper {
-        margin-top: 56px !important;
-        padding: 0;
+    .cta-form {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    .hero-stats {
-        flex-wrap: wrap;
-        gap: 12px;
-        width: 100%;
-        padding: 14px 16px;
+    .cta-inner {
+        padding: 48px 24px;
     }
 
-    .hero-stat {
-        padding: 0 16px;
-    }
-
-    .hero-stat-div {
-        display: none;
+    /* Services 1-col at narrow tablet */
+    .services-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -2398,13 +2499,17 @@ ul {
         box-shadow: none !important;
     }
 
-    /* 11. Mobius canvas hidden via JS but also via CSS as safety. */
-    #mobius-canvas {
-        display: none !important;
-    }
+    /* 11. Mobius canvas: NOT hidden here – see the ≤640px block below. */
 
     /* 12. Particle canvas hidden via JS but also via CSS as safety. */
     #bg-canvas {
+        display: none !important;
+    }
+}
+
+/* ── Phone-only: hide Möbius canvas (≤640px) ── */
+@media (max-width: 640px) {
+    #mobius-canvas {
         display: none !important;
     }
 }
