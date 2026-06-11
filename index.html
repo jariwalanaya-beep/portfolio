@@ -400,17 +400,22 @@
 
     @media (max-width: 640px) {
       .hero-stats-v2 {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         border-radius: 16px;
       }
 
-      /* On single column, every top border is visible except the first */
-      .hero-stat-v2:nth-child(n+2) {
+      /* Row 2 gets a top border */
+      .hero-stat-v2:nth-child(n+3) {
         border-top: 1px solid rgba(255, 255, 255, 0.07);
       }
 
-      /* Hide all side dividers */
-      .hero-stat-v2::before {
+      /* Keep vertical divider only on odd items (left column) */
+      .hero-stat-v2:nth-child(2n+1)::before {
+        display: block;
+      }
+
+      /* Hide dividers on even items (right column) */
+      .hero-stat-v2:nth-child(2n)::before {
         display: none !important;
       }
 
@@ -429,7 +434,11 @@
       }
 
       .hero-stat-v2-num {
-        font-size: 2.4rem;
+        font-size: 2rem;
+      }
+
+      .hero-stat-v2 {
+        padding: 20px 12px;
       }
     }
   </style>
