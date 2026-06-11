@@ -1709,7 +1709,27 @@ ul {
         margin-bottom: 44px;
     }
 
-    /* Hamburger nav for tablets */
+    /* Hero stats wrapper */
+    .hero-stats-wrapper {
+        margin-top: 48px !important;
+        max-width: 100% !important;
+        padding: 0 12px;
+    }
+
+    /* Trust inner 2-col */
+    .trust-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    /* case-studies 2-col */
+    .case-studies-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+/* ── Tablet & Mobile Navigation (≤1024px) ── */
+@media (max-width: 1024px) {
     .nav-links {
         display: none;
         position: absolute;
@@ -1746,24 +1766,6 @@ ul {
 
     .hamburger {
         display: flex;
-    }
-
-    /* Hero stats wrapper */
-    .hero-stats-wrapper {
-        margin-top: 48px !important;
-        max-width: 100% !important;
-        padding: 0 12px;
-    }
-
-    /* Trust inner 2-col */
-    .trust-inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-    }
-
-    /* case-studies 2-col */
-    .case-studies-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
 }
 
@@ -2001,8 +2003,22 @@ ul {
         padding: 24px 18px;
     }
 
+    .workflow-steps {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .step-line {
+        display: none;
+    }
+
     .workflow-step {
-        padding: 0;
+        padding: 0 !important;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
     }
 
     .testimonial-card {
