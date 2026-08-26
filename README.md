@@ -2,7 +2,7 @@
 
 AI automation systems for small businesses — portfolio site and case studies.
 
-Live: https://portfolio-nine-lilac-50.vercel.app
+Live: https://karlspace.in/
 
 ## What's here
 
